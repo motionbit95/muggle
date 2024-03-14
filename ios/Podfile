@@ -26,7 +26,13 @@ if linkage != nil
 end
 
 target 'muggle_app' do
+  $RNFirebaseAsStaticFramework = true
+
   config = use_native_modules!
+  pod 'GoogleUtilities', :modular_headers => true
+  pod 'FirebaseAuth'
+  pod 'FirebaseFirestore'
+  use_frameworks! :linkage => :static
 
   use_react_native!(
     :path => config[:reactNativePath],
