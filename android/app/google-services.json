@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "698586027961",
+    "project_id": "dinnermate-8d37b",
+    "storage_bucket": "dinnermate-8d37b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:698586027961:android:a8ec3f6aeb75a1c897c868",
+        "android_client_info": {
+          "package_name": "com.muggle_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "698586027961-dnb5vaieofef5p8ejs8qhurs4pvgt386.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBzLYgO6s5PiM_S9h0E3WuZ-fDw1Bph5b0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "698586027961-bdtpbm30jfmls8dnke0fj74gf8to0t5h.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "698586027961-go032bl2qvv06h0s6jm0n0hi3ml63r0u.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "org.reactjs.native.example.muggle-app"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
