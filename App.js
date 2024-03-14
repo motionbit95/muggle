@@ -44,8 +44,8 @@ function App() {
       <Tab.Navigator>
         <Tab.Screen name="Home" component={Home} />
         <Tab.Screen name="Login" component={Login} />
-        <Tab.Screen name="User" component={User} />
         <Tab.Screen name="Chat" component={Chat} />
+        <Tab.Screen name="마이페이지" component={User} />
       </Tab.Navigator>
     </NavigationContainer>
   );
