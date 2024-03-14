@@ -12,6 +12,7 @@ import {
   StatusBar,
   StyleSheet,
   Text,
+  TouchableOpacity,
   useColorScheme,
   View,
 } from 'react-native';
@@ -42,7 +43,39 @@ function App() {
   return (
     <NavigationContainer>
       <Tab.Navigator>
-        <Tab.Screen name="Home" component={Home} />
+        <Tab.Screen
+          name="Home"
+          component={Home}
+          options={{
+            title: '',
+            // Header 블록에 대한 스타일
+            headerStyle: {
+              backgroundColor: '#29b6f6',
+            },
+            // Header의 텍스트, 버튼 색상
+            headerTintColor: '#ffffff',
+            // 타이틀 텍스트의 스타일
+            headerTitleStyle: {
+              fontWeight: 'bold',
+              fontSize: 20,
+            },
+            headerBackVisible: false,
+            headerLeft: ({onPress}) => (
+              <TouchableOpacity
+                style={{padding: 10}}
+                onPress={() => alert('여긴 홈인데용!')}>
+                <Text style={{fontSize: 20}}>MUGGLE</Text>
+              </TouchableOpacity>
+            ),
+            headerRight: () => (
+              <TouchableOpacity
+                style={{padding: 10}}
+                onPress={() => alert('알림!')}>
+                <Text>알림</Text>
+              </TouchableOpacity>
+            ),
+          }}
+        />
         <Tab.Screen name="Login" component={Login} />
         <Tab.Screen name="Chat" component={Chat} />
         <Tab.Screen name="마이페이지" component={User} />

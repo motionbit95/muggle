@@ -25,12 +25,21 @@ class Home extends Component {
               flexDirection: 'row',
               alignItems: 'center',
               marginBottom: 20,
-              padding: 10,
               gap: 10,
+              justifyContent: 'space-between',
             }}>
-            <Text>♠︎</Text>
-            <Text>새로운 업데이트 소식 전해드릴게요.</Text>
-            <Text>X</Text>
+            <View style={{flexDirection: 'row', gap: 10, margin: 10}}>
+              <Text>♠︎</Text>
+              <Text>새로운 업데이트 소식 전해드릴게요.</Text>
+            </View>
+            <View>
+              <Button
+                color={'rgba(119, 119, 119, 1)'}
+                style={{width: 24, height: 24}}
+                onPress={() => alert('닫아!')}
+                title="x"
+              />
+            </View>
           </View>
           <View
             style={{
