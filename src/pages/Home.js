@@ -3,12 +3,13 @@ import {Button, ScrollView, StyleSheet, Text, View} from 'react-native';
 class Home extends Component {
   render() {
     return (
-      <View style={styles.screenStyle}>
-        <View style={styles.headerStyle}>
-          <Text style={{fontSize: 20}}>MUGGLE</Text>
-          <Text style={{fontSize: 20}}>알림</Text>
-        </View>
-        <ScrollView style={{width: '100%'}}>
+      <ScrollView style={{width: '100%'}}>
+        <View style={styles.screenStyle}>
+          <View style={styles.headerStyle}>
+            <Text style={{fontSize: 20}}>MUGGLE</Text>
+            <Text style={{fontSize: 20}}>알림</Text>
+          </View>
+
           <View style={styles.headerStyle}>
             <Text>식사모임</Text>
             <Text>클래스모임</Text>
@@ -58,7 +59,13 @@ class Home extends Component {
               </View>
             </View>
           </View>
-          <View style={{backgroundColor: '#d9d9d9', marginBottom: 20, gap: 20}}>
+          <View
+            style={{
+              width: '100%',
+              backgroundColor: '#d9d9d9',
+              marginBottom: 20,
+              gap: 20,
+            }}>
             <View style={{gap: 10}}>
               <Text style={{fontSize: 20}}>식사모임</Text>
               <Text>서브텍스트가 들어갑니다.</Text>
@@ -122,7 +129,13 @@ class Home extends Component {
               />
             </View>
           </View>
-          <View style={{backgroundColor: '#d9d9d9', marginBottom: 20, gap: 20}}>
+          <View
+            style={{
+              width: '100%',
+              backgroundColor: '#d9d9d9',
+              marginBottom: 20,
+              gap: 20,
+            }}>
             <View style={{gap: 10}}>
               <Text style={{fontSize: 20}}>커피 매칭 친구 추천</Text>
               <Text>서브텍스트가 들어갑니다.</Text>
@@ -174,7 +187,13 @@ class Home extends Component {
               </View>
             </View>
           </View>
-          <View style={{backgroundColor: '#d9d9d9', marginBottom: 20, gap: 20}}>
+          <View
+            style={{
+              width: '100%',
+              backgroundColor: '#d9d9d9',
+              marginBottom: 20,
+              gap: 20,
+            }}>
             <View style={{gap: 10}}>
               <Text style={{fontSize: 20}}>클래스 모임</Text>
               <Text>서브텍스트가 들어갑니다.</Text>
@@ -195,17 +214,13 @@ class Home extends Component {
                   <Text>자기계발 독서모임</Text>
                   <View style={{flexDirection: 'row', gap: 10}}>
                     <Text>2023.03.09(토) 17:00</Text>
-                    <View>
-                      <Text
-                        style={{
-                          backgroundColor: 'rgba(255, 99, 79, 1)',
-                          color: 'white',
-                          fontSize: 10,
-                          borderRadius: '5',
-                          padding: 3,
-                        }}>
-                        D-3
-                      </Text>
+                    <View
+                      style={{
+                        backgroundColor: 'rgba(255, 99, 79, 1)',
+                        borderRadius: 5,
+                        padding: 3,
+                      }}>
+                      <Text style={{fontSize: 12, color: 'white'}}>D-3</Text>
                     </View>
                   </View>
                   <Text>코엑스 별마당 도서관</Text>
@@ -242,7 +257,13 @@ class Home extends Component {
               />
             </View>
           </View>
-          <View style={{backgroundColor: '#d9d9d9', marginBottom: 20, gap: 20}}>
+          <View
+            style={{
+              width: '100%',
+              backgroundColor: '#d9d9d9',
+              marginBottom: 20,
+              gap: 20,
+            }}>
             <View style={{gap: 10}}>
               <Text style={{fontSize: 20}}>비즈니스 모임</Text>
               <Text>서브텍스트가 들어갑니다.</Text>
@@ -263,17 +284,13 @@ class Home extends Component {
                   <Text>카페 바이럴 마케터 모임</Text>
                   <View style={{flexDirection: 'row', gap: 10}}>
                     <Text>2023.03.09(토) 17:00</Text>
-                    <View>
-                      <Text
-                        style={{
-                          backgroundColor: 'rgba(255, 99, 79, 1)',
-                          color: 'white',
-                          fontSize: 10,
-                          borderRadius: '5',
-                          padding: 3,
-                        }}>
-                        D-3
-                      </Text>
+                    <View
+                      style={{
+                        backgroundColor: 'rgba(255, 99, 79, 1)',
+                        borderRadius: 5,
+                        padding: 3,
+                      }}>
+                      <Text style={{fontSize: 12, color: 'white'}}>D-3</Text>
                     </View>
                   </View>
                   <Text>서울 강남 역삼동</Text>
@@ -310,8 +327,8 @@ class Home extends Component {
               />
             </View>
           </View>
-        </ScrollView>
-      </View>
+        </View>
+      </ScrollView>
     );
   }
 }
@@ -319,7 +336,6 @@ class Home extends Component {
 const styles = StyleSheet.create({
   screenStyle: {
     flex: 1,
-    height: 3000,
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
