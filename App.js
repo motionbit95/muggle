@@ -32,7 +32,7 @@ import User from './src/pages/User';
 import Chat from './src/pages/Chat';
 import MeetingForm from './src/Component/MeetingForm';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import Matching from './src/Component/Matching';
+import Matching from './src/pages/Matching';
 import Match from './src/pages/Match';
 
 function App() {
@@ -54,9 +54,9 @@ function App() {
           options={{
             title: 'Home',
             // Header 블록에 대한 스타일
-            headerStyle: {
-              backgroundColor: '#29b6f6',
-            },
+            // headerStyle: {
+            //   backgroundColor: '#29b6f6',
+            // },
             // Header의 텍스트, 버튼 색상
             headerTintColor: '#ffffff',
             // 타이틀 텍스트의 스타일
@@ -68,14 +68,14 @@ function App() {
             headerTitle: '',
             headerLeft: ({onPress}) => (
               <TouchableOpacity
-                style={{padding: 10}}
+                style={{marginLeft: 20}}
                 onPress={() => alert('여긴 홈인데용!')}>
                 <Text style={{fontSize: 20}}>MUGGLE</Text>
               </TouchableOpacity>
             ),
             headerRight: () => (
               <TouchableOpacity
-                style={{padding: 10}}
+                style={{marginRight: 20}}
                 onPress={() => alert('알림!')}>
                 <Text>알림</Text>
               </TouchableOpacity>

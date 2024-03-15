@@ -175,7 +175,7 @@ class MeetingForm extends Component {
             }}>
             <Button onPress={() => alert('button눌렀엉')} title="🤍" />
           </View>
-          <View
+          <TouchableOpacity
             style={{
               backgroundColor: 'rgba(255, 206, 79, 1)',
               width: '80%',
@@ -183,13 +183,10 @@ class MeetingForm extends Component {
               height: 56,
               alignItems: 'center',
               justifyContent: 'center',
-            }}>
-            <Button
-              color={'black'}
-              onPress={() => alert('button눌렀엉')}
-              title="참여하기"
-            />
-          </View>
+            }}
+            onPress={() => alert('button눌렀엉')}>
+            <Text style={{color: 'black'}}>참여하기</Text>
+          </TouchableOpacity>
         </View>
       </View>
     );

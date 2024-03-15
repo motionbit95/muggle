@@ -1,16 +1,18 @@
 import React, {Component} from 'react';
 import {ScrollView, StyleSheet, Text, View, Button} from 'react-native';
+import LinearGradient from 'react-native-linear-gradient';
+
 class Match extends Component {
   render() {
     return (
       <View style={styles.screenStyle}>
         <ScrollView style={{width: '100%'}}>
-          <View>
+          <LinearGradient
+            colors={['rgba(255, 132, 79, 1)', 'rgba(255, 99, 79, 1)']}>
             <View
               style={{
                 width: '100%',
                 height: 'auto',
-                backgroundColor: 'red',
                 padding: 50,
                 alignItems: 'center',
                 justifyContent: 'center',
@@ -47,11 +49,12 @@ class Match extends Component {
                 }}>
                 <View
                   style={{
-                    borderRadius: 10,
-                    backgroundColor: 'red',
+                    borderRadius: 5,
+                    backgroundColor: 'rgba(255, 99, 79, 1)',
                     alignItems: 'center',
                     gap: 10,
-                    padding: 5,
+                    paddingHorizontal: 12,
+                    paddingVertical: 3,
                   }}>
                   <Text style={{color: 'white'}}>오프라인 커피 매칭권</Text>
                 </View>
@@ -70,7 +73,8 @@ class Match extends Component {
                       borderRadius: 10,
                       flexDirection: 'row',
                       gap: 5,
-                      padding: 5,
+                      paddingHorizontal: 8,
+                      paddingVertical: 3,
                       alignItems: 'center',
                       justifyContent: 'center',
                     }}>
@@ -87,7 +91,8 @@ class Match extends Component {
                       borderRadius: 10,
                       flexDirection: 'row',
                       gap: 10,
-                      padding: 5,
+                      paddingHorizontal: 8,
+                      paddingVertical: 3,
                     }}>
                     <View
                       style={{width: 14, height: 14, backgroundColor: 'red'}}
@@ -100,12 +105,12 @@ class Match extends Component {
               </View>
             </View>
             <View>
-              <View style={{padding: 20}}>
-                <Text>매칭신청자가 지불한 매칭금액은</Text>
-                <Text>매칭 수락자에게 부수입으로 정산됩니다!</Text>
-              </View>
               <View style={{padding: 20, gap: 10, backgroundColor: '#f1f1f1'}}>
-                <Text>매칭 신청자</Text>
+                <View style={{paddingVertical: 15, gap: 5}}>
+                  <Text>매칭신청자가 지불한 매칭금액은</Text>
+                  <Text>매칭 수락자에게 부수입으로 정산됩니다!</Text>
+                </View>
+                <Text style={{fontWeight: 'bold'}}>매칭 신청자</Text>
                 <View
                   style={{
                     width: '100%',
@@ -189,7 +194,7 @@ class Match extends Component {
                 <Text>상대방이 매칭 거저 또는 채팅 미응답 시 전액 환불</Text>
               </View>
               <View style={{padding: 20, gap: 10, backgroundColor: '#f1f1f1'}}>
-                <Text>매칭 수락자</Text>
+                <Text style={{fontWeight: 'bold'}}>매칭 수락자</Text>
                 <View
                   style={{
                     width: '100%',
@@ -301,7 +306,7 @@ class Match extends Component {
                 </Text>
               </View>
             </View>
-          </View>
+          </LinearGradient>
         </ScrollView>
         <View
           style={{

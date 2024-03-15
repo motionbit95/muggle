@@ -6,9 +6,11 @@ import {
   ScrollView,
   StyleSheet,
   Text,
+  TouchableOpacity,
   View,
 } from 'react-native';
 import {getDocList} from '../firebase/firebase_func';
+import LinearGradient from 'react-native-linear-gradient';
 const Home = ({navigation}) => {
   const [userList, setUserList] = useState([]);
   useEffect(() => {
@@ -23,16 +25,11 @@ const Home = ({navigation}) => {
   return (
     <ScrollView style={{width: '100%'}}>
       <View style={styles.screenStyle}>
-        <View style={styles.headerStyle}>
-          <Text style={{fontSize: 20}}>MUGGLE</Text>
-          <Text style={{fontSize: 20}}>알림</Text>
-        </View>
-
-        <View style={styles.headerStyle}>
+        {/* <View style={styles.headerStyle}>
           <Text>식사모임</Text>
           <Text>클래스모임</Text>
           <Text>비즈니스모임</Text>
-        </View>
+        </View> */}
 
         <View
           style={{
@@ -197,6 +194,7 @@ const Home = ({navigation}) => {
             showsHorizontalScrollIndicator={false}>
             {userList.map((user, index) => (
               <ImageBackground
+                key={index}
                 imageStyle={{borderRadius: 20}}
                 source={{uri: user.user_profile}}
                 style={{
@@ -204,52 +202,62 @@ const Home = ({navigation}) => {
                   height: 300,
                   borderRadius: 20,
                 }}>
-                <View
-                  style={{
-                    gap: 5,
-                    justifyContent: 'flex-end',
-                    width: '100%',
-                    height: '100%',
-                    backgroundColor: 'rgba(0, 0, 0, 0.1)',
-                    borderRadius: 20,
-                    padding: 20,
-                  }}>
+                <LinearGradient
+                  colors={['rgba(0,0,0,0)', 'rgba(0,0,0,1)']}
+                  style={{borderRadius: 20}}>
                   <View
                     style={{
-                      flexDirection: 'row',
-                      borderWidth: 1,
-                      borderColor: 'white',
-                      borderRadius: 10,
-                      width: 60,
-                      justifyContent: 'center',
-                      alignItems: 'center',
-                      padding: 5,
+                      gap: 5,
+                      justifyContent: 'flex-end',
+                      width: '100%',
+                      height: '100%',
+                      backgroundColor: 'rgba(0, 0, 0, 0.1)',
+                      borderRadius: 20,
+                      padding: 20,
                     }}>
-                    <Text>✭</Text>
-                    <Text style={{color: 'white', fontSize: 14}}>근처</Text>
-                  </View>
+                    <View
+                      style={{
+                        flexDirection: 'row',
+                        borderWidth: 1,
+                        borderColor: 'white',
+                        borderRadius: 10,
+                        width: 60,
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        padding: 5,
+                      }}>
+                      <Text>✭</Text>
+                      <Text style={{color: 'white', fontSize: 14}}>근처</Text>
+                    </View>
 
-                  <Text style={{color: 'white', fontSize: 22}}>
-                    {user.user_name}
-                  </Text>
-                  <Text style={{color: 'white', fontSize: 18}}>
-                    {user.user_place?.[0]}
-                  </Text>
-                  <View
-                    style={{
-                      backgroundColor: 'rgba(255, 206, 79, 1)',
-                      borderRadius: 10,
-                      height: 56,
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                    }}>
-                    <Button
-                      color={'black'}
-                      onPress={() => navigation.navigate('커피매칭신청')}
-                      title="커피 매칭 신청"
-                    />
+                    <Text style={{color: 'white', fontSize: 22}}>
+                      {user.user_name}
+                    </Text>
+                    <Text style={{color: 'white', fontSize: 18}}>
+                      {user.user_place?.[0]}
+                    </Text>
+                    <TouchableOpacity
+                      style={{
+                        backgroundColor: 'rgba(255, 206, 79, 1)',
+                        borderRadius: 10,
+                        height: 56,
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                      }}
+                      onPressOut={() =>
+                        navigation.navigate('커피매칭신청', {data: user})
+                      }>
+                      <Text
+                        style={{
+                          color: 'black',
+                          fontSize: 18,
+                          fontWeight: 'bold',
+                        }}>
+                        커피 매칭 신청
+                      </Text>
+                    </TouchableOpacity>
                   </View>
-                </View>
+                </LinearGradient>
               </ImageBackground>
             ))}
           </ScrollView>
