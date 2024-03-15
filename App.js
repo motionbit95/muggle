@@ -30,6 +30,10 @@ import {NavigationContainer} from '@react-navigation/native';
 import Login from './src/pages/Login';
 import User from './src/pages/User';
 import Chat from './src/pages/Chat';
+import MeetingForm from './src/Component/MeetingForm';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import Matching from './src/Component/Matching';
+import Match from './src/pages/Match';
 
 function App() {
   const isDarkMode = useColorScheme() === 'dark';
@@ -39,6 +43,7 @@ function App() {
   };
 
   const Tab = createBottomTabNavigator();
+  const Stack = createNativeStackNavigator();
 
   return (
     <NavigationContainer>
@@ -47,7 +52,7 @@ function App() {
           name="Home"
           component={Home}
           options={{
-            title: '',
+            title: 'Home',
             // Header 블록에 대한 스타일
             headerStyle: {
               backgroundColor: '#29b6f6',
@@ -60,6 +65,7 @@ function App() {
               fontSize: 20,
             },
             headerBackVisible: false,
+            headerTitle: '',
             headerLeft: ({onPress}) => (
               <TouchableOpacity
                 style={{padding: 10}}
@@ -79,6 +85,9 @@ function App() {
         <Tab.Screen name="Login" component={Login} />
         <Tab.Screen name="Chat" component={Chat} />
         <Tab.Screen name="마이페이지" component={User} />
+        <Tab.Screen name="비즈니스모임" component={MeetingForm} />
+        <Tab.Screen name="커피매칭신청" component={Matching} />
+        <Tab.Screen name="매칭중" component={Match} />
       </Tab.Navigator>
     </NavigationContainer>
   );

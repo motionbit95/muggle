@@ -1,7 +1,16 @@
-import React, {Component, useEffect} from 'react';
-import {Button, ScrollView, StyleSheet, Text, View} from 'react-native';
+import React, {Component, useEffect, useState} from 'react';
+import {
+  Button,
+  Image,
+  ImageBackground,
+  ScrollView,
+  StyleSheet,
+  Text,
+  View,
+} from 'react-native';
 import {getDocList} from '../firebase/firebase_func';
-const Home = () => {
+const Home = ({navigation}) => {
+  const [userList, setUserList] = useState([]);
   useEffect(() => {
     updateList();
   }, []);
@@ -9,6 +18,7 @@ const Home = () => {
   const updateList = async () => {
     let list = await getDocList('user');
     console.log('유저리스트 ===> ', list);
+    setUserList(list);
   };
   return (
     <ScrollView style={{width: '100%'}}>
@@ -157,52 +167,92 @@ const Home = () => {
             <Text style={{fontSize: 20}}>커피 매칭 친구 추천</Text>
             <Text>서브텍스트가 들어갑니다.</Text>
           </View>
-          <View
-            style={{
-              width: 280,
-              height: 300,
-              backgroundColor: 'red',
-              borderRadius: 20,
-              padding: 20,
-              justifyContent: 'space-between',
-            }}>
-            <View></View>
-            <View style={{gap: 5}}>
-              <View
-                style={{
-                  flexDirection: 'row',
-                  borderWidth: 1,
-                  borderColor: 'white',
-                  borderRadius: 10,
-                  width: 60,
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                  padding: 5,
-                }}>
-                <Text>✭</Text>
-                <Text style={{color: 'white', fontSize: 14}}>근처</Text>
-              </View>
-
-              <Text style={{color: 'white', fontSize: 22}}>장원영11</Text>
-              <Text style={{color: 'white', fontSize: 18}}>
-                서울특별시 강남구
+          {/* {userList.map((user, index) => (
+            <View>
+              <Image src={user.user_profile} />
+              <Text>{user.user_type}</Text>
+              <Text>{user.doc_id}</Text>
+              <Text>{user.user_name}</Text>
+              <Text>{user.user_price}만원</Text>
+              <Text>{user.dong}</Text>
+              <Text>{user.user_birth}</Text>
+              <Text>{user.user_email}</Text>
+              <Text>{user.user_password}</Text>
+              <Text>{user.user_phone}</Text>
+              <Text>{user.user_food?.[0]}</Text>
+              <Text>{user.user_place?.[0]}</Text>
+              <Text>{user.user_gender}</Text>
+              <Text>{user.user_info}</Text>
+              <Text>
+                {user.user_location?.latitude} {user.user_location?.longitude}
               </Text>
-              <View
-                style={{
-                  backgroundColor: 'rgba(255, 206, 79, 1)',
-                  borderRadius: 10,
-                  height: 56,
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                }}>
-                <Button
-                  color={'black'}
-                  onPress={() => alert('button눌렀엉')}
-                  title="커피 매칭 신청"
-                />
-              </View>
             </View>
-          </View>
+          ))} */}
+          <ScrollView
+            horizontal={true}
+            contentContainerStyle={{
+              gap: 10,
+              padding: 10,
+            }}
+            showsHorizontalScrollIndicator={false}>
+            {userList.map((user, index) => (
+              <ImageBackground
+                imageStyle={{borderRadius: 20}}
+                source={{uri: user.user_profile}}
+                style={{
+                  width: 280,
+                  height: 300,
+                  borderRadius: 20,
+                }}>
+                <View
+                  style={{
+                    gap: 5,
+                    justifyContent: 'flex-end',
+                    width: '100%',
+                    height: '100%',
+                    backgroundColor: 'rgba(0, 0, 0, 0.1)',
+                    borderRadius: 20,
+                    padding: 20,
+                  }}>
+                  <View
+                    style={{
+                      flexDirection: 'row',
+                      borderWidth: 1,
+                      borderColor: 'white',
+                      borderRadius: 10,
+                      width: 60,
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                      padding: 5,
+                    }}>
+                    <Text>✭</Text>
+                    <Text style={{color: 'white', fontSize: 14}}>근처</Text>
+                  </View>
+
+                  <Text style={{color: 'white', fontSize: 22}}>
+                    {user.user_name}
+                  </Text>
+                  <Text style={{color: 'white', fontSize: 18}}>
+                    {user.user_place?.[0]}
+                  </Text>
+                  <View
+                    style={{
+                      backgroundColor: 'rgba(255, 206, 79, 1)',
+                      borderRadius: 10,
+                      height: 56,
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                    }}>
+                    <Button
+                      color={'black'}
+                      onPress={() => navigation.navigate('커피매칭신청')}
+                      title="커피 매칭 신청"
+                    />
+                  </View>
+                </View>
+              </ImageBackground>
+            ))}
+          </ScrollView>
         </View>
         <View
           style={{
