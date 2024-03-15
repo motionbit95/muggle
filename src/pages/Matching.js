@@ -1,6 +1,5 @@
-import React, {Component, useEffect} from 'react';
+import React from 'react';
 import {
-  Button,
   ImageBackground,
   StyleSheet,
   Text,

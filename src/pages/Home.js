@@ -1,7 +1,6 @@
-import React, {Component, useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   Button,
-  Image,
   ImageBackground,
   ScrollView,
   StyleSheet,
@@ -25,12 +24,11 @@ const Home = ({navigation}) => {
   return (
     <ScrollView style={{width: '100%'}}>
       <View style={styles.screenStyle}>
-        {/* <View style={styles.headerStyle}>
+        <View style={styles.headerStyle}>
           <Text>식사모임</Text>
           <Text>클래스모임</Text>
           <Text>비즈니스모임</Text>
-        </View> */}
-
+        </View>
         <View
           style={{
             backgroundColor: 'rgba(255, 206, 79, 1)',
@@ -94,12 +92,13 @@ const Home = ({navigation}) => {
             <Text style={{fontSize: 20}}>식사모임</Text>
             <Text>서브텍스트가 들어갑니다.</Text>
           </View>
-          <View
+          <TouchableOpacity
             style={{
               backgroundColor: 'rgba(255, 233, 230, 1)',
               borderRadius: 10,
               padding: 20,
-            }}>
+            }}
+            onPress={() => navigation.navigate('모임')}>
             <View
               style={{
                 flexDirection: 'row',
@@ -132,7 +131,7 @@ const Home = ({navigation}) => {
                 }}
               />
             </View>
-          </View>
+          </TouchableOpacity>
           <View
             style={{
               backgroundColor: 'white',
@@ -273,12 +272,13 @@ const Home = ({navigation}) => {
             <Text style={{fontSize: 20}}>클래스 모임</Text>
             <Text>서브텍스트가 들어갑니다.</Text>
           </View>
-          <View
+          <TouchableOpacity
             style={{
               backgroundColor: 'rgba(255, 233, 230, 1)',
               borderRadius: 10,
               padding: 20,
-            }}>
+            }}
+            onPress={() => navigation.navigate('모임')}>
             <View
               style={{
                 flexDirection: 'row',
@@ -311,7 +311,7 @@ const Home = ({navigation}) => {
                 }}
               />
             </View>
-          </View>
+          </TouchableOpacity>
           <View
             style={{
               backgroundColor: 'white',
@@ -343,12 +343,13 @@ const Home = ({navigation}) => {
             <Text style={{fontSize: 20}}>비즈니스 모임</Text>
             <Text>서브텍스트가 들어갑니다.</Text>
           </View>
-          <View
+          <TouchableOpacity
             style={{
               backgroundColor: 'rgba(255, 233, 230, 1)',
               borderRadius: 10,
               padding: 20,
-            }}>
+            }}
+            onPress={() => navigation.navigate('모임')}>
             <View
               style={{
                 flexDirection: 'row',
@@ -381,7 +382,7 @@ const Home = ({navigation}) => {
                 }}
               />
             </View>
-          </View>
+          </TouchableOpacity>
           <View
             style={{
               backgroundColor: 'white',

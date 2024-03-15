@@ -30,12 +30,23 @@ import {NavigationContainer} from '@react-navigation/native';
 import Login from './src/pages/Login';
 import User from './src/pages/User';
 import Chat from './src/pages/Chat';
-import MeetingForm from './src/Component/MeetingForm';
+import MeetingForm from './src/pages/MeetingForm';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import Matching from './src/pages/Matching';
 import Match from './src/pages/Match';
+import SignUp from './src/pages/Signup';
+import Certificate from './src/pages/\bCertificate';
 
-function App() {
+const HomeTabs = () => {
+  return (
+    <Tab.Navigator>
+      <Tab.Screen name="Home" component={HomeScreen} />
+      <Tab.Screen name="Profile" component={ProfileScreen} />
+    </Tab.Navigator>
+  );
+};
+
+const App = () => {
   const isDarkMode = useColorScheme() === 'dark';
 
   const backgroundStyle = {
@@ -82,16 +93,38 @@ function App() {
             ),
           }}
         />
-        <Tab.Screen name="Login" component={Login} />
+        <Tab.Screen
+          name="Login"
+          component={Login}
+          options={{headerShown: false}}
+        />
         <Tab.Screen name="Chat" component={Chat} />
         <Tab.Screen name="마이페이지" component={User} />
-        <Tab.Screen name="비즈니스모임" component={MeetingForm} />
+        <Tab.Screen name="모임" component={MeetingForm} />
         <Tab.Screen name="커피매칭신청" component={Matching} />
         <Tab.Screen name="매칭중" component={Match} />
+        <Tab.Screen name="회원가입" component={SignUp} />
+        <Tab.Screen name="휴대폰 본인인증" component={Certificate} />
       </Tab.Navigator>
     </NavigationContainer>
+    // <NavigationContainer>
+    //   <StackNavigation />
+    //   <TabNavigation />
+    // </NavigationContainer>
   );
-}
+};
+
+// const StackNavigation = () => {
+//   <Stack.Navigator>
+
+//   </Stack.Navigator>
+// }
+
+// const TabNavigation = () => {
+//   <Tab.Navigator>
+
+//   </Tab.Navigator>
+// }
 
 const styles = StyleSheet.create({
   screenStyle: {
