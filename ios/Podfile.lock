@@ -646,6 +646,9 @@ PODS:
     - React-Core (= 0.73.5)
     - React-jsi (= 0.73.5)
     - ReactCommon/turbomodule/core (= 0.73.5)
+  - Firebase/Auth (10.22.0):
+    - Firebase/CoreOnly
+    - FirebaseAuth (~> 10.22.0)
   - Firebase/CoreOnly (10.22.0):
     - FirebaseCore (= 10.22.0)
   - Firebase/Firestore (10.22.0):
@@ -1854,6 +1857,10 @@ PODS:
   - RNFBApp (19.0.1):
     - Firebase/CoreOnly (= 10.22.0)
     - React-Core
+  - RNFBAuth (19.0.1):
+    - Firebase/Auth (= 10.22.0)
+    - React-Core
+    - RNFBApp
   - RNFBFirestore (19.0.1):
     - Firebase/Firestore (= 10.22.0)
     - nanopb (< 2.30910.0, >= 2.30908.0)
@@ -1924,6 +1931,7 @@ DEPENDENCIES:
   - React-utils (from `../node_modules/react-native/ReactCommon/react/utils`)
   - ReactCommon/turbomodule/core (from `../node_modules/react-native/ReactCommon`)
   - "RNFBApp (from `../node_modules/@react-native-firebase/app`)"
+  - "RNFBAuth (from `../node_modules/@react-native-firebase/auth`)"
   - "RNFBFirestore (from `../node_modules/@react-native-firebase/firestore`)"
   - RNScreens (from `../node_modules/react-native-screens`)
   - Yoga (from `../node_modules/react-native/ReactCommon/yoga`)
@@ -2057,6 +2065,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon"
   RNFBApp:
     :path: "../node_modules/@react-native-firebase/app"
+  RNFBAuth:
+    :path: "../node_modules/@react-native-firebase/auth"
   RNFBFirestore:
     :path: "../node_modules/@react-native-firebase/firestore"
   RNScreens:
@@ -2137,10 +2147,11 @@ SPEC CHECKSUMS:
   ReactCommon: ab6655d0224cf39c997ea634d257c609d345e23d
   RecaptchaInterop: 7d1a4a01a6b2cb1610a47ef3f85f0c411434cb21
   RNFBApp: d0be9224f318cfd6501f1f83809453800cd04868
+  RNFBAuth: f0722d3ea63e6b5c2ed67c8d19acb17d5738438b
   RNFBFirestore: 5fc53b5b7c8fe0863a7ccee49197f1ce0946abff
   RNScreens: a4d9ce8f68f833f4e42410140eafd88e38bba163
   SocketRocket: f32cd54efbe0f095c4d7594881e52619cfe80b17
-  Yoga: 9e6a04eacbd94f97d94577017e9f23b3ab41cf6c
+  Yoga: a716eea57d0d3430219c0a5a233e1e93ee931eb7
 
 PODFILE CHECKSUM: c374be9389ee88bab62ed9317f7ac772f13ff8dd
 
