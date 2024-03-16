@@ -35,16 +35,7 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import Matching from './src/pages/Matching';
 import Match from './src/pages/Match';
 import SignUp from './src/pages/Signup';
-import Certificate from './src/pages/\bCertificate';
-
-const HomeTabs = () => {
-  return (
-    <Tab.Navigator>
-      <Tab.Screen name="Home" component={HomeScreen} />
-      <Tab.Screen name="Profile" component={ProfileScreen} />
-    </Tab.Navigator>
-  );
-};
+import Certificate from './src/pages/Certificate';
 
 const App = () => {
   const isDarkMode = useColorScheme() === 'dark';
@@ -107,24 +98,8 @@ const App = () => {
         <Tab.Screen name="휴대폰 본인인증" component={Certificate} />
       </Tab.Navigator>
     </NavigationContainer>
-    // <NavigationContainer>
-    //   <StackNavigation />
-    //   <TabNavigation />
-    // </NavigationContainer>
   );
 };
-
-// const StackNavigation = () => {
-//   <Stack.Navigator>
-
-//   </Stack.Navigator>
-// }
-
-// const TabNavigation = () => {
-//   <Tab.Navigator>
-
-//   </Tab.Navigator>
-// }
 
 const styles = StyleSheet.create({
   screenStyle: {
