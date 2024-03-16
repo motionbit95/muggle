@@ -12,19 +12,13 @@ import {component_height, font_md} from '../firebase/api';
 
 const DropDown = ({items, ...props}) => {
   const [openDropdown, setOpenDropdown] = useState(false);
-  const [selectedValue, setSelectedValue] = useState(
-    props.defaultValue ? props.defaultValue : '전체',
-  );
+  const [selectedValue, setSelectedValue] = useState(props.defaultValue);
 
   function handleValueChange(value) {
     setSelectedValue(value);
     setOpenDropdown(false);
     props.onChangeValue(value);
   }
-
-  useEffect(() => {
-    setSelectedValue('전체');
-  }, [items]);
 
   return (
     <View>

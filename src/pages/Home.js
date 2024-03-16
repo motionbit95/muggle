@@ -99,7 +99,7 @@ const Home = ({navigation}) => {
               padding: 20,
               gap: 10,
             }}
-            onPress={() => navigation.navigate('모임')}>
+            onPress={() => navigation.navigate('모임상세')}>
             <View
               style={{
                 flexDirection: 'row',
@@ -290,7 +290,7 @@ const Home = ({navigation}) => {
               borderRadius: 10,
               padding: 20,
             }}
-            onPress={() => navigation.navigate('모임')}>
+            onPress={() => navigation.navigate('모임상세')}>
             <View
               style={{
                 flexDirection: 'row',
@@ -369,7 +369,7 @@ const Home = ({navigation}) => {
               borderRadius: 10,
               padding: 20,
             }}
-            onPress={() => navigation.navigate('모임')}>
+            onPress={() => navigation.navigate('모임상세')}>
             <View
               style={{
                 flexDirection: 'row',

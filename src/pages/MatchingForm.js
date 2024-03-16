@@ -7,18 +7,11 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-const MeetingForm = ({navigation}) => {
+const MatchingForm = ({navigation}) => {
   return (
     <View style={styles.screenStyle}>
       <ScrollView style={{width: '100%'}}>
-        <View
-          style={{
-            width: '100%',
-            height: undefined,
-            aspectRatio: 16 / 9,
-            backgroundColor: 'red',
-          }}
-        />
+        <View style={styles.banner} />
         <View
           style={{
             width: '100%',
@@ -26,57 +19,44 @@ const MeetingForm = ({navigation}) => {
             padding: 20,
             gap: 20,
           }}>
-          <View
-            style={{
-              flexDirection: 'row',
-              justifyContent: 'space-between',
-              alignItems: 'center',
-            }}>
-            <Text style={{fontSize: 20, fontWeight: 'bold'}}>
-              퇴근 후 역삼역 근처에서 저녁
-            </Text>
-            <View
-              style={{
-                backgroundColor: 'rgba(255, 99, 79, 1)',
-                borderRadius: 5,
-                padding: 3,
-              }}>
-              <Text style={{fontSize: 12, color: 'white'}}>D-3</Text>
+          <View style={[{justifyContent: 'space-between'}, styles.rowBox]}>
+            <Text style={styles.titleText}>퇴근 후 역삼역 근처에서 저녁</Text>
+            <View style={styles.daybox}>
+              <Text style={styles.dayText}>D-3</Text>
             </View>
           </View>
-          <View>
-            <View style={{gap: 10}}>
-              <View style={{flexDirection: 'row', gap: 10}}>
-                <View style={{width: 18, height: 18, backgroundColor: 'red'}} />
-                <Text style={{fontSize: 16}}>2023.03.09(토) 17:00</Text>
-              </View>
-              <View style={{flexDirection: 'row', gap: 10}}>
-                <View style={{width: 18, height: 18, backgroundColor: 'red'}} />
-                <Text style={{fontSize: 16}}>서울 강남 역삼동</Text>
-                <TouchableOpacity
-                  style={{
-                    backgroundColor: 'rgba(238, 238, 238, 1)',
-                    borderRadius: 5,
-                    height: 20,
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    padding: 3,
-                  }}
-                  onPress={() => alert('지도보기')}>
-                  <Text>지도보기</Text>
-                </TouchableOpacity>
-              </View>
+          <View style={{gap: 10}}>
+            <View style={{flexDirection: 'row', gap: 10}}>
+              <View style={{width: 18, height: 18, backgroundColor: 'red'}} />
+              <Text style={{fontSize: 16}}>2023.03.09(토) 17:00</Text>
+            </View>
+            <View style={{flexDirection: 'row', gap: 10}}>
+              <View style={{width: 18, height: 18, backgroundColor: 'red'}} />
+              <Text style={{fontSize: 16}}>서울 강남 역삼동</Text>
+              <TouchableOpacity
+                style={{
+                  backgroundColor: 'rgba(238, 238, 238, 1)',
+                  borderRadius: 5,
+                  height: 20,
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  padding: 3,
+                }}
+                onPress={() => alert('지도보기')}>
+                <Text>지도보기</Text>
+              </TouchableOpacity>
+            </View>
 
-              <View style={{flexDirection: 'row', gap: 10}}>
-                <View style={{width: 18, height: 18, backgroundColor: 'red'}} />
-                <Text style={{fontSize: 16}}>나누기</Text>
-              </View>
-              <View style={{flexDirection: 'row', gap: 10}}>
-                <View style={{width: 18, height: 18, backgroundColor: 'red'}} />
-                <Text style={{fontSize: 16}}>5 / 30 (25자리남음)</Text>
-              </View>
+            <View style={{flexDirection: 'row', gap: 10}}>
+              <View style={{width: 18, height: 18, backgroundColor: 'red'}} />
+              <Text style={{fontSize: 16}}>나누기</Text>
+            </View>
+            <View style={{flexDirection: 'row', gap: 10}}>
+              <View style={{width: 18, height: 18, backgroundColor: 'red'}} />
+              <Text style={{fontSize: 16}}>5 / 30 (25자리남음)</Text>
             </View>
           </View>
+
           <View width="50%">
             <Text>
               여기 삼겹살 진짜 맛있어요 퇴근 후 같이 드시러 가실 분~! 밥값은
@@ -93,10 +73,10 @@ const MeetingForm = ({navigation}) => {
             flex: 1,
           }}>
           <View>
-            <Text>참여인원 5</Text>
+            <Text>참여인원 ( 5 )</Text>
           </View>
           <View gap={10}>
-            <View style={{flexDirection: 'row', gap: 10, alignItems: 'center'}}>
+            <View style={[styles.rowBox, {gap: 10}]}>
               <View
                 style={{
                   width: 30,
@@ -107,7 +87,7 @@ const MeetingForm = ({navigation}) => {
               />
               <Text>홍길동</Text>
             </View>
-            <View style={{flexDirection: 'row', gap: 10, alignItems: 'center'}}>
+            <View style={[styles.rowBox, {gap: 10}]}>
               <View
                 style={{
                   width: 30,
@@ -118,7 +98,7 @@ const MeetingForm = ({navigation}) => {
               />
               <Text>홍길동</Text>
             </View>
-            <View style={{flexDirection: 'row', gap: 10, alignItems: 'center'}}>
+            <View style={[styles.rowBox, {gap: 10}]}>
               <View
                 style={{
                   width: 30,
@@ -129,7 +109,7 @@ const MeetingForm = ({navigation}) => {
               />
               <Text>홍길동</Text>
             </View>
-            <View style={{flexDirection: 'row', gap: 10, alignItems: 'center'}}>
+            <View style={[styles.rowBox, {gap: 10}]}>
               <View
                 style={{
                   width: 30,
@@ -178,7 +158,7 @@ const MeetingForm = ({navigation}) => {
   );
 };
 
-export default MeetingForm;
+export default MatchingForm;
 
 const styles = StyleSheet.create({
   screenStyle: {
@@ -186,4 +166,26 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
   },
+  banner: {
+    width: '100%',
+    height: undefined,
+    aspectRatio: 16 / 9,
+    backgroundColor: 'red',
+  },
+  rowBox: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  titleText: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: 'black',
+  },
+  daybox: {
+    backgroundColor: 'rgba(255, 231, 228, 1)',
+    borderRadius: 5,
+    paddingHorizontal: 8,
+    paddingVertical: 3,
+  },
+  dayText: {fontSize: 12, color: 'rgba(255, 99, 79, 1)', fontWeight: 'bold'},
 });

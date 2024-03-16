@@ -30,13 +30,13 @@ import {NavigationContainer} from '@react-navigation/native';
 import Login from './src/pages/Login';
 import User from './src/pages/User';
 import Chat from './src/pages/Chat';
-import MeetingForm from './src/pages/MeetingForm';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import Matching from './src/pages/Matching';
 import Match from './src/pages/Match';
 import SignUp from './src/pages/Signup';
 import Certificate from './src/pages/Certificate';
 import MatchCreate from './src/pages/MatchCreate';
+import MatchingForm from './src/pages/MatchingForm';
 
 const App = () => {
   // const isDarkMode = useColorScheme() === 'dark';
@@ -92,7 +92,7 @@ const App = () => {
         />
         <Tab.Screen name="Chat" component={Chat} />
         <Tab.Screen name="마이페이지" component={User} />
-        <Tab.Screen name="모임" component={MeetingForm} />
+        <Tab.Screen name="모임상세" component={MatchingForm} />
         <Tab.Screen name="커피매칭신청" component={Matching} />
         <Tab.Screen name="매칭중" component={Match} />
         <Tab.Screen name="회원가입" component={SignUp} />
