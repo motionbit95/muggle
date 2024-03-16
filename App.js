@@ -36,13 +36,14 @@ import Matching from './src/pages/Matching';
 import Match from './src/pages/Match';
 import SignUp from './src/pages/Signup';
 import Certificate from './src/pages/Certificate';
+import MatchCreate from './src/pages/MatchCreate';
 
 const App = () => {
-  const isDarkMode = useColorScheme() === 'dark';
+  // const isDarkMode = useColorScheme() === 'dark';
 
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  };
+  // const backgroundStyle = {
+  //   backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
+  // };
 
   const Tab = createBottomTabNavigator();
   const Stack = createNativeStackNavigator();
@@ -96,18 +97,85 @@ const App = () => {
         <Tab.Screen name="매칭중" component={Match} />
         <Tab.Screen name="회원가입" component={SignUp} />
         <Tab.Screen name="휴대폰 본인인증" component={Certificate} />
+        <Tab.Screen name="모임 개설" component={MatchCreate} />
       </Tab.Navigator>
     </NavigationContainer>
   );
 };
 
-const styles = StyleSheet.create({
-  screenStyle: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default App;
+
+/*
+const App = () => {
+  const Stack = createNativeStackNavigator();
+
+  return (
+    <NavigationContainer independent={true}>
+      <Stack.Navigator>
+        <Stack.Screen name="Tab" component={TabNavigator} />
+        <Stack.Screen name="Login" component={LoginStack} />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+};
 
 export default App;
+
+export const TabNavigator = () => {
+  const Tab = createBottomTabNavigator();
+  return (
+    <NavigationContainer>
+      <Tab.Navigator>
+        <Tab.Screen name="Home" component={HomeStack} />
+        <Tab.Screen name="Match" component={<MatchStack />} />
+        <Tab.Screen name="User" component={<UserStack />} />
+        <Tab.Screen name="Chat" component={<ChatStack />} />
+      </Tab.Navigator>
+    </NavigationContainer>
+  );
+};
+
+const LoginStack = () => {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen name="Login" component={Login} />
+      <Stack.Screen name="SignUp" component={SignUp} />
+      <Stack.Screen name="Certificate" component={Certificate} />
+    </Stack.Navigator>
+  );
+};
+
+export const HomeStack = () => {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen name="Home" component={Home} />
+    </Stack.Navigator>
+  );
+};
+
+export const MatchStack = () => {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen name="Match" component={Match} />
+      <Stack.Screen name="Matching" component={Matching} />
+      <Stack.Screen name="MeetingForm" component={MeetingForm} />
+    </Stack.Navigator>
+  );
+};
+
+export const UserStack = () => {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen name="User" component={User} />
+    </Stack.Navigator>
+  );
+};
+
+export const ChatStack = () => {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen name="Chat" component={Chat} />
+    </Stack.Navigator>
+  );
+};
+*/

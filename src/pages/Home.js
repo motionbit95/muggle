@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {
   Button,
+  Image,
   ImageBackground,
   ScrollView,
   StyleSheet,
@@ -25,9 +26,9 @@ const Home = ({navigation}) => {
     <ScrollView style={{width: '100%'}}>
       <View style={styles.screenStyle}>
         <View style={styles.headerStyle}>
-          <Text>식사모임</Text>
-          <Text>클래스모임</Text>
-          <Text>비즈니스모임</Text>
+          <Text>머글 모임</Text>
+          <Text>클래스 모임</Text>
+          <Text>비즈니스 모임</Text>
         </View>
         <View
           style={{
@@ -84,19 +85,19 @@ const Home = ({navigation}) => {
         <View
           style={{
             width: '100%',
-            backgroundColor: '#d9d9d9',
             marginBottom: 20,
             gap: 20,
           }}>
           <View style={{gap: 10}}>
-            <Text style={{fontSize: 20}}>식사모임</Text>
-            <Text>서브텍스트가 들어갑니다.</Text>
+            <Text style={{fontSize: 20}}>머글 모임</Text>
+            <Text>우리 동네, 밥 머글 사람?</Text>
           </View>
           <TouchableOpacity
             style={{
               backgroundColor: 'rgba(255, 233, 230, 1)',
               borderRadius: 10,
               padding: 20,
+              gap: 10,
             }}
             onPress={() => navigation.navigate('모임')}>
             <View
@@ -106,21 +107,32 @@ const Home = ({navigation}) => {
                 justifyContent: 'space-between',
               }}>
               <View style={{gap: 10}}>
-                <Text>퇴근 후 역삼역에서 저녁 드실분</Text>
+                <Text style={styles.boxTitleFont}>
+                  퇴근 후 역삼역에서 저녁 드실분
+                </Text>
                 <View style={{flexDirection: 'row', gap: 10}}>
-                  <Text>2023.03.09(토) 17:00</Text>
+                  <Text style={styles.boxDateFont}>2023.03.09(토) 17:00</Text>
                   <View
                     style={{
                       backgroundColor: 'rgba(255, 99, 79, 1)',
                       borderRadius: 5,
-                      padding: 3,
+                      paddingHorizontal: 8,
+                      paddingVertical: 3,
                     }}>
-                    <Text style={{fontSize: 12, color: 'white'}}>D-3</Text>
+                    <Text
+                      style={{
+                        fontSize: 12,
+                        color: 'white',
+                        fontWeight: 'bold',
+                      }}>
+                      D-3
+                    </Text>
                   </View>
                 </View>
-                <Text>서울 강남 역삼동 골목오리집</Text>
-                <Text>나누기 5/30</Text>
-                <Text>이미지들</Text>
+                <View style={{gap: 5}}>
+                  <Text>서울 강남 역삼동 골목오리집</Text>
+                  <Text>나누기 5/30</Text>
+                </View>
               </View>
               <View
                 style={{
@@ -131,31 +143,32 @@ const Home = ({navigation}) => {
                 }}
               />
             </View>
+            <Text>이미지들</Text>
           </TouchableOpacity>
-          <View
+          <TouchableOpacity
             style={{
               backgroundColor: 'white',
               borderWidth: 1,
-              borderColor: 'rgba(119, 119, 119, 1)',
+              borderColor: 'rgba(217, 217, 217, 1)',
               borderRadius: 10,
-            }}>
-            <Button
-              color={'rgba(119, 119, 119, 1)'}
-              style={{
-                width: '100%',
-                height: 40,
-                alignItems: 'center',
-                justifyContent: 'center',
-              }}
-              onPress={() => alert('button눌렀엉')}
-              title="더보기 >"
-            />
-          </View>
+              alignItems: 'center',
+              justifyContent: 'center',
+              padding: 10,
+              gap: 10,
+              flexDirection: 'row',
+            }}
+            onPress={() => alert('button눌렀엉')}>
+            <Text style={{fontSize: 16, color: 'rgba(119, 119, 119, 1)'}}>
+              더보기
+            </Text>
+            <View style={{width: 20, height: 20, justifyContent: 'center'}}>
+              <Image source={require('../assets/rightarrow.png')} />
+            </View>
+          </TouchableOpacity>
         </View>
         <View
           style={{
             width: '100%',
-            backgroundColor: '#d9d9d9',
             marginBottom: 20,
             gap: 20,
           }}>
@@ -264,13 +277,12 @@ const Home = ({navigation}) => {
         <View
           style={{
             width: '100%',
-            backgroundColor: '#d9d9d9',
             marginBottom: 20,
             gap: 20,
           }}>
           <View style={{gap: 10}}>
             <Text style={{fontSize: 20}}>클래스 모임</Text>
-            <Text>서브텍스트가 들어갑니다.</Text>
+            <Text>우리 동네, 밥 머글 사람?</Text>
           </View>
           <TouchableOpacity
             style={{
@@ -293,9 +305,17 @@ const Home = ({navigation}) => {
                     style={{
                       backgroundColor: 'rgba(255, 99, 79, 1)',
                       borderRadius: 5,
-                      padding: 3,
+                      paddingHorizontal: 8,
+                      paddingVertical: 3,
                     }}>
-                    <Text style={{fontSize: 12, color: 'white'}}>D-3</Text>
+                    <Text
+                      style={{
+                        fontSize: 12,
+                        color: 'white',
+                        fontWeight: 'bold',
+                      }}>
+                      D-3
+                    </Text>
                   </View>
                 </View>
                 <Text>코엑스 별마당 도서관</Text>
@@ -312,36 +332,36 @@ const Home = ({navigation}) => {
               />
             </View>
           </TouchableOpacity>
-          <View
+          <TouchableOpacity
             style={{
               backgroundColor: 'white',
               borderWidth: 1,
-              borderColor: 'rgba(119, 119, 119, 1)',
+              borderColor: 'rgba(217, 217, 217, 1)',
               borderRadius: 10,
-            }}>
-            <Button
-              color={'rgba(119, 119, 119, 1)'}
-              style={{
-                width: '100%',
-                height: 40,
-                alignItems: 'center',
-                justifyContent: 'center',
-              }}
-              onPress={() => alert('button눌렀엉')}
-              title="더보기 >"
-            />
-          </View>
+              alignItems: 'center',
+              justifyContent: 'center',
+              padding: 10,
+              gap: 10,
+              flexDirection: 'row',
+            }}
+            onPress={() => alert('button눌렀엉')}>
+            <Text style={{fontSize: 16, color: 'rgba(119, 119, 119, 1)'}}>
+              더보기
+            </Text>
+            <View style={{width: 20, height: 20, justifyContent: 'center'}}>
+              <Image source={require('../assets/rightarrow.png')} />
+            </View>
+          </TouchableOpacity>
         </View>
         <View
           style={{
             width: '100%',
-            backgroundColor: '#d9d9d9',
             marginBottom: 20,
             gap: 20,
           }}>
           <View style={{gap: 10}}>
             <Text style={{fontSize: 20}}>비즈니스 모임</Text>
-            <Text>서브텍스트가 들어갑니다.</Text>
+            <Text>우리 동네, 밥 머글 사람?</Text>
           </View>
           <TouchableOpacity
             style={{
@@ -364,9 +384,17 @@ const Home = ({navigation}) => {
                     style={{
                       backgroundColor: 'rgba(255, 99, 79, 1)',
                       borderRadius: 5,
-                      padding: 3,
+                      paddingHorizontal: 8,
+                      paddingVertical: 3,
                     }}>
-                    <Text style={{fontSize: 12, color: 'white'}}>D-3</Text>
+                    <Text
+                      style={{
+                        fontSize: 12,
+                        color: 'white',
+                        fontWeight: 'bold',
+                      }}>
+                      D-3
+                    </Text>
                   </View>
                 </View>
                 <Text>서울 강남 역삼동</Text>
@@ -383,25 +411,26 @@ const Home = ({navigation}) => {
               />
             </View>
           </TouchableOpacity>
-          <View
+          <TouchableOpacity
             style={{
               backgroundColor: 'white',
               borderWidth: 1,
-              borderColor: 'rgba(119, 119, 119, 1)',
+              borderColor: 'rgba(217, 217, 217, 1)',
               borderRadius: 10,
-            }}>
-            <Button
-              color={'rgba(119, 119, 119, 1)'}
-              style={{
-                width: '100%',
-                height: 40,
-                alignItems: 'center',
-                justifyContent: 'center',
-              }}
-              onPress={() => alert('button눌렀엉')}
-              title="더보기 >"
-            />
-          </View>
+              alignItems: 'center',
+              justifyContent: 'center',
+              padding: 10,
+              gap: 10,
+              flexDirection: 'row',
+            }}
+            onPress={() => alert('button눌렀엉')}>
+            <Text style={{fontSize: 16, color: 'rgba(119, 119, 119, 1)'}}>
+              더보기
+            </Text>
+            <View style={{width: 20, height: 20, justifyContent: 'center'}}>
+              <Image source={require('../assets/rightarrow.png')} />
+            </View>
+          </TouchableOpacity>
         </View>
       </View>
     </ScrollView>
@@ -424,6 +453,15 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     flexDirection: 'row',
     marginBottom: 20,
+  },
+  boxTitleFont: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: 'black',
+  },
+  boxDateFont: {
+    fontSize: 14,
+    color: 'rgba(153, 153, 153, 1)',
   },
 });
 

@@ -8,13 +8,13 @@ import {
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 const Matching = ({navigation, route}) => {
-  const {data} = route.params;
+  const {data} = route.params ? route.params : {data: null};
 
   return (
     <View style={styles.screenStyle}>
       <View style={{width: '100%', height: '100%'}}>
         <ImageBackground
-          source={{uri: data.user_profile}}
+          source={{uri: data?.user_profile}}
           style={{
             flex: 1,
           }}>
@@ -43,10 +43,10 @@ const Matching = ({navigation, route}) => {
               </View>
 
               <Text style={{color: 'white', fontSize: 22}}>
-                {data.user_name}
+                {data?.user_name}
               </Text>
               <Text style={{color: 'white', fontSize: 18}}>
-                {data.user_place?.[0]}
+                {data?.user_place?.[0]}
               </Text>
               <TouchableOpacity
                 style={{
