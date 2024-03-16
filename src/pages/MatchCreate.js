@@ -1,13 +1,5 @@
 import React, {useState} from 'react';
-import {
-  Button,
-  Modal,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
-import {Picker} from '@react-native-picker/picker';
+import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import DropDown from '../Component/PickerComponent';
 import {cities, districts} from '../firebase/api';
 
