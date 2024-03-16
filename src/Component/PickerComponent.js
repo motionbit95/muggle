@@ -1,26 +1,117 @@
-import React from 'react';
-import {Text, View} from 'react-native';
-import RNPickerSelect from 'react-native-picker-select';
+import React, {useEffect, useState} from 'react';
+import {
+  Image,
+  Modal,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
+import {component_height, font_md} from '../firebase/api';
 
-const DropDown = () => {
+const DropDown = ({items, ...props}) => {
+  const [openDropdown, setOpenDropdown] = useState(false);
+  const [selectedValue, setSelectedValue] = useState(
+    props.defaultValue ? props.defaultValue : '전체',
+  );
+
+  function handleValueChange(value) {
+    setSelectedValue(value);
+    setOpenDropdown(false);
+    props.onChangeValue(value);
+  }
+
+  useEffect(() => {
+    setSelectedValue('전체');
+  }, [items]);
+
   return (
     <View>
-      <RNPickerSelect
-        onValueChange={value => console.log(value)}
-        placeholder={{
-          label: '전체',
-          inputLabel: '전체',
-          value: 'all',
-          key: '1',
-        }}
-        items={[
-          {label: '서울', value: 'seoul', inputLabel: '서울 ', key: '2'},
-          {label: '경기', value: 'gyeonggi', inputLabel: '경기 ', key: '3'},
-          {label: '강원', value: 'gwangwon', inputLabel: '강원 ', key: '4'},
-        ]}
-      />
+      <TouchableOpacity onPress={() => setOpenDropdown(!openDropdown)}>
+        <View style={styles.container}>
+          <Text style={styles.text}>{selectedValue}</Text>
+          <View style={{width: 20, height: 20, justifyContent: 'center'}}>
+            <Image source={require('../assets/downarrow.png')} />
+          </View>
+        </View>
+      </TouchableOpacity>
+      <Modal
+        visible={openDropdown}
+        animationType="fade"
+        transparent={true}
+        style={styles.dropdown}>
+        <View style={{flex: 1}}>
+          <TouchableOpacity
+            style={{flex: 1, backgroundColor: 'rgba(0,0,0,0.2)'}}
+            onPress={() => setOpenDropdown(false)}
+          />
+          <View style={styles.content}>
+            <ScrollView>
+              {items?.map((item, index) => (
+                <TouchableOpacity
+                  key={index}
+                  style={
+                    item === selectedValue
+                      ? styles.selected_button
+                      : styles.button
+                  }
+                  onPress={() => handleValueChange(item)}>
+                  <Text style={styles.text}>{item}</Text>
+                </TouchableOpacity>
+              ))}
+            </ScrollView>
+          </View>
+        </View>
+      </Modal>
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flexDirection: 'row',
+    height: component_height,
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    backgroundColor: 'white',
+    paddingVertical: 10,
+    paddingHorizontal: 10,
+    borderWidth: 1,
+    borderRadius: 5,
+    borderColor: '#dddddd',
+  },
+  dropdown: {
+    top: component_height,
+    width: 100,
+  },
+  content: {
+    backgroundColor: 'white',
+    borderTopLeftRadius: 10,
+    borderTopRightRadius: 10,
+    width: '100%', // 모달의 너비를 화면 너비의 80%로 설정
+    bottom: 0,
+    height: 230,
+    position: 'absolute',
+    paddingTop: 20,
+    paddingBottom: 60,
+  },
+  button: {
+    width: '100%',
+    alignItems: 'center',
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+  },
+  selected_button: {
+    width: '100%',
+    alignItems: 'center',
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    backgroundColor: '#f1f1f1',
+  },
+  text: {
+    fontSize: font_md,
+  },
+});
 
 export default DropDown;

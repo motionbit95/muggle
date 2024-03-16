@@ -1,9 +1,29 @@
 import React, {useState} from 'react';
-import {Button, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {
+  Button,
+  Modal,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import {Picker} from '@react-native-picker/picker';
 import DropDown from '../Component/PickerComponent';
+import {cities, districts} from '../firebase/api';
 
 const MatchCreate = () => {
+  const [selectedCity, setSelectedCity] = useState('');
+  const [selectedDistrict, setSelectedDistrict] = useState('');
+
+  const handleCityChange = value => {
+    setSelectedCity(value);
+    setSelectedDistrict('');
+  };
+
+  const handleDistrictChange = value => {
+    setSelectedDistrict(value);
+  };
+
   return (
     <View style={styles.screenStyle}>
       <View
@@ -17,17 +37,24 @@ const MatchCreate = () => {
           <Text style={{fontSize: 18}}>지역</Text>
           <View
             style={{
-              justifyContent: 'space-around',
+              justifyContent: 'stretch',
               flexDirection: 'row',
               gap: 10,
             }}>
-            <DropDown />
-
-            <TouchableOpacity
-              onPress={() => alert('구 선택')}
-              style={styles.button}>
-              <Text>구</Text>
-            </TouchableOpacity>
+            <View style={{flex: 1}}>
+              <DropDown
+                items={cities}
+                defaultValue={selectedCity}
+                onChangeValue={handleCityChange}
+              />
+            </View>
+            <View style={{flex: 1}}>
+              <DropDown
+                items={districts[selectedCity]}
+                defaultValue={selectedDistrict}
+                onChangeValue={handleDistrictChange}
+              />
+            </View>
           </View>
         </View>
         <View style={{width: '100%', gap: 10}}>
