@@ -1,22 +1,8 @@
 import React, {useState} from 'react';
-import {
-  StyleSheet,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  View,
-} from 'react-native';
-
+import {Text, TextInput, TouchableOpacity, View} from 'react-native';
 import DropDown from '../Component/PickerComponent';
-import {
-  component_height,
-  component_radius,
-  font_lg,
-  font_md,
-  primary_color,
-  cities,
-  districts,
-} from '../firebase/api';
+import {cities, districts} from '../firebase/api';
+import styles from '../style/styles';
 
 const MatchCreate = () => {
   const [selectedCity, setSelectedCity] = useState('');
@@ -32,7 +18,7 @@ const MatchCreate = () => {
   };
 
   return (
-    <View style={styles.screenStyle}>
+    <View style={[styles.screenStyle, styles.spaceBetween]}>
       <View style={{width: '100%', gap: 15, padding: 20}}>
         <View style={styles.columnBox}>
           <Text style={styles.contentTitle}>지역</Text>
@@ -88,10 +74,6 @@ const MatchCreate = () => {
           <Text style={styles.contentTitle}>모임목표</Text>
           <TextInput
             multiline
-            numberOfLines={4}
-            maxLength={300}
-            // onChangeText={(text) => this.setState({text})}
-            // value={this.state.text}
             style={[
               {
                 width: '100%',
@@ -116,61 +98,15 @@ const MatchCreate = () => {
           />
         </View>
       </View>
-      <TouchableOpacity
-        style={[styles.button]}
-        onPress={() => alert('button눌렀엉')}>
-        <Text style={styles.buttonText}>모임 만들기</Text>
-      </TouchableOpacity>
+      <View style={styles.buttonBox}>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => alert('button눌렀엉')}>
+          <Text style={styles.buttonText}>모임 만들기</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };
 
 export default MatchCreate;
-
-const styles = StyleSheet.create({
-  screenStyle: {
-    flex: 1,
-    backgroundColor: '#fff',
-    justifyContent: 'space-between',
-  },
-  button: {
-    backgroundColor: primary_color,
-    borderRadius: component_radius,
-    height: component_height,
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginHorizontal: 20,
-    marginVertical: 10,
-  },
-  buttonText: {
-    fontSize: 18,
-    color: 'black',
-    fontWeight: 'bold',
-  },
-  rowBox: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-  },
-  columnBox: {
-    flexDirection: 'column',
-    gap: 10,
-  },
-  contentTitle: {
-    fontSize: 15,
-    fontWeight: '600',
-  },
-  contentText: {
-    fontSize: 16,
-    fontWeight: '400',
-    color: 'rgba(187, 187, 187, 1)',
-  },
-  contentBox: {
-    borderColor: 'rgba(221, 221, 221, 1)',
-    borderWidth: 1,
-    backgroundColor: 'white',
-    borderRadius: 10,
-    padding: 10,
-    fontSize: font_md,
-  },
-});

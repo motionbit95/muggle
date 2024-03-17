@@ -1,24 +1,14 @@
 import React, {useState} from 'react';
 import {
-  Button,
   ScrollView,
-  StyleSheet,
   Text,
   TextInput,
   TouchableOpacity,
   View,
 } from 'react-native';
-import {
-  component_height,
-  component_radius,
-  font_lg,
-  font_md,
-  primary_color,
-  cities,
-  districts,
-  banks,
-} from '../firebase/api';
+import {cities, districts, banks} from '../firebase/api';
 import DropDown from '../Component/PickerComponent';
+import styles from '../style/styles';
 
 const SignUp = ({navigation}) => {
   const [selectedGender, setSelectedGender] = useState(null);
@@ -80,7 +70,7 @@ const SignUp = ({navigation}) => {
 
   return (
     <View style={styles.screenStyle}>
-      <ScrollView style={{width: '100%'}}>
+      <ScrollView style={styles.scrollViewStyle}>
         <View style={{width: '100%', gap: 15, padding: 20}}>
           <View style={{width: '100%', paddingTop: 10}}>
             <Text style={{fontSize: 24, fontWeight: 'bold'}}>회원가입</Text>
@@ -100,7 +90,7 @@ const SignUp = ({navigation}) => {
           </View>
           <View style={styles.columnBox}>
             <Text style={styles.contentTitle}>성별</Text>
-            <View style={styles.container}>
+            <View style={styles.buttoncontainer}>
               <TouchableOpacity
                 style={[
                   styles.genderButton,
@@ -220,88 +210,15 @@ const SignUp = ({navigation}) => {
           </View>
         </View>
       </ScrollView>
-      <TouchableOpacity
-        style={styles.button}
-        onPress={() => navigation.navigate('관심사 선택')}>
-        <Text style={styles.buttonText}>다음</Text>
-      </TouchableOpacity>
+      <View style={styles.buttonBox}>
+        <TouchableOpacity
+          style={[styles.button, styles.buttonMargin]}
+          onPress={() => navigation.navigate('관심사 선택')}>
+          <Text style={styles.buttonText}>다음</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };
 
 export default SignUp;
-
-const styles = StyleSheet.create({
-  screenStyle: {
-    flex: 1,
-    backgroundColor: '#fff',
-    justifyContent: 'space-between',
-  },
-  container: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-  },
-  genderButton: {
-    width: '48%',
-    height: 50,
-    justifyContent: 'center',
-    alignItems: 'center',
-    paddingVertical: 10,
-    paddingHorizontal: 20,
-    borderWidth: 1,
-    borderRadius: 10,
-    borderColor: 'gray',
-  },
-  selectedButton: {
-    backgroundColor: 'white',
-    borderColor: 'rgba(255, 99, 79, 1)',
-  },
-  genderbuttonText: {
-    color: 'gray',
-    fontSize: 16,
-  },
-  selectedButtonText: {
-    color: 'rgba(255, 99, 79, 1)', // 선택된 상태의 버튼 텍스트 색
-  },
-  button: {
-    backgroundColor: primary_color,
-    borderRadius: component_radius,
-    height: component_height,
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginHorizontal: 20,
-    marginVertical: 10,
-  },
-  buttonText: {
-    fontSize: 18,
-    color: 'black',
-    fontWeight: 'bold',
-  },
-  rowBox: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-  },
-  columnBox: {
-    flexDirection: 'column',
-    gap: 10,
-  },
-  contentTitle: {
-    fontSize: 15,
-    fontWeight: '600',
-  },
-  contentText: {
-    fontSize: 16,
-    fontWeight: '400',
-    color: 'rgba(187, 187, 187, 1)',
-  },
-  contentBox: {
-    borderColor: 'rgba(221, 221, 221, 1)',
-    borderWidth: 1,
-    backgroundColor: 'white',
-    borderRadius: 10,
-    padding: 10,
-    fontSize: font_md,
-  },
-});

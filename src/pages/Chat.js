@@ -77,11 +77,40 @@ const FirstRoute = () => (
 
 const SecondRoute = () => (
   <View>
-    <View>
-      <Text>Hello</Text>
-    </View>
+    <TouchableOpacity
+      style={{
+        backgroundColor: 'white',
+        padding: 20,
+        flexDirection: 'row',
+        gap: 10,
+        justifyContent: 'space-between',
+        alignItems: 'center',
+      }}
+      onPress={() => alert('채팅하겠습니까')}>
+      <View style={{flexDirection: 'row', gap: 10, alignItems: 'center'}}>
+        <View
+          style={{
+            width: 60,
+            height: 60,
+            backgroundColor: 'red',
+            borderRadius: 50,
+          }}
+        />
+        <View>
+          <Text>홍*경</Text>
+          <Text>식사 어때?</Text>
+        </View>
+      </View>
+      <Text>5분전</Text>
+    </TouchableOpacity>
   </View>
 );
+
+const ChatRoom = () => {
+  <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+    <Text>채팅방 화면</Text>
+  </View>;
+};
 
 const renderScene = SceneMap({
   first: FirstRoute,

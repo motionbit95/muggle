@@ -27,7 +27,7 @@ import {
 import Home from './src/pages/Home';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {NavigationContainer} from '@react-navigation/native';
-import Login from './src/pages/Login';
+
 import User from './src/pages/User';
 import Chat from './src/pages/Chat';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
@@ -89,11 +89,7 @@ const App = () => {
             ),
           }}
         />
-        <Tab.Screen
-          name="Login"
-          component={Login}
-          options={{headerShown: false}}
-        />
+
         <Tab.Screen name="Chat" component={Chat} />
         <Tab.Screen name="마이페이지" component={User} />
         <Tab.Screen name="모임상세" component={MatchingForm} />
@@ -112,78 +108,3 @@ const App = () => {
 };
 
 export default App;
-
-/*
-const App = () => {
-  const Stack = createNativeStackNavigator();
-
-  return (
-    <NavigationContainer independent={true}>
-      <Stack.Navigator>
-        <Stack.Screen name="Tab" component={TabNavigator} />
-        <Stack.Screen name="Login" component={LoginStack} />
-      </Stack.Navigator>
-    </NavigationContainer>
-  );
-};
-
-export default App;
-
-export const TabNavigator = () => {
-  const Tab = createBottomTabNavigator();
-  return (
-    <NavigationContainer>
-      <Tab.Navigator>
-        <Tab.Screen name="Home" component={HomeStack} />
-        <Tab.Screen name="Match" component={<MatchStack />} />
-        <Tab.Screen name="User" component={<UserStack />} />
-        <Tab.Screen name="Chat" component={<ChatStack />} />
-      </Tab.Navigator>
-    </NavigationContainer>
-  );
-};
-
-const LoginStack = () => {
-  return (
-    <Stack.Navigator>
-      <Stack.Screen name="Login" component={Login} />
-      <Stack.Screen name="SignUp" component={SignUp} />
-      <Stack.Screen name="Certificate" component={Certificate} />
-    </Stack.Navigator>
-  );
-};
-
-export const HomeStack = () => {
-  return (
-    <Stack.Navigator>
-      <Stack.Screen name="Home" component={Home} />
-    </Stack.Navigator>
-  );
-};
-
-export const MatchStack = () => {
-  return (
-    <Stack.Navigator>
-      <Stack.Screen name="Match" component={Match} />
-      <Stack.Screen name="Matching" component={Matching} />
-      <Stack.Screen name="MeetingForm" component={MeetingForm} />
-    </Stack.Navigator>
-  );
-};
-
-export const UserStack = () => {
-  return (
-    <Stack.Navigator>
-      <Stack.Screen name="User" component={User} />
-    </Stack.Navigator>
-  );
-};
-
-export const ChatStack = () => {
-  return (
-    <Stack.Navigator>
-      <Stack.Screen name="Chat" component={Chat} />
-    </Stack.Navigator>
-  );
-};
-*/

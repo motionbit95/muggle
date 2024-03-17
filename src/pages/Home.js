@@ -4,13 +4,14 @@ import {
   Image,
   ImageBackground,
   ScrollView,
-  StyleSheet,
   Text,
   TouchableOpacity,
   View,
 } from 'react-native';
 import {getDocList} from '../firebase/firebase_func';
 import LinearGradient from 'react-native-linear-gradient';
+import styles from '../style/styles';
+
 const Home = ({navigation}) => {
   const [userList, setUserList] = useState([]);
   useEffect(() => {
@@ -24,8 +25,8 @@ const Home = ({navigation}) => {
   };
   return (
     <ScrollView style={{width: '100%'}}>
-      <View style={styles.screenStyle}>
-        <View style={styles.headerStyle}>
+      <View style={[styles.screenStyle, styles.contentStyle]}>
+        <View style={styles.rowBox}>
           <Text>머글 모임</Text>
           <Text>클래스 모임</Text>
           <Text>비즈니스 모임</Text>
@@ -436,33 +437,5 @@ const Home = ({navigation}) => {
     </ScrollView>
   );
 };
-
-const styles = StyleSheet.create({
-  screenStyle: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-    padding: 20,
-  },
-  headerStyle: {
-    width: '100%',
-    height: 50,
-    alignItems: 'center',
-    backgroundColor: '#f1f1f1',
-    justifyContent: 'space-between',
-    flexDirection: 'row',
-    marginBottom: 20,
-  },
-  boxTitleFont: {
-    fontSize: 16,
-    fontWeight: 'bold',
-    color: 'black',
-  },
-  boxDateFont: {
-    fontSize: 14,
-    color: 'rgba(153, 153, 153, 1)',
-  },
-});
 
 export default Home;
