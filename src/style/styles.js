@@ -104,7 +104,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     borderWidth: 1,
     borderRadius: 10,
-    borderColor: 'gray',
+    borderColor: '#d9d9d9',
   },
   buttoncontainer: {
     flexDirection: 'row',
@@ -142,8 +142,10 @@ const styles = StyleSheet.create({
   Avartar70: {
     width: 70,
     height: 70,
-    backgroundColor: 'red',
+    backgroundColor: '#d9d9d9',
     borderRadius: 50,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   Avartar50: {
     width: 50,
@@ -191,7 +193,7 @@ const styles = StyleSheet.create({
   },
 
   // Horizontal Line
-  hr: {borderBottomColor: 'gray', borderBottomWidth: 1},
+  hr: {borderBottomColor: '#d9d9d9', borderBottomWidth: 1},
 
   // Tag
   tagBox: {

@@ -2,12 +2,9 @@ import firestore from '@react-native-firebase/firestore';
 
 export const getDocList = async collectionId => {
   const list = [];
-  const querySnapshot = await firestore()
-    .collection(collectionId)
-    .limit(10)
-    .get();
+  const querySnapshot = await firestore().collection(collectionId).get();
   querySnapshot.forEach(doc => {
-    list.push(doc.data());
+    if (doc.data().user_phone) list.push(doc.data());
   });
   return list;
 };

@@ -4,6 +4,11 @@ export const component_radius = 10;
 export const font_md = 16;
 export const font_lg = 24;
 
+export const defaultFemale =
+  'https://firebasestorage.googleapis.com/v0/b/dinnermate-8d37b.appspot.com/o/assets%2FFemale.png?alt=media&token=247bbd91-9ebf-4f5a-8911-b8d6b9c89e58';
+export const defaultMale =
+  'https://firebasestorage.googleapis.com/v0/b/dinnermate-8d37b.appspot.com/o/assets%2FMale.png?alt=media&token=dfa379fe-607c-4ac5-8208-37f2745f5baa';
+
 // 시/도, 군/구
 export const cities = [
   '강원도',
@@ -298,3 +303,28 @@ export const banks = [
   'SC제일',
   '한국씨티',
 ];
+
+export function getDisplayAge(birthdate) {
+  if (!birthdate) return '';
+  // 입력된 8자리 문자열을 연, 월, 일로 분리
+  const year = birthdate.slice(0, 4);
+  const month = birthdate.slice(4, 6);
+  const day = birthdate.slice(6, 8);
+
+  // 날짜 객체 생성
+  const birthdateObj = new Date(year, month - 1, day); // 월은 0부터 시작하므로 -1 해줍니다.
+  var currentDate = new Date();
+  var age = currentDate.getFullYear() - birthdateObj.getFullYear();
+
+  if (
+    currentDate.getMonth() < birthdateObj.getMonth() ||
+    (currentDate.getMonth() === birthdateObj.getMonth() &&
+      currentDate.getDate() < birthdateObj.getDate())
+  ) {
+    age--;
+  }
+
+  var lowerRange = Math.floor(age / 5) * 5;
+  var upperRange = lowerRange + 4;
+  return `${age}세`;
+}

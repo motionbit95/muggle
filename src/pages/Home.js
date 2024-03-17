@@ -11,6 +11,7 @@ import {
 import {getDocList} from '../firebase/firebase_func';
 import LinearGradient from 'react-native-linear-gradient';
 import styles from '../style/styles';
+import {defaultFemale, defaultMale} from '../firebase/api';
 
 const Home = ({navigation}) => {
   const [userList, setUserList] = useState([]);
@@ -209,14 +210,20 @@ const Home = ({navigation}) => {
               <ImageBackground
                 key={index}
                 imageStyle={{borderRadius: 20}}
-                source={{uri: user.user_profile}}
+                source={{
+                  uri: user.user_profile
+                    ? user.user_profile
+                    : user.user_gender === 'male' || user.user_gender === '남'
+                    ? defaultMale
+                    : defaultFemale,
+                }}
                 style={{
                   width: 280,
                   height: 300,
                   borderRadius: 20,
                 }}>
                 <LinearGradient
-                  colors={['rgba(0,0,0,0)', 'rgba(0,0,0,1)']}
+                  colors={['rgba(0,0,0,0)', 'rgba(0,0,0,0.5)']}
                   style={{borderRadius: 20}}>
                   <View
                     style={{

@@ -1,7 +1,25 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {Button, Image, Text, TouchableOpacity, View} from 'react-native';
 import styles from '../style/styles';
+import auth from '@react-native-firebase/auth';
+import {singleQuery} from '../firebase/firebase_func';
+import {getDisplayAge} from '../firebase/api';
 const User = ({navigation}) => {
+  const [myInfo, setMyInfo] = useState(null);
+
+  useEffect(() => {
+    const unsubscribe = auth().onAuthStateChanged(user => {
+      if (user) {
+        singleQuery('user', 'uid', user.uid).then(res => {
+          setMyInfo(res[0]);
+        });
+      }
+    });
+    return () => {
+      unsubscribe();
+    };
+  }, []);
+
   return (
     <View style={styles.screenStyle}>
       <View style={styles.bgStyle} />
@@ -10,34 +28,65 @@ const User = ({navigation}) => {
           <View style={styles.rowBox}>
             <View style={styles.Avartar70} />
             <View style={{justifyContent: 'center', gap: 5}}>
-              <View style={{flexDirection: 'row', gap: 5}}>
-                <Text style={{fontSize: 20, color: 'white'}}>홍길동</Text>
-                <Text style={{fontSize: 14, color: 'white'}}>5.0</Text>
+              <View
+                style={{flexDirection: 'row', gap: 5, alignItems: 'center'}}>
+                <Text
+                  style={{fontSize: 20, color: 'white', fontWeight: 'bold'}}>
+                  {myInfo?.user_name}님
+                </Text>
+                <Image source={require('../assets/star.png')} />
+                <Text
+                  style={{fontSize: 14, color: 'white', fontWeight: 'bold'}}>
+                  {(0).toFixed(1)}
+                </Text>
               </View>
-              <View style={{flexDirection: 'row', gap: 5}}>
-                <Text style={{fontSize: 16, color: 'white'}}>20세</Text>
-                <Text style={{fontSize: 16, color: 'white'}}>남자</Text>
+              <View
+                style={{flexDirection: 'row', gap: 5, alignItems: 'center'}}>
+                <Text style={{fontSize: 16, color: 'white'}}>
+                  {getDisplayAge(myInfo?.user_birth)}
+                </Text>
+                <Text style={{fontSize: 12, color: 'white'}}>|</Text>
+                <Text style={{fontSize: 16, color: 'white'}}>
+                  {myInfo?.user_gender === '남' ||
+                  myInfo?.user_gender === 'male'
+                    ? '남성'
+                    : '여성'}
+                </Text>
+                <Text style={{fontSize: 12, color: 'white'}}>|</Text>
                 <Text
                   style={{fontSize: 16, color: 'white', textAlign: 'center'}}>
-                  서울특별시 압구정
+                  {myInfo?.user_place[0]}
                 </Text>
               </View>
               <View style={{flexDirection: 'row', gap: 5}}>
                 <View
                   style={{
-                    padding: 5,
-                    borderRadius: 10,
+                    paddingVertical: 5,
+                    paddingHorizontal: 8,
+                    borderRadius: 30,
                     borderWidth: 1,
                     borderColor: 'white',
                   }}>
-                  <Text style={{fontSize: 12, color: 'white'}}>취미</Text>
+                  <Text style={{fontSize: 12, color: 'white'}}>관심사1</Text>
+                </View>
+                <View
+                  style={{
+                    paddingVertical: 5,
+                    paddingHorizontal: 8,
+                    borderRadius: 30,
+                    borderWidth: 1,
+                    borderColor: 'white',
+                  }}>
+                  <Text style={{fontSize: 12, color: 'white'}}>관심사2</Text>
                 </View>
               </View>
             </View>
           </View>
           <View>
             <TouchableOpacity
-              onPress={() => navigation.navigate('프로필 편집')}>
+              onPress={() =>
+                navigation.navigate('프로필 편집', {data: myInfo})
+              }>
               <Image source={require('../assets/Setting.png')} />
             </TouchableOpacity>
           </View>
