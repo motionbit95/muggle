@@ -37,6 +37,10 @@ import SignUp from './src/pages/Signup';
 import Certificate from './src/pages/Certificate';
 import MatchCreate from './src/pages/MatchCreate';
 import MatchingForm from './src/pages/MatchingForm';
+import Interest from './src/pages/Interest';
+import Interest2 from './src/pages/Interest2';
+import Introduce from './src/pages/Introduce';
+import MatchDetails from './src/pages/MatchDetails';
 
 const App = () => {
   // const isDarkMode = useColorScheme() === 'dark';
@@ -98,6 +102,10 @@ const App = () => {
         <Tab.Screen name="회원가입" component={SignUp} />
         <Tab.Screen name="휴대폰 본인인증" component={Certificate} />
         <Tab.Screen name="모임 개설" component={MatchCreate} />
+        <Tab.Screen name="관심사 선택" component={Interest} />
+        <Tab.Screen name="상세 관심사 선택" component={Interest2} />
+        <Tab.Screen name="인트로" component={Introduce} />
+        <Tab.Screen name="매창내역" component={MatchDetails} />
       </Tab.Navigator>
     </NavigationContainer>
   );

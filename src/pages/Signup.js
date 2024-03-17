@@ -222,7 +222,7 @@ const SignUp = ({navigation}) => {
       </ScrollView>
       <TouchableOpacity
         style={styles.button}
-        onPress={() => alert('button눌렀엉')}>
+        onPress={() => navigation.navigate('관심사 선택')}>
         <Text style={styles.buttonText}>다음</Text>
       </TouchableOpacity>
     </View>
