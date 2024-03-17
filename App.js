@@ -105,7 +105,7 @@ const App = () => {
         <Tab.Screen name="관심사 선택" component={Interest} />
         <Tab.Screen name="상세 관심사 선택" component={Interest2} />
         <Tab.Screen name="인트로" component={Introduce} />
-        <Tab.Screen name="매창내역" component={MatchDetails} />
+        <Tab.Screen name="매칭내역" component={MatchDetails} />
       </Tab.Navigator>
     </NavigationContainer>
   );
