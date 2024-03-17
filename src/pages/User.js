@@ -1,5 +1,5 @@
 import React from 'react';
-import {Button, Text, TouchableOpacity, View} from 'react-native';
+import {Button, Image, Text, TouchableOpacity, View} from 'react-native';
 import styles from '../style/styles';
 const User = ({navigation}) => {
   return (
@@ -36,8 +36,9 @@ const User = ({navigation}) => {
             </View>
           </View>
           <View>
-            <TouchableOpacity>
-              <Text>설정</Text>
+            <TouchableOpacity
+              onPress={() => navigation.navigate('프로필 편집')}>
+              <Image source={require('../assets/Setting.png')} />
             </TouchableOpacity>
           </View>
         </View>

@@ -40,6 +40,7 @@ import Interest from './src/pages/Interest';
 import Interest2 from './src/pages/Interest2';
 import Introduce from './src/pages/Introduce';
 import MatchDetails from './src/pages/MatchDetails';
+import Profile from './src/pages/Profile';
 
 const App = () => {
   // const isDarkMode = useColorScheme() === 'dark';
@@ -100,6 +101,7 @@ const App = () => {
         <Tab.Screen name="상세 관심사 선택" component={Interest2} />
         <Tab.Screen name="인트로" component={Introduce} />
         <Tab.Screen name="매칭내역" component={MatchDetails} />
+        <Tab.Screen name="프로필 편집" component={Profile} />
       </Tab.Navigator>
     </NavigationContainer>
   );
