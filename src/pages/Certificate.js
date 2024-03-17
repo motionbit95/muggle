@@ -16,6 +16,7 @@ import {
   primary_color,
 } from '../firebase/api';
 import auth from '@react-native-firebase/auth';
+import {singleQuery} from '../firebase/firebase_func';
 
 const Certificate = ({navigation}) => {
   // 테스트 정보 : 번호 01012341234 / 코드 101010
@@ -49,6 +50,18 @@ const Certificate = ({navigation}) => {
       setIsActive(true);
     } catch (error) {
       alert('인증 실패:', error);
+    }
+  };
+
+  const moveNextStep = async () => {
+    // 인증 후 가입 된 회원이 있는지 확인하고, 없으면 회원가입 패이지로, 있으면 홈으로 이동한다.
+    let req = await singleQuery('user', 'uid', auth().currentUser.uid);
+    console.log(req);
+
+    if (req?.length > 0) {
+      navigation.navigate('Home');
+    } else {
+      navigation.navigate('회원가입');
     }
   };
 
@@ -203,7 +216,7 @@ const Certificate = ({navigation}) => {
             alignItems: 'center',
             justifyContent: 'center',
           }}
-          onPress={() => navigation.navigate('회원가입')}>
+          onPress={moveNextStep}>
           <Text
             style={{
               fontSize: font_md,

@@ -123,7 +123,9 @@ const Introduce = ({navigation}) => {
         renderTabBar={renderTabBar}
         style={{flexDirection: 'column-reverse'}}
       />
-      <TouchableOpacity style={styles.button} onPress={() => alert('다음으로')}>
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => navigation.navigate('Home')}>
         <Text style={styles.buttonText}>시작하기</Text>
       </TouchableOpacity>
     </View>

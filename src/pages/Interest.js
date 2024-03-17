@@ -13,21 +13,26 @@ import {
   font_lg,
   font_md,
 } from '../firebase/api';
+import {addDocument} from '../firebase/firebase_func';
 
-const Interest = ({navigation}) => {
+const Interest = ({navigation, route}) => {
+  const {data} = route.params ? route.params : {data: null};
+
+  const signupUser = () => {
+    addDocument('user', data);
+    navigation.navigate('인트로');
+  };
   return (
     <View style={styles.screenStyle}>
       <ScrollView style={{width: '100%'}}>
         <View style={{width: '100%', gap: 15, padding: 20}}>
           <View style={{width: '100%', paddingTop: 10}}>
-            <Text>내용이들어갑니다.</Text>
+            <Text>{data?.user_name}</Text>
           </View>
         </View>
       </ScrollView>
-      <TouchableOpacity
-        style={styles.button}
-        onPress={() => navigation.navigate('상세 관심사 선택')}>
-        <Text style={styles.buttonText}>다음</Text>
+      <TouchableOpacity style={styles.button} onPress={signupUser}>
+        <Text style={styles.buttonText}>가입완료</Text>
       </TouchableOpacity>
     </View>
   );

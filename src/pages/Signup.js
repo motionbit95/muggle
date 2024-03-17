@@ -9,8 +9,12 @@ import {
 import {cities, districts, banks} from '../firebase/api';
 import DropDown from '../Component/PickerComponent';
 import styles from '../style/styles';
+import auth from '@react-native-firebase/auth';
 
 const SignUp = ({navigation}) => {
+  const [userName, serUserName] = useState('');
+  const [userPrice, setUserPrice] = useState('');
+
   const [selectedGender, setSelectedGender] = useState(null);
 
   const [selectedCity, setSelectedCity] = useState('');
@@ -21,6 +25,7 @@ const SignUp = ({navigation}) => {
   const [selectday, setSelectday] = useState('');
 
   const [selectbank, setSelectbank] = useState('');
+  const [accountNumber, setAccountNumber] = useState('');
 
   const years = [];
   for (let year = 2005; year >= 1900; year--) {
@@ -68,6 +73,27 @@ const SignUp = ({navigation}) => {
     setSelectbank(value);
   };
 
+  const handleSignup = () => {
+    const userInfo = {
+      uid: auth().currentUser?.uid,
+      user_phone: auth().currentUser?.phoneNumber,
+      user_name: userName,
+      user_gender: selectedGender,
+      user_birth:
+        '' +
+        selectyear +
+        (parseInt(selectmonth < 10) ? '0' + selectmonth : selectmonth) +
+        (parseInt(selectday < 10) ? '0' + selectday : selectday),
+      user_place: [selectedCity + ' ' + selectedDistrict],
+      user_price: userPrice,
+      user_bank: {
+        account_number: accountNumber,
+        bank_name: selectbank,
+      },
+    };
+    navigation.navigate('관심사 선택', {data: userInfo});
+  };
+
   return (
     <View style={styles.screenStyle}>
       <ScrollView style={styles.scrollViewStyle}>
@@ -86,6 +112,7 @@ const SignUp = ({navigation}) => {
                 styles.contentBox,
               ]}
               placeholder="이름을 입력해주세요."
+              onChange={e => serUserName(e.nativeEvent.text)}
             />
           </View>
           <View style={styles.columnBox}>
@@ -180,8 +207,10 @@ const SignUp = ({navigation}) => {
             <Text style={styles.contentTitle}>나의 커피 매칭권 금액은?</Text>
             <View>
               <TextInput
+                keyboardType="numeric"
                 style={[{width: '100%', height: 50}, styles.contentBox]}
                 placeholder="최소 2만원 이상"
+                onChange={e => setUserPrice(e.nativeEvent.text)}
               />
             </View>
           </View>
@@ -203,8 +232,10 @@ const SignUp = ({navigation}) => {
                 />
               </View>
               <TextInput
+                keyboardType="numeric"
                 style={[{flex: 1.5}, styles.contentBox]}
                 placeholder="번호를 입력해주세요."
+                onChange={e => setAccountNumber(e.nativeEvent.text)}
               />
             </View>
           </View>
@@ -213,7 +244,7 @@ const SignUp = ({navigation}) => {
       <View style={styles.buttonBox}>
         <TouchableOpacity
           style={[styles.button, styles.buttonMargin]}
-          onPress={() => navigation.navigate('관심사 선택')}>
+          onPress={handleSignup}>
           <Text style={styles.buttonText}>다음</Text>
         </TouchableOpacity>
       </View>

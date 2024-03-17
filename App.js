@@ -27,7 +27,6 @@ import {
 import Home from './src/pages/Home';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {NavigationContainer} from '@react-navigation/native';
-
 import User from './src/pages/User';
 import Chat from './src/pages/Chat';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
@@ -89,7 +88,6 @@ const App = () => {
             ),
           }}
         />
-
         <Tab.Screen name="Chat" component={Chat} />
         <Tab.Screen name="마이페이지" component={User} />
         <Tab.Screen name="모임상세" component={MatchingForm} />
