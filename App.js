@@ -50,58 +50,111 @@ const App = () => {
   // };
 
   const Tab = createBottomTabNavigator();
-  const Stack = createNativeStackNavigator();
+
+  const HomeStack = createNativeStackNavigator();
+  const UserStack = createNativeStackNavigator();
+  const ChatStack = createNativeStackNavigator();
+  const MatchingStack = createNativeStackNavigator();
+  const SignUpStack = createNativeStackNavigator();
+
+  const HomeStackNavigate = () => (
+    <HomeStack.Navigator>
+      <HomeStack.Screen
+        name="Home"
+        component={Home}
+        options={{
+          title: 'Home',
+          headerTintColor: '#ffffff',
+          headerTitleStyle: {
+            fontWeight: 'bold',
+            fontSize: 20,
+          },
+          headerBackVisible: false,
+          headerTitle: '',
+          headerLeft: ({onPress}) => (
+            <TouchableOpacity
+              style={{marginLeft: 20}}
+              onPress={() => alert('여긴 홈인데용!')}>
+              <Text style={{fontSize: 20}}>MUGGLE</Text>
+            </TouchableOpacity>
+          ),
+          headerRight: () => (
+            <TouchableOpacity
+              style={{marginRight: 20}}
+              onPress={() => alert('알림!')}>
+              <Text>알림</Text>
+            </TouchableOpacity>
+          ),
+        }}
+      />
+      <HomeStack.Screen name="모임상세" component={MatchingForm} />
+      <HomeStack.Screen name="커피매칭신청" component={Matching} />
+    </HomeStack.Navigator>
+  );
+
+  const UserStackNavigate = () => (
+    <UserStack.Navigator>
+      <UserStack.Screen name="마이페이지" component={User} />
+      <UserStack.Screen name="프로필 편집" component={Profile} />
+      <UserStack.Screen name="매칭내역" component={MatchDetails} />
+    </UserStack.Navigator>
+  );
+
+  const ChatStackNavigate = () => (
+    <ChatStack.Navigator>
+      <ChatStack.Screen name="Chat" component={Chat} />
+    </ChatStack.Navigator>
+  );
+
+  const MatchingStackNavigate = () => (
+    <MatchingStack.Navigator>
+      <MatchingStack.Screen name="커피매칭" component={Matching} />
+      <MatchingStack.Screen name="모임상세" component={MatchingForm} />
+      <MatchingStack.Screen name="모임 개설" component={MatchCreate} />
+      <MatchingStack.Screen name="매칭중" component={Match} />
+    </MatchingStack.Navigator>
+  );
+  const SignUpStackNavigate = () => (
+    <SignUpStack.Navigator>
+      <SignUpStack.Screen name="회원가입" component={SignUp} />
+      <SignUpStack.Screen name="휴대폰 본인인증" component={Certificate} />
+      <SignUpStack.Screen name="관심사 선택" component={Interest} />
+      <SignUpStack.Screen name="상세 관심사 선택" component={Interest2} />
+      <SignUpStack.Screen name="인트로" component={Introduce} />
+    </SignUpStack.Navigator>
+  );
 
   return (
     <NavigationContainer>
       <Tab.Navigator>
         <Tab.Screen
           name="Home"
-          component={Home}
+          component={HomeStackNavigate}
           options={{
-            title: 'Home',
-            // Header 블록에 대한 스타일
-            // headerStyle: {
-            //   backgroundColor: '#29b6f6',
-            // },
-            // Header의 텍스트, 버튼 색상
-            headerTintColor: '#ffffff',
-            // 타이틀 텍스트의 스타일
-            headerTitleStyle: {
-              fontWeight: 'bold',
-              fontSize: 20,
-            },
-            headerBackVisible: false,
-            headerTitle: '',
-            headerLeft: ({onPress}) => (
-              <TouchableOpacity
-                style={{marginLeft: 20}}
-                onPress={() => alert('여긴 홈인데용!')}>
-                <Text style={{fontSize: 20}}>MUGGLE</Text>
-              </TouchableOpacity>
-            ),
-            headerRight: () => (
-              <TouchableOpacity
-                style={{marginRight: 20}}
-                onPress={() => alert('알림!')}>
-                <Text>알림</Text>
-              </TouchableOpacity>
-            ),
+            headerShown: false,
           }}
         />
-        <Tab.Screen name="Chat" component={Chat} />
-        <Tab.Screen name="마이페이지" component={User} />
-        <Tab.Screen name="모임상세" component={MatchingForm} />
-        <Tab.Screen name="커피매칭신청" component={Matching} />
-        <Tab.Screen name="매칭중" component={Match} />
-        <Tab.Screen name="회원가입" component={SignUp} />
-        <Tab.Screen name="휴대폰 본인인증" component={Certificate} />
+        <Tab.Screen
+          name="커피매칭신청"
+          component={MatchingStackNavigate}
+          options={{headerShown: false}}
+        />
+        <Tab.Screen
+          name="Chat"
+          component={ChatStackNavigate}
+          options={{headerShown: false}}
+        />
+        <Tab.Screen
+          name="마이페이지"
+          component={UserStackNavigate}
+          options={{headerShown: false}}
+        />
+        <Tab.Screen
+          name="회원가입"
+          component={SignUpStackNavigate}
+          options={{headerShown: false}}
+        />
         <Tab.Screen name="모임 개설" component={MatchCreate} />
-        <Tab.Screen name="관심사 선택" component={Interest} />
-        <Tab.Screen name="상세 관심사 선택" component={Interest2} />
-        <Tab.Screen name="인트로" component={Introduce} />
-        <Tab.Screen name="매칭내역" component={MatchDetails} />
-        <Tab.Screen name="프로필 편집" component={Profile} />
       </Tab.Navigator>
     </NavigationContainer>
   );

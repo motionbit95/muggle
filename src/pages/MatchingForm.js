@@ -85,10 +85,11 @@ const MatchingForm = ({navigation}) => {
         </View>
       </ScrollView>
       <View style={[styles.buttonBox, styles.rowBox]}>
-        <TouchableOpacity
-          style={{flex: 1, backgroundColor: 'gray'}}
-          onPress={() => alert('참여하기')}>
-          <View style={styles.icon24} />
+        <TouchableOpacity style={{flex: 1}} onPress={() => alert('좋아용')}>
+          <Image
+            source={require('../assets/hearticon.png')}
+            style={{width: 30, height: 30}}
+          />
         </TouchableOpacity>
         <TouchableOpacity
           style={[styles.button, {flex: 5}]}

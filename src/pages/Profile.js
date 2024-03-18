@@ -84,7 +84,7 @@ const Profile = ({navigation, route}) => {
 
   return (
     <View style={styles.screenStyle}>
-      <ScrollView style={{width: '100%'}}>
+      <ScrollView style={styles.scrollViewStyle}>
         <View style={[styles.contentStyle, {gap: 20}]}>
           <View
             style={{

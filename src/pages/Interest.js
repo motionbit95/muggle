@@ -1,19 +1,15 @@
 import React from 'react';
 import {
+  Image,
   ScrollView,
-  StyleSheet,
   Text,
+  TextInput,
   TouchableOpacity,
   View,
 } from 'react-native';
-import {
-  component_height,
-  component_radius,
-  primary_color,
-  font_lg,
-  font_md,
-} from '../firebase/api';
+
 import {addDocument} from '../firebase/firebase_func';
+import styles from '../style/styles';
 
 const Interest = ({navigation, route}) => {
   const {data} = route.params ? route.params : {data: null};
@@ -24,66 +20,53 @@ const Interest = ({navigation, route}) => {
   };
   return (
     <View style={styles.screenStyle}>
-      <ScrollView style={{width: '100%'}}>
-        <View style={{width: '100%', gap: 15, padding: 20}}>
-          <View style={{width: '100%', paddingTop: 10}}>
-            <Text>{data?.user_name}</Text>
+      <ScrollView style={styles.scrollViewStyle}>
+        <View style={[styles.contentStyle, {gap: 20}]}>
+          <View
+            style={{
+              width: '100%',
+              gap: 20,
+            }}>
+            <View>
+              <View style={styles.Avartar70}>
+                <Image
+                  style={{width: '90%', height: '90%'}}
+                  source={
+                    data?.user_profile
+                      ? {uri: data?.user_profile}
+                      : require('../assets/avartar.png')
+                  }
+                />
+              </View>
+            </View>
+            <View style={styles.rowBox}>
+              <View style={{flex: 1}}>
+                <Text style={styles.contentTitle}>소개</Text>
+              </View>
+              <TextInput
+                multiline
+                style={[
+                  {
+                    flex: 4,
+                    height: 100,
+                  },
+                  styles.contentBox,
+                ]}
+                placeholder="자기소개 내용을 입력해주세요"
+              />
+            </View>
           </View>
+          <View style={styles.hr} />
+          <Text>상세 관심사 선택 창 ㄱ</Text>
         </View>
       </ScrollView>
-      <TouchableOpacity style={styles.button} onPress={signupUser}>
-        <Text style={styles.buttonText}>가입완료</Text>
-      </TouchableOpacity>
+      <View style={styles.buttonBox}>
+        <TouchableOpacity style={styles.button} onPress={signupUser}>
+          <Text style={styles.buttonText}>가입완료</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };
 
 export default Interest;
-
-const styles = StyleSheet.create({
-  screenStyle: {
-    flex: 1,
-    backgroundColor: '#fff',
-    justifyContent: 'space-between',
-  },
-  button: {
-    backgroundColor: primary_color,
-    borderRadius: component_radius,
-    height: component_height,
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginHorizontal: 20,
-    marginVertical: 10,
-  },
-  buttonText: {
-    fontSize: 18,
-    color: 'black',
-    fontWeight: 'bold',
-  },
-  rowBox: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-  },
-  columnBox: {
-    flexDirection: 'column',
-    gap: 10,
-  },
-  contentTitle: {
-    fontSize: 15,
-    fontWeight: '600',
-  },
-  contentText: {
-    fontSize: 16,
-    fontWeight: '400',
-    color: 'rgba(187, 187, 187, 1)',
-  },
-  contentBox: {
-    borderColor: 'rgba(221, 221, 221, 1)',
-    borderWidth: 1,
-    backgroundColor: 'white',
-    borderRadius: 10,
-    padding: 10,
-    fontSize: font_md,
-  },
-});

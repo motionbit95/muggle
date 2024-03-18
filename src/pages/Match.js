@@ -236,7 +236,7 @@ const Match = ({navigation}) => {
       <View style={styles.buttonBox}>
         <TouchableOpacity
           style={[styles.button, styles.buttonMargin]}
-          onPress={() => navigation.navigate('관심사 선택')}>
+          onPress={() => alert('결제하기로 ㄱㄱ')}>
           <Text style={styles.buttonText}>결제하기</Text>
         </TouchableOpacity>
       </View>

@@ -1,6 +1,7 @@
 import * as React from 'react';
 import {Text, TouchableOpacity, View, useWindowDimensions} from 'react-native';
 import {TabView, SceneMap, TabBar} from 'react-native-tab-view';
+import styles from '../style/styles';
 
 const renderTabBar = props => (
   <TabBar
@@ -16,7 +17,41 @@ const renderTabBar = props => (
   />
 );
 
-const FirstRoute = () => (
+const ChatRoomForm = () => {
+  return (
+    <View></View>
+    // <View
+    //   style={[
+    //     {height: 300, backgroundColor: '#d9d9d9', padding: 10},
+    //     styles.spaceBetween,
+    //   ]}>
+    //   <View>
+    //     <View style={{backgroundColor: 'white', padding: 10}}>
+    //       <Text>퇴근블라블라</Text>
+    //     </View>
+    //     <View style={{gap: 10}}>
+    //       <View style={styles.rowBox}>
+    //         <View>
+    //           <View style={styles.Avartar30} />
+    //           <Text>사람 이름</Text>
+    //         </View>
+    //         <View>
+    //           <View>
+    //             <View style={{width: 70, height: 20, backgroundColor: 'red'}} />
+    //             <Text>시간</Text>
+    //           </View>
+    //         </View>
+    //       </View>
+    //     </View>
+    //   </View>
+    //   <View>
+    //     <Text>채팅바</Text>
+    //   </View>
+    // </View>
+  );
+};
+
+const FirstRoute = ({navigation}) => (
   <View>
     <TouchableOpacity
       style={{
@@ -27,7 +62,7 @@ const FirstRoute = () => (
         justifyContent: 'space-between',
         alignItems: 'center',
       }}
-      onPress={() => alert('채팅하겠습니까')}>
+      onPress={() => alert('채팅방 들어가기')}>
       <View style={{flexDirection: 'row', gap: 10, alignItems: 'center'}}>
         <View
           style={{
@@ -44,34 +79,7 @@ const FirstRoute = () => (
       </View>
       <Text>5분전</Text>
     </TouchableOpacity>
-    <View style={{borderBottomColor: 'gray', borderBottomWidth: 1}} />
-    <TouchableOpacity
-      style={{
-        backgroundColor: 'white',
-        padding: 20,
-        flexDirection: 'row',
-        gap: 10,
-        justifyContent: 'space-between',
-        alignItems: 'center',
-      }}
-      onPress={() => alert('채팅하겠습니까')}>
-      <View style={{flexDirection: 'row', gap: 10, alignItems: 'center'}}>
-        <View
-          style={{
-            width: 60,
-            height: 60,
-            backgroundColor: 'red',
-            borderRadius: 50,
-          }}
-        />
-        <View>
-          <Text>홍*경</Text>
-          <Text>식사 어때?</Text>
-        </View>
-      </View>
-      <Text>5분전</Text>
-    </TouchableOpacity>
-    <View style={{borderBottomColor: 'gray', borderBottomWidth: 1}} />
+    <ChatRoomForm />
   </View>
 );
 
@@ -105,12 +113,6 @@ const SecondRoute = () => (
     </TouchableOpacity>
   </View>
 );
-
-const ChatRoom = () => {
-  <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-    <Text>채팅방 화면</Text>
-  </View>;
-};
 
 const renderScene = SceneMap({
   first: FirstRoute,

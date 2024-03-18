@@ -112,28 +112,28 @@ const User = ({navigation}) => {
               style={styles.TouchButtonStyle}
               onPress={() => navigation.navigate('매칭내역')}>
               <View style={styles.rowBox}>
-                <View style={styles.icon24} />
+                <Image source={require('../assets/menuicon1.png')} />
                 <Text>매칭내역</Text>
               </View>
-              <View style={styles.icon24} />
+              <Image source={require('../assets/rightarrow.png')} />
             </TouchableOpacity>
             <TouchableOpacity
               style={styles.TouchButtonStyle}
               onPress={() => alert('눌렀엉')}>
               <View style={styles.rowBox}>
-                <View style={styles.icon24} />
+                <Image source={require('../assets/menuicon1.png')} />
                 <Text>메뉴02</Text>
               </View>
-              <View style={styles.icon24} />
+              <Image source={require('../assets/rightarrow.png')} />
             </TouchableOpacity>
             <TouchableOpacity
               style={styles.TouchButtonStyle}
               onPress={() => alert('눌렀엉')}>
               <View style={styles.rowBox}>
-                <View style={styles.icon24} />
+                <Image source={require('../assets/menuicon1.png')} />
                 <Text>메뉴 03</Text>
               </View>
-              <View style={styles.icon24} />
+              <Image source={require('../assets/rightarrow.png')} />
             </TouchableOpacity>
           </View>
         </View>
