@@ -95,25 +95,18 @@ const Home = ({navigation}) => {
             <Text>우리 동네, 밥 머글 사람?</Text>
           </View>
           <TouchableOpacity
-            style={{
-              backgroundColor: 'rgba(255, 233, 230, 1)',
-              borderRadius: 10,
-              padding: 20,
-              gap: 10,
-            }}
+            style={styles.matchBox}
             onPress={() => navigation.navigate('모임상세')}>
-            <View
-              style={{
-                flexDirection: 'row',
-                gap: 10,
-                justifyContent: 'space-between',
-              }}>
+            <View style={[styles.spaceBetween, styles.rowBox]}>
               <View style={{gap: 10}}>
-                <Text style={styles.boxTitleFont}>
+                <Text style={{fontSize: 16, fontWeight: '600', color: 'black'}}>
                   퇴근 후 역삼역에서 저녁 드실분
                 </Text>
-                <View style={{flexDirection: 'row', gap: 10}}>
-                  <Text style={styles.boxDateFont}>2023.03.09(토) 17:00</Text>
+                <View style={styles.rowBox}>
+                  <Text
+                    style={{fontSize: 14, fontWeight: '400', color: 'gray'}}>
+                    2023.03.09(토) 17:00
+                  </Text>
                   <View
                     style={{
                       backgroundColor: 'rgba(255, 99, 79, 1)',
@@ -131,21 +124,86 @@ const Home = ({navigation}) => {
                     </Text>
                   </View>
                 </View>
+
                 <View style={{gap: 5}}>
-                  <Text>서울 강남 역삼동 골목오리집</Text>
-                  <Text>나누기 5/30</Text>
+                  <View style={[styles.rowBox, {gap: 5}]}>
+                    <View style={styles.icon18} />
+                    <Text>서울 강남 역 삼동 골목오리집</Text>
+                  </View>
+                  <View style={[styles.rowBox, {gap: 5}]}>
+                    <View style={styles.icon18} />
+                    <Text>나누기 5/30</Text>
+                  </View>
                 </View>
               </View>
               <View
                 style={{
                   width: 100,
                   height: 100,
-                  backgroundColor: 'red',
+                  backgroundColor: 'gray',
                   borderRadius: 10,
                 }}
               />
             </View>
-            <Text>이미지들</Text>
+            <View>
+              <View
+                style={{
+                  flexDirection: 'row',
+                  gap: 10,
+                }}>
+                <View
+                  style={[
+                    styles.rowBox,
+                    {
+                      gap: -5,
+                      backgroundColor: 'white',
+                      borderRadius: 20,
+                      padding: 3,
+                    },
+                  ]}>
+                  {[1, 2, 3, 4, 5].map(
+                    (item, index) =>
+                      index < 3 && (
+                        <View style={styles.rowBox}>
+                          <View
+                            style={[
+                              {
+                                width: 30,
+                                height: 30,
+                                borderRadius: 50,
+                                borderWidth: 2,
+                                borderColor: 'white',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                              },
+                            ]}>
+                            <Image
+                              style={{
+                                width: 24,
+                                height: 24,
+                                backgroundColor: 'gray',
+                                borderRadius: 50,
+                              }}
+                            />
+                          </View>
+                        </View>
+                      ),
+                  )}
+                  <View>
+                    <Text
+                      style={{
+                        marginLeft: 10,
+                        fontSize: 12,
+                        color: 'gray',
+                        textAlign: 'center',
+                      }}>
+                      {'+'}
+                      {[1, 2, 3, 4, 5].length - 3}
+                    </Text>
+                  </View>
+                </View>
+              </View>
+            </View>
           </TouchableOpacity>
           <TouchableOpacity
             style={{
@@ -176,7 +234,7 @@ const Home = ({navigation}) => {
           }}>
           <View style={{gap: 10}}>
             <Text style={{fontSize: 20}}>커피 매칭 친구 추천</Text>
-            <Text>서브텍스트가 들어갑니다.</Text>
+            <Text>새로운 이성과 커피 친구 해보세요.</Text>
           </View>
           {/* {userList.map((user, index) => (
             <View>
@@ -227,7 +285,7 @@ const Home = ({navigation}) => {
                   style={{borderRadius: 20}}>
                   <View
                     style={{
-                      gap: 5,
+                      gap: 8,
                       justifyContent: 'flex-end',
                       width: '100%',
                       height: '100%',
@@ -240,14 +298,22 @@ const Home = ({navigation}) => {
                         flexDirection: 'row',
                         borderWidth: 1,
                         borderColor: 'white',
-                        borderRadius: 10,
+                        borderRadius: 20,
                         width: 60,
                         justifyContent: 'center',
                         alignItems: 'center',
                         padding: 5,
+                        gap: 5,
                       }}>
-                      <Text>✭</Text>
-                      <Text style={{color: 'white', fontSize: 14}}>근처</Text>
+                      <Image source={require('../assets/Subtract.png')} />
+                      <Text
+                        style={{
+                          color: 'white',
+                          fontSize: 14,
+                          fontWeight: '400',
+                        }}>
+                        근처
+                      </Text>
                     </View>
 
                     <Text style={{color: 'white', fontSize: 22}}>

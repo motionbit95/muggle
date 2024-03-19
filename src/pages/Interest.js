@@ -57,7 +57,11 @@ const Interest = ({navigation, route}) => {
             </View>
           </View>
           <View style={styles.hr} />
-          <Text>상세 관심사 선택 창 ㄱ</Text>
+          <TouchableOpacity
+            style={[styles.button, styles.buttonBox]}
+            onPress={() => navigation.navigate('상세 관심사 선택')}>
+            <Text>상세 관심사로 ㄱ</Text>
+          </TouchableOpacity>
         </View>
       </ScrollView>
       <View style={styles.buttonBox}>

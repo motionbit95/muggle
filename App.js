@@ -7,6 +7,7 @@
 
 import React from 'react';
 import {
+  Image,
   SafeAreaView,
   ScrollView,
   StatusBar,
@@ -41,6 +42,7 @@ import Interest2 from './src/pages/Interest2';
 import Introduce from './src/pages/Introduce';
 import MatchDetails from './src/pages/MatchDetails';
 import Profile from './src/pages/Profile';
+import ChatRoom from './src/pages/ChatRoom';
 
 const App = () => {
   // const isDarkMode = useColorScheme() === 'dark';
@@ -60,7 +62,7 @@ const App = () => {
   const HomeStackNavigate = () => (
     <HomeStack.Navigator>
       <HomeStack.Screen
-        name="Home"
+        name="Muggle"
         component={Home}
         options={{
           title: 'Home',
@@ -94,7 +96,7 @@ const App = () => {
 
   const UserStackNavigate = () => (
     <UserStack.Navigator>
-      <UserStack.Screen name="마이페이지" component={User} />
+      <UserStack.Screen name="User" component={User} />
       <UserStack.Screen name="프로필 편집" component={Profile} />
       <UserStack.Screen name="매칭내역" component={MatchDetails} />
     </UserStack.Navigator>
@@ -102,7 +104,8 @@ const App = () => {
 
   const ChatStackNavigate = () => (
     <ChatStack.Navigator>
-      <ChatStack.Screen name="Chat" component={Chat} />
+      <ChatStack.Screen name="채팅" component={Chat} />
+      <ChatStack.Screen name="채팅룸" component={ChatRoom} />
     </ChatStack.Navigator>
   );
 
@@ -116,7 +119,7 @@ const App = () => {
   );
   const SignUpStackNavigate = () => (
     <SignUpStack.Navigator>
-      <SignUpStack.Screen name="회원가입" component={SignUp} />
+      <SignUpStack.Screen name="SignUp" component={SignUp} />
       <SignUpStack.Screen name="휴대폰 본인인증" component={Certificate} />
       <SignUpStack.Screen name="관심사 선택" component={Interest} />
       <SignUpStack.Screen name="상세 관심사 선택" component={Interest2} />
@@ -125,29 +128,51 @@ const App = () => {
   );
 
   return (
-    <NavigationContainer>
+    <NavigationContainer independent={true}>
       <Tab.Navigator>
         <Tab.Screen
           name="Home"
           component={HomeStackNavigate}
           options={{
             headerShown: false,
+            tabBarIcon: () => (
+              <Image source={require('./src/assets/home.png')} />
+            ),
+            unmountOnBlur: true,
           }}
         />
         <Tab.Screen
           name="커피매칭신청"
           component={MatchingStackNavigate}
-          options={{headerShown: false}}
+          options={{
+            headerShown: false,
+            tabBarIcon: () => (
+              <Image source={require('./src/assets/CoffeeBlack.png')} />
+            ),
+            unmountOnBlur: true,
+          }}
         />
         <Tab.Screen
           name="Chat"
           component={ChatStackNavigate}
-          options={{headerShown: false}}
+          options={{
+            headerShown: false,
+            tabBarIcon: () => (
+              <Image source={require('./src/assets/Chat.png')} />
+            ),
+            unmountOnBlur: true,
+          }}
         />
         <Tab.Screen
           name="마이페이지"
           component={UserStackNavigate}
-          options={{headerShown: false}}
+          options={{
+            headerShown: false,
+            tabBarIcon: () => (
+              <Image source={require('./src/assets/mypage.png')} />
+            ),
+            unmountOnBlur: true,
+          }}
         />
         <Tab.Screen
           name="회원가입"
@@ -155,6 +180,7 @@ const App = () => {
           options={{headerShown: false}}
         />
         <Tab.Screen name="모임 개설" component={MatchCreate} />
+        <Tab.Screen name="채팅룸" component={ChatRoom} />
       </Tab.Navigator>
     </NavigationContainer>
   );
