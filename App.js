@@ -85,7 +85,10 @@ const App = () => {
             <TouchableOpacity
               style={{marginRight: 20}}
               onPress={() => alert('알림!')}>
-              <Text>알림</Text>
+              <Image
+                style={{width: 24, height: 24}}
+                source={require('./src/assets/Notification.png')}
+              />
             </TouchableOpacity>
           ),
         }}

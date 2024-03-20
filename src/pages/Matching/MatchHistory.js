@@ -1,5 +1,6 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {
+  Image,
   ImageBackground,
   ScrollView,
   Text,
@@ -8,8 +9,21 @@ import {
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import styles from '../../style/styles';
+import {getDocList} from '../../firebase/firebase_func';
 
 const MatchHistory = ({navigation}) => {
+  const [userList, setUserList] = useState([]);
+
+  useEffect(() => {
+    updateUser();
+  }, []);
+
+  const updateUser = async () => {
+    let list = await getDocList('user');
+    console.log('유저리스트 ===> ', list);
+    setUserList(list);
+  };
+
   return (
     <View style={[styles.screenStyle, styles.contentStyle]}>
       <ScrollView style={styles.scrollViewStyle}>
@@ -21,7 +35,7 @@ const MatchHistory = ({navigation}) => {
               <View style={styles.gap10}>
                 <View style={styles.rowBox}>
                   <View style={[styles.iconBox, styles.icon20]}>
-                    <View style={styles.icon12} />
+                    <Text style={{fontSize: 14, color: 'white'}}>♥︎</Text>
                   </View>
                   <Text style={{fontSize: 14}}>매칭중</Text>
                 </View>
@@ -32,8 +46,8 @@ const MatchHistory = ({navigation}) => {
                       <Text style={{fontSize: 15, fontWeight: 'bold'}}>
                         홍길동
                       </Text>
-                      <View style={styles.rowBox}>
-                        <View style={styles.icon12} />
+                      <View style={[styles.rowBox, {gap: 5}]}>
+                        <Image source={require('../../assets/star.png')} />
                         <Text>평점</Text>
                       </View>
                     </View>
@@ -75,43 +89,61 @@ const MatchHistory = ({navigation}) => {
             horizontal={true}
             contentContainerStyle={styles.horizontalScrollViewStyle}
             showsHorizontalScrollIndicator={false}>
-            {/* {userList.map((user, index) => ( */}
-            <ImageBackground
-              // key={index}
-              imageStyle={{borderRadius: 20}}
-              // source={{uri: user.user_profile}}
-              style={styles.cardImage}>
-              <LinearGradient
-                colors={['rgba(0,0,0,0)', 'rgba(0,0,0,1)']}
-                style={{borderRadius: 20}}>
-                <View style={styles.MatchComponentBox}>
-                  <View style={styles.MatchiconBox}>
-                    <View style={styles.icon12} />
-                    <Text style={{color: 'white', fontSize: 14}}>근처</Text>
-                  </View>
-
-                  <Text style={{color: 'white', fontSize: 22}}>
-                    {/* {user.user_name} */}누구세요
-                  </Text>
-                  <Text style={{color: 'white', fontSize: 18}}>
-                    {/* {user.user_place?.[0]} */}어딘가유
-                  </Text>
-                  <TouchableOpacity
-                    style={styles.button}
-                    onPressOut={() => alert('어쩔티비')}>
-                    <Text
+            {userList.map((user, index) => (
+              <ImageBackground
+                key={index}
+                imageStyle={{borderRadius: 20}}
+                source={{uri: user.user_profile}}
+                style={styles.cardImage}>
+                <LinearGradient
+                  colors={['rgba(0,0,0,0)', 'rgba(0,0,0,1)']}
+                  style={{borderRadius: 20}}>
+                  <View style={styles.MatchComponentBox}>
+                    <View
                       style={{
-                        color: 'black',
-                        fontSize: 18,
-                        fontWeight: 'bold',
+                        flexDirection: 'row',
+                        borderWidth: 1,
+                        borderColor: 'white',
+                        borderRadius: 20,
+                        width: 60,
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        padding: 5,
+                        gap: 5,
                       }}>
-                      커피 매칭 신청
+                      <Image source={require('../../assets/Subtract.png')} />
+                      <Text
+                        style={{
+                          color: 'white',
+                          fontSize: 14,
+                          fontWeight: '400',
+                        }}>
+                        근처
+                      </Text>
+                    </View>
+
+                    <Text style={{color: 'white', fontSize: 22}}>
+                      {user.user_name}
                     </Text>
-                  </TouchableOpacity>
-                </View>
-              </LinearGradient>
-            </ImageBackground>
-            {/* ))} */}
+                    <Text style={{color: 'white', fontSize: 18}}>
+                      {user.user_place?.[0]}
+                    </Text>
+                    <TouchableOpacity
+                      style={styles.button}
+                      onPressOut={() => alert('어쩔티비')}>
+                      <Text
+                        style={{
+                          color: 'black',
+                          fontSize: 18,
+                          fontWeight: 'bold',
+                        }}>
+                        커피 매칭 신청
+                      </Text>
+                    </TouchableOpacity>
+                  </View>
+                </LinearGradient>
+              </ImageBackground>
+            ))}
           </ScrollView>
         </View>
       </ScrollView>

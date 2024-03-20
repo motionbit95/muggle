@@ -78,10 +78,36 @@ const Home = ({navigation}) => {
     <View>
       <ScrollView style={{width: '100%'}}>
         <View style={[styles.screenStyle, styles.contentStyle]}>
-          <View style={styles.rowBox}>
-            <Text>머글 모임</Text>
-            <Text>클래스 모임</Text>
-            <Text>비즈니스 모임</Text>
+          <View style={{width: '100%', gap: 20, marginBottom: 20}}>
+            <View style={styles.rowBox}>
+              <View
+                style={{
+                  borderBottomWidth: 2,
+                  borderColor: 'black',
+                  padding: 10,
+                }}>
+                <Text
+                  style={{fontSize: 18, color: 'black', fontWeight: 'bold'}}>
+                  머글 모임
+                </Text>
+              </View>
+              <View
+                style={{
+                  padding: 10,
+                }}>
+                <Text style={{fontSize: 18, color: 'gray', fontWeight: 'bold'}}>
+                  클래스 모임
+                </Text>
+              </View>
+              <View
+                style={{
+                  padding: 10,
+                }}>
+                <Text style={{fontSize: 18, color: 'gray', fontWeight: 'bold'}}>
+                  비즈니스 모임
+                </Text>
+              </View>
+            </View>
           </View>
           <View
             style={{
@@ -120,6 +146,7 @@ const Home = ({navigation}) => {
             }}>
             {bannerList.image.map((image, index) => (
               <ImageBackground
+                key={index}
                 imageStyle={{borderRadius: 20}}
                 style={{
                   flex: 1,
@@ -164,6 +191,7 @@ const Home = ({navigation}) => {
               (item, index) =>
                 index < 3 && (
                   <TouchableOpacity
+                    key={index}
                     style={styles.matchBox}
                     onPress={() =>
                       navigation.navigate('Home', {
@@ -212,13 +240,22 @@ const Home = ({navigation}) => {
 
                         <View style={{gap: 5}}>
                           <View style={[styles.rowBox, {gap: 5}]}>
-                            <View style={styles.icon18} />
+                            <Image
+                              style={{width: 12, height: 12}}
+                              source={require('../../assets/map.png')}
+                            />
                             <Text>{item.group_place}</Text>
                           </View>
                           <View style={[styles.rowBox, {gap: 5}]}>
-                            <View style={styles.icon18} />
+                            <Image
+                              style={{width: 12, height: 12}}
+                              source={require('../../assets/money.png')}
+                            />
                             <Text>나누기</Text>
-                            <View style={styles.icon18} />
+                            <Image
+                              style={{width: 12, height: 12}}
+                              source={require('../../assets/mypage.png')}
+                            />
                             <Text>
                               {item.group_users.length} / {item.group_personnel}
                             </Text>
@@ -253,7 +290,7 @@ const Home = ({navigation}) => {
                           {item.group_users.map(
                             (user, index) =>
                               index < 3 && (
-                                <View style={styles.rowBox}>
+                                <View key={index} style={styles.rowBox}>
                                   <View
                                     style={[
                                       {
@@ -426,6 +463,7 @@ const Home = ({navigation}) => {
                         }}
                         onPressOut={() =>
                           navigation.navigate('커피매칭신청', {
+                            screen: '커피매칭',
                             params: {data: user},
                           })
                         }>
@@ -458,6 +496,7 @@ const Home = ({navigation}) => {
               (item, index) =>
                 index < 3 && (
                   <TouchableOpacity
+                    key={index}
                     style={styles.matchBox}
                     onPress={() =>
                       navigation.navigate('Home', {
@@ -506,13 +545,22 @@ const Home = ({navigation}) => {
 
                         <View style={{gap: 5}}>
                           <View style={[styles.rowBox, {gap: 5}]}>
-                            <View style={styles.icon18} />
+                            <Image
+                              style={{width: 12, height: 12}}
+                              source={require('../../assets/map.png')}
+                            />
                             <Text>{item.group_place}</Text>
                           </View>
                           <View style={[styles.rowBox, {gap: 5}]}>
-                            <View style={styles.icon18} />
+                            <Image
+                              style={{width: 12, height: 12}}
+                              source={require('../../assets/money.png')}
+                            />
                             <Text>나누기</Text>
-                            <View style={styles.icon18} />
+                            <Image
+                              style={{width: 12, height: 12}}
+                              source={require('../../assets/mypage.png')}
+                            />
                             <Text>
                               {item.group_users.length} / {item.group_personnel}
                             </Text>
@@ -547,7 +595,7 @@ const Home = ({navigation}) => {
                           {item.group_users.map(
                             (user, index) =>
                               index < 3 && (
-                                <View style={styles.rowBox}>
+                                <View key={index} style={styles.rowBox}>
                                   <View
                                     style={[
                                       {
@@ -628,6 +676,7 @@ const Home = ({navigation}) => {
               (item, index) =>
                 index < 3 && (
                   <TouchableOpacity
+                    key={index}
                     style={styles.matchBox}
                     onPress={() =>
                       navigation.navigate('Home', {
@@ -676,13 +725,22 @@ const Home = ({navigation}) => {
 
                         <View style={{gap: 5}}>
                           <View style={[styles.rowBox, {gap: 5}]}>
-                            <View style={styles.icon18} />
+                            <Image
+                              style={{width: 12, height: 12}}
+                              source={require('../../assets/map.png')}
+                            />
                             <Text>{item.group_place}</Text>
                           </View>
                           <View style={[styles.rowBox, {gap: 5}]}>
-                            <View style={styles.icon18} />
+                            <Image
+                              style={{width: 12, height: 12}}
+                              source={require('../../assets/money.png')}
+                            />
                             <Text>나누기</Text>
-                            <View style={styles.icon18} />
+                            <Image
+                              style={{width: 12, height: 12}}
+                              source={require('../../assets/mypage.png')}
+                            />
                             <Text>
                               {item.group_users.length} / {item.group_personnel}
                             </Text>
@@ -717,7 +775,7 @@ const Home = ({navigation}) => {
                           {item.group_users.map(
                             (user, index) =>
                               index < 3 && (
-                                <View style={styles.rowBox}>
+                                <View key={index} style={styles.rowBox}>
                                   <View
                                     style={[
                                       {
