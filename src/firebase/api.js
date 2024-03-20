@@ -345,38 +345,61 @@ export function displayDday(dday) {
   if (dday > 0) {
     return 'D-' + dday;
   } else if (dday == 0) {
-    return 'D-Day!';
+    return 'D-Day';
   } else {
     return 'D+' + Math.abs(dday);
   }
 }
 
+export function convertFirestoreTimestampToDate(timestamp) {
+  if (!timestamp) return new Date();
+  const milliseconds =
+    timestamp.seconds * 1000 + Math.floor(timestamp.nanoseconds / 1e6);
+  return new Date(milliseconds);
+}
+
 export function formatDate(date) {
-  const year = date.getFullYear();
-  let month = date.getMonth() + 1;
-  let day = date.getDate();
+  try {
+    const year = date.getFullYear();
+    let month = date.getMonth() + 1;
+    let day = date.getDate();
 
-  // 월과 일이 한 자리 숫자인 경우 앞에 0을 붙여줍니다.
-  month = month < 10 ? '0' + month : month;
-  day = day < 10 ? '0' + day : day;
+    // 월과 일이 한 자리 숫자인 경우 앞에 0을 붙여줍니다.
+    month = month < 10 ? '0' + month : month;
+    day = day < 10 ? '0' + day : day;
 
-  return `${year}-${month}-${day}`;
+    console.log(`${year}-${month}-${day}`);
+    return `${year}-${month}-${day}`;
+  } catch (error) {
+    let firestoreDate = convertFirestoreTimestampToDate(date);
+    return formatDate(firestoreDate);
+  }
 }
 
 export function formatDateTime(date) {
-  const year = date.getFullYear();
-  let month = date.getMonth() + 1;
-  let day = date.getDate();
+  try {
+    const year = date.getFullYear();
+    let month = date.getMonth() + 1;
+    let day = date.getDate();
 
-  let days = ['일', '월', '화', '수', '목', '금', '토'];
-  let dayOfWeek = days[date.getDay()];
+    let days = ['일', '월', '화', '수', '목', '금', '토'];
+    let dayOfWeek = days[date.getDay()];
 
-  let hour = date.getHours();
-  let minute = date.getMinutes();
+    let hour = date.getHours();
+    let minute = date.getMinutes();
 
-  // 월과 일이 한 자리 숫자인 경우 앞에 0을 붙여줍니다.
-  month = month < 10 ? '0' + month : month;
-  day = day < 10 ? '0' + day : day;
+    // 월과 일이 한 자리 숫자인 경우 앞에 0을 붙여줍니다.
+    month = month < 10 ? '0' + month : month;
+    day = day < 10 ? '0' + day : day;
 
-  return `${year}.${month}.${day}(${dayOfWeek}) ${hour}:${minute}`;
+    hour = hour < 10 ? '0' + hour : hour;
+    minute = minute < 10 ? '0' + minute : minute;
+
+    console.log(`${year}.${month}.${day}(${dayOfWeek}) ${hour}:${minute}`);
+    return `${year}.${month}.${day}(${dayOfWeek}) ${hour}:${minute}`;
+  } catch (error) {
+    let firestoreDate = convertFirestoreTimestampToDate(date);
+    console.log(firestoreDate);
+    return formatDateTime(firestoreDate);
+  }
 }

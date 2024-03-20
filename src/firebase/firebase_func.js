@@ -4,7 +4,11 @@ export const getDocList = async collectionId => {
   const list = [];
   const querySnapshot = await firestore().collection(collectionId).get();
   querySnapshot.forEach(doc => {
-    if (doc.data().user_phone) list.push(doc.data());
+    if (
+      collectionId !== 'user' ||
+      (collectionId === 'user' && doc.data().user_phone)
+    )
+      list.push(doc.data());
   });
   return list;
 };

@@ -108,7 +108,7 @@ const GroupCreate = ({navigation}) => {
             }}>
             <View style={{flex: 1}}>
               <DropDown
-                items={['머글 모임', '클래스 모임', '비지니스 모임']}
+                items={['머글 모임', '클래스 모임', '비즈니스 모임']}
                 defaultValue={selectedMatch}
                 onChangeValue={setSelectedMatch}
               />
