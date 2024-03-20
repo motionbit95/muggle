@@ -8,9 +8,9 @@ import {
   View,
 } from 'react-native';
 
-import styles from '../style/styles';
-import DropDown from '../Component/PickerComponent';
-import {banks, cities, districts} from '../firebase/api';
+import styles from '../../style/styles';
+import DropDown from '../../Component/PickerComponent';
+import {banks, cities, districts} from '../../firebase/api';
 
 const Profile = ({navigation, route}) => {
   const {data} = route.params ? route.params : {data: null};
@@ -98,7 +98,7 @@ const Profile = ({navigation, route}) => {
                   source={
                     data?.user_profile
                       ? {uri: data?.user_profile}
-                      : require('../assets/avartar.png')
+                      : require('../../assets/avartar.png')
                   }
                 />
               </View>

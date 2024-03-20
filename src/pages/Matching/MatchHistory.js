@@ -7,9 +7,9 @@ import {
   View,
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
-import styles from '../style/styles';
+import styles from '../../style/styles';
 
-const MatchDetails = ({navigation}) => {
+const MatchHistory = ({navigation}) => {
   return (
     <View style={[styles.screenStyle, styles.contentStyle]}>
       <ScrollView style={styles.scrollViewStyle}>
@@ -119,4 +119,4 @@ const MatchDetails = ({navigation}) => {
   );
 };
 
-export default MatchDetails;
+export default MatchHistory;

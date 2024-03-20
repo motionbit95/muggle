@@ -14,7 +14,7 @@ import {
   primary_color,
   font_lg,
   font_md,
-} from '../firebase/api';
+} from '../../firebase/api';
 import {SceneMap, TabBar, TabView} from 'react-native-tab-view';
 
 const Intro1 = () => (
@@ -54,7 +54,7 @@ const Intro2 = () => (
       </Text>
     </View>
     <Image
-      source={require('../assets/introimage1.png')}
+      source={require('../../assets/introimage1.png')}
       style={{
         width: '100%',
         height: 300,

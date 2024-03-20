@@ -8,8 +8,8 @@ import {
   View,
 } from 'react-native';
 
-import {addDocument} from '../firebase/firebase_func';
-import styles from '../style/styles';
+import {addDocument} from '../../firebase/firebase_func';
+import styles from '../../style/styles';
 
 const Interest = ({navigation, route}) => {
   const {data} = route.params ? route.params : {data: null};
@@ -34,7 +34,7 @@ const Interest = ({navigation, route}) => {
                   source={
                     data?.user_profile
                       ? {uri: data?.user_profile}
-                      : require('../assets/avartar.png')
+                      : require('../../assets/avartar.png')
                   }
                 />
               </View>

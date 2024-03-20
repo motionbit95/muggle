@@ -1,12 +1,12 @@
 import React, {useState} from 'react';
 import {Text, TextInput, TouchableOpacity, View} from 'react-native';
-import DropDown from '../Component/PickerComponent';
-import {cities, districts} from '../firebase/api';
-import styles from '../style/styles';
-import {addDocument} from '../firebase/firebase_func';
+import {cities, districts} from '../../firebase/api';
+import styles from '../../style/styles';
+import {addDocument} from '../../firebase/firebase_func';
 import auth from '@react-native-firebase/auth';
+import DropDown from '../../Component/PickerComponent';
 
-const MatchCreate = ({navigation}) => {
+const GroupCreate = ({navigation}) => {
   const [selectedCity, setSelectedCity] = useState('');
   const [selectedDistrict, setSelectedDistrict] = useState('');
   const [selectedMatch, setSelectedMatch] = useState('머글 모임');
@@ -27,7 +27,7 @@ const MatchCreate = ({navigation}) => {
     setSelectedDistrict(value);
   };
 
-  const createMatch = () => {
+  const createGroup = () => {
     if (!selectedCity || !selectedDistrict) {
       alert('지역을 선택하세요.');
       return;
@@ -65,7 +65,7 @@ const MatchCreate = ({navigation}) => {
     addDocument('group', matchInfo);
     console.log(matchInfo);
 
-    navigation.navigate('커피매칭신청', {
+    navigation.navigate('Home', {
       screen: '모임상세',
       params: {data: matchInfo},
     });
@@ -161,7 +161,7 @@ const MatchCreate = ({navigation}) => {
         </View>
       </View>
       <View style={styles.buttonBox}>
-        <TouchableOpacity style={styles.button} onPress={createMatch}>
+        <TouchableOpacity style={styles.button} onPress={createGroup}>
           <Text style={styles.buttonText}>모임 만들기</Text>
         </TouchableOpacity>
       </View>
@@ -169,4 +169,4 @@ const MatchCreate = ({navigation}) => {
   );
 };
 
-export default MatchCreate;
+export default GroupCreate;

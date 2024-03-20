@@ -6,9 +6,9 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import {cities, districts, banks} from '../firebase/api';
-import DropDown from '../Component/PickerComponent';
-import styles from '../style/styles';
+import {cities, districts, banks} from '../../firebase/api';
+import DropDown from '../../Component/PickerComponent';
+import styles from '../../style/styles';
 import auth from '@react-native-firebase/auth';
 
 const SignUp = ({navigation}) => {

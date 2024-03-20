@@ -1,9 +1,9 @@
 import React, {useEffect, useState} from 'react';
 import {Button, Image, Text, TouchableOpacity, View} from 'react-native';
-import styles from '../style/styles';
+import styles from '../../style/styles';
 import auth from '@react-native-firebase/auth';
-import {singleQuery} from '../firebase/firebase_func';
-import {getDisplayAge} from '../firebase/api';
+import {singleQuery} from '../../firebase/firebase_func';
+import {getDisplayAge} from '../../firebase/api';
 const User = ({navigation}) => {
   const [myInfo, setMyInfo] = useState(null);
 
@@ -34,7 +34,7 @@ const User = ({navigation}) => {
                   style={{fontSize: 20, color: 'white', fontWeight: 'bold'}}>
                   {myInfo?.user_name}님
                 </Text>
-                <Image source={require('../assets/star.png')} />
+                <Image source={require('../../assets/star.png')} />
                 <Text
                   style={{fontSize: 14, color: 'white', fontWeight: 'bold'}}>
                   {(0).toFixed(1)}
@@ -87,7 +87,7 @@ const User = ({navigation}) => {
               onPress={() =>
                 navigation.navigate('프로필 편집', {data: myInfo})
               }>
-              <Image source={require('../assets/Setting.png')} />
+              <Image source={require('../../assets/Setting.png')} />
             </TouchableOpacity>
           </View>
         </View>
@@ -112,28 +112,28 @@ const User = ({navigation}) => {
               style={styles.TouchButtonStyle}
               onPress={() => navigation.navigate('매칭내역')}>
               <View style={styles.rowBox}>
-                <Image source={require('../assets/menuicon1.png')} />
+                <Image source={require('../../assets/menuicon1.png')} />
                 <Text>매칭내역</Text>
               </View>
-              <Image source={require('../assets/rightarrow.png')} />
+              <Image source={require('../../assets/rightarrow.png')} />
             </TouchableOpacity>
             <TouchableOpacity
               style={styles.TouchButtonStyle}
               onPress={() => alert('눌렀엉')}>
               <View style={styles.rowBox}>
-                <Image source={require('../assets/menuicon1.png')} />
+                <Image source={require('../../assets/menuicon1.png')} />
                 <Text>메뉴02</Text>
               </View>
-              <Image source={require('../assets/rightarrow.png')} />
+              <Image source={require('../../assets/rightarrow.png')} />
             </TouchableOpacity>
             <TouchableOpacity
               style={styles.TouchButtonStyle}
               onPress={() => alert('눌렀엉')}>
               <View style={styles.rowBox}>
-                <Image source={require('../assets/menuicon1.png')} />
+                <Image source={require('../../assets/menuicon1.png')} />
                 <Text>메뉴 03</Text>
               </View>
-              <Image source={require('../assets/rightarrow.png')} />
+              <Image source={require('../../assets/rightarrow.png')} />
             </TouchableOpacity>
           </View>
         </View>

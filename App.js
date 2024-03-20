@@ -25,24 +25,25 @@ import {
   LearnMoreLinks,
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
-import Home from './src/pages/Home';
+import Home from './src/pages/Main/Home';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {NavigationContainer} from '@react-navigation/native';
-import User from './src/pages/User';
-import Chat from './src/pages/Chat';
+import User from './src/pages/MyPage/User';
+import Chat from './src/pages/Chat/Chat';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import Matching from './src/pages/Matching';
-import Match from './src/pages/Match';
-import SignUp from './src/pages/Signup';
-import Certificate from './src/pages/Certificate';
-import MatchCreate from './src/pages/MatchCreate';
-import MatchingForm from './src/pages/MatchingForm';
-import Interest from './src/pages/Interest';
-import Interest2 from './src/pages/Interest2';
-import Introduce from './src/pages/Introduce';
-import MatchDetails from './src/pages/MatchDetails';
-import Profile from './src/pages/Profile';
-import ChatRoom from './src/pages/ChatRoom';
+import Matching from './src/pages/Matching/Matching';
+import SignUp from './src/pages/Account/Signup';
+import Certificate from './src/pages/Account/Certificate';
+import Interest from './src/pages/Account/Interest';
+import Interest2 from './src/pages/Account/Interest2';
+import Introduce from './src/pages/Account/Introduce';
+import Profile from './src/pages/MyPage/Profile';
+import ChatRoom from './src/pages/Chat/ChatRoom';
+
+import GroupDetail from './src/pages/Main/GroupDetail';
+import GroupCreate from './src/pages/Main/GroupCreate';
+import MatchHistory from './src/pages/Matching/MatchHistory';
+import MatchPayment from './src/pages/Matching/MatchPayment';
 
 const App = () => {
   // const isDarkMode = useColorScheme() === 'dark';
@@ -89,8 +90,8 @@ const App = () => {
           ),
         }}
       />
-      <HomeStack.Screen name="모임상세" component={MatchingForm} />
-      <HomeStack.Screen name="커피매칭신청" component={Matching} />
+      <HomeStack.Screen name="모임상세" component={GroupDetail} />
+      <HomeStack.Screen name="모임개설" component={GroupCreate} />
     </HomeStack.Navigator>
   );
 
@@ -98,7 +99,7 @@ const App = () => {
     <UserStack.Navigator>
       <UserStack.Screen name="User" component={User} />
       <UserStack.Screen name="프로필 편집" component={Profile} />
-      <UserStack.Screen name="매칭내역" component={MatchDetails} />
+      <UserStack.Screen name="매칭내역" component={MatchHistory} />
     </UserStack.Navigator>
   );
 
@@ -112,9 +113,7 @@ const App = () => {
   const MatchingStackNavigate = () => (
     <MatchingStack.Navigator>
       <MatchingStack.Screen name="커피매칭" component={Matching} />
-      <MatchingStack.Screen name="모임상세" component={MatchingForm} />
-      <MatchingStack.Screen name="모임 개설" component={MatchCreate} />
-      <MatchingStack.Screen name="매칭중" component={Match} />
+      <MatchingStack.Screen name="매칭중" component={MatchPayment} />
     </MatchingStack.Navigator>
   );
   const SignUpStackNavigate = () => (
@@ -175,11 +174,10 @@ const App = () => {
           }}
         />
         <Tab.Screen
-          name="회원가입"
+          name="Account"
           component={SignUpStackNavigate}
           options={{headerShown: false}}
         />
-        <Tab.Screen name="모임 개설" component={MatchCreate} />
         <Tab.Screen name="채팅룸" component={ChatRoom} />
       </Tab.Navigator>
     </NavigationContainer>

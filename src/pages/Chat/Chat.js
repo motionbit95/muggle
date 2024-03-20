@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {Text, TouchableOpacity, View, useWindowDimensions} from 'react-native';
 import {TabView, SceneMap, TabBar} from 'react-native-tab-view';
-import styles from '../style/styles';
+import styles from '../../style/styles';
 
 const ChatTabBar = props => (
   <TabBar
@@ -30,7 +30,9 @@ const ClassRoute = ({navigation}) => {
           justifyContent: 'space-between',
           alignItems: 'center',
         }}
-        onPress={() => alert('채팅방 이동 왜 안될까')}>
+        onPress={() => alert('채팅하겠습니까')}
+        // onPress={() => navigation.navigate('Chat', {screen: 'ChatRoom', params: {key: 'value'}})}
+      >
         <View style={{flexDirection: 'row', gap: 10, alignItems: 'center'}}>
           <View
             style={{

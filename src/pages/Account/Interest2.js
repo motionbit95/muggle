@@ -1,6 +1,6 @@
 import React from 'react';
 import {ScrollView, Text, TouchableOpacity, View} from 'react-native';
-import styles from '../style/styles';
+import styles from '../../style/styles';
 
 const Interest2 = ({navigation}) => {
   return (

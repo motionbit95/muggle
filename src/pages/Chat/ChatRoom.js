@@ -7,7 +7,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import styles from '../style/styles';
+import styles from '../../style/styles';
 
 const addChatRoom = async () => {
   const key = push(chatRoomsRef).key;
@@ -134,7 +134,7 @@ const ChatRoom = () => {
               justifyContent: 'center',
             }}
             onPress={() => alert('button눌렀엉')}>
-            <Image source={require('../assets/send.png')} />
+            <Image source={require('../../assets/send.png')} />
           </TouchableOpacity>
         </View>
       </View>

@@ -1,7 +1,7 @@
 import React from 'react';
 import {ImageBackground, Text, TouchableOpacity, View} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
-import styles from '../style/styles';
+import styles from '../../style/styles';
 
 const Matching = ({navigation, route}) => {
   const {data} = route.params ? route.params : {data: null};

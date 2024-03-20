@@ -8,9 +8,9 @@ import {
   Image,
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
-import styles from '../style/styles';
+import styles from '../../style/styles';
 
-const Match = ({navigation}) => {
+const MatchPayment = ({navigation}) => {
   return (
     <View style={styles.screenStyle}>
       <ScrollView style={styles.scrollViewStyle}>
@@ -42,7 +42,7 @@ const Match = ({navigation}) => {
               </View>
               <View style={styles.Avartar80}>
                 <Image
-                  source={require('../assets/coffee.png')}
+                  source={require('../../assets/coffee.png')}
                   styles={styles.icon40}
                 />
               </View>
@@ -58,7 +58,7 @@ const Match = ({navigation}) => {
                       justifyContent: 'center',
                     },
                   ]}>
-                  <Image source={require('../assets/check.png')} />
+                  <Image source={require('../../assets/check.png')} />
                   <Text
                     style={{
                       color: 'rgba(255, 99, 79, 1)',
@@ -79,7 +79,7 @@ const Match = ({navigation}) => {
                       justifyContent: 'center',
                     },
                   ]}>
-                  <Image source={require('../assets/check.png')} />
+                  <Image source={require('../../assets/check.png')} />
                   <Text
                     style={{
                       color: 'rgba(255, 99, 79, 1)',
@@ -112,7 +112,7 @@ const Match = ({navigation}) => {
                       backgroundColor: 'rgba(255, 99, 79, 0.1)',
                     },
                   ]}>
-                  <Image source={require('../assets/circlecheck.png')} />
+                  <Image source={require('../../assets/circlecheck.png')} />
                 </View>
                 <View style={{alignItems: 'center', gap: 3}}>
                   <Text style={{fontSize: 12}}>매칭 신청</Text>
@@ -128,7 +128,7 @@ const Match = ({navigation}) => {
                       backgroundColor: 'rgba(255, 99, 79, 0.1)',
                     },
                   ]}>
-                  <Image source={require('../assets/circlecheck.png')} />
+                  <Image source={require('../../assets/circlecheck.png')} />
                 </View>
                 <View style={{alignItems: 'center', gap: 3}}>
                   <Text style={{fontSize: 12}}>채팅으로</Text>
@@ -144,7 +144,7 @@ const Match = ({navigation}) => {
                       backgroundColor: 'rgba(255, 99, 79, 0.1)',
                     },
                   ]}>
-                  <Image source={require('../assets/circlecheck.png')} />
+                  <Image source={require('../../assets/circlecheck.png')} />
                 </View>
                 <View style={{alignItems: 'center', gap: 3}}>
                   <Text style={{fontSize: 12}}>오프라인</Text>
@@ -167,7 +167,7 @@ const Match = ({navigation}) => {
                       backgroundColor: 'rgba(255, 99, 79, 0.1)',
                     },
                   ]}>
-                  <Image source={require('../assets/circlecheck.png')} />
+                  <Image source={require('../../assets/circlecheck.png')} />
                 </View>
                 <View style={{alignItems: 'center', gap: 3}}>
                   <Text style={{fontSize: 12}}>수락 또는</Text>
@@ -183,7 +183,7 @@ const Match = ({navigation}) => {
                       backgroundColor: 'rgba(255, 99, 79, 0.1)',
                     },
                   ]}>
-                  <Image source={require('../assets/circlecheck.png')} />
+                  <Image source={require('../../assets/circlecheck.png')} />
                 </View>
                 <View style={{alignItems: 'center', gap: 3}}>
                   <Text style={{fontSize: 12}}>수락시 채팅으로</Text>
@@ -199,7 +199,7 @@ const Match = ({navigation}) => {
                       backgroundColor: 'rgba(255, 99, 79, 0.1)',
                     },
                   ]}>
-                  <Image source={require('../assets/circlecheck.png')} />
+                  <Image source={require('../../assets/circlecheck.png')} />
                 </View>
                 <View style={{alignItems: 'center', gap: 3}}>
                   <Text style={{fontSize: 12}}>오프라인</Text>
@@ -215,7 +215,7 @@ const Match = ({navigation}) => {
                       backgroundColor: 'rgba(255, 99, 79, 0.1)',
                     },
                   ]}>
-                  <Image source={require('../assets/circlecheck.png')} />
+                  <Image source={require('../../assets/circlecheck.png')} />
                 </View>
                 <View style={{alignItems: 'center', gap: 3}}>
                   <Text style={{fontSize: 12}}>매칭권</Text>
@@ -244,4 +244,4 @@ const Match = ({navigation}) => {
   );
 };
 
-export default Match;
+export default MatchPayment;

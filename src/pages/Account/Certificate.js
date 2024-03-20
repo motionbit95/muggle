@@ -14,9 +14,9 @@ import {
   font_lg,
   font_md,
   primary_color,
-} from '../firebase/api';
+} from '../../firebase/api';
 import auth from '@react-native-firebase/auth';
-import {singleQuery} from '../firebase/firebase_func';
+import {singleQuery} from '../../firebase/firebase_func';
 
 const Certificate = ({navigation}) => {
   // 테스트 정보 : 번호 01012341234 / 코드 101010
@@ -177,8 +177,8 @@ const Certificate = ({navigation}) => {
               <Image
                 source={
                   tempAgree
-                    ? require('../assets/checked.png')
-                    : require('../assets/unchecked.png')
+                    ? require('../../assets/checked.png')
+                    : require('../../assets/unchecked.png')
                 }
               />
             </View>
@@ -195,7 +195,7 @@ const Certificate = ({navigation}) => {
             </Text>
             <TouchableOpacity onPress={() => alert('약관 표시')}>
               <View style={{width: 20, height: 20, justifyContent: 'center'}}>
-                <Image source={require('../assets/rightarrow.png')} />
+                <Image source={require('../../assets/rightarrow.png')} />
               </View>
             </TouchableOpacity>
           </View>

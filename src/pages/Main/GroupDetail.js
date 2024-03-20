@@ -7,21 +7,21 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import styles from '../style/styles';
+import styles from '../../style/styles';
 import {
   calculateDday,
-  displayDday,
   formatDate,
+  displayDday,
   formatDateTime,
-} from '../firebase/api';
-import {singleQuery} from '../firebase/firebase_func';
+} from '../../firebase/api';
+import {singleQuery} from '../../firebase/firebase_func';
 
-const MatchingForm = ({navigation, route}) => {
+const GroupDetail = ({navigation, route}) => {
   const {data} = route.params ? route.params : {data: null};
   const [userList, setUserList] = useState(null);
   console.log(data ? data : 'no data');
   // 디데이 계산 및 표시
-  var dday = calculateDday(formatDate(data.group_time));
+  var dday = calculateDday(formatDate(data?.group_time));
 
   useEffect(() => {
     let group_users = [];
@@ -36,7 +36,7 @@ const MatchingForm = ({navigation, route}) => {
     <View style={styles.screenStyle}>
       <ScrollView style={styles.scrollViewStyle}>
         <Image
-          source={require('../assets/banner1.png')}
+          source={require('../../assets/banner1.png')}
           style={styles.banner}
         />
         <View style={styles.contentStyle}>
@@ -115,7 +115,7 @@ const MatchingForm = ({navigation, route}) => {
       <View style={[styles.buttonBox, styles.rowBox]}>
         <TouchableOpacity style={{flex: 1}} onPress={() => alert('좋아용')}>
           <Image
-            source={require('../assets/hearticon.png')}
+            source={require('../../assets/hearticon.png')}
             style={{width: 30, height: 30}}
           />
         </TouchableOpacity>
@@ -129,4 +129,4 @@ const MatchingForm = ({navigation, route}) => {
   );
 };
 
-export default MatchingForm;
+export default GroupDetail;
