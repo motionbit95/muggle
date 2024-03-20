@@ -86,6 +86,11 @@ const styles = StyleSheet.create({
     height: 300,
     borderRadius: 20,
   },
+  slideContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
 
   // Button
   button: {

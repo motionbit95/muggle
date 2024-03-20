@@ -19,7 +19,7 @@ import {
   formatDate,
   formatDateTime,
 } from '../../firebase/api';
-import Swiper from 'react-native-web-swiper';
+import Swiper from 'react-native-swiper';
 
 const Home = ({navigation}) => {
   const [userList, setUserList] = useState([]);
@@ -28,6 +28,21 @@ const Home = ({navigation}) => {
   const [muggleGroupList, setMuggleGroupList] = useState([]);
   const [muggleClassList, setMuggleClassList] = useState([]);
   const [muggleBusinessList, setMuggleBusinessList] = useState([]);
+  const [swiperIndex, setSwiperIndex] = useState(0);
+
+  const bannerList = {
+    image: [
+      require('../../assets/slide.png'),
+      require('../../assets/slide.png'),
+      require('../../assets/slide.png'),
+      require('../../assets/slide.png'),
+      require('../../assets/slide.png'),
+      require('../../assets/slide.png'),
+      require('../../assets/slide.png'),
+      require('../../assets/slide.png'),
+    ],
+  };
+
   useEffect(() => {
     updateUser();
     updateGroup();
@@ -94,55 +109,45 @@ const Home = ({navigation}) => {
             </View>
           </View>
           <Swiper
-            loop
-            timeout={3}
-            //controlsEnabled={false}
-          >
-            {userList.map((user, index) => (
-              <ImageBackground
-                key={index}
-                imageStyle={{borderRadius: 20}}
-                source={{
-                  uri: user.user_profile
-                    ? user.user_profile
-                    : user.user_gender === 'male' || user.user_gender === '남'
-                    ? defaultMale
-                    : defaultFemale,
-                }}
-                style={{
-                  width: '100%',
-                  height: 320,
-                  borderRadius: 20,
-                }}></ImageBackground>
-            ))}
-          </Swiper>
-          <View
-            style={{
-              backgroundColor: '#8c8c8c',
+            autoplay={true}
+            loop={true}
+            showsPagination={false}
+            autoplayTimeout={5}
+            containerStyle={{
               width: '100%',
               height: 320,
               marginBottom: 20,
-              justifyContent: 'space-between',
-              borderRadius: 20,
             }}>
-            <View></View>
-            <View style={{gap: 10, alignItems: 'center', marginBottom: 20}}>
-              <Text style={{fontSize: 20, color: 'white'}}>Title</Text>
-              <Text style={{fontSize: 16, color: 'white'}}>
-                서브텍스트가 들어갑니다
-              </Text>
-              <View
+            {bannerList.image.map((image, index) => (
+              <ImageBackground
+                imageStyle={{borderRadius: 20}}
                 style={{
-                  backgroundColor: 'gray',
-                  padding: 5,
-                  borderRadius: 15,
-                  width: 60,
-                  alignItems: 'center',
-                }}>
-                <Text style={{fontSize: 12, color: 'white'}}>3/8</Text>
-              </View>
-            </View>
-          </View>
+                  flex: 1,
+                  justifyContent: 'flex-end',
+                }}
+                source={bannerList.image[index]}>
+                <View style={{gap: 10, alignItems: 'center', marginBottom: 20}}>
+                  <Text style={{fontSize: 20, color: 'white'}}>Title</Text>
+                  <Text style={{fontSize: 16, color: 'white'}}>
+                    서브텍스트가 들어갑니다
+                  </Text>
+                  <View
+                    style={{
+                      backgroundColor: 'gray',
+                      padding: 5,
+                      borderRadius: 15,
+                      width: 60,
+                      alignItems: 'center',
+                    }}>
+                    <Text style={{fontSize: 12, color: 'white'}}>
+                      {index + 1}/8
+                    </Text>
+                  </View>
+                </View>
+              </ImageBackground>
+            ))}
+          </Swiper>
+
           <View
             style={{
               width: '100%',
