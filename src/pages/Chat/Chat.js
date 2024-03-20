@@ -17,83 +17,94 @@ const ChatTabBar = props => (
   />
 );
 
-const ClassRoute = ({navigation}) => {
-  return (
-    // 모임 채팅방 목록
-    <View>
-      <TouchableOpacity
-        style={{
-          backgroundColor: 'white',
-          padding: 20,
-          flexDirection: 'row',
-          gap: 10,
-          justifyContent: 'space-between',
-          alignItems: 'center',
-        }}
-        onPress={() => alert('채팅하겠습니까')}
-        // onPress={() => navigation.navigate('Chat', {screen: 'ChatRoom', params: {key: 'value'}})}
-      >
-        <View style={{flexDirection: 'row', gap: 10, alignItems: 'center'}}>
-          <View
-            style={{
-              width: 60,
-              height: 60,
-              backgroundColor: 'red',
-              borderRadius: 50,
-            }}
-          />
-          <View>
-            <Text>홍*경</Text>
-            <Text>식사 어때?</Text>
-          </View>
-        </View>
-        <Text>5분전</Text>
-      </TouchableOpacity>
-    </View>
-  );
-};
-
-const MatchingRoute = () => {
-  return (
-    // 매칭 채팅방 목록
-    <View>
-      <TouchableOpacity
-        style={{
-          backgroundColor: 'white',
-          padding: 20,
-          flexDirection: 'row',
-          gap: 10,
-          justifyContent: 'space-between',
-          alignItems: 'center',
-        }}
-        onPress={() => alert('채팅하겠습니까')}>
-        <View style={{flexDirection: 'row', gap: 10, alignItems: 'center'}}>
-          <View
-            style={{
-              width: 60,
-              height: 60,
-              backgroundColor: 'red',
-              borderRadius: 50,
-            }}
-          />
-          <View>
-            <Text>홍*경</Text>
-            <Text>식사 어때?</Text>
-          </View>
-        </View>
-        <Text>5분전</Text>
-      </TouchableOpacity>
-    </View>
-  );
-};
-
-const renderScene = SceneMap({
-  Class: ClassRoute,
-  Matching: MatchingRoute,
-});
-
 const Chat = ({navigation}) => {
   const layout = useWindowDimensions();
+  console.log(navigation);
+
+  const ClassRoute = () => {
+    return (
+      // 모임 채팅방 목록
+      <View>
+        <TouchableOpacity
+          style={{
+            backgroundColor: 'white',
+            padding: 20,
+            flexDirection: 'row',
+            gap: 10,
+            justifyContent: 'space-between',
+            alignItems: 'center',
+          }}
+          // onPress={() => alert('채팅하겠습니까')}
+          onPress={() =>
+            navigation.navigate('Chat', {
+              screen: '채팅룸',
+              // params: {key: 'value'},
+            })
+          }>
+          <View style={{flexDirection: 'row', gap: 10, alignItems: 'center'}}>
+            <View
+              style={{
+                width: 60,
+                height: 60,
+                backgroundColor: 'red',
+                borderRadius: 50,
+              }}
+            />
+            <View>
+              <Text>홍*경</Text>
+              <Text>식사 어때?</Text>
+            </View>
+          </View>
+          <Text>5분전</Text>
+        </TouchableOpacity>
+      </View>
+    );
+  };
+
+  const MatchingRoute = () => {
+    return (
+      // 매칭 채팅방 목록
+      <View>
+        <TouchableOpacity
+          style={{
+            backgroundColor: 'white',
+            padding: 20,
+            flexDirection: 'row',
+            gap: 10,
+            justifyContent: 'space-between',
+            alignItems: 'center',
+          }}
+          // onPress={() => alert('채팅하겠습니까')}
+          onPress={() =>
+            navigation.navigate('Chat', {
+              screen: '채팅룸',
+              // params: {key: 'value'},
+            })
+          }>
+          <View style={{flexDirection: 'row', gap: 10, alignItems: 'center'}}>
+            <View
+              style={{
+                width: 60,
+                height: 60,
+                backgroundColor: 'red',
+                borderRadius: 50,
+              }}
+            />
+            <View>
+              <Text>홍*경</Text>
+              <Text>식사 어때?</Text>
+            </View>
+          </View>
+          <Text>5분전</Text>
+        </TouchableOpacity>
+      </View>
+    );
+  };
+
+  const renderScene = SceneMap({
+    Class: ClassRoute,
+    Matching: MatchingRoute,
+  });
 
   const [index, setIndex] = React.useState(0);
   const [routes] = React.useState([
