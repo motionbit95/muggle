@@ -328,3 +328,55 @@ export function getDisplayAge(birthdate) {
   var upperRange = lowerRange + 4;
   return `${age}세`;
 }
+
+export function calculateDday(targetDate) {
+  var today = new Date();
+  today.setHours(0, 0, 0, 0); // 오늘 날짜의 시간을 00:00:00으로 설정
+  var target = new Date(targetDate);
+  target.setHours(0, 0, 0, 0); // 대상 날짜의 시간을 00:00:00으로 설정
+
+  var difference = target - today;
+  var daysDifference = Math.ceil(difference / (1000 * 60 * 60 * 24)); // 일 단위로 차이 계산
+
+  return daysDifference;
+}
+
+export function displayDday(dday) {
+  if (dday > 0) {
+    return 'D-' + dday;
+  } else if (dday == 0) {
+    return 'D-Day!';
+  } else {
+    return 'D+' + Math.abs(dday);
+  }
+}
+
+export function formatDate(date) {
+  const year = date.getFullYear();
+  let month = date.getMonth() + 1;
+  let day = date.getDate();
+
+  // 월과 일이 한 자리 숫자인 경우 앞에 0을 붙여줍니다.
+  month = month < 10 ? '0' + month : month;
+  day = day < 10 ? '0' + day : day;
+
+  return `${year}-${month}-${day}`;
+}
+
+export function formatDateTime(date) {
+  const year = date.getFullYear();
+  let month = date.getMonth() + 1;
+  let day = date.getDate();
+
+  let days = ['일', '월', '화', '수', '목', '금', '토'];
+  let dayOfWeek = days[date.getDay()];
+
+  let hour = date.getHours();
+  let minute = date.getMinutes();
+
+  // 월과 일이 한 자리 숫자인 경우 앞에 0을 붙여줍니다.
+  month = month < 10 ? '0' + month : month;
+  day = day < 10 ? '0' + day : day;
+
+  return `${year}.${month}.${day}(${dayOfWeek}) ${hour}:${minute}`;
+}

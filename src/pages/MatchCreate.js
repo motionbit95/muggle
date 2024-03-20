@@ -3,10 +3,20 @@ import {Text, TextInput, TouchableOpacity, View} from 'react-native';
 import DropDown from '../Component/PickerComponent';
 import {cities, districts} from '../firebase/api';
 import styles from '../style/styles';
+import {addDocument} from '../firebase/firebase_func';
+import auth from '@react-native-firebase/auth';
 
-const MatchCreate = () => {
+const MatchCreate = ({navigation}) => {
   const [selectedCity, setSelectedCity] = useState('');
   const [selectedDistrict, setSelectedDistrict] = useState('');
+  const [selectedMatch, setSelectedMatch] = useState('머글 모임');
+
+  const [matchName, setMatchName] = useState('');
+  const [matchTarget, setMatchTarget] = useState('');
+  const [matchPersonnel, setMatchPersonnel] = useState(0);
+  const [matchDateTime, setMatchDateTime] = useState(new Date());
+  const [matchPrice, setMatchPrice] = useState('나누기');
+  const [matchImage, setMatchImage] = useState('');
 
   const handleCityChange = value => {
     setSelectedCity(value);
@@ -15,6 +25,50 @@ const MatchCreate = () => {
 
   const handleDistrictChange = value => {
     setSelectedDistrict(value);
+  };
+
+  const createMatch = () => {
+    if (!selectedCity || !selectedDistrict) {
+      alert('지역을 선택하세요.');
+      return;
+    }
+    if (!selectedMatch) {
+      alert('모임종류를 선택하세요.');
+      return;
+    }
+    if (!matchName) {
+      alert('모임 이름를 입력하세요.');
+      return;
+    }
+    if (!matchTarget) {
+      alert('모임 목표를 입력하세요.');
+      return;
+    }
+    if (!matchPersonnel) {
+      alert('모임 정원을 입력하세요.');
+      return;
+    }
+
+    const matchInfo = {
+      createAt: new Date(),
+      group_place: selectedCity + ' ' + selectedDistrict,
+      group_type: selectedMatch,
+      group_name: matchName,
+      group_target: matchTarget,
+      group_personnel: matchPersonnel,
+      group_users: [auth().currentUser.uid],
+      group_images: [],
+      group_time: matchDateTime,
+      group_price: matchPrice,
+    };
+
+    addDocument('group', matchInfo);
+    console.log(matchInfo);
+
+    navigation.navigate('커피매칭신청', {
+      screen: '모임상세',
+      params: {data: matchInfo},
+    });
   };
 
   return (
@@ -53,13 +107,18 @@ const MatchCreate = () => {
               gap: 10,
             }}>
             <View style={{flex: 1}}>
-              <DropDown items={null} defaultValue={null} onChangeValue={null} />
+              <DropDown
+                items={['머글 모임', '클래스 모임', '비지니스 모임']}
+                defaultValue={selectedMatch}
+                onChangeValue={setSelectedMatch}
+              />
             </View>
           </View>
         </View>
         <View style={styles.columnBox}>
           <Text style={styles.contentTitle}>모임 이름</Text>
           <TextInput
+            onChange={e => setMatchName(e.nativeEvent.text)}
             style={[
               {
                 width: '100%',
@@ -73,6 +132,7 @@ const MatchCreate = () => {
         <View style={styles.columnBox}>
           <Text style={styles.contentTitle}>모임목표</Text>
           <TextInput
+            onChange={e => setMatchTarget(e.nativeEvent.text)}
             multiline
             style={[
               {
@@ -87,6 +147,7 @@ const MatchCreate = () => {
         <View style={styles.columnBox}>
           <Text style={styles.contentTitle}>정원</Text>
           <TextInput
+            onChange={e => setMatchPersonnel(e.nativeEvent.text)}
             style={[
               {
                 width: '100%',
@@ -94,14 +155,13 @@ const MatchCreate = () => {
               },
               styles.contentBox,
             ]}
+            keyboardType="number-pad"
             placeholder="정원을 입력해주세요. (최대 300명)"
           />
         </View>
       </View>
       <View style={styles.buttonBox}>
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => alert('button눌렀엉')}>
+        <TouchableOpacity style={styles.button} onPress={createMatch}>
           <Text style={styles.buttonText}>모임 만들기</Text>
         </TouchableOpacity>
       </View>
