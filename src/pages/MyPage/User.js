@@ -110,7 +110,9 @@ const User = ({navigation}) => {
             style={{backgroundColor: 'white', borderRadius: 10, padding: 10}}>
             <TouchableOpacity
               style={styles.TouchButtonStyle}
-              onPress={() => navigation.navigate('매칭내역')}>
+              onPress={() =>
+                navigation.navigate('커피매칭신청', {screen: '매칭내역'})
+              }>
               <View style={styles.rowBox}>
                 <Image source={require('../../assets/menuicon1.png')} />
                 <Text>매칭내역</Text>

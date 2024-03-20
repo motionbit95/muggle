@@ -368,7 +368,6 @@ export function formatDate(date) {
     month = month < 10 ? '0' + month : month;
     day = day < 10 ? '0' + day : day;
 
-    console.log(`${year}-${month}-${day}`);
     return `${year}-${month}-${day}`;
   } catch (error) {
     let firestoreDate = convertFirestoreTimestampToDate(date);
@@ -395,11 +394,9 @@ export function formatDateTime(date) {
     hour = hour < 10 ? '0' + hour : hour;
     minute = minute < 10 ? '0' + minute : minute;
 
-    console.log(`${year}.${month}.${day}(${dayOfWeek}) ${hour}:${minute}`);
     return `${year}.${month}.${day}(${dayOfWeek}) ${hour}:${minute}`;
   } catch (error) {
     let firestoreDate = convertFirestoreTimestampToDate(date);
-    console.log(firestoreDate);
     return formatDateTime(firestoreDate);
   }
 }

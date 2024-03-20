@@ -99,7 +99,6 @@ const App = () => {
     <UserStack.Navigator>
       <UserStack.Screen name="User" component={User} />
       <UserStack.Screen name="프로필 편집" component={Profile} />
-      <UserStack.Screen name="매칭내역" component={MatchHistory} />
     </UserStack.Navigator>
   );
 
@@ -112,6 +111,7 @@ const App = () => {
 
   const MatchingStackNavigate = () => (
     <MatchingStack.Navigator>
+      <MatchingStack.Screen name="매칭내역" component={MatchHistory} />
       <MatchingStack.Screen name="커피매칭" component={Matching} />
       <MatchingStack.Screen name="매칭중" component={MatchPayment} />
     </MatchingStack.Navigator>
