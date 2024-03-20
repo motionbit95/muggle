@@ -521,7 +521,7 @@ const Home = ({navigation}) => {
       <View
         style={{
           width: '100%',
-          backgroundColor: 'white',
+          position: 'fixed',
           bottom: 70,
         }}>
         <TouchableOpacity
