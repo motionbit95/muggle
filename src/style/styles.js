@@ -147,7 +147,7 @@ const styles = StyleSheet.create({
   Avartar70: {
     width: 70,
     height: 70,
-    backgroundColor: '#d9d9d9',
+    backgroundColor: '#FFCACA',
     borderRadius: 50,
     justifyContent: 'center',
     alignItems: 'center',
@@ -280,9 +280,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   bgStyle: {
-    backgroundColor: 'rgba(255, 121, 79, 1)',
+    // backgroundColor: 'rgba(255, 121, 79, 1)',
     width: '100%',
-    height: 210,
+    height: 270,
     zIndex: -1,
     position: 'absolute',
   },

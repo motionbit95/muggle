@@ -97,8 +97,17 @@ const App = () => {
 
   const UserStackNavigate = () => (
     <UserStack.Navigator>
-      <UserStack.Screen name="User" component={User} />
+      <UserStack.Screen
+        name="User"
+        options={{headerShown: false}}
+        component={User}
+      />
       <UserStack.Screen name="프로필 편집" component={Profile} />
+      <UserStack.Screen
+        name="Account"
+        component={SignUpStackNavigate}
+        options={{headerShown: false}}
+      />
     </UserStack.Navigator>
   );
 
@@ -134,8 +143,15 @@ const App = () => {
           component={HomeStackNavigate}
           options={{
             headerShown: false,
-            tabBarIcon: () => (
-              <Image source={require('./src/assets/home.png')} />
+            tabBarActiveTintColor: '#FF634F',
+            tabBarIcon: ({focused}) => (
+              <Image
+                source={
+                  focused
+                    ? require('./src/assets/navIcon/home_select.png')
+                    : require('./src/assets/navIcon/home_unselect.png')
+                }
+              />
             ),
             unmountOnBlur: true,
           }}
@@ -145,8 +161,15 @@ const App = () => {
           component={MatchingStackNavigate}
           options={{
             headerShown: false,
-            tabBarIcon: () => (
-              <Image source={require('./src/assets/CoffeeBlack.png')} />
+            tabBarActiveTintColor: '#FF634F',
+            tabBarIcon: ({focused}) => (
+              <Image
+                source={
+                  focused
+                    ? require('./src/assets/navIcon/coffee_select.png')
+                    : require('./src/assets/navIcon/coffee_unselect.png')
+                }
+              />
             ),
             unmountOnBlur: true,
           }}
@@ -156,8 +179,15 @@ const App = () => {
           component={ChatStackNavigate}
           options={{
             headerShown: false,
-            tabBarIcon: () => (
-              <Image source={require('./src/assets/Chat.png')} />
+            tabBarActiveTintColor: '#FF634F',
+            tabBarIcon: ({focused}) => (
+              <Image
+                source={
+                  focused
+                    ? require('./src/assets/navIcon/chat_select.png')
+                    : require('./src/assets/navIcon/chat_unselect.png')
+                }
+              />
             ),
             unmountOnBlur: true,
           }}
@@ -167,18 +197,25 @@ const App = () => {
           component={UserStackNavigate}
           options={{
             headerShown: false,
-            tabBarIcon: () => (
-              <Image source={require('./src/assets/mypage.png')} />
+            tabBarActiveTintColor: '#FF634F',
+            tabBarIcon: ({focused}) => (
+              <Image
+                source={
+                  focused
+                    ? require('./src/assets/navIcon/user_select.png')
+                    : require('./src/assets/navIcon/user_unselect.png')
+                }
+              />
             ),
             unmountOnBlur: true,
           }}
         />
-        <Tab.Screen
+        {/* <Tab.Screen
           name="Account"
           component={SignUpStackNavigate}
           options={{headerShown: false}}
         />
-        <Tab.Screen name="채팅룸" component={ChatRoom} />
+        <Tab.Screen name="채팅룸" component={ChatRoom} /> */}
       </Tab.Navigator>
     </NavigationContainer>
   );
