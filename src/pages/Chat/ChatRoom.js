@@ -64,7 +64,10 @@ const ChatRoom = () => {
           {/* 왼쪽 배치 rowBox, 시간은 flex-start
           본인 채팅 시 오른쪽배치 시 row-reverse, 시간은 flex-end 조건, 색상 rgba(255, 218, 122, 1) 추가 */}
           <View style={[styles.rowBox, {gap: 10}]}>
-            <Image style={styles.Avartar50} />
+            <View style={{gap: 10, alignItems: 'center'}}>
+              <Image style={styles.Avartar50} />
+              <Text>홍길동</Text>
+            </View>
             <View style={{alignItems: 'flex-start', gap: 5}}>
               <View
                 style={{
@@ -74,16 +77,19 @@ const ChatRoom = () => {
                   borderRadius: 15,
                   borderTopLeftRadius: 0,
                 }}>
-                <Text>여기가 채팅공간</Text>
+                <Text>커피 마실래요?</Text>
               </View>
-              <Text>시간</Text>
+              <Text>13:59</Text>
             </View>
           </View>
           <View
             style={[
               {alignItems: 'flex-end', flexDirection: 'row-reverse', gap: 10},
             ]}>
-            <Image style={styles.Avartar50} />
+            <View style={{gap: 10, alignItems: 'center'}}>
+              <Image style={styles.Avartar50} />
+              <Text>홍길동</Text>
+            </View>
             <View style={{alignItems: 'flex-end', gap: 5}}>
               <View
                 style={{
@@ -91,11 +97,11 @@ const ChatRoom = () => {
                   padding: 15,
                   backgroundColor: 'rgba(255, 218, 122, 1)',
                   borderRadius: 15,
-                  borderTopLeftRadius: 0,
+                  borderTopRightRadius: 0,
                 }}>
-                <Text>여기가 채팅공간</Text>
+                <Text>반가워요!</Text>
               </View>
-              <Text>시간</Text>
+              <Text>14:00</Text>
             </View>
           </View>
         </View>

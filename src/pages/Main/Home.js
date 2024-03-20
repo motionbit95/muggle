@@ -19,6 +19,7 @@ import {
   formatDate,
   formatDateTime,
 } from '../../firebase/api';
+import Swiper from 'react-native-web-swiper';
 
 const Home = ({navigation}) => {
   const [userList, setUserList] = useState([]);
@@ -92,6 +93,29 @@ const Home = ({navigation}) => {
               />
             </View>
           </View>
+          <Swiper
+            loop
+            timeout={3}
+            //controlsEnabled={false}
+          >
+            {userList.map((user, index) => (
+              <ImageBackground
+                key={index}
+                imageStyle={{borderRadius: 20}}
+                source={{
+                  uri: user.user_profile
+                    ? user.user_profile
+                    : user.user_gender === 'male' || user.user_gender === '남'
+                    ? defaultMale
+                    : defaultFemale,
+                }}
+                style={{
+                  width: '100%',
+                  height: 320,
+                  borderRadius: 20,
+                }}></ImageBackground>
+            ))}
+          </Swiper>
           <View
             style={{
               backgroundColor: '#8c8c8c',
@@ -758,9 +782,10 @@ const Home = ({navigation}) => {
       </ScrollView>
       <View
         style={{
-          width: '100%',
-          position: 'fixed',
-          bottom: 70,
+          flex: 1,
+          position: 'sticky',
+          bottom: 60,
+          left: 330,
         }}>
         <TouchableOpacity
           style={{

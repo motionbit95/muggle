@@ -1,5 +1,11 @@
 import React, {useState} from 'react';
-import {Text, TextInput, TouchableOpacity, View} from 'react-native';
+import {
+  ScrollView,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import {cities, districts} from '../../firebase/api';
 import styles from '../../style/styles';
 import {addDocument} from '../../firebase/firebase_func';
@@ -17,6 +23,8 @@ const GroupCreate = ({navigation}) => {
   const [matchDateTime, setMatchDateTime] = useState(new Date());
   const [matchPrice, setMatchPrice] = useState('나누기');
   const [matchImage, setMatchImage] = useState('');
+
+  const matchProps = ['나누기', '모임 금액 선택'];
 
   const handleCityChange = value => {
     setSelectedCity(value);
@@ -73,93 +81,133 @@ const GroupCreate = ({navigation}) => {
 
   return (
     <View style={[styles.screenStyle, styles.spaceBetween]}>
-      <View style={{width: '100%', gap: 15, padding: 20}}>
-        <View style={styles.columnBox}>
-          <Text style={styles.contentTitle}>지역</Text>
-          <View
-            style={{
-              justifyContent: 'stretch',
-              flexDirection: 'row',
-              gap: 10,
-            }}>
-            <View style={{flex: 1}}>
-              <DropDown
-                items={cities}
-                defaultValue={selectedCity ? selectedCity : '전체'}
-                onChangeValue={handleCityChange}
-              />
+      <ScrollView style={styles.scrollViewStyle}>
+        <View style={{width: '100%', gap: 15, padding: 20}}>
+          <View style={styles.columnBox}>
+            <Text style={styles.contentTitle}>지역</Text>
+            <View
+              style={{
+                justifyContent: 'stretch',
+                flexDirection: 'row',
+                gap: 10,
+              }}>
+              <View style={{flex: 1}}>
+                <DropDown
+                  items={cities}
+                  defaultValue={selectedCity ? selectedCity : '전체'}
+                  onChangeValue={handleCityChange}
+                />
+              </View>
+              <View style={{flex: 1}}>
+                <DropDown
+                  items={districts[selectedCity]}
+                  defaultValue={selectedDistrict ? selectedDistrict : '전체'}
+                  onChangeValue={handleDistrictChange}
+                />
+              </View>
             </View>
-            <View style={{flex: 1}}>
-              <DropDown
-                items={districts[selectedCity]}
-                defaultValue={selectedDistrict ? selectedDistrict : '전체'}
-                onChangeValue={handleDistrictChange}
+          </View>
+          <View style={styles.columnBox}>
+            <Text style={styles.contentTitle}>모임종류</Text>
+            <View
+              style={{
+                justifyContent: 'stretch',
+                flexDirection: 'row',
+                gap: 10,
+              }}>
+              <View style={{flex: 1}}>
+                <DropDown
+                  items={['머글 모임', '클래스 모임', '비즈니스 모임']}
+                  defaultValue={selectedMatch}
+                  onChangeValue={setSelectedMatch}
+                />
+              </View>
+            </View>
+          </View>
+          <View style={styles.columnBox}>
+            <Text style={styles.contentTitle}>모임 이름</Text>
+            <TextInput
+              onChange={e => setMatchName(e.nativeEvent.text)}
+              style={[
+                {
+                  width: '100%',
+                  height: 50,
+                },
+                styles.contentBox,
+              ]}
+              placeholder="모임 이름을 입력해주세요."
+            />
+          </View>
+          <View style={styles.columnBox}>
+            <Text style={styles.contentTitle}>모임 일정</Text>
+            <TextInput
+              // onChange={e => setMatchName(e.nativeEvent.text)}
+              style={[
+                {
+                  width: '100%',
+                  height: 50,
+                },
+                styles.contentBox,
+              ]}
+              placeholder="모임 이름을 입력해주세요."
+            />
+          </View>
+          <View style={styles.columnBox}>
+            <Text style={styles.contentTitle}>더치페이 여부</Text>
+            <View
+              style={{
+                justifyContent: 'stretch',
+                flexDirection: 'row',
+                gap: 10,
+              }}>
+              <View style={{flex: 1}}>
+                <DropDown
+                  items={matchProps}
+                  defaultValue={matchPrice}
+                  onChangeValue={setMatchPrice}
+                />
+              </View>
+              <TextInput
+                keyboardType="numeric"
+                style={[{flex: 1.5}, styles.contentBox]}
+                placeholder="모임 금액을 입력해주세요."
+                onChange={null}
               />
             </View>
           </View>
-        </View>
-        <View style={styles.columnBox}>
-          <Text style={styles.contentTitle}>모임종류</Text>
-          <View
-            style={{
-              justifyContent: 'stretch',
-              flexDirection: 'row',
-              gap: 10,
-            }}>
-            <View style={{flex: 1}}>
-              <DropDown
-                items={['머글 모임', '클래스 모임', '비즈니스 모임']}
-                defaultValue={selectedMatch}
-                onChangeValue={setSelectedMatch}
-              />
-            </View>
+
+          <View style={styles.columnBox}>
+            <Text style={styles.contentTitle}>모임목표</Text>
+            <TextInput
+              onChange={e => setMatchTarget(e.nativeEvent.text)}
+              multiline
+              style={[
+                {
+                  width: '100%',
+                  height: 150,
+                },
+                styles.contentBox,
+              ]}
+              placeholder="모임목표을 설명해주세요."
+            />
+          </View>
+          <View style={styles.columnBox}>
+            <Text style={styles.contentTitle}>정원</Text>
+            <TextInput
+              onChange={e => setMatchPersonnel(e.nativeEvent.text)}
+              style={[
+                {
+                  width: '100%',
+                  height: 50,
+                },
+                styles.contentBox,
+              ]}
+              keyboardType="number-pad"
+              placeholder="정원을 입력해주세요. (최대 300명)"
+            />
           </View>
         </View>
-        <View style={styles.columnBox}>
-          <Text style={styles.contentTitle}>모임 이름</Text>
-          <TextInput
-            onChange={e => setMatchName(e.nativeEvent.text)}
-            style={[
-              {
-                width: '100%',
-                height: 50,
-              },
-              styles.contentBox,
-            ]}
-            placeholder="모임 이름을 입력해주세요."
-          />
-        </View>
-        <View style={styles.columnBox}>
-          <Text style={styles.contentTitle}>모임목표</Text>
-          <TextInput
-            onChange={e => setMatchTarget(e.nativeEvent.text)}
-            multiline
-            style={[
-              {
-                width: '100%',
-                height: 150,
-              },
-              styles.contentBox,
-            ]}
-            placeholder="모임목표을 설명해주세요."
-          />
-        </View>
-        <View style={styles.columnBox}>
-          <Text style={styles.contentTitle}>정원</Text>
-          <TextInput
-            onChange={e => setMatchPersonnel(e.nativeEvent.text)}
-            style={[
-              {
-                width: '100%',
-                height: 50,
-              },
-              styles.contentBox,
-            ]}
-            keyboardType="number-pad"
-            placeholder="정원을 입력해주세요. (최대 300명)"
-          />
-        </View>
-      </View>
+      </ScrollView>
       <View style={styles.buttonBox}>
         <TouchableOpacity style={styles.button} onPress={createGroup}>
           <Text style={styles.buttonText}>모임 만들기</Text>

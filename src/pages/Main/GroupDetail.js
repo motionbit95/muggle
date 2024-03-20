@@ -36,8 +36,8 @@ const GroupDetail = ({navigation, route}) => {
     <View style={styles.screenStyle}>
       <ScrollView style={styles.scrollViewStyle}>
         <Image
-          source={require('../../assets/banner1.png')}
-          style={styles.banner}
+          // source={require('../../assets/banner1.png')}
+          style={[styles.banner, {backgroundColor: 'rgba(255, 206, 79, 1)'}]}
         />
         <View style={styles.contentStyle}>
           <View
