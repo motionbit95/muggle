@@ -65,7 +65,14 @@ const ChatRoom = () => {
           본인 채팅 시 오른쪽배치 시 row-reverse, 시간은 flex-end 조건, 색상 rgba(255, 218, 122, 1) 추가 */}
           <View style={[styles.rowBox, {gap: 10}]}>
             <View style={{gap: 10, alignItems: 'center'}}>
-              <Image style={styles.Avartar50} />
+              <View>
+                <View style={styles.Avartar50}>
+                  <Image
+                    style={{width: '90%', height: '90%'}}
+                    source={require('../../assets/avartar.png')}
+                  />
+                </View>
+              </View>
               <Text>홍길동</Text>
             </View>
             <View style={{alignItems: 'flex-start', gap: 5}}>
@@ -87,7 +94,14 @@ const ChatRoom = () => {
               {alignItems: 'flex-end', flexDirection: 'row-reverse', gap: 10},
             ]}>
             <View style={{gap: 10, alignItems: 'center'}}>
-              <Image style={styles.Avartar50} />
+              <View>
+                <View style={styles.Avartar50}>
+                  <Image
+                    style={{width: '90%', height: '90%'}}
+                    source={require('../../assets/avartar.png')}
+                  />
+                </View>
+              </View>
               <Text>홍길동</Text>
             </View>
             <View style={{alignItems: 'flex-end', gap: 5}}>

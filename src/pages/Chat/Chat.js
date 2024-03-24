@@ -1,5 +1,11 @@
 import * as React from 'react';
-import {Text, TouchableOpacity, View, useWindowDimensions} from 'react-native';
+import {
+  Image,
+  Text,
+  TouchableOpacity,
+  View,
+  useWindowDimensions,
+} from 'react-native';
 import {TabView, SceneMap, TabBar} from 'react-native-tab-view';
 import styles from '../../style/styles';
 
@@ -19,7 +25,6 @@ const ChatTabBar = props => (
 
 const Chat = ({navigation}) => {
   const layout = useWindowDimensions();
-  console.log(navigation);
 
   const ClassRoute = () => {
     return (
@@ -42,14 +47,14 @@ const Chat = ({navigation}) => {
             })
           }>
           <View style={{flexDirection: 'row', gap: 10, alignItems: 'center'}}>
-            <View
-              style={{
-                width: 60,
-                height: 60,
-                backgroundColor: 'red',
-                borderRadius: 50,
-              }}
-            />
+            <View>
+              <View style={styles.Avartar50}>
+                <Image
+                  style={{width: '90%', height: '90%'}}
+                  source={require('../../assets/avartar.png')}
+                />
+              </View>
+            </View>
             <View>
               <Text>홍*경</Text>
               <Text>식사 어때?</Text>
@@ -82,14 +87,14 @@ const Chat = ({navigation}) => {
             })
           }>
           <View style={{flexDirection: 'row', gap: 10, alignItems: 'center'}}>
-            <View
-              style={{
-                width: 60,
-                height: 60,
-                backgroundColor: 'red',
-                borderRadius: 50,
-              }}
-            />
+            <View>
+              <View style={styles.Avartar50}>
+                <Image
+                  style={{width: '90%', height: '90%'}}
+                  source={require('../../assets/avartar.png')}
+                />
+              </View>
+            </View>
             <View>
               <Text>홍*경</Text>
               <Text>식사 어때?</Text>

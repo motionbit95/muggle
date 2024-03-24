@@ -7,6 +7,7 @@
 
 import React from 'react';
 import {
+  Button,
   Image,
   SafeAreaView,
   ScrollView,
@@ -93,8 +94,48 @@ const App = () => {
           ),
         }}
       />
-      <HomeStack.Screen name="모임상세" component={GroupDetail} />
-      <HomeStack.Screen name="모임개설" component={GroupCreate} />
+      <HomeStack.Screen
+        name="모임상세"
+        component={GroupDetail}
+        options={({navigation}) => ({
+          title: '모임상세',
+          headerLeft: () => (
+            <Button
+              onPress={() => navigation.goBack()}
+              title="Back"
+              color="black"
+            />
+          ),
+          headerStyle: {
+            backgroundColor: '#fff',
+          },
+          headerTintColor: '#black',
+          headerTitleStyle: {
+            fontWeight: 'bold',
+          },
+        })}
+      />
+      <HomeStack.Screen
+        name="모임개설"
+        component={GroupCreate}
+        options={({navigation}) => ({
+          title: '모임개설',
+          headerLeft: () => (
+            <Button
+              onPress={() => navigation.goBack()}
+              title="Back"
+              color="black"
+            />
+          ),
+          headerStyle: {
+            backgroundColor: '#fff',
+          },
+          headerTintColor: '#black',
+          headerTitleStyle: {
+            fontWeight: 'bold',
+          },
+        })}
+      />
     </HomeStack.Navigator>
   );
 
@@ -117,20 +158,70 @@ const App = () => {
   const ChatStackNavigate = () => (
     <ChatStack.Navigator>
       <ChatStack.Screen name="채팅" component={Chat} />
-      <ChatStack.Screen name="채팅룸" component={ChatRoom} />
+      <ChatStack.Screen
+        name="채팅룸"
+        component={ChatRoom}
+        options={({navigation}) => ({
+          title: '채팅룸',
+          headerLeft: () => (
+            <Button
+              onPress={() => navigation.goBack()}
+              title="Back"
+              color="black"
+            />
+          ),
+          headerStyle: {
+            backgroundColor: '#fff',
+          },
+          headerTintColor: '#black',
+          headerTitleStyle: {
+            fontWeight: 'bold',
+          },
+        })}
+      />
     </ChatStack.Navigator>
   );
 
   const MatchingStackNavigate = () => (
     <MatchingStack.Navigator>
       <MatchingStack.Screen name="매칭내역" component={MatchHistory} />
-      <MatchingStack.Screen name="커피매칭" component={Matching} />
-      <MatchingStack.Screen name="매칭중" component={MatchPayment} />
+      <MatchingStack.Screen
+        name="매칭중"
+        component={MatchPayment}
+        options={{headerShown: false}}
+      />
+      <MatchingStack.Screen
+        name="커피매칭"
+        component={Matching}
+        options={({navigation}) => ({
+          title: '커피매칭',
+          headerLeft: () => (
+            <Button
+              onPress={() =>
+                navigation.navigate('커피매칭신청', {screen: '매칭내역'})
+              }
+              title="Back"
+              color="black"
+            />
+          ),
+          headerStyle: {
+            backgroundColor: '#fff',
+          },
+          headerTintColor: '#black',
+          headerTitleStyle: {
+            fontWeight: 'bold',
+          },
+        })}
+      />
     </MatchingStack.Navigator>
   );
   const SignUpStackNavigate = () => (
     <SignUpStack.Navigator>
-      <SignUpStack.Screen name="SignUp" component={SignUp} />
+      <SignUpStack.Screen
+        name="SignUp"
+        component={SignUp}
+        options={{title: '회원가입'}}
+      />
       <SignUpStack.Screen name="휴대폰 본인인증" component={Certificate} />
       <SignUpStack.Screen name="관심사 선택" component={Interest} />
       <SignUpStack.Screen name="상세 관심사 선택" component={Interest2} />

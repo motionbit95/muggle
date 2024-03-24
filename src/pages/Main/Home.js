@@ -111,7 +111,7 @@ const Home = ({navigation}) => {
           </View>
           <View
             style={{
-              backgroundColor: 'rgba(255, 206, 79, 1)',
+              backgroundColor: '#D96F6F',
               width: '100%',
               borderRadius: 10,
               height: 40,
@@ -120,19 +120,18 @@ const Home = ({navigation}) => {
               marginBottom: 20,
               gap: 10,
               justifyContent: 'space-between',
+              paddingHorizontal: 10,
             }}>
-            <View style={{flexDirection: 'row', gap: 10, margin: 10}}>
-              <Text>♠︎</Text>
+            <View
+              style={{
+                flexDirection: 'row',
+                gap: 10,
+                margin: 10,
+              }}>
+              <Image source={require('../../assets/megaphone.png')} />
               <Text>새로운 업데이트 소식 전해드릴게요.</Text>
             </View>
-            <View>
-              <Button
-                color={'rgba(119, 119, 119, 1)'}
-                style={{width: 24, height: 24}}
-                onPress={() => alert('닫아!')}
-                title="x"
-              />
-            </View>
+            <Image source={require('../../assets/_x.png')} />
           </View>
           <Swiper
             autoplay={true}
@@ -455,7 +454,7 @@ const Home = ({navigation}) => {
                       </Text>
                       <TouchableOpacity
                         style={{
-                          backgroundColor: 'rgba(255, 206, 79, 1)',
+                          backgroundColor: '#D96F6F',
                           borderRadius: 10,
                           height: 56,
                           alignItems: 'center',

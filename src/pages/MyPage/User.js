@@ -33,6 +33,14 @@ const User = ({navigation}) => {
       });
   };
 
+  const onDeleteUser = () => {
+    auth()
+      .currentUser.delete()
+      .then(() => {
+        navigation.navigate('Account', {screen: '휴대폰 본인인증'});
+      });
+  };
+
   return (
     <View style={styles.screenStyle}>
       <View style={styles.bgStyle}>
@@ -165,6 +173,15 @@ const User = ({navigation}) => {
                 <View style={styles.rowBox}>
                   <Image source={require('../../assets/menuicon1.png')} />
                   <Text>로그아웃</Text>
+                </View>
+                <Image source={require('../../assets/rightarrow.png')} />
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={styles.TouchButtonStyle}
+                onPress={onDeleteUser}>
+                <View style={styles.rowBox}>
+                  <Image source={require('../../assets/menuicon1.png')} />
+                  <Text>탈퇴하기</Text>
                 </View>
                 <Image source={require('../../assets/rightarrow.png')} />
               </TouchableOpacity>

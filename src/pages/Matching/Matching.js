@@ -1,5 +1,11 @@
 import React from 'react';
-import {ImageBackground, Text, TouchableOpacity, View} from 'react-native';
+import {
+  Image,
+  ImageBackground,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import styles from '../../style/styles';
 
@@ -17,7 +23,7 @@ const Matching = ({navigation, route}) => {
         <LinearGradient colors={['rgba(0,0,0,0)', 'rgba(0,0,0,1)']}>
           <View style={[styles.MatchComponentBox, {borderRadius: 0}]}>
             <View style={styles.MatchiconBox}>
-              <View style={styles.icon12} />
+              <Image source={require('../../assets/Subtract.png')} />
               <Text style={{color: 'white', fontSize: 14}}>근처</Text>
             </View>
 

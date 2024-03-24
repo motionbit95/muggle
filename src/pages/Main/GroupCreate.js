@@ -184,7 +184,7 @@ const GroupCreate = ({navigation}) => {
               style={[
                 {
                   width: '100%',
-                  height: 150,
+                  height: 100,
                 },
                 styles.contentBox,
               ]}

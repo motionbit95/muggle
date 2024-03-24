@@ -1,5 +1,6 @@
 import React from 'react';
 import {
+  Alert,
   Image,
   ScrollView,
   Text,
@@ -57,11 +58,53 @@ const Interest = ({navigation, route}) => {
             </View>
           </View>
           <View style={styles.hr} />
-          <TouchableOpacity
+          <View>
+            <View
+              style={{
+                rowGap: 20,
+                columnGap: 0,
+                flexDirection: 'row',
+                flexWrap: 'wrap',
+              }}>
+              {[
+                '아웃도어/여행',
+                '운동/스포츠',
+                '인문학/책/글',
+                '외국/언어',
+                '문화/공연/축제',
+                '음악/악기',
+                '공예/만들기',
+                '댄스/무용',
+                '봉사활동',
+                '사교/인맥',
+                '차/오토바이',
+                '사진/영상',
+                '스포츠관람',
+                '게임/오락',
+                '요리/제조',
+                '반려동물',
+                '자기계발',
+              ].map((item, index) => (
+                <TouchableOpacity
+                  style={{
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    gap: 5,
+                    width: '20%',
+                  }}
+                  onPress={() => Alert.alert('미구현')}>
+                  <View style={styles.interestButton}></View>
+                  <Text style={{fontSize: 12}}>{item}</Text>
+                </TouchableOpacity>
+              ))}
+            </View>
+          </View>
+
+          {/* <TouchableOpacity
             style={[styles.button, styles.buttonBox]}
             onPress={() => navigation.navigate('상세 관심사 선택')}>
-            <Text>상세 관심사로 ㄱ</Text>
-          </TouchableOpacity>
+            <Text>상세 관심사 선택</Text>
+          </TouchableOpacity> */}
         </View>
       </ScrollView>
       <View style={styles.buttonBox}>

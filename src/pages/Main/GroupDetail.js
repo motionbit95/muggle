@@ -37,7 +37,7 @@ const GroupDetail = ({navigation, route}) => {
       <ScrollView style={styles.scrollViewStyle}>
         <Image
           // source={require('../../assets/banner1.png')}
-          style={[styles.banner, {backgroundColor: 'rgba(255, 206, 79, 1)'}]}
+          style={[styles.banner, {backgroundColor: '#d9d9d9'}]}
         />
         <View style={styles.contentStyle}>
           <View
@@ -121,7 +121,12 @@ const GroupDetail = ({navigation, route}) => {
         </TouchableOpacity>
         <TouchableOpacity
           style={[styles.button, {flex: 5}]}
-          onPress={() => alert('참여하기')}>
+          onPress={() =>
+            navigation.navigate('Chat', {
+              screen: '채팅룸',
+              // params: {key: 'value'},
+            })
+          }>
           <Text style={styles.buttonText}>참여하기</Text>
         </TouchableOpacity>
       </View>

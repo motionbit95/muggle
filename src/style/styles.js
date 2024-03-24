@@ -132,6 +132,14 @@ const styles = StyleSheet.create({
     paddingHorizontal: 8,
     backgroundColor: 'rgba(238, 238, 238, 1)',
   },
+  interestButton: {
+    width: 50,
+    height: 50,
+    backgroundColor: '#d9d9d9',
+    borderRadius: 50,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
 
   // Avartar
   Avartar80: {
@@ -155,13 +163,15 @@ const styles = StyleSheet.create({
   Avartar50: {
     width: 50,
     height: 50,
-    backgroundColor: 'red',
+    backgroundColor: '#d9d9d9',
     borderRadius: 50,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   Avartar30: {
     width: 30,
     height: 30,
-    backgroundColor: 'red',
+    backgroundColor: '#d9d9d9',
     borderRadius: 50,
   },
 

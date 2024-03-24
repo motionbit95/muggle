@@ -6,6 +6,7 @@ import {
   Button,
   TouchableOpacity,
   Image,
+  SafeAreaView,
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import styles from '../../style/styles';
@@ -14,85 +15,88 @@ const MatchPayment = ({navigation}) => {
   return (
     <View style={styles.screenStyle}>
       <ScrollView style={styles.scrollViewStyle}>
-        <LinearGradient
-          colors={['rgba(255, 132, 79, 1)', 'rgba(255, 50, 79, 1)']}>
-          <View style={styles.matchingBanner}>
-            <View style={styles.textColumnBox}>
-              <Text style={{fontSize: 30, color: 'white', fontWeight: 'bold'}}>
-                새로운 이성과
-              </Text>
-              <Text style={{fontSize: 30, color: 'white', fontWeight: 'bold'}}>
-                커피 한잔 어떠신가요?
-              </Text>
-            </View>
-            <View style={styles.textColumnBox}>
-              <Text style={{fontSize: 18, color: 'white'}}>
-                매칭권 결제 후 앱채팅으로
-              </Text>
-              <Text style={{fontSize: 18, color: 'white'}}>
-                오프라인 커피 약속을 잡고 만나보세요.
-              </Text>
-            </View>
-            <View style={styles.matchCardBox}>
-              <View style={styles.coffeeTagBox}>
+        <SafeAreaView>
+          <LinearGradient colors={['#FF794F', '#D96F6F']}>
+            <View style={styles.matchingBanner}>
+              <View style={styles.textColumnBox}>
                 <Text
-                  style={{fontSize: 12, color: 'white', fontWeight: 'bold'}}>
-                  오프라인 커피 매칭권
+                  style={{fontSize: 30, color: 'white', fontWeight: 'bold'}}>
+                  새로운 이성과
+                </Text>
+                <Text
+                  style={{fontSize: 30, color: 'white', fontWeight: 'bold'}}>
+                  커피 한잔 어떠신가요?
                 </Text>
               </View>
-              <View style={styles.Avartar80}>
-                <Image
-                  source={require('../../assets/coffee.png')}
-                  styles={styles.icon40}
-                />
+              <View style={styles.textColumnBox}>
+                <Text style={{fontSize: 18, color: 'white'}}>
+                  매칭권 결제 후 앱채팅으로
+                </Text>
+                <Text style={{fontSize: 18, color: 'white'}}>
+                  오프라인 커피 약속을 잡고 만나보세요.
+                </Text>
               </View>
-              <View style={[styles.gap10, {alignItems: 'center'}]}>
-                <View
-                  style={[
-                    styles.rowBox,
-                    {
-                      backgroundColor: 'rgba(255, 99, 79, 0.1)',
-                      borderRadius: 25,
-                      paddingHorizontal: 10,
-                      paddingVertical: 4,
-                      justifyContent: 'center',
-                    },
-                  ]}>
-                  <Image source={require('../../assets/check.png')} />
+              <View style={styles.matchCardBox}>
+                <View style={styles.coffeeTagBox}>
                   <Text
-                    style={{
-                      color: 'rgba(255, 99, 79, 1)',
-                      fontWeight: 'bold',
-                      fontSize: 14,
-                    }}>
-                    매칭권 금액 5만원
+                    style={{fontSize: 12, color: 'white', fontWeight: 'bold'}}>
+                    오프라인 커피 매칭권
                   </Text>
                 </View>
-                <View
-                  style={[
-                    styles.rowBox,
-                    {
-                      backgroundColor: 'rgba(255, 99, 79, 0.1)',
-                      borderRadius: 25,
-                      paddingHorizontal: 10,
-                      paddingVertical: 4,
-                      justifyContent: 'center',
-                    },
-                  ]}>
-                  <Image source={require('../../assets/check.png')} />
-                  <Text
-                    style={{
-                      color: 'rgba(255, 99, 79, 1)',
-                      fontWeight: 'bold',
-                      fontSize: 14,
-                    }}>
-                    채팅 미응답 시 전액 환불
-                  </Text>
+                <View style={styles.Avartar80}>
+                  <Image
+                    source={require('../../assets/coffee.png')}
+                    styles={styles.icon40}
+                  />
+                </View>
+                <View style={[styles.gap10, {alignItems: 'center'}]}>
+                  <View
+                    style={[
+                      styles.rowBox,
+                      {
+                        backgroundColor: 'rgba(255, 99, 79, 0.1)',
+                        borderRadius: 25,
+                        paddingHorizontal: 10,
+                        paddingVertical: 4,
+                        justifyContent: 'center',
+                      },
+                    ]}>
+                    <Image source={require('../../assets/check.png')} />
+                    <Text
+                      style={{
+                        color: 'rgba(255, 99, 79, 1)',
+                        fontWeight: 'bold',
+                        fontSize: 14,
+                      }}>
+                      매칭권 금액 5만원
+                    </Text>
+                  </View>
+                  <View
+                    style={[
+                      styles.rowBox,
+                      {
+                        backgroundColor: 'rgba(255, 99, 79, 0.1)',
+                        borderRadius: 25,
+                        paddingHorizontal: 10,
+                        paddingVertical: 4,
+                        justifyContent: 'center',
+                      },
+                    ]}>
+                    <Image source={require('../../assets/check.png')} />
+                    <Text
+                      style={{
+                        color: 'rgba(255, 99, 79, 1)',
+                        fontWeight: 'bold',
+                        fontSize: 14,
+                      }}>
+                      채팅 미응답 시 전액 환불
+                    </Text>
+                  </View>
                 </View>
               </View>
             </View>
-          </View>
-        </LinearGradient>
+          </LinearGradient>
+        </SafeAreaView>
         <View>
           <View style={{padding: 20, gap: 10}}>
             <View style={{paddingVertical: 10, gap: 5}}>

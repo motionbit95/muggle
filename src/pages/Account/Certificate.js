@@ -61,7 +61,7 @@ const Certificate = ({navigation}) => {
     if (req?.length > 0) {
       navigation.navigate('Home');
     } else {
-      navigation.navigate('회원가입');
+      navigation.navigate('SignUp');
     }
   };
 
@@ -99,17 +99,22 @@ const Certificate = ({navigation}) => {
               onChange={e => setPhoneNumber(e.nativeEvent.text)}
             />
             <TouchableOpacity
+              disabled={!phoneNumber}
               onPress={signInWithPhoneNumber}
               style={{
                 flex: 3,
                 height: component_height,
                 borderRadius: component_radius,
-                backgroundColor: primary_color,
+                backgroundColor: !phoneNumber ? '#d9d9d9' : primary_color,
                 alignItems: 'center',
                 justifyContent: 'center',
               }}>
               <Text
-                style={{fontSize: font_md, fontWeight: 'bold', color: 'black'}}>
+                style={{
+                  fontSize: font_md,
+                  color: !phoneNumber ? '#BBBBBB' : 'black',
+                  fontWeight: 'bold',
+                }}>
                 인증 요청
               </Text>
             </TouchableOpacity>
@@ -221,7 +226,7 @@ const Certificate = ({navigation}) => {
             style={{
               fontSize: font_md,
               fontWeight: 'bold',
-              color: !tempAgree || !isActive ? '#8c8c8c' : 'black',
+              color: !tempAgree || !isActive ? '#BBBBBB' : 'black',
             }}>
             다음
           </Text>
