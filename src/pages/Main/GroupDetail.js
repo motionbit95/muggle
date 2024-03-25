@@ -47,7 +47,7 @@ const GroupDetail = ({navigation, route}) => {
               gap: 20,
             }}>
             <View style={[{justifyContent: 'space-between'}, styles.rowBox]}>
-              <Text style={{fontSize: 18, fontWeight: '600'}}>
+              <Text style={{fontSize: 18, fontWeight: '600', color: 'black'}}>
                 {data?.group_name}
               </Text>
               <View style={styles.d_daytag}>
@@ -57,29 +57,31 @@ const GroupDetail = ({navigation, route}) => {
             <View style={styles.gap10}>
               <View style={styles.rowBox}>
                 <View style={styles.icon18} />
-                <Text style={{fontSize: 16}}>
+                <Text style={{fontSize: 16, color: 'black'}}>
                   {formatDateTime(data?.group_time)}
                 </Text>
               </View>
               <View style={styles.rowBox}>
                 <View style={styles.icon18} />
-                <Text style={{fontSize: 16}}>{data?.group_place}</Text>
+                <Text style={{fontSize: 16, color: 'black'}}>
+                  {data?.group_place}
+                </Text>
                 <TouchableOpacity
                   style={styles.mapButton}
                   onPress={() => alert('지도보기')}>
-                  <Text style={{fontSize: 14}}>지도보기</Text>
+                  <Text style={{fontSize: 14, color: 'black'}}>지도보기</Text>
                 </TouchableOpacity>
               </View>
 
               <View style={styles.rowBox}>
                 <View style={styles.icon18} />
-                <Text style={{fontSize: 16}}>
+                <Text style={{fontSize: 16, color: 'black'}}>
                   {data?.group_price ? data?.group_price : '나누기'}
                 </Text>
               </View>
               <View style={styles.rowBox}>
                 <View style={styles.icon18} />
-                <Text style={{fontSize: 16}}>
+                <Text style={{fontSize: 16, color: 'black'}}>
                   {data?.group_users?.length} / {data?.group_personnel} (
                   {data?.group_personnel - data?.group_users?.length}자리남음)
                 </Text>
@@ -87,7 +89,7 @@ const GroupDetail = ({navigation, route}) => {
             </View>
 
             <View style={{flex: 1, width: '50%'}}>
-              <Text>{data?.group_target}</Text>
+              <Text style={{color: 'black'}}>{data?.group_target}</Text>
             </View>
             <View style={styles.hr} />
           </View>
@@ -99,13 +101,15 @@ const GroupDetail = ({navigation, route}) => {
               gap: 20,
             }}>
             <View>
-              <Text>참여인원 ( {data?.group_users?.length} )</Text>
+              <Text style={{color: 'black'}}>
+                참여인원 ( {data?.group_users?.length} )
+              </Text>
             </View>
             <View gap={10}>
               {userList?.map((user, index) => (
                 <View key={index} style={styles.rowBox}>
                   <View style={styles.Avartar30} />
-                  <Text>{user?.user_name}</Text>
+                  <Text style={{color: 'black'}}>{user?.user_name}</Text>
                 </View>
               ))}
             </View>

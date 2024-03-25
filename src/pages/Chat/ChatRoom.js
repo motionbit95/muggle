@@ -142,6 +142,7 @@ const ChatRoom = () => {
               borderWidth: 1,
               borderRadius: 15,
               padding: 10,
+              color: 'black',
               width: '100%',
             }}
             placeholder="메시지를 입력하시오."

@@ -107,13 +107,13 @@ const App = () => {
         component={GroupDetail}
         options={({navigation}) => ({
           title: '모임상세',
-          headerLeft: () => (
-            <Button
-              onPress={() => navigation.navigate('Home')}
-              title="Back"
-              color="black"
-            />
-          ),
+          // headerLeft: () => (
+          //   <Button
+          //     onPress={() => navigation.navigate('Home')}
+          //     title="Back"
+          //     color="black"
+          //   />
+          // ),
           headerStyle: {
             backgroundColor: '#fff',
           },
@@ -128,13 +128,13 @@ const App = () => {
         component={GroupCreate}
         options={({navigation}) => ({
           title: '모임개설',
-          headerLeft: () => (
-            <Button
-              onPress={() => navigation.goBack()}
-              title="Back"
-              color="black"
-            />
-          ),
+          // headerLeft: () => (
+          //   <Button
+          //     onPress={() => navigation.goBack()}
+          //     title="Back"
+          //     color="black"
+          //   />
+          // ),
           headerStyle: {
             backgroundColor: '#fff',
           },
@@ -171,13 +171,13 @@ const App = () => {
         component={ChatRoom}
         options={({navigation}) => ({
           title: '채팅룸',
-          headerLeft: () => (
-            <Button
-              onPress={() => navigation.goBack()}
-              title="Back"
-              color="black"
-            />
-          ),
+          // headerLeft: () => (
+          //   <Button
+          //     onPress={() => navigation.goBack()}
+          //     title="Back"
+          //     color="black"
+          //   />
+          // ),
           headerStyle: {
             backgroundColor: '#fff',
           },
@@ -203,15 +203,15 @@ const App = () => {
         component={Matching}
         options={({navigation}) => ({
           title: '커피매칭',
-          headerLeft: () => (
-            <Button
-              onPress={() =>
-                navigation.navigate('커피매칭신청', {screen: '매칭내역'})
-              }
-              title="Back"
-              color="black"
-            />
-          ),
+          // headerLeft: () => (
+          //   <Button
+          //     onPress={() =>
+          //       navigation.navigate('커피매칭신청', {screen: '매칭내역'})
+          //     }
+          //     title="Back"
+          //     color="black"
+          //   />
+          // ),
           headerStyle: {
             backgroundColor: '#fff',
           },

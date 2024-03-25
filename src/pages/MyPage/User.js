@@ -133,16 +133,25 @@ const User = ({navigation}) => {
           <View style={styles.shadowBoxStyle}>
             <View style={[styles.rowBox, styles.itembox]}>
               <View style={styles.one_thirdBoxStyle}>
-                <Text style={{fontSize: 20, fontWeight: 'bold'}}>8</Text>
-                <Text>찜모임</Text>
+                <Text
+                  style={{fontSize: 20, fontWeight: 'bold', color: 'black'}}>
+                  8
+                </Text>
+                <Text style={{color: 'black'}}>찜모임</Text>
               </View>
               <View style={styles.one_thirdBoxStyle}>
-                <Text style={{fontSize: 20, fontWeight: 'bold'}}>5</Text>
-                <Text>최근 본 모임</Text>
+                <Text
+                  style={{fontSize: 20, fontWeight: 'bold', color: 'black'}}>
+                  5
+                </Text>
+                <Text style={{color: 'black'}}>최근 본 모임</Text>
               </View>
               <View style={styles.one_thirdBoxStyle}>
-                <Text style={{fontSize: 20, fontWeight: 'bold'}}>3</Text>
-                <Text>초대받은 모임</Text>
+                <Text
+                  style={{fontSize: 20, fontWeight: 'bold', color: 'black'}}>
+                  3
+                </Text>
+                <Text style={{color: 'black'}}>초대받은 모임</Text>
               </View>
             </View>
             <View
@@ -154,7 +163,7 @@ const User = ({navigation}) => {
                 }>
                 <View style={styles.rowBox}>
                   <Image source={require('../../assets/menuicon1.png')} />
-                  <Text>매칭내역</Text>
+                  <Text style={{color: 'black'}}>매칭내역</Text>
                 </View>
                 <Image source={require('../../assets/rightarrow.png')} />
               </TouchableOpacity>
@@ -163,7 +172,7 @@ const User = ({navigation}) => {
                 onPress={() => alert('눌렀엉')}>
                 <View style={styles.rowBox}>
                   <Image source={require('../../assets/menuicon1.png')} />
-                  <Text>메뉴02</Text>
+                  <Text style={{color: 'black'}}>메뉴02</Text>
                 </View>
                 <Image source={require('../../assets/rightarrow.png')} />
               </TouchableOpacity>
@@ -172,7 +181,7 @@ const User = ({navigation}) => {
                 onPress={onLogout}>
                 <View style={styles.rowBox}>
                   <Image source={require('../../assets/menuicon1.png')} />
-                  <Text>로그아웃</Text>
+                  <Text style={{color: 'black'}}>로그아웃</Text>
                 </View>
                 <Image source={require('../../assets/rightarrow.png')} />
               </TouchableOpacity>
@@ -181,7 +190,7 @@ const User = ({navigation}) => {
                 onPress={onDeleteUser}>
                 <View style={styles.rowBox}>
                   <Image source={require('../../assets/menuicon1.png')} />
-                  <Text>탈퇴하기</Text>
+                  <Text style={{color: 'black'}}>탈퇴하기</Text>
                 </View>
                 <Image source={require('../../assets/rightarrow.png')} />
               </TouchableOpacity>

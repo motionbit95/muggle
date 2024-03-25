@@ -245,7 +245,12 @@ const Home = ({navigation}) => {
             }}>
             <View style={[styles.rowBox, styles.spaceBetween]}>
               <View style={{gap: 5}}>
-                <Text style={{fontSize: font_md, fontWeight: 'bold'}}>
+                <Text
+                  style={{
+                    fontSize: font_md,
+                    color: 'black',
+                    fontWeight: 'bold',
+                  }}>
                   머글 모임
                 </Text>
                 <Text style={{fontSize: font_sm, color: 'gray'}}>
@@ -294,7 +299,12 @@ const Home = ({navigation}) => {
             }}>
             <View style={[styles.rowBox, styles.spaceBetween]}>
               <View style={{gap: 5}}>
-                <Text style={{fontSize: font_md, fontWeight: 'bold'}}>
+                <Text
+                  style={{
+                    fontSize: font_md,
+                    color: 'black',
+                    fontWeight: 'bold',
+                  }}>
                   커피 매칭 친구 추천
                 </Text>
                 <Text style={{fontSize: font_sm, color: 'gray'}}>
@@ -323,7 +333,12 @@ const Home = ({navigation}) => {
             }}>
             <View style={[styles.rowBox, styles.spaceBetween]}>
               <View style={{gap: 5}}>
-                <Text style={{fontSize: font_md, fontWeight: 'bold'}}>
+                <Text
+                  style={{
+                    fontSize: font_md,
+                    color: 'black',
+                    fontWeight: 'bold',
+                  }}>
                   클래스 모임
                 </Text>
                 <Text style={{fontSize: font_sm, color: 'gray'}}>
@@ -373,7 +388,12 @@ const Home = ({navigation}) => {
             }}>
             <View style={[styles.rowBox, styles.spaceBetween]}>
               <View style={{gap: 5}}>
-                <Text style={{fontSize: font_md, fontWeight: 'bold'}}>
+                <Text
+                  style={{
+                    fontSize: font_md,
+                    color: 'black',
+                    fontWeight: 'bold',
+                  }}>
                   비지니스 모임
                 </Text>
                 <Text style={{fontSize: font_sm, color: 'gray'}}>

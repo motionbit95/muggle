@@ -39,22 +39,27 @@ const MatchHistory = ({navigation}) => {
                   <View style={[styles.iconBox, styles.icon20]}>
                     <Text style={{fontSize: 14, color: 'white'}}>♥︎</Text>
                   </View>
-                  <Text style={{fontSize: 14}}>매칭중</Text>
+                  <Text style={{fontSize: 14, color: 'black'}}>매칭중</Text>
                 </View>
                 <View style={styles.rowBox}>
                   <View style={styles.Avartar50} />
                   <View style={{gap: 10}}>
                     <View style={styles.rowBox}>
-                      <Text style={{fontSize: 15, fontWeight: 'bold'}}>
+                      <Text
+                        style={{
+                          fontSize: 15,
+                          fontWeight: 'bold',
+                          color: 'black',
+                        }}>
                         홍길동
                       </Text>
                       <View style={[styles.rowBox, {gap: 5}]}>
                         <Image source={require('../../assets/star.png')} />
-                        <Text>평점</Text>
+                        <Text style={{color: 'black'}}>평점</Text>
                       </View>
                     </View>
                     <View style={styles.rowBox}>
-                      <Text style={{fontSize: 13}}>20세</Text>
+                      <Text style={{fontSize: 13, color: 'black'}}>20세</Text>
                       <View style={styles.tagBox}>
                         <Text
                           style={{fontSize: 12, color: 'rgba(255, 99, 79, 1)'}}>
@@ -62,7 +67,7 @@ const MatchHistory = ({navigation}) => {
                         </Text>
                       </View>
                     </View>
-                    <Text>서울특별시 서초구</Text>
+                    <Text style={{color: 'black'}}>서울특별시 서초구</Text>
                   </View>
                 </View>
               </View>

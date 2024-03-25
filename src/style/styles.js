@@ -49,6 +49,7 @@ const styles = StyleSheet.create({
   contentBox: {
     borderColor: 'rgba(221, 221, 221, 1)',
     borderWidth: 1,
+    color: 'black',
     backgroundColor: 'white',
     borderRadius: 10,
     padding: 10,

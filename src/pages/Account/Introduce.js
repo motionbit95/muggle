@@ -174,6 +174,7 @@ const styles = StyleSheet.create({
   },
   contentBox: {
     borderColor: 'rgba(221, 221, 221, 1)',
+    color: 'black',
     borderWidth: 1,
     backgroundColor: 'white',
     borderRadius: 10,
