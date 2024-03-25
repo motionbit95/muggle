@@ -49,11 +49,13 @@ const ChatRoom = () => {
               <View style={{gap: 5}}>
                 <View style={[styles.rowBox, {gap: 5}]}>
                   <View style={styles.icon18} />
-                  <Text>서울 강남 역 삼동 골목오리집</Text>
+                  <Text style={{color: 'black'}}>
+                    서울 강남 역 삼동 골목오리집
+                  </Text>
                 </View>
                 <View style={[styles.rowBox, {gap: 5}]}>
                   <View style={styles.icon18} />
-                  <Text>나누기 5/30</Text>
+                  <Text style={{color: 'black'}}>나누기 5/30</Text>
                 </View>
               </View>
             </View>
@@ -73,7 +75,7 @@ const ChatRoom = () => {
                   />
                 </View>
               </View>
-              <Text>홍길동</Text>
+              <Text style={{color: 'black'}}>홍길동</Text>
             </View>
             <View style={{alignItems: 'flex-start', gap: 5}}>
               <View
@@ -84,9 +86,9 @@ const ChatRoom = () => {
                   borderRadius: 15,
                   borderTopLeftRadius: 0,
                 }}>
-                <Text>커피 마실래요?</Text>
+                <Text style={{color: 'black'}}>커피 마실래요?</Text>
               </View>
-              <Text>13:59</Text>
+              <Text style={{color: 'black'}}>13:59</Text>
             </View>
           </View>
           <View
@@ -102,7 +104,7 @@ const ChatRoom = () => {
                   />
                 </View>
               </View>
-              <Text>홍길동</Text>
+              <Text style={{color: 'black'}}>홍길동</Text>
             </View>
             <View style={{alignItems: 'flex-end', gap: 5}}>
               <View
@@ -113,9 +115,9 @@ const ChatRoom = () => {
                   borderRadius: 15,
                   borderTopRightRadius: 0,
                 }}>
-                <Text>반가워요!</Text>
+                <Text style={{color: 'black'}}>반가워요!</Text>
               </View>
-              <Text>14:00</Text>
+              <Text style={{color: 'black'}}>14:00</Text>
             </View>
           </View>
         </View>

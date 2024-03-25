@@ -10,6 +10,8 @@ import {
 import LinearGradient from 'react-native-linear-gradient';
 import styles from '../../style/styles';
 import {getDocList} from '../../firebase/firebase_func';
+import MatchBox from '../../Component/MatchBox';
+import {font_md} from '../../firebase/api';
 
 const MatchHistory = ({navigation}) => {
   const [userList, setUserList] = useState([]);
@@ -79,70 +81,19 @@ const MatchHistory = ({navigation}) => {
         </View>
         <View
           style={{
-            marginBottom: 20,
             gap: 20,
           }}>
           <View style={{gap: 10}}>
-            <Text style={{fontSize: 14}}>커피 매칭 친구 추천</Text>
+            <Text style={{fontSize: font_md, fontWeight: 'bold'}}>
+              커피 매칭 친구 추천
+            </Text>
           </View>
           <ScrollView
             horizontal={true}
             contentContainerStyle={styles.horizontalScrollViewStyle}
             showsHorizontalScrollIndicator={false}>
             {userList.map((user, index) => (
-              <ImageBackground
-                key={index}
-                imageStyle={{borderRadius: 20}}
-                source={{uri: user.user_profile}}
-                style={styles.cardImage}>
-                <LinearGradient
-                  colors={['rgba(0,0,0,0)', 'rgba(0,0,0,1)']}
-                  style={{borderRadius: 20}}>
-                  <View style={styles.MatchComponentBox}>
-                    <View
-                      style={{
-                        flexDirection: 'row',
-                        borderWidth: 1,
-                        borderColor: 'white',
-                        borderRadius: 20,
-                        width: 60,
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                        padding: 5,
-                        gap: 5,
-                      }}>
-                      <Image source={require('../../assets/Subtract.png')} />
-                      <Text
-                        style={{
-                          color: 'white',
-                          fontSize: 14,
-                          fontWeight: '400',
-                        }}>
-                        근처
-                      </Text>
-                    </View>
-
-                    <Text style={{color: 'white', fontSize: 22}}>
-                      {user.user_name}
-                    </Text>
-                    <Text style={{color: 'white', fontSize: 18}}>
-                      {user.user_place?.[0]}
-                    </Text>
-                    <TouchableOpacity
-                      style={styles.button}
-                      onPressOut={() => alert('어쩔티비')}>
-                      <Text
-                        style={{
-                          color: 'black',
-                          fontSize: 18,
-                          fontWeight: 'bold',
-                        }}>
-                        커피 매칭 신청
-                      </Text>
-                    </TouchableOpacity>
-                  </View>
-                </LinearGradient>
-              </ImageBackground>
+              <MatchBox user={user} index={index} navigation={navigation} />
             ))}
           </ScrollView>
         </View>

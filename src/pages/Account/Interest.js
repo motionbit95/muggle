@@ -47,10 +47,7 @@ const Interest = ({navigation, route}) => {
               <TextInput
                 multiline
                 style={[
-                  {
-                    flex: 4,
-                    height: 100,
-                  },
+                  {color: 'black', flex: 4, height: 100},
                   styles.contentBox,
                 ]}
                 placeholder="자기소개 내용을 입력해주세요"
@@ -94,7 +91,7 @@ const Interest = ({navigation, route}) => {
                   }}
                   onPress={() => Alert.alert('미구현')}>
                   <View style={styles.interestButton}></View>
-                  <Text style={{fontSize: 12}}>{item}</Text>
+                  <Text style={{color: 'black', fontSize: 12}}>{item}</Text>
                 </TouchableOpacity>
               ))}
             </View>

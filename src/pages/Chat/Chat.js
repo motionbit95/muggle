@@ -56,11 +56,11 @@ const Chat = ({navigation}) => {
               </View>
             </View>
             <View>
-              <Text>홍*경</Text>
-              <Text>식사 어때?</Text>
+              <Text style={{color: 'black'}}>홍*경</Text>
+              <Text style={{color: 'black'}}>식사 어때?</Text>
             </View>
           </View>
-          <Text>5분전</Text>
+          <Text style={{color: 'black'}}>5분전</Text>
         </TouchableOpacity>
       </View>
     );
@@ -96,11 +96,11 @@ const Chat = ({navigation}) => {
               </View>
             </View>
             <View>
-              <Text>홍*경</Text>
-              <Text>식사 어때?</Text>
+              <Text style={{color: 'black'}}>홍*경</Text>
+              <Text style={{color: 'black'}}>식사 어때?</Text>
             </View>
           </View>
-          <Text>5분전</Text>
+          <Text style={{color: 'black'}}>5분전</Text>
         </TouchableOpacity>
       </View>
     );

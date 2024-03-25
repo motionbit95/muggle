@@ -100,12 +100,16 @@ const MatchPayment = ({navigation}) => {
         <View>
           <View style={{padding: 20, gap: 10}}>
             <View style={{paddingVertical: 10, gap: 5}}>
-              <Text style={{fontSize: 15}}>매칭신청자가 지불한 매칭금액은</Text>
-              <Text style={{fontSize: 15}}>
+              <Text style={{fontSize: 15, color: 'black'}}>
+                매칭신청자가 지불한 매칭금액은
+              </Text>
+              <Text style={{fontSize: 15, color: 'black'}}>
                 매칭 수락자에게 부수입으로 정산됩니다!
               </Text>
             </View>
-            <Text style={{fontSize: 15, fontWeight: 'bold'}}>매칭 신청자</Text>
+            <Text style={{fontSize: 15, fontWeight: 'bold', color: 'black'}}>
+              매칭 신청자
+            </Text>
             <View style={[styles.rowBox, styles.matchingBox]}>
               <View style={styles.matchingContents}>
                 <View
@@ -119,8 +123,8 @@ const MatchPayment = ({navigation}) => {
                   <Image source={require('../../assets/circlecheck.png')} />
                 </View>
                 <View style={{alignItems: 'center', gap: 3}}>
-                  <Text style={{fontSize: 12}}>매칭 신청</Text>
-                  <Text style={{fontSize: 12}}>및 결제</Text>
+                  <Text style={{fontSize: 12, color: 'black'}}>매칭 신청</Text>
+                  <Text style={{fontSize: 12, color: 'black'}}>및 결제</Text>
                 </View>
               </View>
               <View style={styles.matchingContents}>
@@ -135,8 +139,10 @@ const MatchPayment = ({navigation}) => {
                   <Image source={require('../../assets/circlecheck.png')} />
                 </View>
                 <View style={{alignItems: 'center', gap: 3}}>
-                  <Text style={{fontSize: 12}}>채팅으로</Text>
-                  <Text style={{fontSize: 12}}>커피 약속잡기</Text>
+                  <Text style={{fontSize: 12, color: 'black'}}>채팅으로</Text>
+                  <Text style={{fontSize: 12, color: 'black'}}>
+                    커피 약속잡기
+                  </Text>
                 </View>
               </View>
               <View style={styles.matchingContents}>
@@ -151,16 +157,20 @@ const MatchPayment = ({navigation}) => {
                   <Image source={require('../../assets/circlecheck.png')} />
                 </View>
                 <View style={{alignItems: 'center', gap: 3}}>
-                  <Text style={{fontSize: 12}}>오프라인</Text>
-                  <Text style={{fontSize: 12}}>매칭</Text>
+                  <Text style={{fontSize: 12, color: 'black'}}>오프라인</Text>
+                  <Text style={{fontSize: 12, color: 'black'}}>매칭</Text>
                 </View>
               </View>
             </View>
-            <Text>· 결제된 매칭권 사용기한 2주</Text>
-            <Text>· 상대방이 매칭 거저 또는 채팅 미응답 시 전액 환불</Text>
+            <Text style={{color: 'black'}}>· 결제된 매칭권 사용기한 2주</Text>
+            <Text style={{color: 'black'}}>
+              · 상대방이 매칭 거저 또는 채팅 미응답 시 전액 환불
+            </Text>
           </View>
           <View style={{padding: 20, gap: 10}}>
-            <Text style={{fontSize: 15, fontWeight: 'bold'}}>매칭 수락자</Text>
+            <Text style={{fontSize: 15, fontWeight: 'bold', color: 'black'}}>
+              매칭 수락자
+            </Text>
             <View style={[styles.rowBox, styles.matchingBox]}>
               <View style={styles.matchingContents}>
                 <View
@@ -174,8 +184,8 @@ const MatchPayment = ({navigation}) => {
                   <Image source={require('../../assets/circlecheck.png')} />
                 </View>
                 <View style={{alignItems: 'center', gap: 3}}>
-                  <Text style={{fontSize: 12}}>수락 또는</Text>
-                  <Text style={{fontSize: 12}}>거절</Text>
+                  <Text style={{fontSize: 12, color: 'black'}}>수락 또는</Text>
+                  <Text style={{fontSize: 12, color: 'black'}}>거절</Text>
                 </View>
               </View>
               <View style={styles.matchingContents}>
@@ -190,8 +200,10 @@ const MatchPayment = ({navigation}) => {
                   <Image source={require('../../assets/circlecheck.png')} />
                 </View>
                 <View style={{alignItems: 'center', gap: 3}}>
-                  <Text style={{fontSize: 12}}>수락시 채팅으로</Text>
-                  <Text style={{fontSize: 12}}>약속 잡기</Text>
+                  <Text style={{fontSize: 12, color: 'black'}}>
+                    수락시 채팅으로
+                  </Text>
+                  <Text style={{fontSize: 12, color: 'black'}}>약속 잡기</Text>
                 </View>
               </View>
               <View style={styles.matchingContents}>
@@ -206,8 +218,8 @@ const MatchPayment = ({navigation}) => {
                   <Image source={require('../../assets/circlecheck.png')} />
                 </View>
                 <View style={{alignItems: 'center', gap: 3}}>
-                  <Text style={{fontSize: 12}}>오프라인</Text>
-                  <Text style={{fontSize: 12}}>매칭</Text>
+                  <Text style={{fontSize: 12, color: 'black'}}>오프라인</Text>
+                  <Text style={{fontSize: 12, color: 'black'}}>매칭</Text>
                 </View>
               </View>
               <View style={styles.matchingContents}>
@@ -222,17 +234,21 @@ const MatchPayment = ({navigation}) => {
                   <Image source={require('../../assets/circlecheck.png')} />
                 </View>
                 <View style={{alignItems: 'center', gap: 3}}>
-                  <Text style={{fontSize: 12}}>매칭권</Text>
-                  <Text style={{fontSize: 12}}>부수입 정산</Text>
+                  <Text style={{fontSize: 12, color: 'black'}}>매칭권</Text>
+                  <Text style={{fontSize: 12, color: 'black'}}>
+                    부수입 정산
+                  </Text>
                 </View>
               </View>
             </View>
-            <Text>
+            <Text style={{color: 'black'}}>
               · 내가 설정한 매칭권 금액의 70%가 부수입으로 정산됩니다.
             </Text>
             <View>
-              <Text>· 오프라인 매칭 완료 후 2영업일 내에 기재해주신</Text>
-              <Text> 수락자 계좌로 정산됩니다.</Text>
+              <Text style={{color: 'black'}}>
+                · 오프라인 매칭 완료 후 2영업일 내에 기재해주신
+              </Text>
+              <Text style={{color: 'black'}}> 수락자 계좌로 정산됩니다.</Text>
             </View>
           </View>
         </View>

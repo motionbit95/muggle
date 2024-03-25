@@ -79,13 +79,17 @@ const GroupBox = ({item, index, userList, navigation}) => {
           <View style={{gap: 5}}>
             <View style={[styles.rowBox, {gap: 5}]}>
               <Image style={{width: 16, height: 16}} source={mapImg} />
-              <Text style={{fontSize: font_xs}}>{item.group_place}</Text>
+              <Text style={{color: 'black', fontSize: font_xs}}>
+                {item.group_place}
+              </Text>
             </View>
             <View style={[styles.rowBox, {gap: 5}]}>
               <Image style={{width: 16, height: 16}} source={moneyImg} />
-              <Text style={{fontSize: font_xs}}>{item.group_price}</Text>
+              <Text style={{color: 'black', fontSize: font_xs}}>
+                {item.group_price}
+              </Text>
               <Image style={{width: 16, height: 16}} source={userImg} />
-              <Text style={{fontSize: font_xs}}>
+              <Text style={{color: 'black', fontSize: font_xs}}>
                 {item.group_users.length} / {item.group_personnel}
               </Text>
             </View>

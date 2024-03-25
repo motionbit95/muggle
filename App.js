@@ -79,7 +79,13 @@ const App = () => {
             // <TouchableOpacity
             //   style={{marginLeft: 20}}
             //   onPress={() => alert('여긴 홈인데용!')}>
-            <Text style={{marginLeft: 10, fontSize: 20, fontWeight: 'bold'}}>
+            <Text
+              style={{
+                color: 'black',
+                marginLeft: 10,
+                fontSize: 20,
+                fontWeight: 'bold',
+              }}>
               MUGGLE
             </Text>
             // </TouchableOpacity>

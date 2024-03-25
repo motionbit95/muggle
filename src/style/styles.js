@@ -40,10 +40,7 @@ const styles = StyleSheet.create({
   },
 
   // Font
-  contentTitle: {
-    fontSize: 15,
-    fontWeight: '600',
-  },
+  contentTitle: {color: 'black', fontSize: 15, fontWeight: '600'},
   contentText: {
     fontSize: 16,
     fontWeight: '400',

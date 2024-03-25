@@ -104,6 +104,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#f1f1f1',
   },
   text: {
+    color: 'black',
     fontSize: font_md,
   },
 });

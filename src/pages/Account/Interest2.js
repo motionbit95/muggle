@@ -10,7 +10,7 @@ const Interest2 = ({navigation}) => {
           <View style={{gap: 20}}>
             <View style={styles.rowBox}>
               <View style={styles.icon18} />
-              <Text>아웃도어 / 여행</Text>
+              <Text style={{color: 'black'}}>아웃도어 / 여행</Text>
             </View>
             <View style={styles.rowBox}>
               <View style={{flex: 1, height: 30, backgroundColor: 'gray'}} />

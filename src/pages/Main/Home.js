@@ -9,22 +9,11 @@ import {
   View,
 } from 'react-native';
 import {getDocList} from '../../firebase/firebase_func';
-import LinearGradient from 'react-native-linear-gradient';
 import styles from '../../style/styles';
-import {
-  calculateDday,
-  defaultFemale,
-  defaultMale,
-  displayDday,
-  font_lg,
-  font_md,
-  font_sm,
-  font_xs,
-  formatDate,
-  formatDateTime,
-} from '../../firebase/api';
+import {font_md, font_sm} from '../../firebase/api';
 import Swiper from 'react-native-swiper';
 import GroupBox from '../../Component/GroupBox';
+import MatchBox from '../../Component/MatchBox';
 
 const Home = ({navigation}) => {
   const [userList, setUserList] = useState([]);
@@ -32,6 +21,7 @@ const Home = ({navigation}) => {
   const [muggleGroupList, setMuggleGroupList] = useState([]);
   const [muggleClassList, setMuggleClassList] = useState([]);
   const [muggleBusinessList, setMuggleBusinessList] = useState([]);
+  const [selectedGroup, setSelectedGroup] = useState('머글 모임');
 
   // 각 컴포넌트에 대한 ref 선언
   const scrollViewRef = useRef(null);
@@ -111,17 +101,21 @@ const Home = ({navigation}) => {
           ]}>
           <View style={[styles.rowBox, {width: '100%'}]}>
             <TouchableOpacity
-              onPress={() => scrollToComponent(firstComponentRef)}>
+              onPress={() => {
+                setSelectedGroup('머글 모임');
+                scrollToComponent(firstComponentRef);
+              }}>
               <View
                 style={{
                   borderBottomWidth: 2,
-                  borderColor: 'black',
+                  borderColor:
+                    selectedGroup === '머글 모임' ? 'black' : 'white',
                   padding: 5,
                 }}>
                 <Text
                   style={{
                     fontSize: font_md,
-                    color: 'black',
+                    color: selectedGroup === '머글 모임' ? 'black' : 'gray',
                     fontWeight: 'bold',
                   }}>
                   머글 모임
@@ -130,15 +124,21 @@ const Home = ({navigation}) => {
             </TouchableOpacity>
 
             <TouchableOpacity
-              onPress={() => scrollToComponent(secondComponentRef)}>
+              onPress={() => {
+                setSelectedGroup('클래스 모임');
+                scrollToComponent(secondComponentRef);
+              }}>
               <View
                 style={{
+                  borderBottomWidth: 2,
+                  borderColor:
+                    selectedGroup === '클래스 모임' ? 'black' : 'white',
                   padding: 5,
                 }}>
                 <Text
                   style={{
                     fontSize: font_md,
-                    color: 'gray',
+                    color: selectedGroup === '클래스 모임' ? 'black' : 'gray',
                     fontWeight: 'bold',
                   }}>
                   클래스 모임
@@ -147,15 +147,21 @@ const Home = ({navigation}) => {
             </TouchableOpacity>
 
             <TouchableOpacity
-              onPress={() => scrollToComponent(thirdComponentRef)}>
+              onPress={() => {
+                setSelectedGroup('비즈니스 모임');
+                scrollToComponent(thirdComponentRef);
+              }}>
               <View
                 style={{
+                  borderBottomWidth: 2,
+                  borderColor:
+                    selectedGroup === '비즈니스 모임' ? 'black' : 'white',
                   padding: 5,
                 }}>
                 <Text
                   style={{
                     fontSize: font_md,
-                    color: 'gray',
+                    color: selectedGroup === '비즈니스 모임' ? 'black' : 'gray',
                     fontWeight: 'bold',
                   }}>
                   비즈니스 모임
@@ -190,7 +196,7 @@ const Home = ({navigation}) => {
             <Image source={require('../../assets/_x.png')} />
           </View>
           <Swiper
-            autoplay={true}
+            autoplay={false}
             loop={true}
             showsPagination={false}
             autoplayTimeout={5}
@@ -286,101 +292,24 @@ const Home = ({navigation}) => {
               marginBottom: 20,
               gap: 20,
             }}>
-            <View style={{gap: 10}}>
-              <Text style={{fontSize: 20}}>커피 매칭 친구 추천</Text>
-              <Text>새로운 이성과 커피 친구 해보세요.</Text>
+            <View style={[styles.rowBox, styles.spaceBetween]}>
+              <View style={{gap: 5}}>
+                <Text style={{fontSize: font_md, fontWeight: 'bold'}}>
+                  커피 매칭 친구 추천
+                </Text>
+                <Text style={{fontSize: font_sm, color: 'gray'}}>
+                  새로운 이성과 커피 친구 해보세요.
+                </Text>
+              </View>
             </View>
             <ScrollView
               horizontal={true}
               contentContainerStyle={{
                 gap: 10,
-                padding: 10,
               }}
               showsHorizontalScrollIndicator={false}>
               {userList.map((user, index) => (
-                <ImageBackground
-                  key={index}
-                  imageStyle={{borderRadius: 20}}
-                  source={{
-                    uri: user.user_profile
-                      ? user.user_profile
-                      : user.user_gender === 'male' || user.user_gender === '남'
-                      ? defaultMale
-                      : defaultFemale,
-                  }}
-                  style={{
-                    width: 280,
-                    height: 300,
-                    borderRadius: 20,
-                  }}>
-                  <LinearGradient
-                    colors={['rgba(0,0,0,0)', 'rgba(0,0,0,0.5)']}
-                    style={{borderRadius: 20}}>
-                    <View
-                      style={{
-                        gap: 8,
-                        justifyContent: 'flex-end',
-                        width: '100%',
-                        height: '100%',
-                        backgroundColor: 'rgba(0, 0, 0, 0.1)',
-                        borderRadius: 20,
-                        padding: 20,
-                      }}>
-                      <View
-                        style={{
-                          flexDirection: 'row',
-                          borderWidth: 1,
-                          borderColor: 'white',
-                          borderRadius: 20,
-                          width: 60,
-                          justifyContent: 'center',
-                          alignItems: 'center',
-                          padding: 5,
-                          gap: 5,
-                        }}>
-                        <Image source={require('../../assets/Subtract.png')} />
-                        <Text
-                          style={{
-                            color: 'white',
-                            fontSize: 14,
-                            fontWeight: '400',
-                          }}>
-                          근처
-                        </Text>
-                      </View>
-
-                      <Text style={{color: 'white', fontSize: 22}}>
-                        {user.user_name}
-                      </Text>
-                      <Text style={{color: 'white', fontSize: 18}}>
-                        {user.user_place?.[0]}
-                      </Text>
-                      <TouchableOpacity
-                        style={{
-                          backgroundColor: '#D96F6F',
-                          borderRadius: 10,
-                          height: 56,
-                          alignItems: 'center',
-                          justifyContent: 'center',
-                        }}
-                        onPressOut={() =>
-                          navigation.navigate('커피매칭신청', {
-                            screen: '커피매칭',
-                            params: {data: user},
-                          })
-                        }>
-                        <Text
-                          style={{
-                            color: 'black',
-                            fontSize: 18,
-                            fontWeight: 'bold',
-                          }}>
-                          커피 매칭 신청
-                        </Text>
-                      </TouchableOpacity>
-                    </View>
-                  </LinearGradient>
-                </ImageBackground>
+                <MatchBox user={user} index={index} navigation={navigation} />
               ))}
             </ScrollView>
           </View>
@@ -392,9 +321,15 @@ const Home = ({navigation}) => {
               marginBottom: 20,
               gap: 20,
             }}>
-            <View style={{gap: 10}}>
-              <Text style={{fontSize: 20}}>클래스 모임</Text>
-              <Text>우리 동네, 밥 머글 사람?</Text>
+            <View style={[styles.rowBox, styles.spaceBetween]}>
+              <View style={{gap: 5}}>
+                <Text style={{fontSize: font_md, fontWeight: 'bold'}}>
+                  클래스 모임
+                </Text>
+                <Text style={{fontSize: font_sm, color: 'gray'}}>
+                  우리 동네, 밥 머글 사람?
+                </Text>
+              </View>
             </View>
             {muggleClassList.map(
               (item, index) =>
@@ -436,9 +371,15 @@ const Home = ({navigation}) => {
               marginBottom: 20,
               gap: 20,
             }}>
-            <View style={{gap: 10}}>
-              <Text style={{fontSize: 20}}>비즈니스 모임</Text>
-              <Text>우리 동네, 밥 머글 사람?</Text>
+            <View style={[styles.rowBox, styles.spaceBetween]}>
+              <View style={{gap: 5}}>
+                <Text style={{fontSize: font_md, fontWeight: 'bold'}}>
+                  비지니스 모임
+                </Text>
+                <Text style={{fontSize: font_sm, color: 'gray'}}>
+                  우리 동네, 밥 머글 사람?
+                </Text>
+              </View>
             </View>
             {muggleBusinessList.map(
               (item, index) =>
