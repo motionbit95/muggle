@@ -24,7 +24,7 @@ const GroupBox = ({item, index, userList, navigation}) => {
       }
     });
 
-    console.log(tempUser);
+    // console.log(tempUser);
 
     return tempUser;
   };

@@ -14,15 +14,17 @@ import MatchBox from '../../Component/MatchBox';
 import {font_md} from '../../firebase/api';
 
 const MatchHistory = ({navigation}) => {
-  const [userList, setUserList] = useState([]);
+  const [userList, setUserList] = useState(null);
 
   useEffect(() => {
-    updateUser();
+    if (!userList) {
+      updateUser();
+    }
   }, []);
 
   const updateUser = async () => {
     let list = await getDocList('user');
-    console.log('유저리스트 ===> ', list);
+    // console.log('유저리스트 ===> ', list);
     setUserList(list);
   };
 
@@ -97,8 +99,13 @@ const MatchHistory = ({navigation}) => {
             horizontal={true}
             contentContainerStyle={styles.horizontalScrollViewStyle}
             showsHorizontalScrollIndicator={false}>
-            {userList.map((user, index) => (
-              <MatchBox user={user} index={index} navigation={navigation} />
+            {userList?.map((user, index) => (
+              <MatchBox
+                key={index}
+                user={user}
+                index={index}
+                navigation={navigation}
+              />
             ))}
           </ScrollView>
         </View>

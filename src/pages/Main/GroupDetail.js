@@ -19,18 +19,20 @@ import {singleQuery} from '../../firebase/firebase_func';
 const GroupDetail = ({navigation, route}) => {
   const {data} = route.params ? route.params : {data: null};
   const [userList, setUserList] = useState(null);
-  console.log(data ? data : 'no data');
+  // console.log(data ? data : 'no data');
   // 디데이 계산 및 표시
   var dday = calculateDday(formatDate(data?.group_time));
 
   useEffect(() => {
-    let group_users = [];
-    data?.group_users?.map(async user => {
-      await singleQuery('user', 'uid', user).then(res => {
-        group_users.push(res[0]);
+    if (!userList) {
+      let group_users = [];
+      data?.group_users?.map(async user => {
+        await singleQuery('user', 'uid', user).then(res => {
+          group_users.push(res[0]);
+        });
+        setUserList(group_users);
       });
-      setUserList(group_users);
-    });
+    }
   }, [data]);
   return (
     <View style={styles.screenStyle}>

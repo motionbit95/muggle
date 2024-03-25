@@ -16,11 +16,11 @@ import GroupBox from '../../Component/GroupBox';
 import MatchBox from '../../Component/MatchBox';
 
 const Home = ({navigation}) => {
-  const [userList, setUserList] = useState([]);
+  const [userList, setUserList] = useState(null);
 
-  const [muggleGroupList, setMuggleGroupList] = useState([]);
-  const [muggleClassList, setMuggleClassList] = useState([]);
-  const [muggleBusinessList, setMuggleBusinessList] = useState([]);
+  const [muggleGroupList, setMuggleGroupList] = useState(null);
+  const [muggleClassList, setMuggleClassList] = useState(null);
+  const [muggleBusinessList, setMuggleBusinessList] = useState(null);
   const [selectedGroup, setSelectedGroup] = useState('머글 모임');
 
   // 각 컴포넌트에 대한 ref 선언
@@ -53,8 +53,10 @@ const Home = ({navigation}) => {
   };
 
   useEffect(() => {
-    updateUser();
-    updateGroup();
+    if (!userList) updateUser();
+
+    if (!muggleGroupList || !muggleClassList || !muggleBusinessList)
+      updateGroup();
   }, []);
 
   const updateUser = async () => {
@@ -80,7 +82,6 @@ const Home = ({navigation}) => {
     setMuggleGroupList(muggleGroupList);
     setMuggleClassList(muggleClassList);
     setMuggleBusinessList(muggleBusinessList);
-    // setGroupList(list);
   };
 
   return (
@@ -258,10 +259,11 @@ const Home = ({navigation}) => {
                 </Text>
               </View>
             </View>
-            {muggleGroupList.map(
+            {muggleGroupList?.map(
               (item, index) =>
                 index < 3 && (
                   <GroupBox
+                    key={index}
                     userList={userList}
                     index={index}
                     item={item}
@@ -318,8 +320,13 @@ const Home = ({navigation}) => {
                 gap: 10,
               }}
               showsHorizontalScrollIndicator={false}>
-              {userList.map((user, index) => (
-                <MatchBox user={user} index={index} navigation={navigation} />
+              {userList?.map((user, index) => (
+                <MatchBox
+                  key={index}
+                  user={user}
+                  index={index}
+                  navigation={navigation}
+                />
               ))}
             </ScrollView>
           </View>
@@ -346,10 +353,11 @@ const Home = ({navigation}) => {
                 </Text>
               </View>
             </View>
-            {muggleClassList.map(
+            {muggleClassList?.map(
               (item, index) =>
                 index < 3 && (
                   <GroupBox
+                    key={index}
                     userList={userList}
                     index={index}
                     item={item}
@@ -401,10 +409,11 @@ const Home = ({navigation}) => {
                 </Text>
               </View>
             </View>
-            {muggleBusinessList.map(
+            {muggleBusinessList?.map(
               (item, index) =>
                 index < 3 && (
                   <GroupBox
+                    key={index}
                     userList={userList}
                     index={index}
                     item={item}

@@ -83,6 +83,7 @@ const Interest = ({navigation, route}) => {
                 '자기계발',
               ].map((item, index) => (
                 <TouchableOpacity
+                  key={index}
                   style={{
                     justifyContent: 'center',
                     alignItems: 'center',

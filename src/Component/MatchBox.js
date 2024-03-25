@@ -15,10 +15,10 @@ import {
   font_xxs,
 } from '../firebase/api';
 
-const MatchBox = ({user, index, navigation}) => {
+const MatchBox = ({key, user, index, navigation}) => {
   return (
     <ImageBackground
-      key={index}
+      key={key}
       imageStyle={{borderRadius: 20}}
       source={{
         uri: user.user_profile
