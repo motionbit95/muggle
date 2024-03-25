@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
   },
   contentStyle: {
-    padding: 20,
+    padding: 16,
   },
   spaceBetween: {
     justifyContent: 'space-between',
@@ -333,8 +333,8 @@ const styles = StyleSheet.create({
   matchBox: {
     backgroundColor: 'rgba(255, 245, 244, 1)',
     borderRadius: 10,
-    padding: 20,
-    gap: 10,
+    padding: 10,
+    gap: 5,
   },
   matchingBanner: {
     width: '100%',

@@ -76,16 +76,18 @@ const App = () => {
           headerBackVisible: false,
           headerTitle: '',
           headerLeft: ({onPress}) => (
-            <TouchableOpacity
-              style={{marginLeft: 20}}
-              onPress={() => alert('여긴 홈인데용!')}>
-              <Text style={{fontSize: 20}}>MUGGLE</Text>
-            </TouchableOpacity>
+            // <TouchableOpacity
+            //   style={{marginLeft: 20}}
+            //   onPress={() => alert('여긴 홈인데용!')}>
+            <Text style={{marginLeft: 10, fontSize: 20, fontWeight: 'bold'}}>
+              MUGGLE
+            </Text>
+            // </TouchableOpacity>
           ),
           headerRight: () => (
             <TouchableOpacity
-              style={{marginRight: 20}}
-              onPress={() => alert('알림!')}>
+              style={{marginRight: 10}}
+              onPress={() => alert('알림 페이지 전달')}>
               <Image
                 style={{width: 24, height: 24}}
                 source={require('./src/assets/Notification.png')}
@@ -101,7 +103,7 @@ const App = () => {
           title: '모임상세',
           headerLeft: () => (
             <Button
-              onPress={() => navigation.goBack()}
+              onPress={() => navigation.navigate('Home')}
               title="Back"
               color="black"
             />

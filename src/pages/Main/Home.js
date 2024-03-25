@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {
   Button,
   Image,
@@ -16,19 +16,38 @@ import {
   defaultFemale,
   defaultMale,
   displayDday,
+  font_lg,
+  font_md,
+  font_sm,
+  font_xs,
   formatDate,
   formatDateTime,
 } from '../../firebase/api';
 import Swiper from 'react-native-swiper';
+import GroupBox from '../../Component/GroupBox';
 
 const Home = ({navigation}) => {
   const [userList, setUserList] = useState([]);
-  const [groupList, setGroupList] = useState([]);
 
   const [muggleGroupList, setMuggleGroupList] = useState([]);
   const [muggleClassList, setMuggleClassList] = useState([]);
   const [muggleBusinessList, setMuggleBusinessList] = useState([]);
-  const [swiperIndex, setSwiperIndex] = useState(0);
+
+  // 각 컴포넌트에 대한 ref 선언
+  const scrollViewRef = useRef(null);
+
+  const firstComponentRef = useRef(null);
+  const secondComponentRef = useRef(null);
+  const thirdComponentRef = useRef(null);
+  const scrollToComponent = ref => {
+    ref.current.measureLayout(
+      scrollViewRef.current,
+      (x, y) => {
+        scrollViewRef.current.scrollTo({y, animated: true});
+      },
+      () => console.error('측정 실패'),
+    );
+  };
 
   const bannerList = {
     image: [
@@ -50,13 +69,13 @@ const Home = ({navigation}) => {
 
   const updateUser = async () => {
     let list = await getDocList('user');
-    console.log('유저리스트 ===> ', list);
+    // console.log('유저리스트 ===> ', list);
     setUserList(list);
   };
 
   const updateGroup = async () => {
     let list = await getDocList('group');
-    console.log('그룹리스트 ===> ', list);
+    // console.log('그룹리스트 ===> ', list);
 
     let muggleGroupList = list.filter(
       group => group.group_type === '머글 모임',
@@ -76,39 +95,76 @@ const Home = ({navigation}) => {
 
   return (
     <View>
-      <ScrollView style={{width: '100%'}}>
-        <View style={[styles.screenStyle, styles.contentStyle]}>
-          <View style={{width: '100%', gap: 20, marginBottom: 20}}>
-            <View style={styles.rowBox}>
+      <ScrollView
+        style={{width: '100%'}}
+        ref={scrollViewRef}
+        stickyHeaderIndices={[0]}>
+        <View
+          style={[
+            styles.screenStyle,
+            {
+              width: '100%',
+              alignItems: 'flex-start',
+              paddingHorizontal: 20,
+              paddingTop: 10,
+            },
+          ]}>
+          <View style={[styles.rowBox, {width: '100%'}]}>
+            <TouchableOpacity
+              onPress={() => scrollToComponent(firstComponentRef)}>
               <View
                 style={{
                   borderBottomWidth: 2,
                   borderColor: 'black',
-                  padding: 10,
+                  padding: 5,
                 }}>
                 <Text
-                  style={{fontSize: 18, color: 'black', fontWeight: 'bold'}}>
+                  style={{
+                    fontSize: font_md,
+                    color: 'black',
+                    fontWeight: 'bold',
+                  }}>
                   머글 모임
                 </Text>
               </View>
+            </TouchableOpacity>
+
+            <TouchableOpacity
+              onPress={() => scrollToComponent(secondComponentRef)}>
               <View
                 style={{
-                  padding: 10,
+                  padding: 5,
                 }}>
-                <Text style={{fontSize: 18, color: 'gray', fontWeight: 'bold'}}>
+                <Text
+                  style={{
+                    fontSize: font_md,
+                    color: 'gray',
+                    fontWeight: 'bold',
+                  }}>
                   클래스 모임
                 </Text>
               </View>
+            </TouchableOpacity>
+
+            <TouchableOpacity
+              onPress={() => scrollToComponent(thirdComponentRef)}>
               <View
                 style={{
-                  padding: 10,
+                  padding: 5,
                 }}>
-                <Text style={{fontSize: 18, color: 'gray', fontWeight: 'bold'}}>
+                <Text
+                  style={{
+                    fontSize: font_md,
+                    color: 'gray',
+                    fontWeight: 'bold',
+                  }}>
                   비즈니스 모임
                 </Text>
               </View>
-            </View>
+            </TouchableOpacity>
           </View>
+        </View>
+        <View style={[styles.screenStyle, styles.contentStyle]}>
           <View
             style={{
               backgroundColor: '#D96F6F',
@@ -117,7 +173,7 @@ const Home = ({navigation}) => {
               height: 40,
               flexDirection: 'row',
               alignItems: 'center',
-              marginBottom: 20,
+              marginBottom: 16,
               gap: 10,
               justifyContent: 'space-between',
               paddingHorizontal: 10,
@@ -175,163 +231,31 @@ const Home = ({navigation}) => {
           </Swiper>
 
           <View
+            ref={firstComponentRef}
             style={{
               width: '100%',
-              marginBottom: 20,
+              marginBottom: 16,
               gap: 20,
             }}>
             <View style={[styles.rowBox, styles.spaceBetween]}>
-              <View style={{gap: 10}}>
-                <Text style={{fontSize: 20}}>머글 모임</Text>
-                <Text>우리 동네, 밥 머글 사람?</Text>
+              <View style={{gap: 5}}>
+                <Text style={{fontSize: font_md, fontWeight: 'bold'}}>
+                  머글 모임
+                </Text>
+                <Text style={{fontSize: font_sm, color: 'gray'}}>
+                  우리 동네, 밥 머글 사람?
+                </Text>
               </View>
             </View>
             {muggleGroupList.map(
               (item, index) =>
                 index < 3 && (
-                  <TouchableOpacity
-                    key={index}
-                    style={styles.matchBox}
-                    onPress={() =>
-                      navigation.navigate('Home', {
-                        screen: '모임상세',
-                        params: {data: item},
-                      })
-                    }>
-                    <View style={[styles.spaceBetween, styles.rowBox]}>
-                      <View style={{gap: 10}}>
-                        <Text
-                          style={{
-                            fontSize: 16,
-                            fontWeight: '600',
-                            color: 'black',
-                          }}>
-                          {item.group_name}
-                        </Text>
-                        <View style={styles.rowBox}>
-                          <Text
-                            style={{
-                              fontSize: 14,
-                              fontWeight: '400',
-                              color: 'gray',
-                            }}>
-                            {formatDateTime(item.group_date)}
-                          </Text>
-                          <View
-                            style={{
-                              backgroundColor: 'rgba(255, 99, 79, 1)',
-                              borderRadius: 5,
-                              paddingHorizontal: 8,
-                              paddingVertical: 3,
-                            }}>
-                            <Text
-                              style={{
-                                fontSize: 12,
-                                color: 'white',
-                                fontWeight: 'bold',
-                              }}>
-                              {displayDday(
-                                calculateDday(formatDate(item.group_time)),
-                              )}
-                            </Text>
-                          </View>
-                        </View>
-
-                        <View style={{gap: 5}}>
-                          <View style={[styles.rowBox, {gap: 5}]}>
-                            <Image
-                              style={{width: 12, height: 12}}
-                              source={require('../../assets/map.png')}
-                            />
-                            <Text>{item.group_place}</Text>
-                          </View>
-                          <View style={[styles.rowBox, {gap: 5}]}>
-                            <Image
-                              style={{width: 12, height: 12}}
-                              source={require('../../assets/money.png')}
-                            />
-                            <Text>나누기</Text>
-                            <Image
-                              style={{width: 12, height: 12}}
-                              source={require('../../assets/mypage.png')}
-                            />
-                            <Text>
-                              {item.group_users.length} / {item.group_personnel}
-                            </Text>
-                          </View>
-                        </View>
-                      </View>
-                      <View
-                        style={{
-                          width: 100,
-                          height: 100,
-                          backgroundColor: 'gray',
-                          borderRadius: 10,
-                        }}
-                      />
-                    </View>
-                    <View>
-                      <View
-                        style={{
-                          flexDirection: 'row',
-                          gap: 10,
-                        }}>
-                        <View
-                          style={[
-                            styles.rowBox,
-                            {
-                              gap: -5,
-                              backgroundColor: 'white',
-                              borderRadius: 20,
-                              padding: 3,
-                            },
-                          ]}>
-                          {item.group_users.map(
-                            (user, index) =>
-                              index < 3 && (
-                                <View key={index} style={styles.rowBox}>
-                                  <View
-                                    style={[
-                                      {
-                                        width: 30,
-                                        height: 30,
-                                        borderRadius: 50,
-                                        borderWidth: 2,
-                                        borderColor: 'white',
-                                        alignItems: 'center',
-                                        justifyContent: 'center',
-                                      },
-                                    ]}>
-                                    <Image
-                                      style={{
-                                        width: 24,
-                                        height: 24,
-                                        backgroundColor: 'gray',
-                                        borderRadius: 50,
-                                      }}
-                                    />
-                                  </View>
-                                </View>
-                              ),
-                          )}
-                          {item.group_users?.length > 3 && (
-                            <View>
-                              <Text
-                                style={{
-                                  marginLeft: 10,
-                                  fontSize: 12,
-                                  color: 'gray',
-                                  textAlign: 'center',
-                                }}>
-                                {'+'}
-                                {item.group_user.length - 3}
-                              </Text>
-                            </View>
-                          )}
-                        </View>
-                      </View>
-                    </View>
-                  </TouchableOpacity>
+                  <GroupBox
+                    userList={userList}
+                    index={index}
+                    item={item}
+                    navigation={navigation}
+                  />
                 ),
             )}
 
@@ -366,27 +290,6 @@ const Home = ({navigation}) => {
               <Text style={{fontSize: 20}}>커피 매칭 친구 추천</Text>
               <Text>새로운 이성과 커피 친구 해보세요.</Text>
             </View>
-            {/* {userList.map((user, index) => (
-            <View>
-              <Image src={user.user_profile} />
-              <Text>{user.user_type}</Text>
-              <Text>{user.doc_id}</Text>
-              <Text>{user.user_name}</Text>
-              <Text>{user.user_price}만원</Text>
-              <Text>{user.dong}</Text>
-              <Text>{user.user_birth}</Text>
-              <Text>{user.user_email}</Text>
-              <Text>{user.user_password}</Text>
-              <Text>{user.user_phone}</Text>
-              <Text>{user.user_food?.[0]}</Text>
-              <Text>{user.user_place?.[0]}</Text>
-              <Text>{user.user_gender}</Text>
-              <Text>{user.user_info}</Text>
-              <Text>
-                {user.user_location?.latitude} {user.user_location?.longitude}
-              </Text>
-            </View>
-          ))} */}
             <ScrollView
               horizontal={true}
               contentContainerStyle={{
@@ -481,7 +384,9 @@ const Home = ({navigation}) => {
               ))}
             </ScrollView>
           </View>
+
           <View
+            ref={secondComponentRef}
             style={{
               width: '100%',
               marginBottom: 20,
@@ -494,149 +399,12 @@ const Home = ({navigation}) => {
             {muggleClassList.map(
               (item, index) =>
                 index < 3 && (
-                  <TouchableOpacity
-                    key={index}
-                    style={styles.matchBox}
-                    onPress={() =>
-                      navigation.navigate('Home', {
-                        screen: '모임상세',
-                        params: {data: item},
-                      })
-                    }>
-                    <View style={[styles.spaceBetween, styles.rowBox]}>
-                      <View style={{gap: 10}}>
-                        <Text
-                          style={{
-                            fontSize: 16,
-                            fontWeight: '600',
-                            color: 'black',
-                          }}>
-                          {item.group_name}
-                        </Text>
-                        <View style={styles.rowBox}>
-                          <Text
-                            style={{
-                              fontSize: 14,
-                              fontWeight: '400',
-                              color: 'gray',
-                            }}>
-                            {formatDateTime(item.group_date)}
-                          </Text>
-                          <View
-                            style={{
-                              backgroundColor: 'rgba(255, 99, 79, 1)',
-                              borderRadius: 5,
-                              paddingHorizontal: 8,
-                              paddingVertical: 3,
-                            }}>
-                            <Text
-                              style={{
-                                fontSize: 12,
-                                color: 'white',
-                                fontWeight: 'bold',
-                              }}>
-                              {displayDday(
-                                calculateDday(formatDate(item.group_time)),
-                              )}
-                            </Text>
-                          </View>
-                        </View>
-
-                        <View style={{gap: 5}}>
-                          <View style={[styles.rowBox, {gap: 5}]}>
-                            <Image
-                              style={{width: 12, height: 12}}
-                              source={require('../../assets/map.png')}
-                            />
-                            <Text>{item.group_place}</Text>
-                          </View>
-                          <View style={[styles.rowBox, {gap: 5}]}>
-                            <Image
-                              style={{width: 12, height: 12}}
-                              source={require('../../assets/money.png')}
-                            />
-                            <Text>나누기</Text>
-                            <Image
-                              style={{width: 12, height: 12}}
-                              source={require('../../assets/mypage.png')}
-                            />
-                            <Text>
-                              {item.group_users.length} / {item.group_personnel}
-                            </Text>
-                          </View>
-                        </View>
-                      </View>
-                      <View
-                        style={{
-                          width: 100,
-                          height: 100,
-                          backgroundColor: 'gray',
-                          borderRadius: 10,
-                        }}
-                      />
-                    </View>
-                    <View>
-                      <View
-                        style={{
-                          flexDirection: 'row',
-                          gap: 10,
-                        }}>
-                        <View
-                          style={[
-                            styles.rowBox,
-                            {
-                              gap: -5,
-                              backgroundColor: 'white',
-                              borderRadius: 20,
-                              padding: 3,
-                            },
-                          ]}>
-                          {item.group_users.map(
-                            (user, index) =>
-                              index < 3 && (
-                                <View key={index} style={styles.rowBox}>
-                                  <View
-                                    style={[
-                                      {
-                                        width: 30,
-                                        height: 30,
-                                        borderRadius: 50,
-                                        borderWidth: 2,
-                                        borderColor: 'white',
-                                        alignItems: 'center',
-                                        justifyContent: 'center',
-                                      },
-                                    ]}>
-                                    <Image
-                                      style={{
-                                        width: 24,
-                                        height: 24,
-                                        backgroundColor: 'gray',
-                                        borderRadius: 50,
-                                      }}
-                                    />
-                                  </View>
-                                </View>
-                              ),
-                          )}
-                          {item.group_users?.length > 3 && (
-                            <View>
-                              <Text
-                                style={{
-                                  marginLeft: 10,
-                                  fontSize: 12,
-                                  color: 'gray',
-                                  textAlign: 'center',
-                                }}>
-                                {'+'}
-                                {item.group_user.length - 3}
-                              </Text>
-                            </View>
-                          )}
-                        </View>
-                      </View>
-                    </View>
-                  </TouchableOpacity>
+                  <GroupBox
+                    userList={userList}
+                    index={index}
+                    item={item}
+                    navigation={navigation}
+                  />
                 ),
             )}
 
@@ -662,6 +430,7 @@ const Home = ({navigation}) => {
             </TouchableOpacity>
           </View>
           <View
+            ref={thirdComponentRef}
             style={{
               width: '100%',
               marginBottom: 20,
@@ -674,149 +443,12 @@ const Home = ({navigation}) => {
             {muggleBusinessList.map(
               (item, index) =>
                 index < 3 && (
-                  <TouchableOpacity
-                    key={index}
-                    style={styles.matchBox}
-                    onPress={() =>
-                      navigation.navigate('Home', {
-                        screen: '모임상세',
-                        params: {data: item},
-                      })
-                    }>
-                    <View style={[styles.spaceBetween, styles.rowBox]}>
-                      <View style={{gap: 10}}>
-                        <Text
-                          style={{
-                            fontSize: 16,
-                            fontWeight: '600',
-                            color: 'black',
-                          }}>
-                          {item.group_name}
-                        </Text>
-                        <View style={styles.rowBox}>
-                          <Text
-                            style={{
-                              fontSize: 14,
-                              fontWeight: '400',
-                              color: 'gray',
-                            }}>
-                            {formatDateTime(item.group_date)}
-                          </Text>
-                          <View
-                            style={{
-                              backgroundColor: 'rgba(255, 99, 79, 1)',
-                              borderRadius: 5,
-                              paddingHorizontal: 8,
-                              paddingVertical: 3,
-                            }}>
-                            <Text
-                              style={{
-                                fontSize: 12,
-                                color: 'white',
-                                fontWeight: 'bold',
-                              }}>
-                              {displayDday(
-                                calculateDday(formatDate(item.group_time)),
-                              )}
-                            </Text>
-                          </View>
-                        </View>
-
-                        <View style={{gap: 5}}>
-                          <View style={[styles.rowBox, {gap: 5}]}>
-                            <Image
-                              style={{width: 12, height: 12}}
-                              source={require('../../assets/map.png')}
-                            />
-                            <Text>{item.group_place}</Text>
-                          </View>
-                          <View style={[styles.rowBox, {gap: 5}]}>
-                            <Image
-                              style={{width: 12, height: 12}}
-                              source={require('../../assets/money.png')}
-                            />
-                            <Text>나누기</Text>
-                            <Image
-                              style={{width: 12, height: 12}}
-                              source={require('../../assets/mypage.png')}
-                            />
-                            <Text>
-                              {item.group_users.length} / {item.group_personnel}
-                            </Text>
-                          </View>
-                        </View>
-                      </View>
-                      <View
-                        style={{
-                          width: 100,
-                          height: 100,
-                          backgroundColor: 'gray',
-                          borderRadius: 10,
-                        }}
-                      />
-                    </View>
-                    <View>
-                      <View
-                        style={{
-                          flexDirection: 'row',
-                          gap: 10,
-                        }}>
-                        <View
-                          style={[
-                            styles.rowBox,
-                            {
-                              gap: -5,
-                              backgroundColor: 'white',
-                              borderRadius: 20,
-                              padding: 3,
-                            },
-                          ]}>
-                          {item.group_users.map(
-                            (user, index) =>
-                              index < 3 && (
-                                <View key={index} style={styles.rowBox}>
-                                  <View
-                                    style={[
-                                      {
-                                        width: 30,
-                                        height: 30,
-                                        borderRadius: 50,
-                                        borderWidth: 2,
-                                        borderColor: 'white',
-                                        alignItems: 'center',
-                                        justifyContent: 'center',
-                                      },
-                                    ]}>
-                                    <Image
-                                      style={{
-                                        width: 24,
-                                        height: 24,
-                                        backgroundColor: 'gray',
-                                        borderRadius: 50,
-                                      }}
-                                    />
-                                  </View>
-                                </View>
-                              ),
-                          )}
-                          {item.group_users?.length > 3 && (
-                            <View>
-                              <Text
-                                style={{
-                                  marginLeft: 10,
-                                  fontSize: 12,
-                                  color: 'gray',
-                                  textAlign: 'center',
-                                }}>
-                                {'+'}
-                                {item.group_user.length - 3}
-                              </Text>
-                            </View>
-                          )}
-                        </View>
-                      </View>
-                    </View>
-                  </TouchableOpacity>
+                  <GroupBox
+                    userList={userList}
+                    index={index}
+                    item={item}
+                    navigation={navigation}
+                  />
                 ),
             )}
             <TouchableOpacity

@@ -68,6 +68,7 @@ const GroupCreate = ({navigation}) => {
       group_images: [],
       group_time: matchDateTime,
       group_price: matchPrice,
+      group_admin: auth().currentUser.uid,
     };
 
     addDocument('group', matchInfo);

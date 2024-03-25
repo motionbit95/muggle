@@ -121,13 +121,13 @@ const SignUp = ({navigation}) => {
               <TouchableOpacity
                 style={[
                   styles.genderButton,
-                  selectedGender === 'male' && styles.selectedButton,
+                  selectedGender === '남' && styles.selectedButton,
                 ]}
-                onPress={() => selectGender('male')}>
+                onPress={() => selectGender('남')}>
                 <Text
                   style={[
                     styles.genderbuttonText,
-                    selectedGender === 'male' && styles.selectedButtonText,
+                    selectedGender === '남' && styles.selectedButtonText,
                   ]}>
                   남성
                 </Text>
@@ -135,13 +135,13 @@ const SignUp = ({navigation}) => {
               <TouchableOpacity
                 style={[
                   styles.genderButton,
-                  selectedGender === 'female' && styles.selectedButton,
+                  selectedGender === '여' && styles.selectedButton,
                 ]}
-                onPress={() => selectGender('female')}>
+                onPress={() => selectGender('여')}>
                 <Text
                   style={[
                     styles.genderbuttonText,
-                    selectedGender === 'female' && styles.selectedButtonText,
+                    selectedGender === '여' && styles.selectedButtonText,
                   ]}>
                   여성
                 </Text>
