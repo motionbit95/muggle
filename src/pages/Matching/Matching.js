@@ -15,7 +15,7 @@ const Matching = ({navigation, route}) => {
   return (
     <View style={styles.screenStyle}>
       <ImageBackground
-        source={{uri: data?.user_profile}}
+        source={require('../../assets/wonyoung.png')}
         style={{
           flex: 1,
           width: '100%',
