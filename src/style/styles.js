@@ -679,6 +679,11 @@ export const img_sm = {
   height: 20,
 };
 
+export const img_md = {
+  width: 30,
+  height: 30,
+};
+
 export const img_sm_2 = {
   width: 24,
   height: 20,

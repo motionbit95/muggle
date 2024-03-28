@@ -8,7 +8,7 @@ export const getDocList = async collectionId => {
       collectionId !== 'user' ||
       (collectionId === 'user' && doc.data().user_phone)
     )
-      list.push(doc.data());
+      list.push({...doc.data(), doc_id: doc.id});
   });
   return list;
 };
@@ -35,4 +35,16 @@ export const singleQuery = async (collection_name, key, value) => {
   });
 
   return list;
+};
+
+export const updateDocument = async (collection_name, doc_id, data) => {
+  console.log('data ===> ', data);
+  try {
+    await firestore()
+      .collection(collection_name)
+      .doc(doc_id)
+      .set(data, {merge: true});
+  } catch (error) {
+    console.error('문서 수정 중 오류:', error);
+  }
 };

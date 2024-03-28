@@ -7,7 +7,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import styles, {fs_md, img_sm} from '../../style/styles';
+import styles, {fs_md, img_md, img_sm, p_2} from '../../style/styles';
 import {
   calculateDday,
   formatDate,
@@ -16,13 +16,16 @@ import {
   defaultMale,
   defaultFemale,
 } from '../../firebase/api';
-import {singleQuery} from '../../firebase/firebase_func';
+import auth from '@react-native-firebase/auth';
+import {singleQuery, updateDocument} from '../../firebase/firebase_func';
 
 const GroupDetail = ({navigation, route}) => {
   const {data, userList} = route.params ? route.params : {data: null};
   // console.log(data ? data : 'no data');
   // 디데이 계산 및 표시
   var dday = calculateDday(formatDate(data?.group_time));
+  const [myInfo, setMyInfo] = useState(null);
+  const [icon, setIcon] = useState(require('../../assets/icons/heart.png'));
 
   const getUser = uid => {
     let tempUser = null;
@@ -32,9 +35,37 @@ const GroupDetail = ({navigation, route}) => {
       }
     });
 
-    // console.log(tempUser);
-
     return tempUser;
+  };
+
+  useEffect(() => {
+    const getUsesrInfo = async user => {
+      singleQuery('user', 'uid', auth().currentUser.uid).then(res => {
+        setMyInfo(res[0]);
+        if (res[0].goods.includes(data?.doc_id)) {
+          setIcon(require('../../assets/icons/heart_fill.png'));
+        }
+      });
+    };
+    getUsesrInfo();
+  }, []);
+
+  const handleGoods = async gid => {
+    if (!myInfo.goods) {
+      myInfo.goods = [];
+    }
+    if (myInfo.goods.includes(gid)) {
+      // 지우기
+      myInfo.goods = myInfo.goods.filter(g => g !== gid);
+      setIcon(require('../../assets/icons/heart.png'));
+    } else {
+      myInfo.goods.push(gid);
+      setIcon(require('../../assets/icons/heart_fill.png'));
+    }
+
+    console.log(myInfo.goods);
+
+    await updateDocument('user', auth().currentUser.uid, myInfo);
   };
 
   return (
@@ -153,11 +184,10 @@ const GroupDetail = ({navigation, route}) => {
         </View>
       </ScrollView>
       <View style={[styles.buttonBox, styles.rowBox]}>
-        <TouchableOpacity style={{flex: 1}} onPress={() => alert('좋아용')}>
-          <Image
-            source={require('../../assets/hearticon.png')}
-            style={{width: 30, height: 30}}
-          />
+        <TouchableOpacity
+          style={{flex: 1}}
+          onPress={() => handleGoods(data.doc_id)}>
+          <Image source={icon} style={img_md} />
         </TouchableOpacity>
         <TouchableOpacity
           style={[styles.button, {flex: 5}]}

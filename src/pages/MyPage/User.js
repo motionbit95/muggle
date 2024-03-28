@@ -10,9 +10,10 @@ const User = ({navigation}) => {
   const [myInfo, setMyInfo] = useState(null);
 
   useEffect(() => {
-    const unsubscribe = auth().onAuthStateChanged(user => {
+    const unsubscribe = auth().onAuthStateChanged(async user => {
       if (user) {
-        singleQuery('user', 'uid', user.uid).then(res => {
+        await singleQuery('user', 'uid', user.uid).then(res => {
+          console.log(res[0]);
           setMyInfo(res[0]);
         });
       } else {
@@ -135,7 +136,7 @@ const User = ({navigation}) => {
               <View style={styles.one_thirdBoxStyle}>
                 <Text
                   style={{fontSize: 20, fontWeight: 'bold', color: 'black'}}>
-                  8
+                  {myInfo?.goods ? myInfo?.goods.length : 0}
                 </Text>
                 <Text style={{color: 'black'}}>찜모임</Text>
               </View>
