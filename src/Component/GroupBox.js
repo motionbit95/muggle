@@ -1,13 +1,34 @@
 import React from 'react';
 import {Image, Text, TouchableOpacity, View} from 'react-native';
-import styles from '../style/styles';
+import styles, {
+  align_center,
+  blackAlpha100,
+  blackAlpha500,
+  blackAlpha900,
+  flex_row,
+  fs_md,
+  fs_sm,
+  fw_bold,
+  img_lg,
+  justify_between,
+  p_1,
+  p_2,
+  p_3,
+  radius_full,
+  radius_md,
+  radius_sm,
+  sp_2,
+  sp_3,
+  whiteAlpha900,
+} from '../style/styles';
 import {
   calculateDday,
+  defaultFemale,
+  defaultMale,
   displayDday,
-  font_sm,
-  font_xs,
   formatDate,
   formatDateTime,
+  primary_color,
 } from '../firebase/api';
 
 const userImg = require('../assets/icons/user.png');
@@ -32,45 +53,49 @@ const GroupBox = ({item, index, userList, navigation}) => {
   return (
     <TouchableOpacity
       key={index}
-      style={styles.matchBox}
+      style={[radius_md, p_3, {backgroundColor: whiteAlpha900}]}
       onPress={() =>
         navigation.navigate('Home', {
           screen: '모임상세',
-          params: {data: item},
+          params: {data: item, userList: userList},
         })
       }>
-      <View style={[styles.spaceBetween, styles.rowBox]}>
+      <View style={[flex_row, justify_between]}>
         <View style={{gap: 5}}>
           <Text
             style={{
-              fontSize: font_sm,
-              fontWeight: '600',
-              color: 'black',
+              fontSize: fs_md,
+              fontWeight: fw_bold,
+              color: blackAlpha900,
             }}>
             {item.group_name}
           </Text>
-          <View style={styles.rowBox}>
+          <View style={[flex_row, align_center, sp_2]}>
             <Text
               style={{
-                fontSize: font_xs,
+                fontSize: fs_sm,
                 fontWeight: '400',
-                color: 'gray',
+                color: blackAlpha500,
               }}>
               {formatDateTime(item.group_date)}
             </Text>
             <View
-              style={{
-                backgroundColor: 'rgba(255, 99, 79, 1)',
-                borderRadius: 5,
-                paddingHorizontal: 8,
-                paddingVertical: 3,
-              }}>
+              style={[
+                radius_sm,
+                {
+                  backgroundColor: primary_color,
+                  paddingHorizontal: 5,
+                  paddingVertical: 3,
+                },
+              ]}>
               <Text
-                style={{
-                  fontSize: font_xs,
-                  color: 'white',
-                  fontWeight: 'bold',
-                }}>
+                style={[
+                  {
+                    fontWeight: fw_bold,
+                    fontSize: fs_sm,
+                    color: whiteAlpha900,
+                  },
+                ]}>
                 {displayDday(calculateDday(formatDate(item.group_time)))}
               </Text>
             </View>
@@ -79,77 +104,84 @@ const GroupBox = ({item, index, userList, navigation}) => {
           <View style={{gap: 5}}>
             <View style={[styles.rowBox, {gap: 5}]}>
               <Image style={{width: 16, height: 16}} source={mapImg} />
-              <Text style={{color: 'black', fontSize: font_xs}}>
+              <Text style={{color: blackAlpha900, fontSize: fs_sm}}>
                 {item.group_place}
               </Text>
             </View>
             <View style={[styles.rowBox, {gap: 5}]}>
               <Image style={{width: 16, height: 16}} source={moneyImg} />
-              <Text style={{color: 'black', fontSize: font_xs}}>
+              <Text style={{color: blackAlpha900, fontSize: fs_sm}}>
                 {item.group_price}
               </Text>
               <Image style={{width: 16, height: 16}} source={userImg} />
-              <Text style={{color: 'black', fontSize: font_xs}}>
+              <Text style={{color: blackAlpha900, fontSize: fs_sm}}>
                 {item.group_users.length} / {item.group_personnel}
               </Text>
             </View>
           </View>
         </View>
         <View
-          style={{
-            width: 100,
-            height: 100,
-            backgroundColor: 'gray',
-            borderRadius: 10,
-            overflow: 'hidden',
-          }}>
+          style={[
+            img_lg,
+            radius_md,
+            {
+              backgroundColor: blackAlpha100,
+              overflow: 'hidden',
+            },
+          ]}>
           <Image source={groupImg} />
         </View>
       </View>
-      <View>
+      {/* 유저 이미지 */}
+      <View style={[flex_row, sp_3]}>
         <View
-          style={{
-            flexDirection: 'row',
-            gap: 10,
-          }}>
-          <View
-            style={[
-              styles.rowBox,
-              {
-                gap: -5,
-                backgroundColor: 'white',
-                borderRadius: 20,
-                padding: 3,
-              },
-            ]}>
-            {item.group_users.map(
-              (user, index) =>
-                index < 3 && (
-                  <View key={index} style={styles.rowBox}>
-                    <Image
-                      source={{uri: getUser(user)?.user_profile}}
-                      width={30}
-                      height={30}
-                      borderRadius={50}
-                    />
-                  </View>
-                ),
-            )}
-            {item.group_users?.length > 3 && (
-              <View>
-                <Text
-                  style={{
-                    marginLeft: 10,
-                    fontSize: 12,
-                    color: 'gray',
-                    textAlign: 'center',
-                  }}>
-                  {'+'}
-                  {item.group_user.length - 3}
-                </Text>
-              </View>
-            )}
-          </View>
+          style={[
+            flex_row,
+            align_center,
+            radius_full,
+            {paddingHorizontal: 10, backgroundColor: whiteAlpha900},
+          ]}>
+          {item.group_users?.map(
+            (user, index) =>
+              index < 3 && (
+                <View
+                  key={index}
+                  style={[
+                    flex_row,
+                    radius_full,
+                    p_1,
+                    {backgroundColor: whiteAlpha900, marginLeft: -10},
+                  ]}>
+                  <Image
+                    source={{
+                      uri: getUser(user)?.user_profile
+                        ? getUser(user)?.user_profile
+                        : getUser(user)?.user_gender === 'male' ||
+                          getUser(user)?.user_gender === '남'
+                        ? defaultMale
+                        : defaultFemale,
+                    }}
+                    width={30}
+                    height={30}
+                    borderRadius={50}
+                  />
+                </View>
+              ),
+          )}
+          {item.group_users?.length > 3 && (
+            <View>
+              <Text
+                style={{
+                  fontSize: fs_sm,
+                  color: blackAlpha500,
+                  textAlign: 'center',
+                  marginLeft: 10,
+                }}>
+                {'+'}
+                {item.group_users?.length - 3}
+              </Text>
+            </View>
+          )}
         </View>
       </View>
     </TouchableOpacity>

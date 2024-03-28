@@ -1,6 +1,5 @@
 import React, {useEffect, useRef, useState} from 'react';
 import {
-  Button,
   Dimensions,
   Image,
   ImageBackground,
@@ -10,19 +9,19 @@ import {
   View,
 } from 'react-native';
 import {getDocList} from '../../firebase/firebase_func';
-import styles, {
+import {
   align_center,
   align_start,
   banner,
   bg_body,
   blackAlpha500,
-  center,
+  blackAlpha800,
+  blackAlpha900,
+  btn_primary,
+  btn_secondary,
   description,
   flex_column,
   flex_row,
-  fs_2xl,
-  fs_3xl,
-  fs_lg,
   fs_md,
   fs_sm,
   fs_xl,
@@ -31,33 +30,25 @@ import styles, {
   img_sm,
   img_sm_2,
   img_xs,
+  img_xxs,
   justify_between,
+  justify_center,
   m_4,
   p_0,
-  p_1,
-  p_2,
   p_3,
   p_4,
   radius_full,
   radius_lg,
-  radius_md,
-  radius_sm,
   sp_2,
   sp_3,
   sp_4,
-  sp_5,
-  sp_6,
   text_selected,
   title,
   under_button,
   w_full,
-  whiteAlpha50,
-  whiteAlpha500,
-  whiteAlpha700,
   whiteAlpha800,
   whiteAlpha900,
 } from '../../style/styles';
-import {font_md, font_sm, getIcon} from '../../firebase/api';
 import Swiper from 'react-native-swiper';
 import GroupBox from '../../Component/GroupBox';
 import MatchBox from '../../Component/MatchBox';
@@ -132,15 +123,51 @@ const Home = ({navigation}) => {
       group => group.group_type === group_category[0],
     );
     let muggleClassList = list.filter(
-      group => group.group_type === group_category[1],
+      group => group.group_type === group_category[2],
     );
     let muggleBusinessList = list.filter(
-      group => group.group_type === group_category[2],
+      group => group.group_type === group_category[3],
     );
 
     setMuggleGroupList(muggleGroupList);
     setMuggleClassList(muggleClassList);
     setMuggleBusinessList(muggleBusinessList);
+  };
+
+  const ItemList = ({items}) => {
+    const [visibleItems, setVisibleItems] = useState(3);
+
+    const handleLoadMore = () => {
+      setVisibleItems(prevVisibleItems => prevVisibleItems + 3);
+    };
+
+    return (
+      <View>
+        <View>
+          {items?.slice(0, visibleItems)?.map((item, index) => (
+            <GroupBox
+              key={index}
+              userList={userList}
+              index={index}
+              item={item}
+              navigation={navigation}
+            />
+          ))}
+        </View>
+        <TouchableOpacity
+          style={[btn_secondary, {marginVertical: 10}]}
+          onPress={handleLoadMore}>
+          <View style={[flex_row, justify_center, align_center, sp_2]}>
+            <Text
+              style={{color: blackAlpha800, fontSize: fs_md}}>{`더보기`}</Text>
+            <Image
+              style={img_xxs}
+              source={require('../../assets/icons/right_arrow.png')}
+            />
+          </View>
+        </TouchableOpacity>
+      </View>
+    );
   };
 
   return (
@@ -185,7 +212,7 @@ const Home = ({navigation}) => {
               align_center,
               {paddingHorizontal: 10},
             ]}>
-            <View style={[flex_row, sp_4, p_2, align_center]}>
+            <View style={[flex_row, sp_4, p_3, align_center]}>
               <Image style={img_sm_2} source={alertIcon} />
               <Text>새로운 업데이트 소식 전해드릴게요.</Text>
             </View>
@@ -284,20 +311,15 @@ const Home = ({navigation}) => {
                   </ScrollView>
                 </View>
               ) : (
-                <View>
-                  {muggleGroupList?.map(
-                    (item, index) =>
-                      index < 3 && (
-                        <GroupBox
-                          key={index}
-                          userList={userList}
-                          index={index}
-                          item={item}
-                          navigation={navigation}
-                        />
-                      ),
-                  )}
-                </View>
+                <ItemList
+                  items={
+                    index === 0
+                      ? muggleGroupList
+                      : index === 2
+                      ? muggleClassList
+                      : muggleBusinessList
+                  }
+                />
               )}
             </View>
           ))}

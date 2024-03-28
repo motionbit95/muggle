@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   ScrollView,
   Text,
@@ -11,10 +11,13 @@ import styles from '../../style/styles';
 import {addDocument} from '../../firebase/firebase_func';
 import auth from '@react-native-firebase/auth';
 import DropDown from '../../Component/PickerComponent';
+import DateTimeInput from '../../Component/DateTimeInput';
+import {group_category} from './Home';
 
 const GroupCreate = ({navigation}) => {
   const [selectedCity, setSelectedCity] = useState('');
   const [selectedDistrict, setSelectedDistrict] = useState('');
+  const [matchPlace, setPlace] = useState('');
   const [selectedMatch, setSelectedMatch] = useState('머글 모임');
 
   const [matchName, setMatchName] = useState('');
@@ -36,6 +39,10 @@ const GroupCreate = ({navigation}) => {
   };
 
   const createGroup = () => {
+    if (!auth().currentUser) {
+      alert('회원만 모임을 생성할 수 있습니다.');
+      return;
+    }
     if (!selectedCity || !selectedDistrict) {
       alert('지역을 선택하세요.');
       return;
@@ -45,7 +52,11 @@ const GroupCreate = ({navigation}) => {
       return;
     }
     if (!matchName) {
-      alert('모임 이름를 입력하세요.');
+      alert('모임 이름을 입력하세요.');
+      return;
+    }
+    if (!matchDateTime) {
+      alert('모임 시간을 입력하세요.');
       return;
     }
     if (!matchTarget) {
@@ -59,7 +70,7 @@ const GroupCreate = ({navigation}) => {
 
     const matchInfo = {
       createAt: new Date(),
-      group_place: selectedCity + ' ' + selectedDistrict,
+      group_place: selectedCity + ' ' + selectedDistrict + ' ' + matchPlace,
       group_type: selectedMatch,
       group_name: matchName,
       group_target: matchTarget,
@@ -72,7 +83,7 @@ const GroupCreate = ({navigation}) => {
     };
 
     addDocument('group', matchInfo);
-    console.log(matchInfo);
+    // console.log(matchInfo);
 
     navigation.navigate('Home', {
       screen: '모임상세',
@@ -107,6 +118,19 @@ const GroupCreate = ({navigation}) => {
                 />
               </View>
             </View>
+            <View>
+              <TextInput
+                onChange={e => setPlace(e.nativeEvent.text)}
+                style={[
+                  {
+                    width: '100%',
+                    height: 50,
+                  },
+                  styles.contentBox,
+                ]}
+                placeholder="상세 주소를 입력하세요."
+              />
+            </View>
           </View>
           <View style={styles.columnBox}>
             <Text style={styles.contentTitle}>모임종류</Text>
@@ -118,7 +142,9 @@ const GroupCreate = ({navigation}) => {
               }}>
               <View style={{flex: 1}}>
                 <DropDown
-                  items={['머글 모임', '클래스 모임', '비즈니스 모임']}
+                  items={group_category.filter(
+                    item => item !== '커피 친구 추천',
+                  )}
                   defaultValue={selectedMatch}
                   onChangeValue={setSelectedMatch}
                 />
@@ -141,8 +167,9 @@ const GroupCreate = ({navigation}) => {
           </View>
           <View style={styles.columnBox}>
             <Text style={styles.contentTitle}>모임 일정</Text>
-            <TextInput
-              // onChange={e => setMatchName(e.nativeEvent.text)}
+            <DateTimeInput onChange={e => setMatchDateTime(e)} />
+            {/* <TextInput
+              onChange={e => setMatchDateTime(e.nativeEvent.text)}
               style={[
                 {
                   width: '100%',
@@ -150,8 +177,8 @@ const GroupCreate = ({navigation}) => {
                 },
                 styles.contentBox,
               ]}
-              placeholder="모임 이름을 입력해주세요."
-            />
+              placeholder="모임 일정을 입력해주세요."
+            /> */}
           </View>
           <View style={styles.columnBox}>
             <Text style={styles.contentTitle}>더치페이 여부</Text>
@@ -183,11 +210,12 @@ const GroupCreate = ({navigation}) => {
               onChange={e => setMatchTarget(e.nativeEvent.text)}
               multiline
               style={[
+                styles.contentBox,
                 {
                   width: '100%',
                   height: 100,
+                  textAlignVertical: 'top',
                 },
-                styles.contentBox,
               ]}
               placeholder="모임목표을 설명해주세요."
             />
@@ -208,12 +236,12 @@ const GroupCreate = ({navigation}) => {
             />
           </View>
         </View>
+        <View style={styles.buttonBox}>
+          <TouchableOpacity style={styles.button} onPress={createGroup}>
+            <Text style={styles.buttonText}>모임 만들기</Text>
+          </TouchableOpacity>
+        </View>
       </ScrollView>
-      <View style={styles.buttonBox}>
-        <TouchableOpacity style={styles.button} onPress={createGroup}>
-          <Text style={styles.buttonText}>모임 만들기</Text>
-        </TouchableOpacity>
-      </View>
     </View>
   );
 };

@@ -3,7 +3,7 @@ import {Button, Image, Text, TouchableOpacity, View} from 'react-native';
 import styles, {shadow_base, sp_3} from '../../style/styles';
 import auth from '@react-native-firebase/auth';
 import {singleQuery} from '../../firebase/firebase_func';
-import {getDisplayAge} from '../../firebase/api';
+import {getDisplayAge, primary_color} from '../../firebase/api';
 import LinearGradient from 'react-native-linear-gradient';
 import {SafeAreaView} from 'react-native-safe-area-context';
 const User = ({navigation}) => {
@@ -47,7 +47,7 @@ const User = ({navigation}) => {
         <LinearGradient
           style={styles.bgStyle}
           start={{x: 0, y: 0}}
-          colors={['#D96F6F', '#FF794F']}
+          colors={[primary_color, '#FF794F']}
         />
       </View>
       <SafeAreaView>

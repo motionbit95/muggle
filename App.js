@@ -88,21 +88,25 @@ const App = () => {
           headerBackVisible: false,
           headerTitle: '',
           headerLeft: ({onPress}) => (
+            <Image
+              style={{height: 26, width: 102}}
+              source={require('./src/assets/icons/logo.png')}
+            />
             // <TouchableOpacity
             //   style={{marginLeft: 20}}
             //   onPress={() => alert('여긴 홈인데용!')}>
-            <Text
-              style={[
-                {
-                  color: 'black',
-                  marginLeft: 10,
+            // <Text
+            //   style={[
+            //     {
+            //       color: 'black',
+            //       marginLeft: 10,
 
-                  fontWeight: 'bold',
-                },
-                xs,
-              ]}>
-              MUGGLE
-            </Text>
+            //       fontWeight: 'bold',
+            //     },
+            //     xs,
+            //   ]}>
+            //   MUGGLE
+            // </Text>
             // </TouchableOpacity>
           ),
           headerRight: () => (
@@ -122,13 +126,14 @@ const App = () => {
         component={GroupDetail}
         options={({navigation}) => ({
           title: '모임상세',
-          // headerLeft: () => (
-          //   <Button
-          //     onPress={() => navigation.navigate('Home')}
-          //     title="Back"
-          //     color="black"
-          //   />
-          // ),
+          headerLeft: () => (
+            <TouchableOpacity onPress={() => navigation.navigate('Muggle')}>
+              <Image
+                style={img_sm}
+                source={require('./src/assets/icons/left_arrow.png')}
+              />
+            </TouchableOpacity>
+          ),
           headerStyle: {
             backgroundColor: '#fff',
           },

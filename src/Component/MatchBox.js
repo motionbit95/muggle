@@ -7,13 +7,31 @@ import {
   View,
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
+import {defaultFemale, defaultMale, font_md} from '../firebase/api';
 import {
-  defaultFemale,
-  defaultMale,
-  font_md,
-  font_sm,
-  font_xxs,
-} from '../firebase/api';
+  align_center,
+  blackAlpha100,
+  blackAlpha700,
+  btn_primary,
+  f_full,
+  flex_row,
+  fs_lg,
+  fs_md,
+  fs_xs,
+  fw_bold,
+  fw_medium,
+  img_sm,
+  img_xl,
+  justify_center,
+  justify_end,
+  p_1,
+  p_4,
+  radius_full,
+  radius_lg,
+  sp_1,
+  sp_3,
+  whiteAlpha900,
+} from '../style/styles';
 
 const MatchBox = ({key, user, index, navigation}) => {
   return (
@@ -27,64 +45,51 @@ const MatchBox = ({key, user, index, navigation}) => {
           ? defaultMale
           : defaultFemale,
       }}
-      style={{
-        width: 280 * 0.7,
-        height: 300 * 0.7,
-        borderRadius: 16,
-      }}>
-      <LinearGradient
-        colors={['rgba(0,0,0,0)', 'rgba(0,0,0,0.5)']}
-        style={{borderRadius: 16}}>
-        <View
-          style={{
-            gap: 8,
-            justifyContent: 'flex-end',
-            width: '100%',
-            height: '100%',
-            backgroundColor: 'rgba(0, 0, 0, 0.1)',
-            borderRadius: 20,
-            padding: 16,
-          }}>
+      style={[img_xl, radius_lg]}>
+      <LinearGradient colors={[blackAlpha100, blackAlpha700]} style={radius_lg}>
+        <View style={[sp_3, justify_end, f_full, radius_lg, p_4]}>
           <View
-            style={{
-              flexDirection: 'row',
-              borderWidth: 1,
-              borderColor: 'white',
-              borderRadius: 20,
-              width: 60,
-              justifyContent: 'center',
-              alignItems: 'center',
-              padding: 4,
-              gap: 5,
-            }}>
+            style={[
+              radius_full,
+              flex_row,
+              align_center,
+              justify_center,
+              p_1,
+              sp_1,
+              {borderWidth: 1, borderColor: whiteAlpha900, width: '25%'},
+            ]}>
             <Image
-              style={{width: 16, height: 16}}
+              style={img_sm}
               source={require('../assets/icons/subtract.png')}
             />
             <Text
               style={{
-                color: 'white',
-                fontSize: font_xxs,
+                color: whiteAlpha900,
+                fontSize: fs_xs,
                 fontWeight: '400',
               }}>
               근처
             </Text>
           </View>
 
-          <Text style={{color: 'white', fontSize: font_md, fontWeight: 'bold'}}>
+          <Text
+            style={{
+              color: whiteAlpha900,
+              fontSize: fs_lg,
+              fontWeight: fw_bold,
+            }}>
             {user.user_name}
           </Text>
-          <Text style={{color: 'white', fontSize: font_sm}}>
+          <Text
+            style={{
+              color: whiteAlpha900,
+              fontSize: fs_md,
+              fontWeight: fw_medium,
+            }}>
             {user.user_place?.[0]}
           </Text>
           <TouchableOpacity
-            style={{
-              backgroundColor: '#D96F6F',
-              borderRadius: 10,
-              height: 40,
-              alignItems: 'center',
-              justifyContent: 'center',
-            }}
+            style={btn_primary}
             onPressOut={() =>
               navigation.navigate('커피매칭신청', {
                 screen: '커피매칭',

@@ -7,33 +7,36 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import styles from '../../style/styles';
+import styles, {fs_md, img_sm} from '../../style/styles';
 import {
   calculateDday,
   formatDate,
   displayDday,
   formatDateTime,
+  defaultMale,
+  defaultFemale,
 } from '../../firebase/api';
 import {singleQuery} from '../../firebase/firebase_func';
 
 const GroupDetail = ({navigation, route}) => {
-  const {data} = route.params ? route.params : {data: null};
-  const [userList, setUserList] = useState(null);
+  const {data, userList} = route.params ? route.params : {data: null};
   // console.log(data ? data : 'no data');
   // 디데이 계산 및 표시
   var dday = calculateDday(formatDate(data?.group_time));
 
-  useEffect(() => {
-    if (!userList) {
-      let group_users = [];
-      data?.group_users?.map(async user => {
-        await singleQuery('user', 'uid', user).then(res => {
-          group_users.push(res[0]);
-        });
-        setUserList(group_users);
-      });
-    }
-  }, [data]);
+  const getUser = uid => {
+    let tempUser = null;
+    userList?.map(user => {
+      if (user.doc_id === uid || user.uid === uid) {
+        tempUser = user;
+      }
+    });
+
+    // console.log(tempUser);
+
+    return tempUser;
+  };
+
   return (
     <View style={styles.screenStyle}>
       <ScrollView style={styles.scrollViewStyle}>
@@ -58,13 +61,19 @@ const GroupDetail = ({navigation, route}) => {
             </View>
             <View style={styles.gap10}>
               <View style={styles.rowBox}>
-                <View style={styles.icon18} />
+                <Image
+                  style={img_sm}
+                  source={require('../../assets/icons/calendar.png')}
+                />
                 <Text style={{fontSize: 16, color: 'black'}}>
                   {formatDateTime(data?.group_time)}
                 </Text>
               </View>
               <View style={styles.rowBox}>
-                <View style={styles.icon18} />
+                <Image
+                  style={img_sm}
+                  source={require('../../assets/icons/map.png')}
+                />
                 <Text style={{fontSize: 16, color: 'black'}}>
                   {data?.group_place}
                 </Text>
@@ -76,13 +85,19 @@ const GroupDetail = ({navigation, route}) => {
               </View>
 
               <View style={styles.rowBox}>
-                <View style={styles.icon18} />
+                <Image
+                  style={img_sm}
+                  source={require('../../assets/icons/money.png')}
+                />
                 <Text style={{fontSize: 16, color: 'black'}}>
                   {data?.group_price ? data?.group_price : '나누기'}
                 </Text>
               </View>
               <View style={styles.rowBox}>
-                <View style={styles.icon18} />
+                <Image
+                  style={img_sm}
+                  source={require('../../assets/icons/user.png')}
+                />
                 <Text style={{fontSize: 16, color: 'black'}}>
                   {data?.group_users?.length} / {data?.group_personnel} (
                   {data?.group_personnel - data?.group_users?.length}자리남음)
@@ -90,8 +105,10 @@ const GroupDetail = ({navigation, route}) => {
               </View>
             </View>
 
-            <View style={{flex: 1, width: '50%'}}>
-              <Text style={{color: 'black'}}>{data?.group_target}</Text>
+            <View style={{flex: 1}}>
+              <Text style={{color: 'black', fontSize: fs_md}}>
+                {data?.group_target}
+              </Text>
             </View>
             <View style={styles.hr} />
           </View>
@@ -108,12 +125,29 @@ const GroupDetail = ({navigation, route}) => {
               </Text>
             </View>
             <View gap={10}>
-              {userList?.map((user, index) => (
-                <View key={index} style={styles.rowBox}>
-                  <View style={styles.Avartar30} />
-                  <Text style={{color: 'black'}}>{user?.user_name}</Text>
-                </View>
-              ))}
+              {data.group_users?.map(
+                (user, index) =>
+                  index < 3 && (
+                    <View key={index} style={styles.rowBox}>
+                      <Image
+                        source={{
+                          uri: getUser(user)?.user_profile
+                            ? getUser(user)?.user_profile
+                            : getUser(user)?.user_gender === 'male' ||
+                              getUser(user)?.user_gender === '남'
+                            ? defaultMale
+                            : defaultFemale,
+                        }}
+                        width={30}
+                        height={30}
+                        borderRadius={50}
+                      />
+                      <Text style={{fontSize: 14, color: 'black'}}>
+                        {getUser(user)?.user_name}
+                      </Text>
+                    </View>
+                  ),
+              )}
             </View>
           </View>
         </View>

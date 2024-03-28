@@ -1,5 +1,6 @@
 import React from 'react';
-export const primary_color = '#D96F6F';
+export const primary_color = '#FF5E5B';
+// export const primary_color = '#D96F6F';
 export const component_height = 50;
 export const component_radius = 10;
 export const font_xxs = 10;

@@ -98,9 +98,11 @@ const Certificate = ({navigation}) => {
                   fontSize: font_md,
                   color: 'black',
                 }}
+                keyboardType="phone-pad" // 전화번호 입력용 키보드
+                maxLength={11} // 최대 길이 설정
                 placeholder="휴대폰번호 입력"
-                keyboardType="number-pad"
                 onChange={e => setPhoneNumber(e.nativeEvent.text)}
+                autoComplete="tel-device"
               />
               <TouchableOpacity
                 disabled={!phoneNumber}
@@ -138,6 +140,7 @@ const Certificate = ({navigation}) => {
               placeholder="인증번호를 입력하세요"
               keyboardType="number-pad"
               onChange={e => setCode(e.nativeEvent.text)}
+              autoComplete="one-time-code"
             />
             {sendCode && (
               <View

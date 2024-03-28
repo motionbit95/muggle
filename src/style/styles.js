@@ -426,12 +426,13 @@ export const t_align_justify = 'justify';
 // title
 export const title = {
   fontSize: fs_xl,
-  lineHeight: lh_title,
+  // lineHeight: lh_title,
   fontWeight: fw_bold,
+  color: blackAlpha900,
 };
 export const description = {
   fontSize: fs_md,
-  lineHeight: lh_title,
+  // lineHeight: lh_title,
   color: blackAlpha500,
 };
 
@@ -663,6 +664,11 @@ export const text_unselected = isSelected => [
   },
 ];
 
+export const img_xxs = {
+  width: 8,
+  height: 12,
+};
+
 export const img_xs = {
   width: 16,
   height: 16,
@@ -678,9 +684,45 @@ export const img_sm_2 = {
   height: 20,
 };
 
+export const img_lg = {
+  width: 100,
+  height: 100,
+};
+
+export const img_xl = {
+  width: 280,
+  height: 300,
+};
+
+export const f_full = {
+  width: '100%',
+  height: '100%',
+};
+
 export const img_full = [
   {
     flex: 1,
   },
   justify_end,
+];
+
+// button
+export const btn_primary = [
+  radius_md,
+  justify_center,
+  align_center,
+  p_3,
+  {
+    backgroundColor: primary_color,
+  },
+];
+
+export const btn_secondary = [
+  radius_md,
+  justify_center,
+  align_center,
+  p_3,
+  {
+    backgroundColor: whiteAlpha900,
+  },
 ];

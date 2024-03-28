@@ -10,13 +10,14 @@ import {
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import styles from '../../style/styles';
+import {primary_color} from '../../firebase/api';
 
 const MatchPayment = ({navigation}) => {
   return (
     <View style={styles.screenStyle}>
       <ScrollView style={styles.scrollViewStyle}>
         <SafeAreaView>
-          <LinearGradient colors={['#FF794F', '#D96F6F']}>
+          <LinearGradient colors={['#FF794F', primary_color]}>
             <View style={styles.matchingBanner}>
               <View style={styles.textColumnBox}>
                 <Text
