@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {Button, Image, Text, TouchableOpacity, View} from 'react-native';
-import styles from '../../style/styles';
+import styles, {shadow_base, sp_3} from '../../style/styles';
 import auth from '@react-native-firebase/auth';
 import {singleQuery} from '../../firebase/firebase_func';
 import {getDisplayAge} from '../../firebase/api';
@@ -130,7 +130,7 @@ const User = ({navigation}) => {
               </TouchableOpacity>
             </View>
           </View>
-          <View style={styles.shadowBoxStyle}>
+          <View style={[shadow_base, sp_3]}>
             <View style={[styles.rowBox, styles.itembox]}>
               <View style={styles.one_thirdBoxStyle}>
                 <Text

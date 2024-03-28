@@ -45,6 +45,18 @@ import GroupDetail from './src/pages/Main/GroupDetail';
 import GroupCreate from './src/pages/Main/GroupCreate';
 import MatchHistory from './src/pages/Matching/MatchHistory';
 import MatchPayment from './src/pages/Matching/MatchPayment';
+import {
+  center,
+  circle_40,
+  circle_50,
+  img_sm,
+  img_xs,
+  radius_full,
+  shadow_2xl,
+  shadow_md,
+  xs,
+} from './src/style/styles';
+import {primary_color} from './src/firebase/api';
 
 const App = () => {
   // const isDarkMode = useColorScheme() === 'dark';
@@ -80,12 +92,15 @@ const App = () => {
             //   style={{marginLeft: 20}}
             //   onPress={() => alert('여긴 홈인데용!')}>
             <Text
-              style={{
-                color: 'black',
-                marginLeft: 10,
-                fontSize: 20,
-                fontWeight: 'bold',
-              }}>
+              style={[
+                {
+                  color: 'black',
+                  marginLeft: 10,
+
+                  fontWeight: 'bold',
+                },
+                xs,
+              ]}>
               MUGGLE
             </Text>
             // </TouchableOpacity>
@@ -248,6 +263,7 @@ const App = () => {
             tabBarActiveTintColor: '#FF634F',
             tabBarIcon: ({focused}) => (
               <Image
+                style={img_sm}
                 source={
                   focused
                     ? require('./src/assets/navIcon/home_select.png')
@@ -266,12 +282,29 @@ const App = () => {
             tabBarActiveTintColor: '#FF634F',
             tabBarIcon: ({focused}) => (
               <Image
+                style={img_sm}
                 source={
                   focused
                     ? require('./src/assets/navIcon/coffee_select.png')
                     : require('./src/assets/navIcon/coffee_unselect.png')
                 }
               />
+            ),
+            unmountOnBlur: true,
+          }}
+        />
+        <Tab.Screen
+          name="모임생성"
+          component={GroupCreate}
+          options={{
+            tabBarLabel: '',
+            tabBarIcon: ({focused}) => (
+              <View style={[center, radius_full, circle_40]}>
+                <Image
+                  style={img_xs}
+                  source={require('./src/assets/Plus.png')}
+                />
+              </View>
             ),
             unmountOnBlur: true,
           }}
@@ -284,6 +317,7 @@ const App = () => {
             tabBarActiveTintColor: '#FF634F',
             tabBarIcon: ({focused}) => (
               <Image
+                style={img_sm}
                 source={
                   focused
                     ? require('./src/assets/navIcon/chat_select.png')
@@ -302,6 +336,7 @@ const App = () => {
             tabBarActiveTintColor: '#FF634F',
             tabBarIcon: ({focused}) => (
               <Image
+                style={img_sm}
                 source={
                   focused
                     ? require('./src/assets/navIcon/user_select.png')

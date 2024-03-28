@@ -368,3 +368,319 @@ const styles = StyleSheet.create({
 });
 
 export default styles;
+
+// 스타일 가이드 모음
+// ========================== color ===========================
+export const color_primary = '#FC8181';
+
+export const color_bg_body = '#f4f4f4';
+export const color_box_body = 'white';
+
+export const blackAlpha50 = 'rgba(0, 0, 0, 0.04)'; // 완전히 불투명한 검은색
+export const blackAlpha100 = 'rgba(0, 0, 0, 0.06)';
+export const blackAlpha200 = 'rgba(0, 0, 0, 0.08)';
+export const blackAlpha300 = 'rgba(0, 0, 0, 0.16)';
+export const blackAlpha400 = 'rgba(0, 0, 0, 0.24)';
+export const blackAlpha500 = 'rgba(0, 0, 0, 0.36)';
+export const blackAlpha600 = 'rgba(0, 0, 0, 0.48)';
+export const blackAlpha700 = 'rgba(0, 0, 0, 0.64)';
+export const blackAlpha800 = 'rgba(0, 0, 0, 0.8)';
+export const blackAlpha900 = 'rgba(0, 0, 0, 0.92)';
+
+export const whiteAlpha50 = 'rgba(255, 255, 255, 0.04)'; // 완전히 불투명한 흰색
+export const whiteAlpha100 = 'rgba(255, 255, 255, 0.06)';
+export const whiteAlpha200 = 'rgba(255, 255, 255, 0.08)';
+export const whiteAlpha300 = 'rgba(255, 255, 255, 0.16)';
+export const whiteAlpha400 = 'rgba(255, 255, 255, 0.24)';
+export const whiteAlpha500 = 'rgba(255, 255, 255, 0.36)';
+export const whiteAlpha600 = 'rgba(255, 255, 255, 0.48)';
+export const whiteAlpha700 = 'rgba(255, 255, 255, 0.64)';
+export const whiteAlpha800 = 'rgba(255, 255, 255, 0.8)';
+export const whiteAlpha900 = 'rgba(255, 255, 255, 0.92)';
+
+// typograpy
+export const fs_xs = 12;
+export const fs_sm = 14;
+export const fs_md = 16;
+export const fs_lg = 18;
+export const fs_xl = 20;
+export const fs_2xl = 24;
+export const fs_3xl = 30;
+export const fs_4xl = 36;
+export const fs_5xl = 48;
+export const fs_6xl = 60;
+
+export const lh_component = '150%';
+export const lh_title = '100%';
+export const lh_none = '60%';
+
+export const fw_normal = 'normal';
+export const fw_medium = '500';
+export const fw_bold = 'bold';
+
+export const t_align_center = 'center';
+export const t_align_left = 'left';
+export const t_align_right = 'right';
+export const t_align_justify = 'justify';
+
+// title
+export const title = {
+  fontSize: fs_xl,
+  lineHeight: lh_title,
+  fontWeight: fw_bold,
+};
+export const description = {
+  fontSize: fs_md,
+  lineHeight: lh_title,
+  color: blackAlpha500,
+};
+
+export const shadow_xs = {
+  shadowColor: '#000',
+  shadowOffset: {width: 0, height: 0},
+  shadowOpacity: 0.25,
+  shadowRadius: 1,
+};
+
+export const shadow_sm = {
+  shadowColor: '#000',
+  shadowOffset: {width: 0, height: 1},
+  shadowOpacity: 0.05,
+  shadowRadius: 2,
+};
+
+export const shadow_base = {
+  shadowColor: '#000',
+  shadowOffset: {width: 0, height: 1},
+  shadowOpacity: 0.06,
+  shadowRadius: 2,
+};
+
+export const shadow_md = {
+  shadowColor: '#000',
+  shadowOffset: {width: 0, height: 2},
+  shadowOpacity: 0.06,
+  shadowRadius: 4,
+};
+
+export const shadow_lg = {
+  shadowColor: '#000',
+  shadowOffset: {width: 0, height: 4},
+  shadowOpacity: 0.05,
+  shadowRadius: 6,
+  gap: 10,
+};
+
+export const shadow_xl = {
+  shadowColor: '#000',
+  shadowOffset: {width: 0, height: 10},
+  shadowOpacity: 0.04,
+  shadowRadius: 10,
+};
+
+export const shadow_2xl = {
+  shadowColor: '#000',
+  shadowOffset: {width: 0, height: 25},
+  shadowOpacity: 0.25,
+  shadowRadius: 50,
+};
+
+export const outline = {
+  shadowColor: '#3f99E1',
+  shadowOffset: {width: 0, height: 0},
+  shadowOpacity: 1,
+};
+
+export const shadow_dark = {
+  shadowColor: 'black',
+  shadowOffset: {width: 0, height: 0},
+  shadowOpacity: 0.8,
+  shadowRadius: 10,
+};
+
+// spacing
+export const sp_0 = {gap: 0};
+export const sp_1 = {gap: 4};
+export const sp_2 = {gap: 8};
+export const sp_3 = {gap: 12};
+export const sp_4 = {gap: 16};
+export const sp_5 = {gap: 20};
+export const sp_6 = {gap: 24};
+export const sp_7 = {gap: 28};
+export const sp_8 = {gap: 32};
+export const sp_9 = {gap: 36};
+export const sp_10 = {gap: 40};
+export const sp_12 = {gap: 48};
+export const sp_13 = {gap: 52};
+export const sp_14 = {gap: 56};
+export const sp_16 = {gap: 64};
+export const sp_20 = {gap: 80};
+export const sp_24 = {gap: 96};
+export const sp_28 = {gap: 112};
+export const sp_32 = {gap: 128};
+export const sp_36 = {gap: 144};
+export const sp_40 = {gap: 160};
+export const sp_44 = {gap: 176};
+export const sp_48 = {gap: 192};
+export const sp_52 = {gap: 208};
+export const sp_56 = {gap: 224};
+export const sp_60 = {gap: 240};
+export const sp_64 = {gap: 256};
+export const sp_72 = {gap: 288};
+export const sp_80 = {gap: 320};
+export const sp_96 = {gap: 384};
+
+// 정렬
+export const flex_row = {display: 'flex', flexDirection: 'row'};
+export const flex_column = {display: 'flex', flexDirection: 'column'};
+export const flex_row_reverse = {display: 'flex', flexDirection: 'row-reverse'};
+export const flex_column_reverse = {
+  display: 'flex',
+  flexDirection: 'column-reverse',
+};
+export const flex_wrap = {display: 'flex', flexWrap: 'wrap'};
+export const flex_wrap_reverse = {display: 'flex', flexWrap: 'wrap-reverse'};
+export const flex_nowrap = {display: 'flex', flexWrap: 'nowrap'};
+
+// 진행 방향 정렬
+export const justify_start = {display: 'flex', justifyContent: 'flex-start'};
+export const justify_end = {display: 'flex', justifyContent: 'flex-end'};
+export const justify_center = {display: 'flex', justifyContent: 'center'};
+export const justify_between = {
+  display: 'flex',
+  justifyContent: 'space-between',
+};
+export const justify_around = {display: 'flex', justifyContent: 'space-around'};
+export const justify_evenly = {display: 'flex', justifyContent: 'space-evenly'};
+
+// 진행 방향 반대 정렬
+export const align_start = {display: 'flex', alignItems: 'flex-start'};
+export const align_end = {display: 'flex', alignItems: 'flex-end'};
+export const align_center = {display: 'flex', alignItems: 'center'};
+export const align_stretch = {display: 'flex', alignItems: 'stretch'};
+export const align_baseline = {display: 'flex', alignItems: 'baseline'};
+
+// 가운데 레이아웃
+export const center = {
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+};
+
+export const w_full = {width: '100%'};
+
+export const circle_40 = {
+  width: 40,
+  height: 40,
+  backgroundColor: primary_color,
+};
+
+export const circle_50 = {
+  width: 50,
+  height: 50,
+  backgroundColor: primary_color,
+};
+
+// radius
+export const radius_sm = {borderRadius: 4};
+export const radius_md = {borderRadius: 8};
+export const radius_lg = {borderRadius: 12};
+export const radius_xl = {borderRadius: 16};
+export const radius_2xl = {borderRadius: 20};
+export const radius_3xl = {borderRadius: 24};
+export const radius_full = {borderRadius: 999};
+
+// padding
+export const p_0 = {padding: 0};
+export const p_1 = {padding: 4};
+export const p_2 = {padding: 8};
+export const p_3 = {padding: 12};
+export const p_4 = {padding: 16};
+export const p_5 = {padding: 20};
+export const p_6 = {padding: 24};
+export const p_7 = {padding: 28};
+export const p_8 = {padding: 32};
+export const p_9 = {padding: 36};
+export const p_10 = {padding: 40};
+export const p_12 = {padding: 48};
+export const p_14 = {padding: 56};
+export const p_16 = {padding: 64};
+export const p_20 = {padding: 80};
+export const p_24 = {padding: 96};
+export const p_28 = {padding: 112};
+export const p_32 = {padding: 128};
+
+// margin
+export const m_0 = {margin: 0};
+export const m_1 = {margin: 4};
+export const m_2 = {margin: 8};
+export const m_3 = {margin: 12};
+export const m_4 = {margin: 16};
+export const m_5 = {margin: 20};
+export const m_6 = {margin: 24};
+export const m_7 = {margin: 28};
+export const m_8 = {margin: 32};
+export const m_9 = {margin: 36};
+export const m_10 = {margin: 40};
+export const m_12 = {margin: 48};
+export const m_14 = {margin: 56};
+export const m_16 = {margin: 64};
+export const m_20 = {margin: 80};
+export const m_24 = {margin: 96};
+export const m_28 = {margin: 112};
+export const m_32 = {margin: 128};
+
+export const bg_body = {backgroundColor: color_bg_body};
+
+export const banner = isVisible => [
+  {
+    backgroundColor: primary_color,
+  },
+];
+
+// button
+export const under_button = isSelected => [
+  {
+    borderBottomWidth: 2,
+    borderColor: isSelected ? blackAlpha900 : blackAlpha50,
+  },
+  p_2,
+];
+
+export const text_selected = isSelected => [
+  {
+    fontSize: fs_md,
+    color: isSelected ? blackAlpha900 : blackAlpha500,
+    fontWeight: fw_bold,
+  },
+];
+
+export const text_unselected = isSelected => [
+  {
+    fontSize: fs_md,
+    color: isSelected ? blackAlpha900 : blackAlpha500,
+    fontWeight: fw_normal,
+  },
+];
+
+export const img_xs = {
+  width: 16,
+  height: 16,
+};
+
+export const img_sm = {
+  width: 20,
+  height: 20,
+};
+
+export const img_sm_2 = {
+  width: 24,
+  height: 20,
+};
+
+export const img_full = [
+  {
+    flex: 1,
+  },
+  justify_end,
+];

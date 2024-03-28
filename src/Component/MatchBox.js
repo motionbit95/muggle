@@ -20,10 +20,16 @@ const MatchBox = ({key, user, index, navigation}) => {
     <ImageBackground
       key={key}
       imageStyle={{borderRadius: 20}}
-      source={require('../assets/wonyoung.png')}
+      source={{
+        uri: user.user_profile
+          ? user.user_profile
+          : user.user_gender === 'male' || user.user_gender === '남'
+          ? defaultMale
+          : defaultFemale,
+      }}
       style={{
-        width: 280,
-        height: 300,
+        width: 280 * 0.7,
+        height: 300 * 0.7,
         borderRadius: 16,
       }}>
       <LinearGradient
