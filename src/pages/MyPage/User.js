@@ -170,15 +170,6 @@ const User = ({navigation}) => {
               </TouchableOpacity>
               <TouchableOpacity
                 style={styles.TouchButtonStyle}
-                onPress={() => alert('눌렀엉')}>
-                <View style={styles.rowBox}>
-                  <Image source={require('../../assets/menuicon1.png')} />
-                  <Text style={{color: 'black'}}>메뉴02</Text>
-                </View>
-                <Image source={require('../../assets/rightarrow.png')} />
-              </TouchableOpacity>
-              <TouchableOpacity
-                style={styles.TouchButtonStyle}
                 onPress={onLogout}>
                 <View style={styles.rowBox}>
                   <Image source={require('../../assets/menuicon1.png')} />

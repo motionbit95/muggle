@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useRef, useState} from 'react';
 import {
   ScrollView,
   Text,
@@ -11,8 +11,88 @@ import {
 import LinearGradient from 'react-native-linear-gradient';
 import styles from '../../style/styles';
 import {primary_color} from '../../firebase/api';
+import auth from '@react-native-firebase/auth';
+import {getUser} from '../../firebase/firebase_func';
 
-const MatchPayment = ({navigation}) => {
+<script src="https://democpay.payple.kr/js/cpay.payple.1.0.1.js"></script>;
+<script src="https://cpay.payple.kr/js/cpay.payple.1.0.1.js"></script>;
+
+const MatchPayment = ({navigation, route}) => {
+  const [amount, setAmount] = useState(1000);
+  const [pay_method, setPayMethod] = useState('card');
+
+  function createOid() {
+    const now_date = new Date();
+    let now_year = now_date.getFullYear();
+    let now_month = now_date.getMonth() + 1;
+    now_month = now_month < 10 ? '0' + now_month : now_month;
+    let now_day = now_date.getDate();
+    now_day = now_day < 10 ? '0' + now_day : now_day;
+    const datetime = now_date.getTime();
+    return now_year + now_month + now_day + datetime;
+  }
+
+  const content = useRef({
+    // Default form set
+    is_direct: 'Y', // 결제창 방식 (DIRECT: Y | POPUP: N)
+    pay_type: 'card', // 결제수단
+    work_type: 'CERT', // 결제요청방식
+    card_ver: '', // DEFAULT: 01 (01: 정기결제 플렛폼, 02: 일반결제 플렛폼), 카드결제 시 필수
+    payple_payer_id: '', // 결제자 고유ID (본인인증 된 결제회원 고유 KEY)
+    buyer_no: '2335', // 가맹점 회원 고유번호
+    buyer_name: '홍길동', // 결제자 이름
+    buyer_hp: '01012345678', // 결제자 휴대폰 번호
+    buyer_email: 'test@payple.kr', // 결제자 Email
+    buy_goods: '매칭 식사권', // 결제 상품
+    buy_total: '1000', // 결제 금액
+    buy_istax: 'Y', // 과세여부 (과세: Y | 비과세(면세): N)
+    buy_taxtotal: '', // 부가세(복합과세인 경우 필수)
+    order_num: createOid(), // 주문번호
+    pay_year: '', // [정기결제] 결제 구분 년도
+    pay_month: '', // [정기결제] 결제 구분 월
+    is_reguler: 'N', // 정기결제 여부 (Y | N)
+    is_taxsave: 'N', // 현금영수증 발행여부
+    simple_flag: 'Y', // 간편결제 여부
+    auth_type: 'sms', // [간편결제/정기결제] 본인인증 방식 (sms : 문자인증 | pwd : 패스워드 인증)
+  });
+  let [payResult] = useState({});
+
+  const getResult = res => {
+    if (res.PCD_PAY_RST === 'success') {
+      payResult = res;
+
+      // 전달받은 결제 파라미터값을 state에 저장 후  '/react/order_result'로 이동
+      // navigate('/order_result', {state: {payResult: payResult}});
+    } else {
+      // 결제 실패일 경우 알림 메시지
+      alert(res.PCD_PAY_MSG);
+    }
+  };
+
+  async function handlePayment() {
+    console.log(content.current);
+
+    // 유저정보
+    const user = await getUser(auth().currentUser?.uid);
+    console.log('결제유저 정보 ===> ', user);
+
+    // 구매정보 수정
+
+    content.current.pay_type = pay_method;
+    content.current.buyer_name = user?.user_name;
+    content.current.buyer_hp = user?.user_phone;
+    content.current.buyer_email = user?.user_email;
+    content.current.buy_total = amount;
+    content.current.order_num = createOid();
+
+    navigation.navigate('커피매칭신청', {
+      screen: '결제',
+      params: {
+        data: content.current,
+      },
+    });
+  }
+
   return (
     <View style={styles.screenStyle}>
       <ScrollView style={styles.scrollViewStyle}>
@@ -257,7 +337,7 @@ const MatchPayment = ({navigation}) => {
       <View style={styles.buttonBox}>
         <TouchableOpacity
           style={[styles.button, styles.buttonMargin]}
-          onPress={() => alert('결제하기로 ㄱㄱ')}>
+          onPress={handlePayment}>
           <Text style={styles.buttonText}>결제하기</Text>
         </TouchableOpacity>
       </View>

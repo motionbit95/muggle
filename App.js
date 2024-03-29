@@ -57,6 +57,7 @@ import {
   xs,
 } from './src/style/styles';
 import {primary_color} from './src/firebase/api';
+import WebViewPayment from './src/pages/Matching/WebViewPayment';
 
 const App = () => {
   // const isDarkMode = useColorScheme() === 'dark';
@@ -219,6 +220,11 @@ const App = () => {
         options={{headerShown: false}}
       />
       <MatchingStack.Screen
+        name="결제"
+        component={WebViewPayment}
+        options={{headerShown: false}}
+      />
+      <MatchingStack.Screen
         name="커피매칭"
         component={Matching}
         options={({navigation}) => ({
@@ -262,10 +268,17 @@ const App = () => {
       <Tab.Navigator>
         <Tab.Screen
           name="Home"
-          component={HomeStackNavigate}
+          component={Home}
           options={{
-            headerShown: false,
+            title: '홈',
+            headerTintColor: '#ffffff',
+            headerTitleStyle: {
+              fontWeight: 'bold',
+              fontSize: 20,
+            },
             tabBarActiveTintColor: '#FF634F',
+            headerBackVisible: false,
+            headerTitle: '',
             tabBarIcon: ({focused}) => (
               <Image
                 style={img_sm}
@@ -276,14 +289,29 @@ const App = () => {
                 }
               />
             ),
-            unmountOnBlur: true,
+            headerLeft: ({onPress}) => (
+              <Image
+                style={{height: 26, width: 102, marginLeft: 20}}
+                source={require('./src/assets/icons/logo.png')}
+              />
+            ),
+            headerRight: () => (
+              <TouchableOpacity
+                style={{marginRight: 10}}
+                onPress={() => alert('알림 페이지 전달')}>
+                <Image
+                  style={{width: 24, height: 24}}
+                  source={require('./src/assets/Notification.png')}
+                />
+              </TouchableOpacity>
+            ),
           }}
         />
         <Tab.Screen
           name="커피매칭신청"
-          component={MatchingStackNavigate}
+          component={MatchHistory}
           options={{
-            headerShown: false,
+            // headerShown: false,
             tabBarActiveTintColor: '#FF634F',
             tabBarIcon: ({focused}) => (
               <Image
