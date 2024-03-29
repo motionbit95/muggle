@@ -9,7 +9,7 @@ import {
   SafeAreaView,
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
-import styles from '../../style/styles';
+import styles, {blackAlpha600, blackAlpha700} from '../../style/styles';
 import {primary_color} from '../../firebase/api';
 import auth from '@react-native-firebase/auth';
 import {getUser} from '../../firebase/firebase_func';
@@ -96,8 +96,8 @@ const MatchPayment = ({navigation, route}) => {
   return (
     <View style={styles.screenStyle}>
       <ScrollView style={styles.scrollViewStyle}>
-        <SafeAreaView>
-          <LinearGradient colors={['#FF794F', primary_color]}>
+        <LinearGradient colors={[primary_color, '#AA4236']}>
+          <SafeAreaView>
             <View style={styles.matchingBanner}>
               <View style={styles.textColumnBox}>
                 <Text
@@ -176,8 +176,8 @@ const MatchPayment = ({navigation, route}) => {
                 </View>
               </View>
             </View>
-          </LinearGradient>
-        </SafeAreaView>
+          </SafeAreaView>
+        </LinearGradient>
         <View>
           <View style={{padding: 20, gap: 10}}>
             <View style={{paddingVertical: 10, gap: 5}}>
@@ -243,8 +243,10 @@ const MatchPayment = ({navigation, route}) => {
                 </View>
               </View>
             </View>
-            <Text style={{color: 'black'}}>· 결제된 매칭권 사용기한 2주</Text>
-            <Text style={{color: 'black'}}>
+            <Text style={{color: blackAlpha700}}>
+              · 결제된 매칭권 사용기한 2주
+            </Text>
+            <Text style={{color: blackAlpha700}}>
               · 상대방이 매칭 거저 또는 채팅 미응답 시 전액 환불
             </Text>
           </View>
@@ -322,14 +324,17 @@ const MatchPayment = ({navigation, route}) => {
                 </View>
               </View>
             </View>
-            <Text style={{color: 'black'}}>
+            <Text style={{color: blackAlpha700}}>
               · 내가 설정한 매칭권 금액의 70%가 부수입으로 정산됩니다.
             </Text>
             <View>
-              <Text style={{color: 'black'}}>
+              <Text style={{color: blackAlpha700}}>
                 · 오프라인 매칭 완료 후 2영업일 내에 기재해주신
               </Text>
-              <Text style={{color: 'black'}}> 수락자 계좌로 정산됩니다.</Text>
+              <Text style={{color: blackAlpha700}}>
+                {''}
+                {'  '}수락자 계좌로 정산됩니다.
+              </Text>
             </View>
           </View>
         </View>

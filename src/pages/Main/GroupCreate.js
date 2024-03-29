@@ -103,10 +103,7 @@ const GroupCreate = ({navigation}) => {
           ],
         });
 
-        navigation.navigate('홈', {
-          screen: '모임상세',
-          params: {data: {...matchInfo, gid: id}},
-        });
+        navigation.navigate('모임상세', {data: {...matchInfo, gid: id}});
       })
       .catch(err => {
         console.log(err);

@@ -30,38 +30,32 @@ import {
   formatDateTime,
   primary_color,
 } from '../firebase/api';
-import {singleQuery} from '../firebase/firebase_func';
+import {getUser, singleQuery} from '../firebase/firebase_func';
 
 export const userImg = require('../assets/icons/user.png');
 export const mapImg = require('../assets/icons/map.png');
 export const moneyImg = require('../assets/icons/money.png');
 export const groupImg = require('../assets/GroupImage.png');
 
-const GroupBox = ({item, index, userList, navigation}) => {
+const GroupBox = ({item, index, navigation}) => {
   const [groupUsers, setGroupUsers] = useState([]);
 
   useEffect(() => {
     const getGroupUsers = async () => {
-      // console.log('getGroupUsers ===> ', data.group_users);
       let groupUsers = [];
-      item.group_users.map(async uid => {
-        await singleQuery('user', 'uid', uid)
-          .then(res => {
-            groupUsers.push(res[0]);
-          })
-          .catch(err => {
-            console.log(err);
-          });
-        // console.log('groupUsers ===> ', groupUsers);
-        setGroupUsers(groupUsers);
-      });
+      for (let i = 0; i < item.group_users?.length; i++) {
+        const user = await singleQuery('user', 'uid', item.group_users[i]);
+        groupUsers.push(user[0]);
+      }
+      setGroupUsers(groupUsers);
+      console.log(groupUsers);
     };
     getGroupUsers();
   }, []);
 
   return (
     <TouchableOpacity
-      key={index}
+      key={index + '_' + item.doc_id}
       style={[
         radius_md,
         p_3,
@@ -69,10 +63,7 @@ const GroupBox = ({item, index, userList, navigation}) => {
       ]}
       onPress={() => {
         // console.log({...item, gid: item.doc_id});
-        navigation.navigate('홈', {
-          screen: '모임상세',
-          params: {data: {...item, gid: item.doc_id}},
-        });
+        navigation.navigate('모임상세', {data: {...item, gid: item.doc_id}});
       }}>
       <View style={[flex_row, justify_between]}>
         <View style={{gap: 5}}>
@@ -181,7 +172,7 @@ const GroupBox = ({item, index, userList, navigation}) => {
                 </View>
               ),
           )}
-          {item.group_users?.length > 3 && (
+          {groupUsers?.length > 3 && (
             <View>
               <Text
                 style={{
@@ -191,7 +182,7 @@ const GroupBox = ({item, index, userList, navigation}) => {
                   marginLeft: 10,
                 }}>
                 {'+'}
-                {item.group_users?.length - 3}
+                {groupUsers?.length - 3}
               </Text>
             </View>
           )}

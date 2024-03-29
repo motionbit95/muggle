@@ -46,23 +46,16 @@ const GroupDetail = ({navigation, route}) => {
     };
 
     const getGroupUsers = async () => {
-      // console.log('getGroupUsers ===> ', data.group_users);
       let groupUsers = [];
-      data.group_users.map(async uid => {
-        await singleQuery('user', 'uid', uid)
-          .then(res => {
-            groupUsers.push(res[0]);
-          })
-          .catch(err => {
-            console.log(err);
-          });
-        // console.log('groupUsers ===> ', groupUsers);
-        setGroupUsers(groupUsers);
-      });
+      for (let i = 0; i < data.group_users?.length; i++) {
+        const user = await singleQuery('user', 'uid', data.group_users[i]);
+        groupUsers.push(user[0]);
+      }
+      setGroupUsers(groupUsers);
     };
+    getGroupUsers();
 
     getUserInfo();
-    getGroupUsers();
   }, []);
 
   const handleGoods = async gid => {

@@ -166,6 +166,52 @@ const App = () => {
           },
         })}
       />
+      <HomeStack.Screen
+        name="커피매칭"
+        component={Matching}
+        options={({navigation}) => ({
+          title: '',
+          headerLeft: ({onPress}) => (
+            <Image
+              style={{height: 26, width: 102}}
+              source={require('./src/assets/icons/logo.png')}
+            />
+            // <TouchableOpacity
+            //   style={{marginLeft: 20}}
+            //   onPress={() => alert('여긴 홈인데용!')}>
+            // <Text
+            //   style={[
+            //     {
+            //       color: 'black',
+            //       marginLeft: 10,
+
+            //       fontWeight: 'bold',
+            //     },
+            //     xs,
+            //   ]}>
+            //   MUGGLE
+            // </Text>
+            // </TouchableOpacity>
+          ),
+          headerRight: () => (
+            <TouchableOpacity
+              style={{marginRight: 10}}
+              onPress={() => alert('알림 페이지 전달')}>
+              <Image
+                style={{width: 24, height: 24}}
+                source={require('./src/assets/Notification.png')}
+              />
+            </TouchableOpacity>
+          ),
+          headerStyle: {
+            backgroundColor: '#fff',
+          },
+          headerTintColor: '#black',
+          headerTitleStyle: {
+            fontWeight: 'bold',
+          },
+        })}
+      />
     </HomeStack.Navigator>
   );
 
@@ -225,29 +271,6 @@ const App = () => {
         name="결제"
         component={WebViewPayment}
         options={{headerShown: false}}
-      />
-      <MatchingStack.Screen
-        name="커피매칭"
-        component={Matching}
-        options={({navigation}) => ({
-          title: '커피매칭',
-          // headerLeft: () => (
-          //   <Button
-          //     onPress={() =>
-          //       navigation.navigate('커피매칭신청', {screen: '매칭내역'})
-          //     }
-          //     title="Back"
-          //     color="black"
-          //   />
-          // ),
-          headerStyle: {
-            backgroundColor: '#fff',
-          },
-          headerTintColor: '#black',
-          headerTitleStyle: {
-            fontWeight: 'bold',
-          },
-        })}
       />
     </MatchingStack.Navigator>
   );
@@ -327,9 +350,9 @@ const App = () => {
         />
         <Tab.Screen
           name="커피매칭신청"
-          component={MatchHistory}
+          component={MatchingStackNavigate}
           options={{
-            // headerShown: false,
+            headerShown: false,
             tabBarActiveTintColor: '#FF634F',
             tabBarIcon: ({focused}) => (
               <Image

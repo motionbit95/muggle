@@ -146,7 +146,6 @@ const Home = ({navigation}) => {
         <View>
           {items?.slice(0, visibleItems)?.map((item, index) => (
             <GroupBox
-              key={index}
               userList={userList}
               index={index}
               item={item}
@@ -302,7 +301,7 @@ const Home = ({navigation}) => {
                     showsHorizontalScrollIndicator={false}>
                     {userList?.map((user, index) => (
                       <MatchBox
-                        key={index}
+                        // key={index}
                         user={user}
                         index={index}
                         navigation={navigation}

@@ -1,6 +1,12 @@
 import React, {useEffect, useState} from 'react';
 import {Dimensions, SafeAreaView, Text, View} from 'react-native';
-import {align_center, f_full, justify_center} from '../../style/styles';
+import {
+  align_center,
+  blackAlpha500,
+  f_full,
+  fs_md,
+  justify_center,
+} from '../../style/styles';
 import WebView from 'react-native-webview';
 
 function WebViewPayment({nacvigation, route}) {
@@ -33,6 +39,12 @@ function WebViewPayment({nacvigation, route}) {
 
   return (
     <SafeAreaView>
+      <View
+        style={[justify_center, align_center, f_full, {position: 'absolute'}]}>
+        <Text style={{color: blackAlpha500, fontSize: fs_md}}>
+          결제페이지로 이동중...
+        </Text>
+      </View>
       <View style={[f_full, justify_center, align_center]}>
         <WebView
           source={{
