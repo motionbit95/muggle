@@ -305,6 +305,7 @@ const Home = ({navigation}) => {
                         user={user}
                         index={index}
                         navigation={navigation}
+                        userList={userList}
                       />
                     ))}
                   </ScrollView>

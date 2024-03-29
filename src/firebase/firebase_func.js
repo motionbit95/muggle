@@ -41,10 +41,7 @@ export const singleQuery = async (collection_name, key, value) => {
 
 export const updateDocument = async (collection_name, doc_id, data) => {
   try {
-    await firestore()
-      .collection(collection_name)
-      .doc(doc_id)
-      .set(data, {merge: true});
+    await firestore().collection(collection_name).doc(doc_id).update(data);
   } catch (error) {
     console.error('문서 수정 중 오류:', error);
   }

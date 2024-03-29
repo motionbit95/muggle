@@ -33,7 +33,7 @@ import {
   whiteAlpha900,
 } from '../style/styles';
 
-const MatchBox = ({user, index, navigation}) => {
+const MatchBox = ({user, index, userList, navigation}) => {
   return (
     <ImageBackground
       key={index}
@@ -91,9 +91,9 @@ const MatchBox = ({user, index, navigation}) => {
           <TouchableOpacity
             style={btn_primary}
             onPressOut={() =>
-              navigation.navigate('홈', {
+              navigation.navigate('커피매칭신청', {
                 screen: '커피매칭',
-                params: {data: user},
+                params: {data: user, userList: userList, index: index},
               })
             }>
             <Text

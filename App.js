@@ -166,52 +166,6 @@ const App = () => {
           },
         })}
       />
-      <HomeStack.Screen
-        name="커피매칭"
-        component={Matching}
-        options={({navigation}) => ({
-          title: '',
-          headerLeft: ({onPress}) => (
-            <Image
-              style={{height: 26, width: 102}}
-              source={require('./src/assets/icons/logo.png')}
-            />
-            // <TouchableOpacity
-            //   style={{marginLeft: 20}}
-            //   onPress={() => alert('여긴 홈인데용!')}>
-            // <Text
-            //   style={[
-            //     {
-            //       color: 'black',
-            //       marginLeft: 10,
-
-            //       fontWeight: 'bold',
-            //     },
-            //     xs,
-            //   ]}>
-            //   MUGGLE
-            // </Text>
-            // </TouchableOpacity>
-          ),
-          headerRight: () => (
-            <TouchableOpacity
-              style={{marginRight: 10}}
-              onPress={() => alert('알림 페이지 전달')}>
-              <Image
-                style={{width: 24, height: 24}}
-                source={require('./src/assets/Notification.png')}
-              />
-            </TouchableOpacity>
-          ),
-          headerStyle: {
-            backgroundColor: '#fff',
-          },
-          headerTintColor: '#black',
-          headerTitleStyle: {
-            fontWeight: 'bold',
-          },
-        })}
-      />
     </HomeStack.Navigator>
   );
 
@@ -270,7 +224,74 @@ const App = () => {
       <MatchingStack.Screen
         name="결제"
         component={WebViewPayment}
-        options={{headerShown: false}}
+        options={({navigation}) => ({
+          headerShown: true,
+          title: '결제',
+          headerLeft: () => (
+            <TouchableOpacity
+              onPress={() =>
+                navigation.navigate('커피매칭신청', {screen: '매칭중'})
+              }>
+              <Image
+                style={img_sm}
+                source={require('./src/assets/icons/left_arrow.png')}
+              />
+            </TouchableOpacity>
+          ),
+          headerStyle: {
+            backgroundColor: '#fff',
+          },
+          headerTintColor: '#black',
+          headerTitleStyle: {
+            fontWeight: 'bold',
+          },
+        })}
+      />
+      <MatchingStack.Screen
+        name="커피매칭"
+        component={Matching}
+        options={({navigation}) => ({
+          title: '',
+          headerLeft: ({onPress}) => (
+            <Image
+              style={{height: 26, width: 102}}
+              source={require('./src/assets/icons/logo.png')}
+            />
+            // <TouchableOpacity
+            //   style={{marginLeft: 20}}
+            //   onPress={() => alert('여긴 홈인데용!')}>
+            // <Text
+            //   style={[
+            //     {
+            //       color: 'black',
+            //       marginLeft: 10,
+
+            //       fontWeight: 'bold',
+            //     },
+            //     xs,
+            //   ]}>
+            //   MUGGLE
+            // </Text>
+            // </TouchableOpacity>
+          ),
+          headerRight: () => (
+            <TouchableOpacity
+              style={{marginRight: 10}}
+              onPress={() => alert('알림 페이지 전달')}>
+              <Image
+                style={{width: 24, height: 24}}
+                source={require('./src/assets/Notification.png')}
+              />
+            </TouchableOpacity>
+          ),
+          headerStyle: {
+            backgroundColor: '#fff',
+          },
+          headerTintColor: '#black',
+          headerTitleStyle: {
+            fontWeight: 'bold',
+          },
+        })}
       />
     </MatchingStack.Navigator>
   );
@@ -294,45 +315,7 @@ const App = () => {
         <Tab.Screen
           name="홈"
           component={HomeStackNavigate}
-          // options={{
-          //   title: '홈',
-          //   headerTintColor: '#ffffff',
-          //   headerTitleStyle: {
-          //     fontWeight: 'bold',
-          //     fontSize: 20,
-          //   },
-          //   tabBarActiveTintColor: '#FF634F',
-          //   headerBackVisible: false,
-          //   headerTitle: '',
-          //   tabBarIcon: ({focused}) => (
-          //     <Image
-          //       style={img_sm}
-          //       source={
-          //         focused
-          //           ? require('./src/assets/navIcon/home_select.png')
-          //           : require('./src/assets/navIcon/home_unselect.png')
-          //       }
-          //     />
-          //   ),
-          //   headerLeft: ({onPress}) => (
-          //     <Image
-          //       style={{height: 26, width: 102, marginLeft: 20}}
-          //       source={require('./src/assets/icons/logo.png')}
-          //     />
-          //   ),
-          //   headerRight: () => (
-          //     <TouchableOpacity
-          //       style={{marginRight: 10}}
-          //       onPress={() => alert('알림 페이지 전달')}>
-          //       <Image
-          //         style={{width: 24, height: 24}}
-          //         source={require('./src/assets/Notification.png')}
-          //       />
-          //     </TouchableOpacity>
-          //   ),
-          // }}
           options={{
-            // headerShown: false,
             tabBarActiveTintColor: '#FF634F',
             headerShown: false,
             tabBarIcon: ({focused}) => (

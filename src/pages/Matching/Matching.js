@@ -1,5 +1,6 @@
 import React from 'react';
 import {
+  Dimensions,
   Image,
   ImageBackground,
   Text,
@@ -9,6 +10,7 @@ import {
 import LinearGradient from 'react-native-linear-gradient';
 import styles, {
   align_center,
+  center,
   f_full,
   flex_column,
   flex_row,
@@ -21,12 +23,14 @@ import styles, {
   fw_bold,
   fw_medium,
   img_lg,
+  img_ml,
   img_sm,
   justify_between,
   justify_center,
   justify_end,
   p_1,
   p_2,
+  p_3,
   p_4,
   radius_full,
   sp_1,
@@ -35,9 +39,12 @@ import styles, {
   whiteAlpha900,
 } from '../../style/styles';
 import {defaultFemale, defaultMale, getDisplayAge} from '../../firebase/api';
+import {InnerScreen} from 'react-native-screens';
 
 const Matching = ({navigation, route}) => {
-  const {data} = route.params ? route.params : {data: null};
+  const {data, userList, index} = route.params ? route.params : {data: null};
+
+  console.log('data ===> ', userList, index);
 
   return (
     <View style={styles.screenStyle}>
@@ -121,6 +128,65 @@ const Matching = ({navigation, route}) => {
                 />
               </TouchableOpacity>
             </View>
+          </View>
+          <View
+            style={[
+              flex_row,
+              w_full,
+              justify_between,
+              // f_full,
+              p_3,
+              {
+                position: 'absolute',
+                top: '50%',
+                transform: [{translate: [0, -50]}],
+              },
+            ]}>
+            <TouchableOpacity
+              disabled={index === 0}
+              onPress={() =>
+                navigation.navigate('커피매칭신청', {
+                  screen: '커피매칭',
+                  params: {
+                    data: userList[index - 1],
+                    userList: userList,
+                    index: index - 1,
+                  },
+                })
+              }>
+              <Image
+                style={[
+                  img_ml,
+                  {
+                    opacity: index === 0 ? 0 : 0.5,
+                  },
+                ]}
+                source={require('../../assets/icons/left_arrow_white.png')}
+              />
+            </TouchableOpacity>
+            <TouchableOpacity
+              disabled={index === userList?.length - 1}
+              onPress={() =>
+                navigation.navigate('커피매칭신청', {
+                  screen: '커피매칭',
+                  params: {
+                    data: userList?.[index + 1],
+                    userList: userList,
+                    index: index + 1,
+                  },
+                })
+              }>
+              <Image
+                style={[
+                  img_ml,
+                  {
+                    opacity: index === userList?.length - 1 ? 0 : 0.5,
+                    transform: [{rotate: '180deg'}],
+                  },
+                ]}
+                source={require('../../assets/icons/left_arrow_white.png')}
+              />
+            </TouchableOpacity>
           </View>
         </LinearGradient>
       </ImageBackground>

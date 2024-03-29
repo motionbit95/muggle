@@ -63,7 +63,11 @@ const GroupBox = ({item, index, navigation}) => {
       ]}
       onPress={() => {
         // console.log({...item, gid: item.doc_id});
-        navigation.navigate('모임상세', {data: {...item, gid: item.doc_id}});
+        navigation.navigate(
+          '모임상세',
+
+          {data: {...item, gid: item.doc_id}},
+        );
       }}>
       <View style={[flex_row, justify_between]}>
         <View style={{gap: 5}}>
