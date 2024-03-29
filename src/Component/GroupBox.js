@@ -31,10 +31,10 @@ import {
   primary_color,
 } from '../firebase/api';
 
-const userImg = require('../assets/icons/user.png');
-const mapImg = require('../assets/icons/map.png');
-const moneyImg = require('../assets/icons/money.png');
-const groupImg = require('../assets/GroupImage.png');
+export const userImg = require('../assets/icons/user.png');
+export const mapImg = require('../assets/icons/map.png');
+export const moneyImg = require('../assets/icons/money.png');
+export const groupImg = require('../assets/GroupImage.png');
 
 const GroupBox = ({item, index, userList, navigation}) => {
   const getUser = uid => {
@@ -53,7 +53,11 @@ const GroupBox = ({item, index, userList, navigation}) => {
   return (
     <TouchableOpacity
       key={index}
-      style={[radius_md, p_3, {backgroundColor: whiteAlpha900}]}
+      style={[
+        radius_md,
+        p_3,
+        {backgroundColor: whiteAlpha900, marginBottom: 10},
+      ]}
       onPress={() =>
         navigation.navigate('Home', {
           screen: '모임상세',

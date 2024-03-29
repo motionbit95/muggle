@@ -143,14 +143,14 @@ const User = ({navigation}) => {
               <View style={styles.one_thirdBoxStyle}>
                 <Text
                   style={{fontSize: 20, fontWeight: 'bold', color: 'black'}}>
-                  5
+                  {myInfo?.views ? myInfo?.views.length : 0}
                 </Text>
                 <Text style={{color: 'black'}}>최근 본 모임</Text>
               </View>
               <View style={styles.one_thirdBoxStyle}>
                 <Text
                   style={{fontSize: 20, fontWeight: 'bold', color: 'black'}}>
-                  3
+                  0
                 </Text>
                 <Text style={{color: 'black'}}>초대받은 모임</Text>
               </View>

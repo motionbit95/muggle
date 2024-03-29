@@ -14,10 +14,12 @@ export const getDocList = async collectionId => {
 };
 
 export const addDocument = async (collection_name, data) => {
+  console.log('data ===> ', collection_name, data);
   try {
     // Firestore 컬렉션에 문서 추가
     const docRef = await firestore().collection(collection_name).add(data);
     console.log('문서가 성공적으로 추가되었습니다.', docRef.id);
+    return docRef.id;
   } catch (error) {
     console.error('문서 추가 중 오류:', error);
   }
@@ -47,4 +49,30 @@ export const updateDocument = async (collection_name, doc_id, data) => {
   } catch (error) {
     console.error('문서 수정 중 오류:', error);
   }
+};
+
+export const deleteDocument = async (collection_name, doc_id) => {
+  try {
+    await firestore().collection(collection_name).doc(doc_id).delete();
+  } catch (error) {
+    console.error('문서 삭제 중 오류:', error);
+  }
+};
+
+export const addChat = async data => {
+  firestore()
+    .collection('chat-' + data.gid)
+    .doc('chat_info')
+    .set(data)
+    .then(() => {
+      console.log('채팅이 성공적으로 등록되었습니다.');
+    })
+    .catch(error => {
+      console.error('채팅 등록 중 오류 발생:', error);
+    });
+};
+
+export const getUser = async uid => {
+  const docRef = await firestore().collection('user').doc(uid).get();
+  return docRef.data();
 };

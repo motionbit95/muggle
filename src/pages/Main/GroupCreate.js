@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 import {cities, districts} from '../../firebase/api';
 import styles from '../../style/styles';
-import {addDocument} from '../../firebase/firebase_func';
+import {addChat, addDocument} from '../../firebase/firebase_func';
 import auth from '@react-native-firebase/auth';
 import DropDown from '../../Component/PickerComponent';
 import DateTimeInput from '../../Component/DateTimeInput';
@@ -38,7 +38,7 @@ const GroupCreate = ({navigation}) => {
     setSelectedDistrict(value);
   };
 
-  const createGroup = () => {
+  const createGroup = async () => {
     if (!auth().currentUser) {
       alert('회원만 모임을 생성할 수 있습니다.');
       return;
@@ -82,13 +82,30 @@ const GroupCreate = ({navigation}) => {
       group_admin: auth().currentUser.uid,
     };
 
-    addDocument('group', matchInfo);
-    // console.log(matchInfo);
+    await addDocument('group', matchInfo)
+      .then(id => {
+        addChat({
+          gid: id,
+          group_info: matchInfo,
+          doc_id: 'chat_info',
+          last_message: '',
+          createAt: new Date(),
+          chat_users: [
+            {
+              uid: auth().currentUser.uid,
+              unRead: 0,
+            },
+          ],
+        });
 
-    navigation.navigate('Home', {
-      screen: '모임상세',
-      params: {data: matchInfo},
-    });
+        navigation.navigate('Home', {
+          screen: '모임상세',
+          params: {data: {...matchInfo, gid: id}},
+        });
+      })
+      .catch(err => {
+        console.log(err);
+      });
   };
 
   return (

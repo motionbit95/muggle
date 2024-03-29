@@ -68,11 +68,60 @@ const GroupDetail = ({navigation, route}) => {
     await updateDocument('user', auth().currentUser.uid, myInfo);
   };
 
+  const handleView = async gid => {
+    console.log('최근 본 모임 ==> ', myInfo.views);
+    if (!myInfo.views) {
+      myInfo.views = [];
+    }
+    if (myInfo.views.includes(gid)) {
+      // 지우기
+      // myInfo.views = myInfo.views.filter(g => g !== gid);
+    } else {
+      myInfo.views.push(gid);
+    }
+
+    console.log(myInfo.views);
+
+    await updateDocument('user', auth().currentUser.uid, myInfo);
+  };
+
+  handleView(data.doc_id);
+
+  const handleEnterGroup = async () => {
+    if (!auth().currentUser) {
+      alert('회원만 모임에 참가할 수 있습니다.');
+      return;
+    }
+
+    console.log('data ===> ', data.group_users);
+
+    if (!data.group_users) {
+      data.group_users = [];
+    }
+    if (data.group_users.includes(auth().currentUser.uid)) {
+      // 지우기
+      // data.group_users = data.group_users.filter(
+      //   g => g !== auth().currentUser.uid,
+      // );
+    } else {
+      data.group_users.push(auth().currentUser.uid);
+    }
+
+    console.log(data.group_users);
+
+    await updateDocument('group', data.doc_id, data);
+
+    navigation.navigate('Chat', {
+      screen: '채팅룸',
+      params: {data: {...data, gid: data.doc_id}, userList: userList},
+    });
+  };
+
   return (
     <View style={styles.screenStyle}>
       <ScrollView style={styles.scrollViewStyle}>
         <Image
-          // source={require('../../assets/banner1.png')}
+          source={require('../../assets/banner1.png')}
           style={[styles.banner, {backgroundColor: '#d9d9d9'}]}
         />
         <View style={styles.contentStyle}>
@@ -108,11 +157,11 @@ const GroupDetail = ({navigation, route}) => {
                 <Text style={{fontSize: 16, color: 'black'}}>
                   {data?.group_place}
                 </Text>
-                <TouchableOpacity
+                {/* <TouchableOpacity
                   style={styles.mapButton}
                   onPress={() => alert('지도보기')}>
                   <Text style={{fontSize: 14, color: 'black'}}>지도보기</Text>
-                </TouchableOpacity>
+                </TouchableOpacity> */}
               </View>
 
               <View style={styles.rowBox}>
@@ -131,7 +180,7 @@ const GroupDetail = ({navigation, route}) => {
                 />
                 <Text style={{fontSize: 16, color: 'black'}}>
                   {data?.group_users?.length} / {data?.group_personnel} (
-                  {data?.group_personnel - data?.group_users?.length}자리남음)
+                  {data?.group_personnel - data?.group_users?.length}자리 남음)
                 </Text>
               </View>
             </View>
@@ -191,13 +240,12 @@ const GroupDetail = ({navigation, route}) => {
         </TouchableOpacity>
         <TouchableOpacity
           style={[styles.button, {flex: 5}]}
-          onPress={() =>
-            navigation.navigate('Chat', {
-              screen: '채팅룸',
-              // params: {key: 'value'},
-            })
-          }>
-          <Text style={styles.buttonText}>참여하기</Text>
+          onPress={handleEnterGroup}>
+          <Text style={styles.buttonText}>
+            {data?.group_users.includes(auth().currentUser.uid)
+              ? '채팅하기'
+              : '참여하기'}
+          </Text>
         </TouchableOpacity>
       </View>
     </View>
