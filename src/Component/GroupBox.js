@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {Image, Text, TouchableOpacity, View} from 'react-native';
 import styles, {
   align_center,
@@ -30,6 +30,7 @@ import {
   formatDateTime,
   primary_color,
 } from '../firebase/api';
+import {singleQuery} from '../firebase/firebase_func';
 
 export const userImg = require('../assets/icons/user.png');
 export const mapImg = require('../assets/icons/map.png');
@@ -37,18 +38,26 @@ export const moneyImg = require('../assets/icons/money.png');
 export const groupImg = require('../assets/GroupImage.png');
 
 const GroupBox = ({item, index, userList, navigation}) => {
-  const getUser = uid => {
-    let tempUser = null;
-    userList?.map(user => {
-      if (user.doc_id === uid) {
-        tempUser = user;
-      }
-    });
+  const [groupUsers, setGroupUsers] = useState([]);
 
-    // console.log(tempUser);
-
-    return tempUser;
-  };
+  useEffect(() => {
+    const getGroupUsers = async () => {
+      // console.log('getGroupUsers ===> ', data.group_users);
+      let groupUsers = [];
+      item.group_users.map(async uid => {
+        await singleQuery('user', 'uid', uid)
+          .then(res => {
+            groupUsers.push(res[0]);
+          })
+          .catch(err => {
+            console.log(err);
+          });
+        console.log('groupUsers ===> ', groupUsers);
+        setGroupUsers(groupUsers);
+      });
+    };
+    getGroupUsers();
+  }, []);
 
   return (
     <TouchableOpacity
@@ -58,12 +67,13 @@ const GroupBox = ({item, index, userList, navigation}) => {
         p_3,
         {backgroundColor: whiteAlpha900, marginBottom: 10},
       ]}
-      onPress={() =>
+      onPress={() => {
+        console.log({...item, gid: item.doc_id});
         navigation.navigate('Home', {
           screen: '모임상세',
-          params: {data: item, userList: userList},
-        })
-      }>
+          params: {data: {...item, gid: item.doc_id}},
+        });
+      }}>
       <View style={[flex_row, justify_between]}>
         <View style={{gap: 5}}>
           <Text
@@ -81,7 +91,7 @@ const GroupBox = ({item, index, userList, navigation}) => {
                 fontWeight: '400',
                 color: blackAlpha500,
               }}>
-              {formatDateTime(item.group_date)}
+              {formatDateTime(item.group_time)}
             </Text>
             <View
               style={[
@@ -145,7 +155,7 @@ const GroupBox = ({item, index, userList, navigation}) => {
             radius_full,
             {paddingHorizontal: 10, backgroundColor: whiteAlpha900},
           ]}>
-          {item.group_users?.map(
+          {groupUsers?.map(
             (user, index) =>
               index < 3 && (
                 <View
@@ -158,10 +168,9 @@ const GroupBox = ({item, index, userList, navigation}) => {
                   ]}>
                   <Image
                     source={{
-                      uri: getUser(user)?.user_profile
-                        ? getUser(user)?.user_profile
-                        : getUser(user)?.user_gender === 'male' ||
-                          getUser(user)?.user_gender === '남'
+                      uri: user?.user_profile
+                        ? user?.user_profile
+                        : user?.user_gender === '남'
                         ? defaultMale
                         : defaultFemale,
                     }}

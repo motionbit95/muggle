@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   Alert,
   Image,
@@ -10,14 +10,29 @@ import {
 } from 'react-native';
 
 import {addDocument} from '../../firebase/firebase_func';
-import styles from '../../style/styles';
+import styles, {
+  blackAlpha100,
+  blackAlpha900,
+  center,
+  fs_xs,
+} from '../../style/styles';
+import ProfilePicker from '../../Component/ProfilePicker';
 
 const Interest = ({navigation, route}) => {
   const {data} = route.params ? route.params : {data: null};
+  const [interest, setInterest] = useState([]);
 
   const signupUser = () => {
     addDocument('user', data);
     navigation.navigate('인트로');
+  };
+
+  const handleInterest = content => {
+    if (interest.includes(content)) {
+      setInterest(interest.filter(item => item !== content));
+    } else {
+      setInterest([...interest, content]);
+    }
   };
   return (
     <View style={styles.screenStyle}>
@@ -28,18 +43,7 @@ const Interest = ({navigation, route}) => {
               width: '100%',
               gap: 20,
             }}>
-            <View>
-              <View style={styles.Avartar70}>
-                <Image
-                  style={{width: '90%', height: '90%'}}
-                  source={
-                    data?.user_profile
-                      ? {uri: data?.user_profile}
-                      : require('../../assets/avartar.png')
-                  }
-                />
-              </View>
-            </View>
+            <ProfilePicker />
             <View style={styles.rowBox}>
               <View style={{flex: 1}}>
                 <Text style={styles.contentTitle}>소개</Text>
@@ -55,7 +59,7 @@ const Interest = ({navigation, route}) => {
             </View>
           </View>
           <View style={styles.hr} />
-          <View>
+          <View style={center}>
             <View
               style={{
                 rowGap: 20,
@@ -85,14 +89,28 @@ const Interest = ({navigation, route}) => {
                 <TouchableOpacity
                   key={index}
                   style={{
-                    justifyContent: 'center',
+                    justifyContent: 'flex-start',
                     alignItems: 'center',
                     gap: 5,
-                    width: '20%',
+                    margin: 2,
+                    width: 65,
+                    height: 100,
+                    backgroundColor: interest.includes(item)
+                      ? blackAlpha100
+                      : 'white',
+                    padding: 5,
+                    borderRadius: 10,
                   }}
-                  onPress={() => Alert.alert('미구현')}>
+                  onPress={() => handleInterest(item)}>
                   <View style={styles.interestButton}></View>
-                  <Text style={{color: 'black', fontSize: 12}}>{item}</Text>
+                  <Text
+                    style={{
+                      color: blackAlpha900,
+                      fontSize: fs_xs,
+                      textAlign: 'center',
+                    }}>
+                    {item}
+                  </Text>
                 </TouchableOpacity>
               ))}
             </View>

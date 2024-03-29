@@ -47,6 +47,7 @@ import MatchHistory from './src/pages/Matching/MatchHistory';
 import MatchPayment from './src/pages/Matching/MatchPayment';
 import {
   center,
+  circle_30,
   circle_40,
   circle_50,
   img_sm,
@@ -257,7 +258,7 @@ const App = () => {
         options={{title: '회원가입'}}
       />
       <SignUpStack.Screen name="휴대폰 본인인증" component={Certificate} />
-      <SignUpStack.Screen name="관심사 선택" component={Interest} />
+      <SignUpStack.Screen name="프로필 설정" component={Interest} />
       <SignUpStack.Screen name="상세 관심사 선택" component={Interest2} />
       <SignUpStack.Screen name="인트로" component={Introduce} />
     </SignUpStack.Navigator>
@@ -268,17 +269,48 @@ const App = () => {
       <Tab.Navigator>
         <Tab.Screen
           name="Home"
-          component={Home}
+          component={HomeStackNavigate}
+          // options={{
+          //   title: '홈',
+          //   headerTintColor: '#ffffff',
+          //   headerTitleStyle: {
+          //     fontWeight: 'bold',
+          //     fontSize: 20,
+          //   },
+          //   tabBarActiveTintColor: '#FF634F',
+          //   headerBackVisible: false,
+          //   headerTitle: '',
+          //   tabBarIcon: ({focused}) => (
+          //     <Image
+          //       style={img_sm}
+          //       source={
+          //         focused
+          //           ? require('./src/assets/navIcon/home_select.png')
+          //           : require('./src/assets/navIcon/home_unselect.png')
+          //       }
+          //     />
+          //   ),
+          //   headerLeft: ({onPress}) => (
+          //     <Image
+          //       style={{height: 26, width: 102, marginLeft: 20}}
+          //       source={require('./src/assets/icons/logo.png')}
+          //     />
+          //   ),
+          //   headerRight: () => (
+          //     <TouchableOpacity
+          //       style={{marginRight: 10}}
+          //       onPress={() => alert('알림 페이지 전달')}>
+          //       <Image
+          //         style={{width: 24, height: 24}}
+          //         source={require('./src/assets/Notification.png')}
+          //       />
+          //     </TouchableOpacity>
+          //   ),
+          // }}
           options={{
-            title: '홈',
-            headerTintColor: '#ffffff',
-            headerTitleStyle: {
-              fontWeight: 'bold',
-              fontSize: 20,
-            },
+            // headerShown: false,
             tabBarActiveTintColor: '#FF634F',
-            headerBackVisible: false,
-            headerTitle: '',
+            headerShown: false,
             tabBarIcon: ({focused}) => (
               <Image
                 style={img_sm}
@@ -289,22 +321,7 @@ const App = () => {
                 }
               />
             ),
-            headerLeft: ({onPress}) => (
-              <Image
-                style={{height: 26, width: 102, marginLeft: 20}}
-                source={require('./src/assets/icons/logo.png')}
-              />
-            ),
-            headerRight: () => (
-              <TouchableOpacity
-                style={{marginRight: 10}}
-                onPress={() => alert('알림 페이지 전달')}>
-                <Image
-                  style={{width: 24, height: 24}}
-                  source={require('./src/assets/Notification.png')}
-                />
-              </TouchableOpacity>
-            ),
+            unmountOnBlur: true,
           }}
         />
         <Tab.Screen
@@ -331,12 +348,15 @@ const App = () => {
           component={GroupCreate}
           options={{
             tabBarLabel: '',
+
             tabBarIcon: ({focused}) => (
-              <View style={[center, radius_full, circle_40]}>
-                <Image
-                  style={img_xs}
-                  source={require('./src/assets/Plus.png')}
-                />
+              <View style={{marginTop: 20}}>
+                <View style={[center, radius_full, circle_40]}>
+                  <Image
+                    style={img_xs}
+                    source={require('./src/assets/Plus.png')}
+                  />
+                </View>
               </View>
             ),
             unmountOnBlur: true,

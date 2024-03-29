@@ -92,7 +92,7 @@ const ProfilePicker = () => {
         />
       </View>
       <TouchableOpacity style={btn_normal} onPress={handleChoosePhoto}>
-        <Text>프로필 편집</Text>
+        <Text>이미지 선택</Text>
       </TouchableOpacity>
     </View>
   );

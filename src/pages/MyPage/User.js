@@ -1,6 +1,11 @@
 import React, {useEffect, useState} from 'react';
 import {Button, Image, Text, TouchableOpacity, View} from 'react-native';
-import styles, {shadow_base, sp_3} from '../../style/styles';
+import styles, {
+  f_full,
+  radius_full,
+  shadow_base,
+  sp_3,
+} from '../../style/styles';
 import auth from '@react-native-firebase/auth';
 import {singleQuery} from '../../firebase/firebase_func';
 import {getDisplayAge, primary_color} from '../../firebase/api';
@@ -58,7 +63,7 @@ const User = ({navigation}) => {
               <View>
                 <View style={styles.Avartar70}>
                   <Image
-                    style={{width: '90%', height: '90%'}}
+                    style={[f_full, radius_full]}
                     source={
                       myInfo?.user_profile
                         ? {uri: myInfo?.user_profile}

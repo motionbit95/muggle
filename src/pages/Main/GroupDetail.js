@@ -7,7 +7,14 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import styles, {fs_md, img_md, img_sm, p_2} from '../../style/styles';
+import styles, {
+  blackAlpha900,
+  fs_md,
+  fw_bold,
+  img_md,
+  img_sm,
+  p_2,
+} from '../../style/styles';
 import {
   calculateDday,
   formatDate,
@@ -26,31 +33,40 @@ const GroupDetail = ({navigation, route}) => {
   var dday = calculateDday(formatDate(data?.group_time));
   const [myInfo, setMyInfo] = useState(null);
   const [icon, setIcon] = useState(require('../../assets/icons/heart.png'));
-
-  const getUser = uid => {
-    let tempUser = null;
-    userList?.map(user => {
-      if (user.doc_id === uid || user.uid === uid) {
-        tempUser = user;
-      }
-    });
-
-    return tempUser;
-  };
+  const [groupUsers, setGroupUsers] = useState([]);
 
   useEffect(() => {
-    const getUsesrInfo = async user => {
+    const getUserInfo = async user => {
       singleQuery('user', 'uid', auth().currentUser.uid).then(res => {
         setMyInfo(res[0]);
-        if (res[0].goods.includes(data?.doc_id)) {
+        if (res[0].goods?.includes(data?.doc_id)) {
           setIcon(require('../../assets/icons/heart_fill.png'));
         }
       });
     };
-    getUsesrInfo();
+
+    const getGroupUsers = async () => {
+      // console.log('getGroupUsers ===> ', data.group_users);
+      let groupUsers = [];
+      data.group_users.map(async uid => {
+        await singleQuery('user', 'uid', uid)
+          .then(res => {
+            groupUsers.push(res[0]);
+          })
+          .catch(err => {
+            console.log(err);
+          });
+        console.log('groupUsers ===> ', groupUsers);
+        setGroupUsers(groupUsers);
+      });
+    };
+
+    getUserInfo();
+    getGroupUsers();
   }, []);
 
   const handleGoods = async gid => {
+    if (!myInfo) return;
     if (!myInfo.goods) {
       myInfo.goods = [];
     }
@@ -65,11 +81,11 @@ const GroupDetail = ({navigation, route}) => {
 
     console.log(myInfo.goods);
 
-    await updateDocument('user', auth().currentUser.uid, myInfo);
+    await updateDocument('user', myInfo.doc_id, myInfo);
   };
 
   const handleView = async gid => {
-    console.log('최근 본 모임 ==> ', myInfo.views);
+    if (!myInfo) return;
     if (!myInfo.views) {
       myInfo.views = [];
     }
@@ -80,9 +96,7 @@ const GroupDetail = ({navigation, route}) => {
       myInfo.views.push(gid);
     }
 
-    console.log(myInfo.views);
-
-    await updateDocument('user', auth().currentUser.uid, myInfo);
+    await updateDocument('user', myInfo.doc_id, myInfo);
   };
 
   handleView(data.doc_id);
@@ -92,8 +106,6 @@ const GroupDetail = ({navigation, route}) => {
       alert('회원만 모임에 참가할 수 있습니다.');
       return;
     }
-
-    console.log('data ===> ', data.group_users);
 
     if (!data.group_users) {
       data.group_users = [];
@@ -186,7 +198,7 @@ const GroupDetail = ({navigation, route}) => {
             </View>
 
             <View style={{flex: 1}}>
-              <Text style={{color: 'black', fontSize: fs_md}}>
+              <Text style={{color: 'black', fontSize: fs_md, lineHeight: 24}}>
                 {data?.group_target}
               </Text>
             </View>
@@ -200,30 +212,45 @@ const GroupDetail = ({navigation, route}) => {
               gap: 20,
             }}>
             <View>
-              <Text style={{color: 'black'}}>
+              <Text
+                style={{
+                  color: blackAlpha900,
+                  fontWeight: fw_bold,
+                  fontSize: fs_md,
+                }}>
                 참여인원 ( {data?.group_users?.length} )
               </Text>
             </View>
-            <View gap={10}>
-              {data.group_users?.map(
+            <View
+              style={{
+                rowGap: 20,
+                columnGap: 0,
+                flexDirection: 'row',
+                flexWrap: 'wrap',
+              }}>
+              {groupUsers?.map(
                 (user, index) =>
                   index < 3 && (
-                    <View key={index} style={styles.rowBox}>
+                    <View key={index} style={[styles.rowBox, {width: '50%'}]}>
                       <Image
                         source={{
-                          uri: getUser(user)?.user_profile
-                            ? getUser(user)?.user_profile
-                            : getUser(user)?.user_gender === 'male' ||
-                              getUser(user)?.user_gender === '남'
+                          uri: user?.user_profile
+                            ? user?.user_profile
+                            : user?.user_gender === '남'
                             ? defaultMale
                             : defaultFemale,
+                          // ? user?.user_profile
+                          // : user?.user_gender === 'male' ||
+                          //   user?.user_gender === '남'
+                          // ? defaultMale
+                          // : defaultFemale,
                         }}
                         width={30}
                         height={30}
                         borderRadius={50}
                       />
                       <Text style={{fontSize: 14, color: 'black'}}>
-                        {getUser(user)?.user_name}
+                        {user?.user_name}
                       </Text>
                     </View>
                   ),

@@ -27,7 +27,7 @@ const GroupCreate = ({navigation}) => {
   const [matchPrice, setMatchPrice] = useState('나누기');
   const [matchImage, setMatchImage] = useState('');
 
-  const matchProps = ['나누기', '모임 금액 선택'];
+  const matchProps = ['나누기', '직접 입력'];
 
   const handleCityChange = value => {
     setSelectedCity(value);
@@ -65,6 +65,11 @@ const GroupCreate = ({navigation}) => {
     }
     if (!matchPersonnel) {
       alert('모임 정원을 입력하세요.');
+      return;
+    }
+
+    if (matchPersonnel > 300) {
+      alert('300명 이하로 입력하세요.');
       return;
     }
 
@@ -213,10 +218,12 @@ const GroupCreate = ({navigation}) => {
                 />
               </View>
               <TextInput
+                readOnly={matchPrice === '나누기'}
+                onChange={e => setMatchPrice(e.nativeEvent.text)}
                 keyboardType="numeric"
                 style={[{flex: 1.5}, styles.contentBox]}
                 placeholder="모임 금액을 입력해주세요."
-                onChange={null}
+                // onChange={null}
               />
             </View>
           </View>

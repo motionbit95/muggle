@@ -7,7 +7,13 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import {cities, districts, banks, font_lg} from '../../firebase/api';
+import {
+  cities,
+  districts,
+  banks,
+  font_lg,
+  formatTwoDigits,
+} from '../../firebase/api';
 import DropDown from '../../Component/PickerComponent';
 import styles from '../../style/styles';
 import auth from '@react-native-firebase/auth';
@@ -75,16 +81,43 @@ const SignUp = ({navigation}) => {
   };
 
   const handleSignup = () => {
+    if (!userName) {
+      alert('회원 이름을 입력하세요.');
+      return;
+    }
+
+    if (!selectedGender) {
+      alert('성별을 선택하세요.');
+      return;
+    }
+
+    if (!selectyear || !selectmonth || !selectday) {
+      alert('생년월일을 선택하세요.');
+      return;
+    }
+
+    if (!selectedCity || !selectedDistrict) {
+      alert('지역을 선택하세요.');
+      return;
+    }
+
+    if (!userPrice) {
+      alert('매칭권 금액을 입력하세요.');
+      return;
+    }
+
+    if (userPrice < 2) {
+      alert('매칭권 금액을 2만원 이상으로 입력하세요.');
+      return;
+    }
+
     const userInfo = {
       uid: auth().currentUser?.uid,
       user_phone: auth().currentUser?.phoneNumber,
       user_name: userName,
       user_gender: selectedGender,
       user_birth:
-        '' +
-        selectyear +
-        (parseInt(selectmonth < 10) ? '0' + selectmonth : selectmonth) +
-        (parseInt(selectday < 10) ? '0' + selectday : selectday),
+        selectyear + formatTwoDigits(selectmonth) + formatTwoDigits(selectday),
       user_place: [selectedCity + ' ' + selectedDistrict],
       user_price: userPrice,
       user_bank: {
@@ -92,7 +125,7 @@ const SignUp = ({navigation}) => {
         bank_name: selectbank,
       },
     };
-    navigation.navigate('관심사 선택', {data: userInfo});
+    navigation.navigate('프로필 설정', {data: userInfo});
   };
 
   return (
@@ -100,7 +133,7 @@ const SignUp = ({navigation}) => {
       <SafeAreaView style={{width: '100%'}}>
         <ScrollView style={styles.scrollViewStyle}>
           <View style={{width: '100%', gap: 15, padding: 20}}>
-            <View style={{width: '100%', paddingTop: 10}}>
+            <View style={{width: '100%'}}>
               <Text
                 style={{color: 'black', fontSize: font_lg, fontWeight: 'bold'}}>
                 회원가입
@@ -249,14 +282,14 @@ const SignUp = ({navigation}) => {
               </View>
             </View>
           </View>
+          <View style={styles.buttonBox}>
+            <TouchableOpacity
+              style={[styles.button, styles.buttonMargin]}
+              onPress={handleSignup}>
+              <Text style={styles.buttonText}>다음</Text>
+            </TouchableOpacity>
+          </View>
         </ScrollView>
-        <View style={styles.buttonBox}>
-          <TouchableOpacity
-            style={[styles.button, styles.buttonMargin]}
-            onPress={handleSignup}>
-            <Text style={styles.buttonText}>다음</Text>
-          </TouchableOpacity>
-        </View>
       </SafeAreaView>
     </View>
   );

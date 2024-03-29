@@ -14,7 +14,6 @@ export const getDocList = async collectionId => {
 };
 
 export const addDocument = async (collection_name, data) => {
-  console.log('data ===> ', collection_name, data);
   try {
     // Firestore 컬렉션에 문서 추가
     const docRef = await firestore().collection(collection_name).add(data);
@@ -33,14 +32,13 @@ export const singleQuery = async (collection_name, key, value) => {
     .get();
 
   querySnapshot.forEach(doc => {
-    list.push(doc.data());
+    list.push({...doc.data(), doc_id: doc.id});
   });
 
   return list;
 };
 
 export const updateDocument = async (collection_name, doc_id, data) => {
-  console.log('data ===> ', data);
   try {
     await firestore()
       .collection(collection_name)

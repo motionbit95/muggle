@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {
   Image,
   ScrollView,
@@ -9,27 +9,19 @@ import {
 } from 'react-native';
 import styles, {
   align_center,
-  blackAlpha100,
   blackAlpha500,
   blackAlpha900,
+  f_full,
   flex_row,
   fs_md,
   fs_sm,
+  fs_xs,
   fw_bold,
   justify_between,
-  radius_sm,
+  radius_full,
   sp_2,
-  whiteAlpha900,
 } from '../../style/styles';
-import {
-  calculateDday,
-  defaultFemale,
-  defaultMale,
-  displayDday,
-  formatDate,
-  formatDateTime,
-  primary_color,
-} from '../../firebase/api';
+import {formatDateTime, primary_color} from '../../firebase/api';
 import {mapImg, moneyImg, userImg} from '../../Component/GroupBox';
 import firestore from '@react-native-firebase/firestore';
 import {addDocument, getUser} from '../../firebase/firebase_func';
@@ -41,7 +33,16 @@ const ChatRoom = ({navigation, route}) => {
   const [groupInfo, setGroupInfo] = useState(null);
   const [chatList, setChatList] = useState([]);
 
+  // ScrollView의 ref를 생성합니다.
+  const scrollViewRef = useRef();
+
+  // 스크롤을 제일 아래로 내리는 함수
+  const scrollToBottom = () => {
+    scrollViewRef.current.scrollToEnd({animated: true});
+  };
+
   useEffect(() => {
+    console.log('data===>', data);
     const unsubscribe = firestore()
       .collection('chat-' + data.gid)
       .orderBy('createdAt', 'asc')
@@ -59,6 +60,7 @@ const ChatRoom = ({navigation, route}) => {
         });
         console.log(updatedDocuments);
         setChatList(updatedDocuments);
+        scrollToBottom();
       });
 
     return () => unsubscribe();
@@ -86,28 +88,37 @@ const ChatRoom = ({navigation, route}) => {
   };
   return (
     <View style={styles.screenStyle}>
-      <ScrollView style={styles.scrollViewStyle}>
-        <View style={[styles.matchBox, {margin: 10}]}>
-          <View style={[flex_row, justify_between]}>
-            <View style={{gap: 5}}>
+      <View
+        style={[
+          {
+            backgroundColor: '#FFF7E3',
+            borderRadius: 10,
+            padding: 10,
+            gap: 5,
+            width: '95%',
+            margin: 10,
+          },
+        ]}>
+        <View style={[flex_row, justify_between]}>
+          <View style={{gap: 5}}>
+            <Text
+              style={{
+                fontSize: fs_md,
+                fontWeight: fw_bold,
+                color: blackAlpha900,
+              }}>
+              {data?.group_name}
+            </Text>
+            <View style={[flex_row, align_center, sp_2]}>
               <Text
                 style={{
-                  fontSize: fs_md,
-                  fontWeight: fw_bold,
-                  color: blackAlpha900,
+                  fontSize: fs_sm,
+                  fontWeight: '400',
+                  color: blackAlpha500,
                 }}>
-                {groupInfo?.group_name}
+                {formatDateTime(data?.group_date)}
               </Text>
-              <View style={[flex_row, align_center, sp_2]}>
-                <Text
-                  style={{
-                    fontSize: fs_sm,
-                    fontWeight: '400',
-                    color: blackAlpha500,
-                  }}>
-                  {formatDateTime(groupInfo?.group_date)}
-                </Text>
-                {/* <View
+              {/* <View
                   style={[
                     radius_sm,
                     {
@@ -127,33 +138,40 @@ const ChatRoom = ({navigation, route}) => {
                     {displayDday(calculateDday(formatDate(data?.group_time)))}
                   </Text>
                 </View> */}
-              </View>
+            </View>
 
-              <View style={{gap: 5}}>
-                <View style={[styles.rowBox, {gap: 5}]}>
-                  <Image style={{width: 16, height: 16}} source={mapImg} />
-                  <Text style={{color: blackAlpha900, fontSize: fs_sm}}>
-                    {groupInfo?.group_place}
-                  </Text>
-                </View>
-                <View style={[styles.rowBox, {gap: 5}]}>
-                  <Image style={{width: 16, height: 16}} source={moneyImg} />
-                  <Text style={{color: blackAlpha900, fontSize: fs_sm}}>
-                    {groupInfo?.group_price}
-                  </Text>
-                  <Image style={{width: 16, height: 16}} source={userImg} />
-                  <Text style={{color: blackAlpha900, fontSize: fs_sm}}>
-                    {groupInfo?.group_users.length} /{' '}
-                    {groupInfo?.group_personnel} (
-                    {groupInfo?.group_personnel - groupInfo?.group_users.length}
-                    자리 남음)
-                  </Text>
-                </View>
+            <View style={{gap: 5}}>
+              <View style={[styles.rowBox, {gap: 5}]}>
+                <Image style={{width: 16, height: 16}} source={mapImg} />
+                <Text style={{color: blackAlpha900, fontSize: fs_sm}}>
+                  {data?.group_place}
+                </Text>
+              </View>
+              <View style={[styles.rowBox, {gap: 5}]}>
+                <Image style={{width: 16, height: 16}} source={moneyImg} />
+                <Text style={{color: blackAlpha900, fontSize: fs_sm}}>
+                  {data?.group_price}
+                </Text>
+                <Image style={{width: 16, height: 16}} source={userImg} />
+                <Text
+                  style={{
+                    color: primary_color,
+                    fontWeight: fw_bold,
+                    fontSize: fs_sm,
+                  }}>
+                  {data?.group_users.length}
+                </Text>
+                <Text style={{color: blackAlpha900, fontSize: fs_sm}}>
+                  / {data?.group_personnel} (
+                  {data?.group_personnel - data?.group_users.length}
+                  자리 남음)
+                </Text>
               </View>
             </View>
           </View>
         </View>
-
+      </View>
+      <ScrollView style={styles.scrollViewStyle} ref={scrollViewRef}>
         <View
           style={[styles.contentStyle, {gap: 15, justifyContent: 'flex-end'}]}>
           {/* 왼쪽 배치 rowBox, 시간은 flex-start
@@ -164,19 +182,19 @@ const ChatRoom = ({navigation, route}) => {
               <View
                 style={[
                   {
-                    alignItems: 'flex-end',
+                    alignItems: 'flex-start',
                     flexDirection: 'row-reverse',
                     gap: 10,
                   },
                 ]}>
                 <View style={{gap: 10, alignItems: 'center'}}>
                   <View>
-                    <View style={styles.Avartar50}>
+                    <View style={styles.Avartar40}>
                       <Image
-                        style={{width: '90%', height: '90%'}}
+                        style={[f_full, radius_full]}
                         source={
                           chat?.user_info?.user_profile
-                            ? chat?.user_info?.user_profile
+                            ? {uri: chat?.user_info?.user_profile}
                             : require('../../assets/avartar.png')
                         }
                       />
@@ -191,13 +209,14 @@ const ChatRoom = ({navigation, route}) => {
                     style={{
                       flex: 1,
                       padding: 15,
-                      backgroundColor: 'rgba(255, 218, 122, 1)',
+                      backgroundColor: '#F1F1F1',
                       borderRadius: 15,
                       borderTopRightRadius: 0,
+                      maxWidth: 290,
                     }}>
-                    <Text style={{color: 'black'}}>{chat?.chat}</Text>
+                    <Text style={{color: blackAlpha900}}>{chat?.chat}</Text>
                   </View>
-                  <Text style={{color: 'black'}}>
+                  <Text style={{color: blackAlpha500, fontSize: fs_xs}}>
                     {formatDateTime(chat?.createdAt).split(' ')[1]}
                   </Text>
                 </View>
@@ -206,9 +225,9 @@ const ChatRoom = ({navigation, route}) => {
               <View style={[styles.rowBox, {gap: 10}]}>
                 <View style={{gap: 10, alignItems: 'center'}}>
                   <View>
-                    <View style={styles.Avartar50}>
+                    <View style={styles.Avartar40}>
                       <Image
-                        style={{width: '90%', height: '90%'}}
+                        style={[f_full, radius_full]}
                         source={
                           chat?.user_info?.user_profile
                             ? chat?.user_info?.user_profile
@@ -227,13 +246,13 @@ const ChatRoom = ({navigation, route}) => {
                     style={{
                       flex: 1,
                       padding: 15,
-                      backgroundColor: '#d9d9d9',
+                      backgroundColor: '#FFDA7A',
                       borderRadius: 15,
                       borderTopLeftRadius: 0,
                     }}>
-                    <Text style={{color: 'black'}}>{chat?.chat}</Text>
+                    <Text style={{color: blackAlpha900}}>{chat?.chat}</Text>
                   </View>
-                  <Text style={{color: 'black'}}>
+                  <Text style={{color: blackAlpha500, fontSize: fs_xs}}>
                     {formatDateTime(chat?.createdAt).split(' ')[1]}
                   </Text>
                 </View>

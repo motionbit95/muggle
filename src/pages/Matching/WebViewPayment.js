@@ -8,8 +8,6 @@ function WebViewPayment({nacvigation, route}) {
   const [queryParams, setQueryParams] = useState(null);
 
   useEffect(() => {
-    console.log('data ===> ', data);
-
     let queryParams = new URLSearchParams();
     queryParams.append('buyer_name', data.buyer_name);
     queryParams.append('buy_goods', data.buy_goods);

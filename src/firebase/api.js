@@ -405,3 +405,19 @@ export function formatDateTime(date) {
     return formatDateTime(firestoreDate);
   }
 }
+
+export function getDayText(date) {
+  console.log(date);
+}
+
+export function formatTwoDigits(num) {
+  // 숫자를 문자열로 변환
+  var strNum = num.toString();
+
+  // 만약 한 자리 숫자라면 앞에 0 추가
+  if (strNum.length === 1) {
+    strNum = '0' + strNum;
+  }
+
+  return strNum;
+}

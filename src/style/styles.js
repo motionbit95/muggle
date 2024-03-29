@@ -158,6 +158,14 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  Avartar40: {
+    width: 40,
+    height: 40,
+    backgroundColor: '#d9d9d9',
+    borderRadius: 40,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
   Avartar50: {
     width: 50,
     height: 50,
@@ -399,6 +407,7 @@ export const whiteAlpha800 = 'rgba(255, 255, 255, 0.8)';
 export const whiteAlpha900 = 'rgba(255, 255, 255, 0.92)';
 
 // typograpy
+export const fs_2xs = 10;
 export const fs_xs = 12;
 export const fs_sm = 14;
 export const fs_md = 16;
@@ -569,6 +578,12 @@ export const center = {
 };
 
 export const w_full = {width: '100%'};
+
+export const circle_30 = {
+  width: 30,
+  height: 30,
+  backgroundColor: primary_color,
+};
 
 export const circle_40 = {
   width: 40,
