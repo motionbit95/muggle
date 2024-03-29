@@ -14,6 +14,7 @@ export const getDocList = async collectionId => {
 };
 
 export const addDocument = async (collection_name, data) => {
+  console.log('add data ===> ', data);
   try {
     // Firestore 컬렉션에 문서 추가
     const docRef = await firestore().collection(collection_name).add(data);
@@ -71,6 +72,31 @@ export const addChat = async data => {
 };
 
 export const getUser = async uid => {
-  const docRef = await firestore().collection('user').doc(uid).get();
-  return docRef.data();
+  const list = [];
+  const querySnapshot = await firestore()
+    .collection('user')
+    .where('uid', '==', uid)
+    .get();
+
+  querySnapshot.forEach(doc => {
+    list.push({...doc.data(), doc_id: doc.id});
+  });
+
+  return list[0];
+};
+
+export const userGroups = async uid => {
+  const list = [];
+  const querySnapshot = await firestore()
+    .collection('group')
+    .where('group_users', 'array-contains', uid)
+    .get();
+
+  querySnapshot.forEach(doc => {
+    list.push({...doc.data(), doc_id: doc.id});
+  });
+
+  console.log('uid ===> ', list);
+
+  return list;
 };

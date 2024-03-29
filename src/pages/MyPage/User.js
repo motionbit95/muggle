@@ -7,10 +7,12 @@ import styles, {
   sp_3,
 } from '../../style/styles';
 import auth from '@react-native-firebase/auth';
-import {singleQuery} from '../../firebase/firebase_func';
+import {singleQuery, updateDocument} from '../../firebase/firebase_func';
 import {getDisplayAge, primary_color} from '../../firebase/api';
 import LinearGradient from 'react-native-linear-gradient';
 import {SafeAreaView} from 'react-native-safe-area-context';
+import Geolocation from '@react-native-community/geolocation'; // 라이브러리 import
+
 const User = ({navigation}) => {
   const [myInfo, setMyInfo] = useState(null);
 
@@ -18,14 +20,37 @@ const User = ({navigation}) => {
     const unsubscribe = auth().onAuthStateChanged(async user => {
       if (user) {
         await singleQuery('user', 'uid', user.uid).then(res => {
-          console.log(res[0]);
+          // console.log(res[0]);
           setMyInfo(res[0]);
         });
       } else {
-        console.log('없음!!');
+        // console.log('없음!!');
         navigation.navigate('Account', {screen: '휴대폰 본인인증'});
       }
     });
+
+    Geolocation.getCurrentPosition(
+      position => {
+        // console.log(
+        //   'position ===> ',
+        //   position.coords.latitude,
+        //   position.coords.longitude,
+        // );
+
+        updateDocument('user', myInfo?.doc_id, {
+          ...myInfo,
+          user_location: {
+            latitude: position.coords.latitude,
+            longitude: position.coords.longitude,
+          },
+        });
+      },
+      error => {
+        console.error(error);
+      },
+      {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000},
+    );
+
     return () => {
       unsubscribe();
     };

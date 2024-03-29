@@ -193,13 +193,14 @@ const App = () => {
         component={ChatRoom}
         options={({navigation}) => ({
           title: '채팅룸',
-          // headerLeft: () => (
-          //   <Button
-          //     onPress={() => navigation.goBack()}
-          //     title="Back"
-          //     color="black"
-          //   />
-          // ),
+          headerLeft: () => (
+            <TouchableOpacity onPress={() => navigation.navigate('채팅')}>
+              <Image
+                style={img_sm}
+                source={require('./src/assets/icons/left_arrow.png')}
+              />
+            </TouchableOpacity>
+          ),
           headerStyle: {
             backgroundColor: '#fff',
           },
@@ -268,7 +269,7 @@ const App = () => {
     <NavigationContainer independent={true}>
       <Tab.Navigator>
         <Tab.Screen
-          name="Home"
+          name="홈"
           component={HomeStackNavigate}
           // options={{
           //   title: '홈',
@@ -313,7 +314,7 @@ const App = () => {
             headerShown: false,
             tabBarIcon: ({focused}) => (
               <Image
-                style={img_sm}
+                style={{width: 26, height: 26}}
                 source={
                   focused
                     ? require('./src/assets/navIcon/home_select.png')

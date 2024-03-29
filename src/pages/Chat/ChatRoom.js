@@ -42,7 +42,7 @@ const ChatRoom = ({navigation, route}) => {
   };
 
   useEffect(() => {
-    console.log('data===>', data);
+    // console.log('data===>', data);
     const unsubscribe = firestore()
       .collection('chat-' + data.gid)
       .orderBy('createdAt', 'asc')
@@ -58,7 +58,7 @@ const ChatRoom = ({navigation, route}) => {
             });
           }
         });
-        console.log(updatedDocuments);
+        // console.log(updatedDocuments);
         setChatList(updatedDocuments);
         scrollToBottom();
       });
@@ -69,7 +69,7 @@ const ChatRoom = ({navigation, route}) => {
   const handleAddChat = async () => {
     if (!chat) return;
 
-    console.log('chat ===> ', chat, data.gid);
+    // console.log('chat ===> ', chat, data.gid, auth().currentUser.uid);
 
     let userInfo = {};
     await getUser(auth().currentUser.uid).then(res => {
@@ -83,7 +83,7 @@ const ChatRoom = ({navigation, route}) => {
       createdAt: new Date(),
     });
 
-    console.log(chat);
+    // console.log(chat);
     setChat(null);
   };
   return (
@@ -214,7 +214,10 @@ const ChatRoom = ({navigation, route}) => {
                       borderTopRightRadius: 0,
                       maxWidth: 290,
                     }}>
-                    <Text style={{color: blackAlpha900}}>{chat?.chat}</Text>
+                    <Text
+                      style={{color: blackAlpha900, whiteSpace: 'pre-wrap'}}>
+                      {`${chat?.chat}`}
+                    </Text>
                   </View>
                   <Text style={{color: blackAlpha500, fontSize: fs_xs}}>
                     {formatDateTime(chat?.createdAt).split(' ')[1]}
@@ -230,7 +233,7 @@ const ChatRoom = ({navigation, route}) => {
                         style={[f_full, radius_full]}
                         source={
                           chat?.user_info?.user_profile
-                            ? chat?.user_info?.user_profile
+                            ? {uri: chat?.user_info?.user_profile}
                             : require('../../assets/avartar.png')
                         }
                       />
@@ -250,7 +253,10 @@ const ChatRoom = ({navigation, route}) => {
                       borderRadius: 15,
                       borderTopLeftRadius: 0,
                     }}>
-                    <Text style={{color: blackAlpha900}}>{chat?.chat}</Text>
+                    <Text
+                      style={{color: blackAlpha900, whiteSpace: 'pre-wrap'}}>
+                      {`${chat?.chat}`}
+                    </Text>
                   </View>
                   <Text style={{color: blackAlpha500, fontSize: fs_xs}}>
                     {formatDateTime(chat?.createdAt).split(' ')[1]}

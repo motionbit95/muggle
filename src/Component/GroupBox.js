@@ -52,7 +52,7 @@ const GroupBox = ({item, index, userList, navigation}) => {
           .catch(err => {
             console.log(err);
           });
-        console.log('groupUsers ===> ', groupUsers);
+        // console.log('groupUsers ===> ', groupUsers);
         setGroupUsers(groupUsers);
       });
     };
@@ -68,8 +68,8 @@ const GroupBox = ({item, index, userList, navigation}) => {
         {backgroundColor: whiteAlpha900, marginBottom: 10},
       ]}
       onPress={() => {
-        console.log({...item, gid: item.doc_id});
-        navigation.navigate('Home', {
+        // console.log({...item, gid: item.doc_id});
+        navigation.navigate('홈', {
           screen: '모임상세',
           params: {data: {...item, gid: item.doc_id}},
         });

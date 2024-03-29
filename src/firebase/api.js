@@ -406,10 +406,6 @@ export function formatDateTime(date) {
   }
 }
 
-export function getDayText(date) {
-  console.log(date);
-}
-
 export function formatTwoDigits(num) {
   // 숫자를 문자열로 변환
   var strNum = num.toString();

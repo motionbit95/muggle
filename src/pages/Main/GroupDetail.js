@@ -56,7 +56,7 @@ const GroupDetail = ({navigation, route}) => {
           .catch(err => {
             console.log(err);
           });
-        console.log('groupUsers ===> ', groupUsers);
+        // console.log('groupUsers ===> ', groupUsers);
         setGroupUsers(groupUsers);
       });
     };
@@ -79,7 +79,7 @@ const GroupDetail = ({navigation, route}) => {
       setIcon(require('../../assets/icons/heart_fill.png'));
     }
 
-    console.log(myInfo.goods);
+    // console.log(myInfo.goods);
 
     await updateDocument('user', myInfo.doc_id, myInfo);
   };
@@ -119,7 +119,7 @@ const GroupDetail = ({navigation, route}) => {
       data.group_users.push(auth().currentUser.uid);
     }
 
-    console.log(data.group_users);
+    // console.log(data.group_users);
 
     await updateDocument('group', data.doc_id, data);
 

@@ -8,7 +8,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import {getDocList} from '../../firebase/firebase_func';
+import {getDocList, updateDocument} from '../../firebase/firebase_func';
 import {
   align_center,
   align_start,

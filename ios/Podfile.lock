@@ -1897,6 +1897,10 @@ PODS:
     - React-debug
   - react-native-contacts (7.0.8):
     - React-Core
+  - react-native-geolocation (3.2.1):
+    - glog
+    - RCT-Folly (= 2022.05.16.00)
+    - React-Core
   - react-native-image-picker (7.1.2):
     - glog
     - RCT-Folly (= 2022.05.16.00)
@@ -2143,6 +2147,7 @@ DEPENDENCIES:
   - React-logger (from `../node_modules/react-native/ReactCommon/logger`)
   - React-Mapbuffer (from `../node_modules/react-native/ReactCommon`)
   - react-native-contacts (from `../node_modules/react-native-contacts`)
+  - "react-native-geolocation (from `../node_modules/@react-native-community/geolocation`)"
   - react-native-image-picker (from `../node_modules/react-native-image-picker`)
   - react-native-pager-view (from `../node_modules/react-native-pager-view`)
   - react-native-safe-area-context (from `../node_modules/react-native-safe-area-context`)
@@ -2263,6 +2268,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon"
   react-native-contacts:
     :path: "../node_modules/react-native-contacts"
+  react-native-geolocation:
+    :path: "../node_modules/@react-native-community/geolocation"
   react-native-image-picker:
     :path: "../node_modules/react-native-image-picker"
   react-native-pager-view:
@@ -2380,6 +2387,7 @@ SPEC CHECKSUMS:
   React-logger: 0331362115f0f5b392bd7ed14636d1a3ea612479
   React-Mapbuffer: 30d796a057e4e077d44b4c2ba17869fb8c1064eb
   react-native-contacts: cb4f3b823550adbce0802901b9e63bf1526ec0af
+  react-native-geolocation: fff5fb51dd294e845aa203c2e747958421425087
   react-native-image-picker: 7c3a279e7a518628910f2ea02917bd3b90049465
   react-native-pager-view: 3796df305c59c352a26811ead0f6ea78acac1886
   react-native-safe-area-context: b97eb6f9e3b7f437806c2ce5983f479f8eb5de4b
