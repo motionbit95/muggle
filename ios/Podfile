@@ -28,6 +28,8 @@ end
 target 'muggle_app' do
   $RNFirebaseAsStaticFramework = true
 
+  pod 'Firebase/CoreOnly', '~> 10.23.0'
+  
   config = use_native_modules!
   pod 'GoogleUtilities', :modular_headers => true
   pod 'FirebaseAuth'

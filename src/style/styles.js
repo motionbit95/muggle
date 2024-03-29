@@ -731,3 +731,13 @@ export const btn_secondary = [
     backgroundColor: whiteAlpha900,
   },
 ];
+
+export const btn_normal = [
+  radius_md,
+  justify_center,
+  align_center,
+  p_3,
+  {
+    backgroundColor: blackAlpha100,
+  },
+];

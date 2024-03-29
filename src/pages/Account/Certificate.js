@@ -18,6 +18,8 @@ import {
 } from '../../firebase/api';
 import auth from '@react-native-firebase/auth';
 import {singleQuery} from '../../firebase/firebase_func';
+import PopupBase from '../../Component/PopupBase';
+import {terms} from '../../assets/terms';
 
 const Certificate = ({navigation}) => {
   // 테스트 정보 : 번호 01012341234 / 코드 101010
@@ -201,7 +203,7 @@ const Certificate = ({navigation}) => {
                 flex: 9,
                 flexDirection: 'row',
                 width: '100%',
-                alignItems: 'stretch',
+                alignItems: 'center',
               }}>
               <Text
                 style={{
@@ -212,11 +214,14 @@ const Certificate = ({navigation}) => {
                 }}>
                 서비스 이용약관 동의
               </Text>
-              <TouchableOpacity onPress={() => alert('약관 표시')}>
+              <PopupBase
+                icon={require('../../assets/rightarrow.png')}
+                contents={terms}></PopupBase>
+              {/* <TouchableOpacity onPress={() => alert('약관 표시')}>
                 <View style={{width: 20, height: 20, justifyContent: 'center'}}>
                   <Image source={require('../../assets/rightarrow.png')} />
                 </View>
-              </TouchableOpacity>
+              </TouchableOpacity> */}
             </View>
           </View>
         </View>

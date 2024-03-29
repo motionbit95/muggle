@@ -8,9 +8,11 @@ import {
   View,
 } from 'react-native';
 
-import styles from '../../style/styles';
+import styles, {btn_primary, btn_secondary} from '../../style/styles';
 import DropDown from '../../Component/PickerComponent';
 import {banks, cities, districts} from '../../firebase/api';
+import ImagePicker from '../../Component/ProfilePicker';
+import ProfilePicker from '../../Component/ProfilePicker';
 
 const Profile = ({navigation, route}) => {
   const {data} = route.params ? route.params : {data: null};
@@ -91,18 +93,7 @@ const Profile = ({navigation, route}) => {
               width: '100%',
               gap: 20,
             }}>
-            <View>
-              <View style={styles.Avartar70}>
-                <Image
-                  style={{width: '90%', height: '90%'}}
-                  source={
-                    data?.user_profile
-                      ? {uri: data?.user_profile}
-                      : require('../../assets/avartar.png')
-                  }
-                />
-              </View>
-            </View>
+            <ProfilePicker />
             <View style={styles.rowBox}>
               <View style={{flex: 1}}>
                 <Text style={styles.contentTitle}>이름</Text>

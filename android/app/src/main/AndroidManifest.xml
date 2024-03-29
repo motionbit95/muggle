@@ -107,5 +107,8 @@
       <!-- 국민카드-->
       <package android:name="com.kbstar.reboot"/>
       <package android:name="com.kbstar.kbbank"/>
-</queries>
+  </queries>
+
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 </manifest>
