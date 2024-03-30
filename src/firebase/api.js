@@ -10,11 +10,10 @@ export const font_md = 16;
 export const font_lg = 24;
 
 export const defaultFemale =
-  // 'https://firebasestorage.googleapis.com/v0/b/dinnermate-8d37b.appspot.com/o/assets%2FFemale.png?alt=media&token=247bbd91-9ebf-4f5a-8911-b8d6b9c89e58';
-  '';
+  'https://firebasestorage.googleapis.com/v0/b/dinnermate-8d37b.appspot.com/o/assets%2FFemale.png?alt=media&token=247bbd91-9ebf-4f5a-8911-b8d6b9c89e58';
+
 export const defaultMale =
-  // 'https://firebasestorage.googleapis.com/v0/b/dinnermate-8d37b.appspot.com/o/assets%2FMale.png?alt=media&token=dfa379fe-607c-4ac5-8208-37f2745f5baa';
-  '';
+  'https://firebasestorage.googleapis.com/v0/b/dinnermate-8d37b.appspot.com/o/assets%2FMale.png?alt=media&token=dfa379fe-607c-4ac5-8208-37f2745f5baa';
 
 // 시/도, 군/구
 export const cities = [

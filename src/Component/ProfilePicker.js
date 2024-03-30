@@ -50,7 +50,7 @@ const ProfilePicker = props => {
           console.log('Camera permission denied');
         }
       } catch (err) {
-        console.warn(err);
+        // console.warn(err);
       }
     } else {
       launchImageLibrary(options, response => {

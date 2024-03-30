@@ -42,7 +42,7 @@ export const singleQuery = async (collection_name, key, value) => {
 export const updateDocument = async (collection_name, doc_id, data) => {
   try {
     await firestore().collection(collection_name).doc(doc_id).update(data);
-    console.error('문서 업데이트 완료', collection_name, data);
+    console.log('문서 업데이트 완료', collection_name, data);
   } catch (error) {
     console.error('문서 수정 중 오류:', error);
   }

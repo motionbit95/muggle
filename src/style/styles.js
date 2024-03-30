@@ -334,12 +334,12 @@ const styles = StyleSheet.create({
   matchBoxs: {
     width: '100%',
     gap: 10,
-    paddingBottom: 20,
+    paddingBottom: 10,
   },
   matchBox: {
     backgroundColor: 'rgba(255, 245, 244, 1)',
     borderRadius: 10,
-    padding: 10,
+    padding: 16,
     gap: 5,
   },
   matchingBanner: {

@@ -205,7 +205,7 @@ const DirectRoom = ({navigation, route}) => {
                       padding: 5,
                     },
                   ]}>
-                  {user?.user_gender}
+                  {user?.user_gender}자
                 </Text>
               </View>
               <Text style={[{fontSize: fs_sm, color: blackAlpha700}]}>
