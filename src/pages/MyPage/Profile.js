@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import {
+  Alert,
   Image,
   ScrollView,
   Text,
@@ -8,17 +9,33 @@ import {
   View,
 } from 'react-native';
 
-import styles, {btn_primary, btn_secondary} from '../../style/styles';
+import styles, {
+  align_center,
+  blackAlpha100,
+  blackAlpha300,
+  blackAlpha900,
+  btn_primary,
+  btn_secondary,
+  center,
+  flex_row,
+  fs_md,
+  fs_xs,
+  justify_center,
+} from '../../style/styles';
 import DropDown from '../../Component/PickerComponent';
 import {banks, cities, districts} from '../../firebase/api';
 import ImagePicker from '../../Component/ProfilePicker';
 import ProfilePicker from '../../Component/ProfilePicker';
+import {updateDocument} from '../../firebase/firebase_func';
 
 const Profile = ({navigation, route}) => {
   const {data} = route.params ? route.params : {data: null};
 
-  const [userName, serUserName] = useState(data?.user_name);
-  const [userPrice, setUserPrice] = useState('');
+  const [userName, setUserName] = useState(data?.user_name);
+  const [userInfo, setUserInfo] = useState(data?.user_info);
+  const [interest, setInterest] = useState(data?.user_interest);
+
+  const [userPrice, setUserPrice] = useState(data?.user_price);
 
   const [selectedGender, setSelectedGender] = useState(data?.user_gender);
 
@@ -53,6 +70,14 @@ const Profile = ({navigation, route}) => {
     days.push(day);
   }
 
+  const handleInterest = content => {
+    if (interest.includes(content)) {
+      setInterest(interest.filter(item => item !== content));
+    } else {
+      setInterest([...interest, content]);
+    }
+  };
+
   const handleYearChange = year => {
     setSelectyear(year);
     setSelectmonth('');
@@ -84,6 +109,30 @@ const Profile = ({navigation, route}) => {
     setSelectbank(value);
   };
 
+  const handleSaveProfile = () => {
+    updateDocument('user', data?.doc_id, {
+      ...data,
+      user_name: userName,
+      user_info: userInfo,
+      user_interest: interest,
+      user_price: userPrice,
+      user_gender: selectedGender,
+      user_place: [`${selectedCity} ${selectedDistrict}`],
+      user_birth: `${selectyear}${selectmonth}${selectday}`,
+      user_bank: {
+        bank_name: selectbank,
+        account_number: accountNumber,
+      },
+    });
+
+    Alert.alert('확인', '프로필이 수정되었습니다.', [
+      {
+        text: '확인',
+        onPress: () => navigation.goBack(),
+      },
+    ]);
+  };
+
   return (
     <View style={styles.screenStyle}>
       <ScrollView style={styles.scrollViewStyle}>
@@ -93,7 +142,10 @@ const Profile = ({navigation, route}) => {
               width: '100%',
               gap: 20,
             }}>
-            <ProfilePicker />
+            <ProfilePicker
+              defaultValue={data?.user_profile}
+              onChangeValue={uri => (data.user_profile = uri)}
+            />
             <View style={styles.rowBox}>
               <View style={{flex: 1}}>
                 <Text style={styles.contentTitle}>이름</Text>
@@ -108,6 +160,7 @@ const Profile = ({navigation, route}) => {
                 ]}
                 placeholder="변경할 이름을 입력해주세요"
                 defaultValue={userName}
+                onChange={e => setUserName(e.nativeEvent.text)}
               />
             </View>
             <View style={styles.rowBox}>
@@ -120,10 +173,13 @@ const Profile = ({navigation, route}) => {
                   {
                     flex: 4,
                     height: 100,
+                    textAlignVertical: 'top',
                   },
                   styles.contentBox,
                 ]}
                 placeholder="자기소개 내용을 입력해주세요"
+                defaultValue={userInfo}
+                onChange={e => setUserInfo(e.nativeEvent.text)}
               />
             </View>
           </View>
@@ -223,6 +279,30 @@ const Profile = ({navigation, route}) => {
               </View>
             </View>
             <View style={styles.columnBox}>
+              <Text style={styles.contentTitle}>나의 커피 매칭권 금액은?</Text>
+              <View style={styles.contentBox}>
+                <View
+                  style={[
+                    flex_row,
+                    justify_center,
+                    align_center,
+                    {height: 30},
+                  ]}>
+                  <TextInput
+                    keyboardType="numeric"
+                    style={[{color: blackAlpha900, fontSize: fs_md}]}
+                    placeholder="0"
+                    onChange={e => setUserPrice(e.nativeEvent.text)}
+                    defaultValue={userPrice}
+                  />
+                  <Text style={[{color: blackAlpha900, fontSize: fs_md}]}>
+                    {' '}
+                    만원
+                  </Text>
+                </View>
+              </View>
+            </View>
+            <View style={styles.columnBox}>
               <Text style={styles.contentTitle}>
                 커피ㅣ 매칭 부수입 정산 받으실 계좌(선택)
               </Text>
@@ -253,15 +333,71 @@ const Profile = ({navigation, route}) => {
           <View>
             <Text style={styles.contentTitle}>관심사</Text>
           </View>
+          <View style={center}>
+            <View
+              style={{
+                rowGap: 20,
+                columnGap: 0,
+                flexDirection: 'row',
+                flexWrap: 'wrap',
+              }}>
+              {[
+                '아웃도어/여행',
+                '운동/스포츠',
+                '인문학/책/글',
+                '외국/언어',
+                '문화/공연/축제',
+                '음악/악기',
+                '공예/만들기',
+                '댄스/무용',
+                '봉사활동',
+                '사교/인맥',
+                '차/오토바이',
+                '사진/영상',
+                '스포츠관람',
+                '게임/오락',
+                '요리/제조',
+                '반려동물',
+                '자기계발',
+              ].map((item, index) => (
+                <TouchableOpacity
+                  key={index}
+                  style={{
+                    justifyContent: 'flex-start',
+                    alignItems: 'center',
+                    gap: 5,
+                    margin: 2,
+                    width: 65,
+                    height: 100,
+                    backgroundColor: interest.includes(item)
+                      ? blackAlpha100
+                      : 'white',
+                    padding: 5,
+                    borderRadius: 10,
+                  }}
+                  onPress={() => handleInterest(item)}>
+                  <View style={styles.interestButton}></View>
+                  <Text
+                    style={{
+                      color: blackAlpha900,
+                      fontSize: fs_xs,
+                      textAlign: 'center',
+                    }}>
+                    {item}
+                  </Text>
+                </TouchableOpacity>
+              ))}
+            </View>
+          </View>
+        </View>
+        <View style={styles.buttonBox}>
+          <TouchableOpacity
+            style={[styles.button, styles.buttonMargin]}
+            onPress={handleSaveProfile}>
+            <Text style={styles.buttonText}>저장</Text>
+          </TouchableOpacity>
         </View>
       </ScrollView>
-      <View style={styles.buttonBox}>
-        <TouchableOpacity
-          style={[styles.button, styles.buttonMargin]}
-          onPress={() => alert('저장')}>
-          <Text style={styles.buttonText}>저장</Text>
-        </TouchableOpacity>
-      </View>
     </View>
   );
 };

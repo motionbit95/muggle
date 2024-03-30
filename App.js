@@ -36,7 +36,6 @@ import Matching from './src/pages/Matching/Matching';
 import SignUp from './src/pages/Account/Signup';
 import Certificate from './src/pages/Account/Certificate';
 import Interest from './src/pages/Account/Interest';
-import Interest2 from './src/pages/Account/Interest2';
 import Introduce from './src/pages/Account/Introduce';
 import Profile from './src/pages/MyPage/Profile';
 import ChatRoom from './src/pages/Chat/ChatRoom';
@@ -304,7 +303,6 @@ const App = () => {
       />
       <SignUpStack.Screen name="휴대폰 본인인증" component={Certificate} />
       <SignUpStack.Screen name="프로필 설정" component={Interest} />
-      <SignUpStack.Screen name="상세 관심사 선택" component={Interest2} />
       <SignUpStack.Screen name="인트로" component={Introduce} />
     </SignUpStack.Navigator>
   );

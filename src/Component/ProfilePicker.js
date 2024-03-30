@@ -5,14 +5,17 @@ import ImagePicker, {launchImageLibrary} from 'react-native-image-picker';
 
 import {PermissionsAndroid} from 'react-native';
 import styles, {
+  blackAlpha900,
   btn_normal,
   btn_primary,
   f_full,
   radius_full,
 } from '../style/styles';
 
-const ProfilePicker = () => {
-  const [imageUri, setImageUri] = useState(null);
+const ProfilePicker = props => {
+  const [imageUri, setImageUri] = useState(
+    props.defaultValue ? props.defaultValue : null,
+  );
 
   const handleChoosePhoto = async () => {
     const options = {
@@ -51,8 +54,9 @@ const ProfilePicker = () => {
       }
     } else {
       launchImageLibrary(options, response => {
-        if (response.uri) {
-          setImageUri(response.uri);
+        if (response.assets[0].uri) {
+          setImageUri(response.assets[0].uri);
+          uploadImage(response.assets[0].uri);
           // Handle image selection
         } else if (response.error) {
           Alert.alert('Error', response.error);
@@ -69,6 +73,7 @@ const ProfilePicker = () => {
     const filename = uri.substring(uri.lastIndexOf('/') + 1);
     const uploadUri = Platform.OS === 'ios' ? uri.replace('file://', '') : uri;
 
+    console.log('uploadUri ===> ', uploadUri);
     const task = storage().ref(filename).putFile(uploadUri);
 
     try {
@@ -77,6 +82,7 @@ const ProfilePicker = () => {
       const url = await storage().ref(filename).getDownloadURL();
       console.log('Image URL:', url);
       // 여기서 URL을 사용하거나 상태로 저장할 수 있습니다.
+      props.onChangeValue(url);
     } catch (error) {
       console.error('Error uploading image: ', error);
       Alert.alert('Error', 'Failed to upload image');
@@ -92,7 +98,7 @@ const ProfilePicker = () => {
         />
       </View>
       <TouchableOpacity style={btn_normal} onPress={handleChoosePhoto}>
-        <Text>이미지 선택</Text>
+        <Text style={{color: blackAlpha900}}>이미지 선택</Text>
       </TouchableOpacity>
     </View>
   );

@@ -22,34 +22,30 @@ const User = ({navigation}) => {
         await singleQuery('user', 'uid', user.uid).then(res => {
           // console.log(res[0]);
           setMyInfo(res[0]);
+
+          Geolocation.getCurrentPosition(
+            position => {
+              // console.log('myInfo ===> ', res[0]?.doc_id);
+
+              updateDocument('user', res[0]?.doc_id, {
+                ...myInfo,
+                user_location: {
+                  latitude: position.coords.latitude,
+                  longitude: position.coords.longitude,
+                },
+              });
+            },
+            error => {
+              console.error(error);
+            },
+            {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000},
+          );
         });
       } else {
         // console.log('없음!!');
         navigation.navigate('Account', {screen: '휴대폰 본인인증'});
       }
     });
-
-    Geolocation.getCurrentPosition(
-      position => {
-        // console.log(
-        //   'position ===> ',
-        //   position.coords.latitude,
-        //   position.coords.longitude,
-        // );
-
-        updateDocument('user', myInfo?.doc_id, {
-          ...myInfo,
-          user_location: {
-            latitude: position.coords.latitude,
-            longitude: position.coords.longitude,
-          },
-        });
-      },
-      error => {
-        console.error(error);
-      },
-      {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000},
-    );
 
     return () => {
       unsubscribe();
@@ -128,27 +124,19 @@ const User = ({navigation}) => {
                     {myInfo?.user_place[0]}
                   </Text>
                 </View>
-                <View style={{flexDirection: 'row', gap: 10}}>
-                  <View
-                    style={{
-                      paddingVertical: 5,
-                      paddingHorizontal: 8,
-                      borderRadius: 30,
-                      borderWidth: 1,
-                      borderColor: 'white',
-                    }}>
-                    <Text style={{fontSize: 12, color: 'white'}}>관심사1</Text>
-                  </View>
-                  <View
-                    style={{
-                      paddingVertical: 5,
-                      paddingHorizontal: 8,
-                      borderRadius: 30,
-                      borderWidth: 1,
-                      borderColor: 'white',
-                    }}>
-                    <Text style={{fontSize: 12, color: 'white'}}>관심사2</Text>
-                  </View>
+                <View style={{flexDirection: 'row', gap: 10, flexWrap: 'wrap'}}>
+                  {myInfo?.user_interest?.map((item, index) => (
+                    <View
+                      style={{
+                        paddingVertical: 5,
+                        paddingHorizontal: 8,
+                        borderRadius: 30,
+                        borderWidth: 1,
+                        borderColor: 'white',
+                      }}>
+                      <Text style={{fontSize: 12, color: 'white'}}>{item}</Text>
+                    </View>
+                  ))}
                 </View>
               </View>
             </View>

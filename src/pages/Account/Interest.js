@@ -23,6 +23,8 @@ const Interest = ({navigation, route}) => {
   const [interest, setInterest] = useState([]);
 
   const signupUser = () => {
+    data.user_interest = interest;
+    console.log('data ===> ', data);
     addDocument('user', data);
     navigation.navigate('인트로');
   };
@@ -43,15 +45,21 @@ const Interest = ({navigation, route}) => {
               width: '100%',
               gap: 20,
             }}>
-            <ProfilePicker />
+            <ProfilePicker onChangeValue={uri => (data.user_profile = uri)} />
             <View style={styles.rowBox}>
               <View style={{flex: 1}}>
                 <Text style={styles.contentTitle}>소개</Text>
               </View>
               <TextInput
+                onChange={e => (data.user_info = e.nativeEvent.text)}
                 multiline
                 style={[
-                  {color: 'black', flex: 4, height: 100},
+                  {
+                    color: 'black',
+                    flex: 4,
+                    height: 100,
+                    textAlignVertical: 'top',
+                  },
                   styles.contentBox,
                 ]}
                 placeholder="자기소개 내용을 입력해주세요"

@@ -125,7 +125,7 @@ const Introduce = ({navigation}) => {
       />
       <TouchableOpacity
         style={styles.button}
-        onPress={() => navigation.navigate('홈')}>
+        onPress={() => navigation.navigate('홈', {screen: 'Muggle'})}>
         <Text style={styles.buttonText}>시작하기</Text>
       </TouchableOpacity>
     </View>
