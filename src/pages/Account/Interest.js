@@ -24,7 +24,7 @@ const Interest = ({navigation, route}) => {
 
   const signupUser = () => {
     data.user_interest = interest;
-    console.log('data ===> ', data);
+    // console.log('data ===> ', data);
     addDocument('user', data);
     navigation.navigate('인트로');
   };

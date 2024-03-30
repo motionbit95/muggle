@@ -102,8 +102,7 @@ const Matching = ({navigation, route}) => {
                     fontSize: fs_2xl,
                     fontWeight: '900',
                   }}>
-                  {data?.user_name}{' '}
-                  {getDisplayAge(data?.user_birth).slice(0, 2)}
+                  {data?.user_name} {getDisplayAge(data?.user_birth)}
                 </Text>
                 <Text
                   style={{

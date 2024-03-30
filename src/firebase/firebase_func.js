@@ -69,6 +69,19 @@ export const addChat = async data => {
     });
 };
 
+export const addMessage = async data => {
+  firestore()
+    .collection('message-' + data.mid)
+    .doc('chat_info')
+    .set(data)
+    .then(() => {
+      console.log('채팅이 성공적으로 등록되었습니다.');
+    })
+    .catch(error => {
+      console.error('채팅 등록 중 오류 발생:', error);
+    });
+};
+
 export const getUser = async uid => {
   const list = [];
   const querySnapshot = await firestore()
@@ -97,4 +110,9 @@ export const userGroups = async uid => {
   console.log('uid ===> ', list);
 
   return list;
+};
+
+export const getDocument = async (collection_name, doc_id) => {
+  const doc = await firestore().collection(collection_name).doc(doc_id).get();
+  return doc.data();
 };

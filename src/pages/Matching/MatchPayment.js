@@ -18,6 +18,7 @@ import {getUser} from '../../firebase/firebase_func';
 <script src="https://cpay.payple.kr/js/cpay.payple.1.0.1.js"></script>;
 
 const MatchPayment = ({navigation, route}) => {
+  const {data} = route.params ? route.params : {data: null};
   const [amount, setAmount] = useState(1000);
   const [pay_method, setPayMethod] = useState('card');
 
@@ -65,6 +66,7 @@ const MatchPayment = ({navigation, route}) => {
 
     // 유저정보
     const user = await getUser(auth().currentUser?.uid);
+    console.log(user.uid, '->', data.uid);
 
     // 구매정보 수정
 
@@ -79,6 +81,7 @@ const MatchPayment = ({navigation, route}) => {
       screen: '결제',
       params: {
         data: content.current,
+        receiver: data.uid,
       },
     });
   }

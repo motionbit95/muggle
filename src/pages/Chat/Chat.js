@@ -19,9 +19,72 @@ import styles, {
   sp_1,
   sp_2,
 } from '../../style/styles';
-import {singleQuery, userGroups} from '../../firebase/firebase_func';
+import {
+  getDocList,
+  getDocument,
+  getUser,
+  getUserName,
+  singleQuery,
+  userGroups,
+} from '../../firebase/firebase_func';
 import auth from '@react-native-firebase/auth';
-import {formatDateTime, primary_color} from '../../firebase/api';
+import {
+  compareTimestampWithCurrentTime,
+  formatDateTime,
+  primary_color,
+} from '../../firebase/api';
+
+const DmBox = ({navigation, data}) => {
+  const [user, setUser] = React.useState({});
+  React.useEffect(() => {
+    getUser(
+      data?.receiver === auth().currentUser.uid ? data?.sender : data?.receiver,
+    ).then(setUser);
+  }, []);
+
+  return (
+    <View>
+      <TouchableOpacity
+        style={{
+          backgroundColor: 'white',
+          padding: 20,
+          flexDirection: 'row',
+          gap: 10,
+          justifyContent: 'space-between',
+          alignItems: 'center',
+        }}
+        // onPress={() => alert('채팅하겠습니까')}
+        onPress={() =>
+          navigation.navigate('Chat', {
+            screen: '매칭룸',
+            params: {data},
+          })
+        }>
+        <View style={{flexDirection: 'row', gap: 10, alignItems: 'center'}}>
+          <View>
+            <View style={styles.Avartar50}>
+              <Image
+                style={{width: '90%', height: '90%'}}
+                source={
+                  user?.user_profile
+                    ? {uri: user?.user_profile}
+                    : require('../../assets/avartar.png')
+                }
+              />
+            </View>
+          </View>
+          <View>
+            <Text style={{color: 'black'}}>{user?.user_name}</Text>
+            <Text style={{color: 'black'}}>{data?.last_message}</Text>
+          </View>
+        </View>
+        <Text style={{color: 'black'}}>
+          {compareTimestampWithCurrentTime(data?.timestamp)}
+        </Text>
+      </TouchableOpacity>
+    </View>
+  );
+};
 
 const ChatTabBar = props => (
   <TabBar
@@ -40,12 +103,53 @@ const ChatTabBar = props => (
 const Chat = ({navigation}) => {
   const layout = useWindowDimensions();
   const [groups, setGroups] = React.useState([]);
+  const [matchings, setMatchings] = React.useState([]);
+  const [dmList, setDmList] = React.useState([]);
   React.useEffect(() => {
     const getUserGroups = async () => {
       await userGroups(auth().currentUser.uid).then(res => {
         setGroups(res);
       });
     };
+
+    const getUserMatchings = async () => {
+      let sendMatching = [];
+      await singleQuery('matching', 'sender', auth().currentUser.uid).then(
+        res => {
+          sendMatching = res;
+        },
+      );
+
+      let receiveMatching = [];
+      await singleQuery('matching', 'receiver', auth().currentUser.uid).then(
+        res => {
+          receiveMatching = res;
+        },
+      );
+
+      let matchings = [...sendMatching, ...receiveMatching].sort((a, b) => {
+        if (a.createdAt < b.createdAt) {
+          return 1;
+        }
+        if (a.createdAt > b.createdAt) {
+          return -1;
+        }
+        return 0;
+      });
+      setMatchings(matchings);
+
+      let dmList = [];
+      matchings.forEach(async matching => {
+        await getDocument(`message-${matching.doc_id}`, 'chat_info').then(
+          res => {
+            dmList.push(res);
+            setDmList(dmList);
+          },
+        );
+      });
+    };
+
+    getUserMatchings();
     getUserGroups();
   }, []);
 
@@ -120,46 +224,58 @@ const Chat = ({navigation}) => {
     return (
       // 매칭 채팅방 목록
       <View style={[f_full]}>
-        <View style={[f_full, flex_row, center, sp_2]}>
-          <Text style={{color: blackAlpha500}}>채팅 내역이 없어요</Text>
-          <Image
-            style={img_sm}
-            source={require('../../assets/icons/BsChat.png')}
-          />
-        </View>
-        {/* <View>
-          <TouchableOpacity
-            style={{
-              backgroundColor: 'white',
-              padding: 20,
-              flexDirection: 'row',
-              gap: 10,
-              justifyContent: 'space-between',
-              alignItems: 'center',
-            }}
-            // onPress={() => alert('채팅하겠습니까')}
-            onPress={() =>
-              navigation.navigate('Chat', {
-                screen: '채팅룸',
-              })
-            }>
-            <View style={{flexDirection: 'row', gap: 10, alignItems: 'center'}}>
-              <View>
-                <View style={styles.Avartar50}>
-                  <Image
-                    style={{width: '90%', height: '90%'}}
-                    source={require('../../assets/avartar.png')}
-                  />
-                </View>
-              </View>
-              <View>
-                <Text style={{color: 'black'}}>홍*경</Text>
-                <Text style={{color: 'black'}}>식사 어때?</Text>
-              </View>
-            </View>
-            <Text style={{color: 'black'}}>5분전</Text>
-          </TouchableOpacity>
-        </View> */}
+        {matchings?.length === 0 && (
+          <View style={[f_full, flex_row, center, sp_2]}>
+            <Text style={{color: blackAlpha500}}>채팅 내역이 없어요</Text>
+            <Image
+              style={img_sm}
+              source={require('../../assets/icons/BsChat.png')}
+            />
+          </View>
+        )}
+        {dmList?.map((dm, index) => (
+          <DmBox navigation={navigation} data={dm} />
+          // <View>
+          //   <TouchableOpacity
+          //     style={{
+          //       backgroundColor: 'white',
+          //       padding: 20,
+          //       flexDirection: 'row',
+          //       gap: 10,
+          //       justifyContent: 'space-between',
+          //       alignItems: 'center',
+          //     }}
+          //     // onPress={() => alert('채팅하겠습니까')}
+          //     onPress={() =>
+          //       navigation.navigate('Chat', {
+          //         screen: '채팅룸',
+          //       })
+          //     }>
+          //     <View
+          //       style={{flexDirection: 'row', gap: 10, alignItems: 'center'}}>
+          //       <View>
+          //         <View style={styles.Avartar50}>
+          //           <Image
+          //             style={{width: '90%', height: '90%'}}
+          //             source={require('../../assets/avartar.png')}
+          //           />
+          //         </View>
+          //       </View>
+          //       <View>
+          //         <Text style={{color: 'black'}}>
+          //           {dm?.receiver === auth().currentUser.uid
+          //             ? dm?.sender
+          //             : dm?.receiver}
+          //         </Text>
+          //         <Text style={{color: 'black'}}>{dm?.last_message}</Text>
+          //       </View>
+          //     </View>
+          //     <Text style={{color: 'black'}}>
+          //       {compareTimestampWithCurrentTime(dm?.timestamp)}
+          //     </Text>
+          //   </TouchableOpacity>
+          // </View>
+        ))}
       </View>
     );
   };

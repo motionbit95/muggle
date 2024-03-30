@@ -109,7 +109,7 @@ const User = ({navigation}) => {
                 <View
                   style={{flexDirection: 'row', gap: 5, alignItems: 'center'}}>
                   <Text style={{fontSize: 16, color: 'white'}}>
-                    {getDisplayAge(myInfo?.user_birth)}
+                    {getDisplayAge(myInfo?.user_birth)}세
                   </Text>
                   <Text style={{fontSize: 12, color: 'white'}}>|</Text>
                   <Text style={{fontSize: 16, color: 'white'}}>

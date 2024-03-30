@@ -742,6 +742,16 @@ export const btn_primary = [
   },
 ];
 
+export const btn_yellow = [
+  radius_md,
+  justify_center,
+  align_center,
+  p_3,
+  {
+    backgroundColor: '#FFCE4F',
+  },
+];
+
 export const btn_secondary = [
   radius_md,
   justify_center,

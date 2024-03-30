@@ -9,11 +9,11 @@ import {
 } from '../../style/styles';
 import WebView from 'react-native-webview';
 import firestore from '@react-native-firebase/firestore';
-import {addDocument, getUser} from '../../firebase/firebase_func';
+import {addDocument, addMessage, getUser} from '../../firebase/firebase_func';
 import auth from '@react-native-firebase/auth';
 
-function WebViewPayment({nacvigation, route}) {
-  const {data} = route.params ? route.params : {data: null};
+function WebViewPayment({navigation, route}) {
+  const {data, receiver} = route.params ? route.params : {data: null};
   const [queryParams, setQueryParams] = useState(null);
 
   useEffect(() => {
@@ -39,17 +39,58 @@ function WebViewPayment({nacvigation, route}) {
 
     setQueryParams(queryParams.toString());
 
-    console.log(queryParams.toString());
+    // console.log(queryParams.toString());
 
     const unsubscribe = firestore()
       .collection('payment')
       .doc(data.order_num)
-      .onSnapshot(documentSnapshot => {
+      .onSnapshot(async documentSnapshot => {
         // 문서가 업데이트될 때 호출되는 콜백 함수
         if (documentSnapshot.exists) {
           // 문서가 존재하는 경우
           // setDocData(documentSnapshot.data());
           console.log('결제가 완료되었습니다. ===> ', documentSnapshot.data());
+
+          await addDocument('matching', {
+            matching_state: 0,
+            pid: documentSnapshot.id,
+            sender: auth().currentUser.uid,
+            receiver: receiver,
+          })
+            .then(async id => {
+              await addMessage({
+                mid: id,
+                sender: auth().currentUser.uid,
+                receiver: receiver,
+                last_message: '',
+                doc_id: 'chat_info',
+                last_message: '',
+                receiver_isRead: 0,
+                sender_isRead: 0,
+                timestamp: new Date(),
+              });
+
+              navigation.navigate('Chat', {
+                screen: '매칭룸',
+                params: {
+                  data: {
+                    mid: id,
+                    sender: auth().currentUser.uid,
+                    receiver: receiver,
+                    last_message: '',
+                    doc_id: 'chat_info',
+                    last_message: '',
+                    receiver_isRead: 0,
+                    sender_isRead: 0,
+                    createAt: new Date(),
+                  },
+                  receiver: receiver,
+                },
+              });
+            })
+            .catch(err => {
+              console.log(err);
+            });
         } else {
           // 문서가 존재하지 않는 경우
           // setDocData(null);

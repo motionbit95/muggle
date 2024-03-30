@@ -10,9 +10,11 @@ export const font_md = 16;
 export const font_lg = 24;
 
 export const defaultFemale =
-  'https://firebasestorage.googleapis.com/v0/b/dinnermate-8d37b.appspot.com/o/assets%2FFemale.png?alt=media&token=247bbd91-9ebf-4f5a-8911-b8d6b9c89e58';
+  // 'https://firebasestorage.googleapis.com/v0/b/dinnermate-8d37b.appspot.com/o/assets%2FFemale.png?alt=media&token=247bbd91-9ebf-4f5a-8911-b8d6b9c89e58';
+  '';
 export const defaultMale =
-  'https://firebasestorage.googleapis.com/v0/b/dinnermate-8d37b.appspot.com/o/assets%2FMale.png?alt=media&token=dfa379fe-607c-4ac5-8208-37f2745f5baa';
+  // 'https://firebasestorage.googleapis.com/v0/b/dinnermate-8d37b.appspot.com/o/assets%2FMale.png?alt=media&token=dfa379fe-607c-4ac5-8208-37f2745f5baa';
+  '';
 
 // 시/도, 군/구
 export const cities = [
@@ -331,7 +333,7 @@ export function getDisplayAge(birthdate) {
 
   var lowerRange = Math.floor(age / 5) * 5;
   var upperRange = lowerRange + 4;
-  return `${age}세`;
+  return `${age}`;
 }
 
 export function calculateDday(targetDate) {
@@ -416,4 +418,25 @@ export function formatTwoDigits(num) {
   }
 
   return strNum;
+}
+
+export function compareTimestampWithCurrentTime(firestoreTimestamp) {
+  const firestoreDate = convertFirestoreTimestampToDate(firestoreTimestamp);
+  const currentDate = new Date();
+
+  // 두 날짜의 차이 계산 (밀리초 단위)
+  const timeDifference = currentDate - firestoreDate;
+
+  // 차이를 표시하는 문자열 생성
+  if (timeDifference < 60 * 1000) {
+    return `${Math.round(timeDifference / 1000)}초 전`;
+  } else if (timeDifference < 60 * 60 * 1000) {
+    return `${Math.round(timeDifference / (60 * 1000))}분 전`;
+  } else if (timeDifference < 24 * 60 * 60 * 1000) {
+    return `${Math.round(timeDifference / (60 * 60 * 1000))}시간 전`;
+  } else {
+    // 다양한 형식으로 날짜 표시 가능
+    const options = {year: 'numeric', month: 'long', day: 'numeric'};
+    return firestoreDate.toLocaleDateString('ko-Kr', options);
+  }
 }

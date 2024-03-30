@@ -58,6 +58,7 @@ import {
 } from './src/style/styles';
 import {primary_color} from './src/firebase/api';
 import WebViewPayment from './src/pages/Matching/WebViewPayment';
+import DirectRoom from './src/pages/Chat/DirectRoom';
 
 const App = () => {
   // const isDarkMode = useColorScheme() === 'dark';
@@ -192,6 +193,28 @@ const App = () => {
         component={ChatRoom}
         options={({navigation}) => ({
           title: '채팅룸',
+          headerLeft: () => (
+            <TouchableOpacity onPress={() => navigation.navigate('채팅')}>
+              <Image
+                style={img_sm}
+                source={require('./src/assets/icons/left_arrow.png')}
+              />
+            </TouchableOpacity>
+          ),
+          headerStyle: {
+            backgroundColor: '#fff',
+          },
+          headerTintColor: '#black',
+          headerTitleStyle: {
+            fontWeight: 'bold',
+          },
+        })}
+      />
+      <ChatStack.Screen
+        name="매칭룸"
+        component={DirectRoom}
+        options={({navigation}) => ({
+          title: '매칭룸',
           headerLeft: () => (
             <TouchableOpacity onPress={() => navigation.navigate('채팅')}>
               <Image
