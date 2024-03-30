@@ -44,7 +44,7 @@ import {InnerScreen} from 'react-native-screens';
 const Matching = ({navigation, route}) => {
   const {data, userList, index} = route.params ? route.params : {data: null};
 
-  console.log('data ===> ', userList, index);
+  // console.log('data ===> ', userList, index);
 
   return (
     <View style={styles.screenStyle}>

@@ -138,7 +138,10 @@ const GroupBox = ({item, index, navigation}) => {
               overflow: 'hidden',
             },
           ]}>
-          <Image source={groupImg} />
+          <Image
+            style={{width: '100%', height: '100%'}}
+            source={{uri: item.group_image}}
+          />
         </View>
       </View>
       {/* 유저 이미지 */}

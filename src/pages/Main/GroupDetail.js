@@ -56,6 +56,8 @@ const GroupDetail = ({navigation, route}) => {
     getGroupUsers();
 
     getUserInfo();
+
+    handleView(data.doc_id);
   }, []);
 
   const handleGoods = async gid => {
@@ -92,8 +94,6 @@ const GroupDetail = ({navigation, route}) => {
     await updateDocument('user', myInfo.doc_id, myInfo);
   };
 
-  handleView(data.doc_id);
-
   const handleEnterGroup = async () => {
     if (!auth().currentUser) {
       alert('회원만 모임에 참가할 수 있습니다.');
@@ -126,7 +126,7 @@ const GroupDetail = ({navigation, route}) => {
     <View style={styles.screenStyle}>
       <ScrollView style={styles.scrollViewStyle}>
         <Image
-          source={require('../../assets/banner1.png')}
+          source={data?.group_image ? {uri: data?.group_image} : null}
           style={[styles.banner, {backgroundColor: '#d9d9d9'}]}
         />
         <View style={styles.contentStyle}>

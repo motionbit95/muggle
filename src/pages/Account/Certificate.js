@@ -62,7 +62,7 @@ const Certificate = ({navigation}) => {
     // console.log(req[0]);
 
     if (req?.length > 0) {
-      navigation.navigate('Home');
+      navigation.navigate('홈');
     } else {
       navigation.navigate('SignUp');
     }

@@ -55,26 +55,16 @@ const MatchPayment = ({navigation, route}) => {
     simple_flag: 'Y', // 간편결제 여부
     auth_type: 'sms', // [간편결제/정기결제] 본인인증 방식 (sms : 문자인증 | pwd : 패스워드 인증)
   });
-  let [payResult] = useState({});
-
-  const getResult = res => {
-    if (res.PCD_PAY_RST === 'success') {
-      payResult = res;
-
-      // 전달받은 결제 파라미터값을 state에 저장 후  '/react/order_result'로 이동
-      // navigate('/order_result', {state: {payResult: payResult}});
-    } else {
-      // 결제 실패일 경우 알림 메시지
-      alert(res.PCD_PAY_MSG);
-    }
-  };
 
   async function handlePayment() {
-    console.log(content.current);
+    // console.log(content.current);
+    if (!auth().currentUser?.uid) {
+      alert('로그인해주세요.');
+      return;
+    }
 
     // 유저정보
     const user = await getUser(auth().currentUser?.uid);
-    console.log('결제유저 정보 ===> ', user);
 
     // 구매정보 수정
 

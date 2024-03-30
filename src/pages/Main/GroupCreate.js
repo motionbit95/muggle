@@ -13,6 +13,7 @@ import auth from '@react-native-firebase/auth';
 import DropDown from '../../Component/PickerComponent';
 import DateTimeInput from '../../Component/DateTimeInput';
 import {group_category} from './Home';
+import BannerPicker from '../../Component/BannerPicker';
 
 const GroupCreate = ({navigation}) => {
   const [selectedCity, setSelectedCity] = useState('');
@@ -85,6 +86,7 @@ const GroupCreate = ({navigation}) => {
       group_time: matchDateTime,
       group_price: matchPrice,
       group_admin: auth().currentUser.uid,
+      group_image: matchImage,
     };
 
     await addDocument('group', matchInfo)
@@ -103,7 +105,10 @@ const GroupCreate = ({navigation}) => {
           ],
         });
 
-        navigation.navigate('모임상세', {data: {...matchInfo, gid: id}});
+        navigation.navigate('홈', {
+          screen: '모임상세',
+          params: {data: {...matchInfo, gid: id}},
+        });
       })
       .catch(err => {
         console.log(err);
@@ -115,6 +120,7 @@ const GroupCreate = ({navigation}) => {
       <ScrollView style={styles.scrollViewStyle}>
         <View style={{width: '100%', gap: 15, padding: 20}}>
           <View style={styles.columnBox}>
+            <BannerPicker onChangeValue={setMatchImage} />
             <Text style={styles.contentTitle}>지역</Text>
             <View
               style={{
