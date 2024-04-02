@@ -66,7 +66,8 @@ const App = () => {
   // const backgroundStyle = {
   //   backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   // };
-
+  {
+    /* 
   const Tab = createBottomTabNavigator();
 
   const HomeStack = createNativeStackNavigator();
@@ -94,22 +95,6 @@ const App = () => {
               style={{height: 26, width: 102}}
               source={require('./src/assets/icons/logo.png')}
             />
-            // <TouchableOpacity
-            //   style={{marginLeft: 20}}
-            //   onPress={() => alert('여긴 홈인데용!')}>
-            // <Text
-            //   style={[
-            //     {
-            //       color: 'black',
-            //       marginLeft: 10,
-
-            //       fontWeight: 'bold',
-            //     },
-            //     xs,
-            //   ]}>
-            //   MUGGLE
-            // </Text>
-            // </TouchableOpacity>
           ),
           headerRight: () => (
             <TouchableOpacity
@@ -150,13 +135,6 @@ const App = () => {
         component={GroupCreate}
         options={({navigation}) => ({
           title: '모임개설',
-          // headerLeft: () => (
-          //   <Button
-          //     onPress={() => navigation.goBack()}
-          //     title="Back"
-          //     color="black"
-          //   />
-          // ),
           headerStyle: {
             backgroundColor: '#fff',
           },
@@ -332,13 +310,16 @@ const App = () => {
 
   return (
     <NavigationContainer independent={true}>
-      <Tab.Navigator>
+      <Tab.Navigator
+        screenOptions={{
+          tabBarActiveTintColor: '#FF634F',
+          unmountOnBlur: true,
+          headerShown: false,
+        }}>
         <Tab.Screen
           name="홈"
           component={HomeStackNavigate}
           options={{
-            tabBarActiveTintColor: '#FF634F',
-            headerShown: false,
             tabBarIcon: ({focused}) => (
               <Image
                 style={{width: 26, height: 26}}
@@ -349,15 +330,12 @@ const App = () => {
                 }
               />
             ),
-            unmountOnBlur: true,
           }}
         />
         <Tab.Screen
           name="커피매칭신청"
           component={MatchingStackNavigate}
           options={{
-            headerShown: false,
-            tabBarActiveTintColor: '#FF634F',
             tabBarIcon: ({focused}) => (
               <Image
                 style={img_sm}
@@ -368,13 +346,13 @@ const App = () => {
                 }
               />
             ),
-            unmountOnBlur: true,
           }}
         />
         <Tab.Screen
           name="모임생성"
           component={GroupCreate}
           options={{
+            headerShown: true,
             tabBarLabel: '',
 
             tabBarIcon: ({focused}) => (
@@ -387,15 +365,12 @@ const App = () => {
                 </View>
               </View>
             ),
-            unmountOnBlur: true,
           }}
         />
         <Tab.Screen
           name="Chat"
           component={ChatStackNavigate}
           options={{
-            headerShown: false,
-            tabBarActiveTintColor: '#FF634F',
             tabBarIcon: ({focused}) => (
               <Image
                 style={img_sm}
@@ -406,15 +381,12 @@ const App = () => {
                 }
               />
             ),
-            unmountOnBlur: true,
           }}
         />
         <Tab.Screen
           name="마이페이지"
           component={UserStackNavigate}
           options={{
-            headerShown: false,
-            tabBarActiveTintColor: '#FF634F',
             tabBarIcon: ({focused}) => (
               <Image
                 style={img_sm}
@@ -425,18 +397,189 @@ const App = () => {
                 }
               />
             ),
-            unmountOnBlur: true,
           }}
         />
-        {/* <Tab.Screen
-          name="Account"
-          component={SignUpStackNavigate}
-          options={{headerShown: false}}
-        />
-        <Tab.Screen name="채팅룸" component={ChatRoom} /> */}
       </Tab.Navigator>
     </NavigationContainer>
   );
+*/
+  }
+
+  // {
+  //   /*
+  const Tab = createBottomTabNavigator();
+  const Stack = createNativeStackNavigator();
+  const SignUpStack = createNativeStackNavigator();
+  const PageStack = createNativeStackNavigator();
+
+  const MyTab = () => (
+    <Tab.Navigator
+      screenOptions={{
+        tabBarActiveTintColor: '#FF634F',
+        unmountOnBlur: true,
+        headerShown: false,
+      }}>
+      <Tab.Screen
+        name="Muggle"
+        component={Home}
+        options={{
+          headerShown: true,
+          title: 'Home',
+          headerTintColor: '#ffffff',
+          headerTitleStyle: {
+            fontWeight: 'bold',
+            fontSize: 20,
+          },
+          headerBackVisible: false,
+          headerTitle: '',
+          headerLeft: ({onPress}) => (
+            <Image
+              style={{height: 26, width: 102, marginLeft: 10}}
+              source={require('./src/assets/icons/logo.png')}
+            />
+          ),
+          headerRight: () => (
+            <TouchableOpacity
+              style={{marginRight: 10}}
+              onPress={() => alert('알림 페이지 전달')}>
+              <Image
+                style={{width: 24, height: 24}}
+                source={require('./src/assets/Notification.png')}
+              />
+            </TouchableOpacity>
+          ),
+          tabBarIcon: ({focused}) => (
+            <Image
+              style={{width: 26, height: 26}}
+              source={
+                focused
+                  ? require('./src/assets/navIcon/home_select.png')
+                  : require('./src/assets/navIcon/home_unselect.png')
+              }
+            />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="커피매칭신청"
+        component={MatchHistory}
+        options={{
+          headerShown: true,
+          tabBarIcon: ({focused}) => (
+            <Image
+              style={img_sm}
+              source={
+                focused
+                  ? require('./src/assets/navIcon/coffee_select.png')
+                  : require('./src/assets/navIcon/coffee_unselect.png')
+              }
+            />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="모임생성"
+        component={GroupCreate}
+        options={{
+          headerShown: true,
+          tabBarLabel: '',
+
+          tabBarIcon: ({focused}) => (
+            <View style={{marginTop: 20}}>
+              <View style={[center, radius_full, circle_40]}>
+                <Image
+                  style={img_xs}
+                  source={require('./src/assets/Plus.png')}
+                />
+              </View>
+            </View>
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Chat"
+        component={Chat}
+        options={{
+          headerShown: true,
+          tabBarIcon: ({focused}) => (
+            <Image
+              style={img_sm}
+              source={
+                focused
+                  ? require('./src/assets/navIcon/chat_select.png')
+                  : require('./src/assets/navIcon/chat_unselect.png')
+              }
+            />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="마이페이지"
+        component={User}
+        options={{
+          tabBarIcon: ({focused}) => (
+            <Image
+              style={img_sm}
+              source={
+                focused
+                  ? require('./src/assets/navIcon/user_select.png')
+                  : require('./src/assets/navIcon/user_unselect.png')
+              }
+            />
+          ),
+        }}
+      />
+    </Tab.Navigator>
+  );
+
+  const SignUpStackNavigate = () => (
+    <SignUpStack.Navigator>
+      <SignUpStack.Screen
+        name="SignUp"
+        component={SignUp}
+        options={{title: '회원가입'}}
+      />
+      <SignUpStack.Screen name="휴대폰 본인인증" component={Certificate} />
+      <SignUpStack.Screen name="프로필 설정" component={Interest} />
+      <SignUpStack.Screen name="인트로" component={Introduce} />
+    </SignUpStack.Navigator>
+  );
+
+  const PageStackNavigate = () => (
+    <PageStack.Navigator screenOptions={{headerShown: false}}>
+      <PageStack.Screen name="매칭신청" component={Matching} />
+      <PageStack.Screen name="프로필 편집" component={Profile} />
+      <PageStack.Screen name="모임상세" component={GroupDetail} />
+      <PageStack.Screen name="채팅룸" component={ChatRoom} />
+      <PageStack.Screen name="매칭룸" component={DirectRoom} />
+      <PageStack.Screen name="매칭중" component={MatchPayment} />
+      <PageStack.Screen name="결제" component={WebViewPayment} />
+    </PageStack.Navigator>
+  );
+
+  return (
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen
+          name="tab"
+          component={MyTab}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="SignUp"
+          component={SignUpStackNavigate}
+          options={{title: '회원가입'}}
+        />
+        <Stack.Screen
+          name="Page"
+          component={PageStackNavigate}
+          options={{headerShown: false}}
+        />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+  // */
+  // }
 };
 
 export default App;
