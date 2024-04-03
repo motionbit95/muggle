@@ -10,6 +10,7 @@ import styles, {
   fs_sm,
   fw_bold,
   img_lg,
+  img_sm,
   justify_between,
   justify_center,
   p_1,
@@ -40,7 +41,7 @@ export const mapImg = require('../assets/icons/map.png');
 export const moneyImg = require('../assets/icons/money.png');
 export const groupImg = require('../assets/GroupImage.png');
 
-const GroupBox = ({item, index, navigation}) => {
+const GroupBox = ({item, index, myInfo, navigation}) => {
   const [groupUsers, setGroupUsers] = useState([]);
 
   useEffect(() => {
@@ -118,10 +119,29 @@ const GroupBox = ({item, index, navigation}) => {
               overflow: 'hidden',
             },
           ]}>
-          <Image
-            style={{width: '100%', height: '100%'}}
-            source={item?.group_image ? {uri: item?.group_image} : groupImg}
-          />
+          <View>
+            <Image
+              style={{width: '100%', height: '100%'}}
+              source={item?.group_image ? {uri: item?.group_image} : groupImg}
+            />
+            <Image
+              style={[
+                img_sm,
+                {
+                  position: 'absolute',
+                  top: 4,
+                  right: 4,
+                  width: 30,
+                  height: 30,
+                },
+              ]}
+              source={
+                myInfo?.goods?.includes(item.doc_id)
+                  ? require('../assets/icons/heart_fill.png')
+                  : require('../assets/icons/heart.png')
+              }
+            />
+          </View>
         </View>
       </View>
       {/* 유저 이미지 */}

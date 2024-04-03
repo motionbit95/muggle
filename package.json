@@ -28,6 +28,7 @@
     "react-native": "0.73.5",
     "react-native-contacts": "^7.0.8",
     "react-native-image-picker": "^7.1.2",
+    "react-native-kakao-share-link": "^1.0.10",
     "react-native-linear-gradient": "^2.8.3",
     "react-native-pager-view": "^6.2.3",
     "react-native-picker-select": "^9.0.1",

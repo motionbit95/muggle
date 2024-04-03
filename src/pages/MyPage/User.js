@@ -8,15 +8,18 @@ import {
   View,
 } from 'react-native';
 import styles, {
-  align_center,
+  center,
   f_full,
-  justify_center,
   radius_full,
+  shadow_md,
   sp_3,
-  w_full,
 } from '../../style/styles';
 import auth from '@react-native-firebase/auth';
-import {singleQuery, updateDocument} from '../../firebase/firebase_func';
+import {
+  getDocList,
+  singleQuery,
+  updateDocument,
+} from '../../firebase/firebase_func';
 import {getDisplayAge, primary_color} from '../../firebase/api';
 import LinearGradient from 'react-native-linear-gradient';
 import {SafeAreaView} from 'react-native-safe-area-context';
@@ -28,6 +31,43 @@ import Typography from '../../Component/Typography';
 
 const User = ({navigation}) => {
   const [myInfo, setMyInfo] = useState(null);
+  const [goods, setGoods] = useState(null);
+  const [views, setViews] = useState(null);
+
+  useEffect(() => {
+    const getGroups = async () => {
+      await getDocList('group').then(res => {
+        let goodList = [];
+        res.forEach(group => {
+          myInfo?.goods?.forEach(async gid => {
+            if (gid === group.doc_id) {
+              goodList.push(group);
+              console.log(new Date(), '찜했습니다.', goodList);
+              setGoods(goodList);
+            }
+          });
+        });
+      });
+    };
+
+    const getViews = async () => {
+      await getDocList('group').then(res => {
+        let viewList = [];
+        res.forEach(group => {
+          myInfo?.views?.forEach(async gid => {
+            if (gid === group.doc_id) {
+              viewList.push(group);
+              console.log(new Date(), '봤습니다.', viewList);
+              setViews(viewList);
+            }
+          });
+        });
+      });
+    };
+
+    getGroups();
+    getViews();
+  }, [myInfo]);
 
   useEffect(() => {
     const unsubscribe = auth().onAuthStateChanged(async user => {
@@ -125,12 +165,7 @@ const User = ({navigation}) => {
                     {getDisplayAge(myInfo?.user_birth)}세
                   </Typography>
                   <Typography white>|</Typography>
-                  <Typography white>
-                    {myInfo?.user_gender === '남' ||
-                    myInfo?.user_gender === 'male'
-                      ? '남성'
-                      : '여성'}
-                  </Typography>
+                  <Typography white>{myInfo?.user_gender}자</Typography>
                   <Typography white>|</Typography>
                   <Typography white>{myInfo?.user_place[0]}</Typography>
                 </View>
@@ -159,26 +194,54 @@ const User = ({navigation}) => {
               </TouchableOpacity>
             </View>
           </View>
-          <View style={[sp_3]}>
+          <View style={[sp_3, shadow_md]}>
             <View style={[styles.rowBox, styles.itembox]}>
-              <View style={styles.one_thirdBoxStyle}>
-                <Typography size="2xl" bold>
-                  {myInfo?.goods ? myInfo?.goods.length : 0}
-                </Typography>
-                <Typography>찜모임</Typography>
-              </View>
-              <View style={styles.one_thirdBoxStyle}>
-                <Typography size="2xl" bold>
-                  {myInfo?.views ? myInfo?.views.length : 0}
-                </Typography>
-                <Typography>최근 본 모임</Typography>
-              </View>
-              <View style={styles.one_thirdBoxStyle}>
-                <Typography size="2xl" bold>
-                  0
-                </Typography>
-                <Typography>초대받은 모임</Typography>
-              </View>
+              <TouchableOpacity
+                style={styles.one_thirdBoxStyle}
+                onPress={() =>
+                  navigation.navigate('모임', {
+                    screen: '모임리스트',
+                    params: {
+                      data: goods,
+                      // userList: userList,
+                      title: '찜모임',
+                    },
+                  })
+                }>
+                <View style={center}>
+                  <Typography size="2xl" bold>
+                    {myInfo?.goods ? myInfo?.goods.length : 0}
+                  </Typography>
+                  <Typography>찜모임</Typography>
+                </View>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={styles.one_thirdBoxStyle}
+                onPress={() =>
+                  navigation.navigate('모임', {
+                    screen: '모임리스트',
+                    params: {
+                      data: views,
+                      // userList: userList,
+                      title: '최근 본 모임',
+                    },
+                  })
+                }>
+                <View style={center}>
+                  <Typography size="2xl" bold>
+                    {myInfo?.views ? myInfo?.views.length : 0}
+                  </Typography>
+                  <Typography>최근 본 모임</Typography>
+                </View>
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.one_thirdBoxStyle}>
+                <View style={center}>
+                  <Typography size="2xl" bold>
+                    0
+                  </Typography>
+                  <Typography>초대받은 모임</Typography>
+                </View>
+              </TouchableOpacity>
             </View>
             <View
               style={{backgroundColor: 'white', borderRadius: 10, padding: 10}}>
@@ -195,19 +258,10 @@ const User = ({navigation}) => {
               </TouchableOpacity>
               <TouchableOpacity
                 style={styles.TouchButtonStyle}
-                onPress={onLogout}>
+                onPress={() => navigation.navigate('마이', {screen: '알림'})}>
                 <View style={styles.rowBox}>
                   <Image source={require('../../assets/menuicon1.png')} />
-                  <Typography>로그아웃</Typography>
-                </View>
-                <Image source={require('../../assets/rightarrow.png')} />
-              </TouchableOpacity>
-              <TouchableOpacity
-                style={styles.TouchButtonStyle}
-                onPress={onDeleteUser}>
-                <View style={styles.rowBox}>
-                  <Image source={require('../../assets/menuicon1.png')} />
-                  <Typography>탈퇴하기</Typography>
+                  <Typography>알림설정</Typography>
                 </View>
                 <Image source={require('../../assets/rightarrow.png')} />
               </TouchableOpacity>
@@ -251,6 +305,24 @@ const User = ({navigation}) => {
                   }}
                 />
               </PopupBase>
+              <TouchableOpacity
+                style={styles.TouchButtonStyle}
+                onPress={onLogout}>
+                <View style={styles.rowBox}>
+                  <Image source={require('../../assets/menuicon1.png')} />
+                  <Typography>로그아웃</Typography>
+                </View>
+                <Image source={require('../../assets/rightarrow.png')} />
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={styles.TouchButtonStyle}
+                onPress={onDeleteUser}>
+                <View style={styles.rowBox}>
+                  <Image source={require('../../assets/menuicon1.png')} />
+                  <Typography>탈퇴하기</Typography>
+                </View>
+                <Image source={require('../../assets/rightarrow.png')} />
+              </TouchableOpacity>
             </View>
           </View>
         </View>

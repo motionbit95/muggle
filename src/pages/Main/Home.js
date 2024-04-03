@@ -60,6 +60,8 @@ import alertIcon from '../../assets/icons/alert.png';
 import _x from '../../assets/icons/_x.png';
 import Typography from '../../Component/Typography';
 
+import auth from '@react-native-firebase/auth';
+
 export const group_category = [
   '머글 모임',
   '커피 친구 추천',
@@ -68,6 +70,7 @@ export const group_category = [
 ];
 const Home = ({navigation}) => {
   const [userList, setUserList] = useState(null);
+  const [myInfo, setMyInfo] = useState(null);
 
   const [muggleGroupList, setMuggleGroupList] = useState(null);
   const [muggleClassList, setMuggleClassList] = useState(null);
@@ -133,6 +136,8 @@ const Home = ({navigation}) => {
     let list = await getDocList('user');
     // console.log('유저리스트 ===> ', list);
     setUserList(list);
+
+    setMyInfo(list.find(user => user.uid === auth().currentUser?.uid));
   };
 
   const updateGroup = async () => {
@@ -166,6 +171,7 @@ const Home = ({navigation}) => {
         <View>
           {items?.slice(0, visibleItems)?.map((item, index) => (
             <GroupBox
+              myInfo={myInfo}
               key={index}
               userList={userList}
               index={index}
@@ -177,7 +183,7 @@ const Home = ({navigation}) => {
         <TouchableOpacity
           style={[btn_secondary, {marginVertical: 10}]}
           onPress={() =>
-            navigation.navigate('모임리스트', {
+            navigation.navigate('모임', {
               data: items,
               userList: userList,
               title: group_category[index],

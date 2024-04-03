@@ -74,6 +74,7 @@ import GroupView from './src/pages/Main/GroupView';
 import Typography from './src/Component/Typography';
 import Terms from './src/pages/Account/Terms';
 import Privacy from './src/pages/Account/Privacy';
+import Alarm from './src/pages/MyPage/Alarm';
 
 const App = () => {
   // const isDarkMode = useColorScheme() === 'dark';
@@ -212,6 +213,7 @@ const App = () => {
         component={SignUpStackNavigate}
         options={{headerShown: false}}
       />
+      <UserStack.Screen name="알림" component={Alarm} />
     </UserStack.Navigator>
   );
 
