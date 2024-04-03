@@ -123,7 +123,7 @@ const App = () => {
           headerTitle: '',
           headerLeft: ({onPress}) => (
             <Image
-              style={{height: 26, width: 102}}
+              style={{height: 79.61 * 0.25, width: 515.92 * 0.25}}
               source={require('./src/assets/icons/logo.png')}
             />
           ),
@@ -276,7 +276,7 @@ const App = () => {
           title: '',
           headerLeft: ({onPress}) => (
             <Image
-              style={{height: 26, width: 102}}
+              style={{height: 79.61 * 0.25, width: 515.92 * 0.25}}
               source={require('./src/assets/icons/logo.png')}
             />
           ),

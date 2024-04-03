@@ -184,9 +184,12 @@ const Home = ({navigation}) => {
           style={[btn_secondary, {marginVertical: 10}]}
           onPress={() =>
             navigation.navigate('모임', {
-              data: items,
-              userList: userList,
-              title: group_category[index],
+              screen: '모임리스트',
+              params: {
+                data: items,
+                userList: userList,
+                title: group_category[index],
+              },
             })
           }>
           <View style={[flex_row, justify_center, align_center, sp_2]}>
