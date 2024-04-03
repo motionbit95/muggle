@@ -39,7 +39,7 @@ function WebViewPayment({navigation, route}) {
 
     setQueryParams(queryParams.toString());
 
-    // console.log(queryParams.toString());
+    console.log(queryParams.toString());
 
     const unsubscribe = firestore()
       .collection('payment')

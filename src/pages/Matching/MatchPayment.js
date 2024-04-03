@@ -39,7 +39,7 @@ const MatchPayment = ({navigation, route}) => {
     is_direct: 'Y', // 결제창 방식 (DIRECT: Y | POPUP: N)
     pay_type: 'card', // 결제수단
     work_type: 'CERT', // 결제요청방식
-    card_ver: '', // DEFAULT: 01 (01: 정기결제 플렛폼, 02: 일반결제 플렛폼), 카드결제 시 필수
+    card_ver: '01', // DEFAULT: 01 (01: 정기결제 플렛폼, 02: 일반결제 플렛폼), 카드결제 시 필수
     payple_payer_id: '', // 결제자 고유ID (본인인증 된 결제회원 고유 KEY)
     buyer_no: '2335', // 가맹점 회원 고유번호
     buyer_name: '홍길동', // 결제자 이름
@@ -54,7 +54,7 @@ const MatchPayment = ({navigation, route}) => {
     pay_month: '', // [정기결제] 결제 구분 월
     is_reguler: 'N', // 정기결제 여부 (Y | N)
     is_taxsave: 'N', // 현금영수증 발행여부
-    simple_flag: 'N', // 간편결제 여부
+    simple_flag: 'Y', // 간편결제 여부
     auth_type: 'sms', // [간편결제/정기결제] 본인인증 방식 (sms : 문자인증 | pwd : 패스워드 인증)
   });
 
