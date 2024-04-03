@@ -22,6 +22,8 @@ import {
   description,
   flex_column,
   flex_row,
+  font_description,
+  font_title,
   fs_md,
   fs_sm,
   fs_xl,
@@ -56,8 +58,7 @@ import MatchBox from '../../Component/MatchBox';
 // icon
 import alertIcon from '../../assets/icons/alert.png';
 import _x from '../../assets/icons/_x.png';
-
-export const {width: screenWidth} = Dimensions.get('window');
+import Typography from '../../Component/Typography';
 
 export const group_category = [
   '머글 모임',
@@ -109,6 +110,25 @@ const Home = ({navigation}) => {
       updateGroup();
   }, []);
 
+  const [screenWidth, setScreenWidth] = useState(
+    Dimensions.get('window').width,
+  );
+  const [screenHeight, setScreenHeight] = useState(
+    Dimensions.get('window').height,
+  );
+
+  const handleScreenSizeChange = ({window}) => {
+    setScreenWidth(window.width);
+    setScreenHeight(window.height);
+  };
+
+  useEffect(() => {
+    Dimensions.addEventListener('change', handleScreenSizeChange);
+    return () => {
+      Dimensions.removeEventListener('change', handleScreenSizeChange);
+    };
+  }, []);
+
   const updateUser = async () => {
     let list = await getDocList('user');
     // console.log('유저리스트 ===> ', list);
@@ -134,7 +154,7 @@ const Home = ({navigation}) => {
     setMuggleBusinessList(muggleBusinessList);
   };
 
-  const ItemList = ({items}) => {
+  const ItemList = ({items, index}) => {
     const [visibleItems, setVisibleItems] = useState(3);
 
     const handleLoadMore = () => {
@@ -146,6 +166,7 @@ const Home = ({navigation}) => {
         <View>
           {items?.slice(0, visibleItems)?.map((item, index) => (
             <GroupBox
+              key={index}
               userList={userList}
               index={index}
               item={item}
@@ -155,7 +176,13 @@ const Home = ({navigation}) => {
         </View>
         <TouchableOpacity
           style={[btn_secondary, {marginVertical: 10}]}
-          onPress={handleLoadMore}>
+          onPress={() =>
+            navigation.navigate('모임리스트', {
+              data: items,
+              userList: userList,
+              title: group_category[index],
+            })
+          }>
           <View style={[flex_row, justify_center, align_center, sp_2]}>
             <Text
               style={{color: blackAlpha800, fontSize: fs_md}}>{`더보기`}</Text>
@@ -176,7 +203,13 @@ const Home = ({navigation}) => {
         ref={scrollViewRef}
         stickyHeaderIndices={[0]}>
         {/* TAB */}
-        <View style={[bg_body, align_start, w_full, p_3, {paddingBottom: 0}]}>
+        <View
+          style={[
+            align_start,
+            w_full,
+            p_3,
+            {paddingBottom: 0, backgroundColor: 'white'},
+          ]}>
           <View style={[flex_row, sp_2]}>
             {group_category.map(
               (category, index) =>
@@ -184,8 +217,15 @@ const Home = ({navigation}) => {
                   <TouchableOpacity
                     key={index}
                     onPress={() => {
+                      console.log('category ===> ', category, index);
                       setSelectedGroup(category);
-                      scrollToComponent(firstComponentRef);
+                      scrollToComponent(
+                        index === 0
+                          ? firstComponentRef
+                          : index === 2
+                          ? secondComponentRef
+                          : thirdComponentRef,
+                      );
                     }}>
                     <View style={[under_button(selectedGroup === category)]}>
                       <Text style={[text_selected(selectedGroup === category)]}>
@@ -271,19 +311,21 @@ const Home = ({navigation}) => {
               ref={
                 index === 0
                   ? firstComponentRef
-                  : index === 1
+                  : index === 2
                   ? secondComponentRef
                   : thirdComponentRef
               }>
               <View style={[flex_column, sp_2]}>
-                <Text style={title}>{category}</Text>
-                <Text style={description}>
+                <Typography size={'lg'} bold>
+                  {category}
+                </Typography>
+                <Typography size={'md'} light>
                   {index === 0 || index === 2
                     ? '우리 동네, 밥 머글 사람?'
                     : index === 1
                     ? '새로운 이성과 커피 친구 해보세요.'
                     : '각 분야 정보를 공유해보세요.'}
-                </Text>
+                </Typography>
               </View>
 
               {index === 1 ? (
@@ -301,7 +343,7 @@ const Home = ({navigation}) => {
                     showsHorizontalScrollIndicator={false}>
                     {userList?.map((user, index) => (
                       <MatchBox
-                        // key={index}
+                        key={index}
                         user={user}
                         index={index}
                         navigation={navigation}
@@ -312,6 +354,7 @@ const Home = ({navigation}) => {
                 </View>
               ) : (
                 <ItemList
+                  index={index}
                   items={
                     index === 0
                       ? muggleGroupList

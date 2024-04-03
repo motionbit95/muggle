@@ -5,6 +5,7 @@ import styles, {
   radius_full,
   shadow_base,
   sp_3,
+  w_full,
 } from '../../style/styles';
 import auth from '@react-native-firebase/auth';
 import {singleQuery, updateDocument} from '../../firebase/firebase_func';
@@ -12,6 +13,8 @@ import {getDisplayAge, primary_color} from '../../firebase/api';
 import LinearGradient from 'react-native-linear-gradient';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import Geolocation from '@react-native-community/geolocation'; // 라이브러리 import
+import PopupBase from '../../Component/PopupBase';
+import {terms} from '../../assets/terms';
 
 const User = ({navigation}) => {
   const [myInfo, setMyInfo] = useState(null);
@@ -178,7 +181,7 @@ const User = ({navigation}) => {
               <TouchableOpacity
                 style={styles.TouchButtonStyle}
                 onPress={() =>
-                  navigation.navigate('커피매칭신청', {screen: '매칭내역'})
+                  navigation.navigate('매칭', {screen: '매칭내역'})
                 }>
                 <View style={styles.rowBox}>
                   <Image source={require('../../assets/menuicon1.png')} />
@@ -201,6 +204,17 @@ const User = ({navigation}) => {
                 <View style={styles.rowBox}>
                   <Image source={require('../../assets/menuicon1.png')} />
                   <Text style={{color: 'black'}}>탈퇴하기</Text>
+                </View>
+                <Image source={require('../../assets/rightarrow.png')} />
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={styles.TouchButtonStyle}
+                onPress={() =>
+                  navigation.navigate('모임', {screen: '이용약관'})
+                }>
+                <View style={styles.rowBox}>
+                  <Image source={require('../../assets/menuicon1.png')} />
+                  <Text style={{color: 'black'}}>이용약관</Text>
                 </View>
                 <Image source={require('../../assets/rightarrow.png')} />
               </TouchableOpacity>

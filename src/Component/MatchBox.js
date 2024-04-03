@@ -32,6 +32,7 @@ import {
   sp_3,
   whiteAlpha900,
 } from '../style/styles';
+import Typography from './Typography';
 
 const MatchBox = ({user, index, userList, navigation}) => {
   return (
@@ -62,48 +63,28 @@ const MatchBox = ({user, index, userList, navigation}) => {
               style={img_sm}
               source={require('../assets/icons/subtract.png')}
             />
-            <Text
-              style={{
-                color: whiteAlpha900,
-                fontSize: fs_xs,
-                fontWeight: '400',
-              }}>
+            <Typography size={'sm'} white>
               근처
-            </Text>
+            </Typography>
           </View>
 
-          <Text
-            style={{
-              color: whiteAlpha900,
-              fontSize: fs_lg,
-              fontWeight: fw_bold,
-            }}>
-            {user.user_name}
-          </Text>
-          <Text
-            style={{
-              color: whiteAlpha900,
-              fontSize: fs_md,
-              fontWeight: fw_medium,
-            }}>
-            {user.user_place?.[0]}
-          </Text>
+          <View style={sp_1}>
+            <Typography size={'lg'} white bold>
+              {user.user_name}
+            </Typography>
+            <Typography white>{user.user_place?.[0]}</Typography>
+          </View>
           <TouchableOpacity
             style={btn_primary}
             onPressOut={() =>
-              navigation.navigate('커피매칭신청', {
-                screen: '커피매칭',
+              navigation.navigate('매칭', {
+                screen: '매칭',
                 params: {data: user, userList: userList, index: index},
               })
             }>
-            <Text
-              style={{
-                color: 'black',
-                fontSize: font_md,
-                fontWeight: 'bold',
-              }}>
+            <Typography bold size={'lg'}>
               커피 매칭 신청
-            </Text>
+            </Typography>
           </TouchableOpacity>
         </View>
       </LinearGradient>

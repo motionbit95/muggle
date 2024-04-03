@@ -116,7 +116,7 @@ const GroupDetail = ({navigation, route}) => {
 
     await updateDocument('group', data.doc_id, data);
 
-    navigation.navigate('Chat', {
+    navigation.navigate('채팅', {
       screen: '채팅룸',
       params: {data: {...data, gid: data.doc_id}, userList: userList},
     });
@@ -126,7 +126,7 @@ const GroupDetail = ({navigation, route}) => {
     <View style={styles.screenStyle}>
       <ScrollView style={styles.scrollViewStyle}>
         <Image
-          source={data?.group_image ? {uri: data?.group_image} : null}
+          source={{uri: data?.group_image}}
           style={[styles.banner, {backgroundColor: '#d9d9d9'}]}
         />
         <View style={styles.contentStyle}>

@@ -22,6 +22,7 @@ import styles, {
   w_full,
 } from '../style/styles';
 import {formatDateTime} from '../firebase/api';
+import Typography from './Typography';
 
 const DateTimeInput = props => {
   const [dateTime, setDateTime] = useState(new Date());
@@ -51,16 +52,12 @@ const DateTimeInput = props => {
           <TouchableOpacity
             style={[styles.contentBox, {flex: 1}]}
             onPress={() => showDateTimePicker('date')}>
-            <Text style={{color: blackAlpha900, fontSize: fs_md}}>
-              {formatDateTime(dateTime).split(' ')[0]}
-            </Text>
+            <Typography>{formatDateTime(dateTime).split(' ')[0]}</Typography>
           </TouchableOpacity>
           <TouchableOpacity
             style={[styles.contentBox, {flex: 1}]}
             onPress={() => showDateTimePicker('time')}>
-            <Text style={{color: blackAlpha900, fontSize: fs_md}}>
-              {formatDateTime(dateTime).split(' ')[1]}
-            </Text>
+            <Typography>{formatDateTime(dateTime).split(' ')[1]}</Typography>
           </TouchableOpacity>
           {showPicker && (
             <DateTimePicker

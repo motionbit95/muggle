@@ -13,6 +13,7 @@ import styles, {
   radius_full,
   sp_2,
 } from '../style/styles';
+import Typography from './Typography';
 
 const BannerPicker = props => {
   const [imageUri, setImageUri] = useState(
@@ -102,7 +103,7 @@ const BannerPicker = props => {
         source={imageUri ? {uri: imageUri} : null}
       />
       <TouchableOpacity style={btn_normal} onPress={handleChoosePhoto}>
-        <Text style={{color: blackAlpha900}}>모임 배너 이미지 선택</Text>
+        <Typography>모임 배너 이미지 선택</Typography>
       </TouchableOpacity>
     </View>
   );

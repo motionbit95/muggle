@@ -55,7 +55,7 @@ const DmBox = ({navigation, data}) => {
         }}
         // onPress={() => alert('채팅하겠습니까')}
         onPress={() =>
-          navigation.navigate('Chat', {
+          navigation.navigate('채팅', {
             screen: '매칭룸',
             params: {data},
           })
@@ -177,12 +177,12 @@ const Chat = ({navigation}) => {
               alignItems: 'center',
             }}
             // onPress={() => alert('채팅하겠습니까')}
-            onPress={() =>
-              navigation.navigate('Chat', {
+            onPress={() => {
+              navigation.navigate('채팅', {
                 screen: '채팅룸',
                 params: {data: {...group, group: group.doc_id}},
-              })
-            }>
+              });
+            }}>
             <View style={{flexDirection: 'row', gap: 10, alignItems: 'center'}}>
               <View>
                 <View style={styles.Avartar50}>
@@ -247,7 +247,7 @@ const Chat = ({navigation}) => {
           //     }}
           //     // onPress={() => alert('채팅하겠습니까')}
           //     onPress={() =>
-          //       navigation.navigate('Chat', {
+          //       navigation.navigate('채팅', {
           //         screen: '채팅룸',
           //       })
           //     }>

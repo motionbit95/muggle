@@ -105,7 +105,7 @@ const GroupCreate = ({navigation}) => {
           ],
         });
 
-        navigation.navigate('홈', {
+        navigation.navigate('모임', {
           screen: '모임상세',
           params: {data: {...matchInfo, gid: id}},
         });

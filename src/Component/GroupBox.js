@@ -11,12 +11,14 @@ import styles, {
   fw_bold,
   img_lg,
   justify_between,
+  justify_center,
   p_1,
   p_2,
   p_3,
   radius_full,
   radius_md,
   radius_sm,
+  sp_1,
   sp_2,
   sp_3,
   whiteAlpha900,
@@ -31,6 +33,7 @@ import {
   primary_color,
 } from '../firebase/api';
 import {getUser, singleQuery} from '../firebase/firebase_func';
+import Typography from './Typography';
 
 export const userImg = require('../assets/icons/user.png');
 export const mapImg = require('../assets/icons/map.png');
@@ -48,7 +51,7 @@ const GroupBox = ({item, index, navigation}) => {
         groupUsers.push(user[0]);
       }
       setGroupUsers(groupUsers);
-      console.log(groupUsers);
+      // console.log(groupUsers);
     };
     getGroupUsers();
   }, []);
@@ -58,7 +61,7 @@ const GroupBox = ({item, index, navigation}) => {
       key={index + '_' + item.doc_id}
       style={[
         radius_md,
-        p_3,
+        p_2,
         {backgroundColor: whiteAlpha900, marginBottom: 10},
       ]}
       onPress={() => {
@@ -70,24 +73,12 @@ const GroupBox = ({item, index, navigation}) => {
         );
       }}>
       <View style={[flex_row, justify_between]}>
-        <View style={{gap: 5}}>
-          <Text
-            style={{
-              fontSize: fs_md,
-              fontWeight: fw_bold,
-              color: blackAlpha900,
-            }}>
-            {item.group_name}
-          </Text>
+        <View style={[sp_1, justify_center]}>
+          <Typography bold>{item.group_name}</Typography>
           <View style={[flex_row, align_center, sp_2]}>
-            <Text
-              style={{
-                fontSize: fs_sm,
-                fontWeight: '400',
-                color: blackAlpha500,
-              }}>
+            <Typography size={'sm'} light bold>
               {formatDateTime(item.group_time)}
-            </Text>
+            </Typography>
             <View
               style={[
                 radius_sm,
@@ -97,35 +88,24 @@ const GroupBox = ({item, index, navigation}) => {
                   paddingVertical: 3,
                 },
               ]}>
-              <Text
-                style={[
-                  {
-                    fontWeight: fw_bold,
-                    fontSize: fs_sm,
-                    color: whiteAlpha900,
-                  },
-                ]}>
+              <Typography bold size={'sm'} white>
                 {displayDday(calculateDday(formatDate(item.group_time)))}
-              </Text>
+              </Typography>
             </View>
           </View>
 
-          <View style={{gap: 5}}>
-            <View style={[styles.rowBox, {gap: 5}]}>
+          <View style={sp_1}>
+            <View style={[styles.rowBox, sp_2]}>
               <Image style={{width: 16, height: 16}} source={mapImg} />
-              <Text style={{color: blackAlpha900, fontSize: fs_sm}}>
-                {item.group_place}
-              </Text>
+              <Typography size={'sm'}>{item.group_place}</Typography>
             </View>
-            <View style={[styles.rowBox, {gap: 5}]}>
+            <View style={[styles.rowBox, sp_2]}>
               <Image style={{width: 16, height: 16}} source={moneyImg} />
-              <Text style={{color: blackAlpha900, fontSize: fs_sm}}>
-                {item.group_price}
-              </Text>
+              <Typography size={'sm'}>{item.group_price}</Typography>
               <Image style={{width: 16, height: 16}} source={userImg} />
-              <Text style={{color: blackAlpha900, fontSize: fs_sm}}>
+              <Typography size={'sm'}>
                 {item.group_users.length} / {item.group_personnel}
-              </Text>
+              </Typography>
             </View>
           </View>
         </View>
@@ -140,7 +120,7 @@ const GroupBox = ({item, index, navigation}) => {
           ]}>
           <Image
             style={{width: '100%', height: '100%'}}
-            source={{uri: item.group_image}}
+            source={item?.group_image ? {uri: item?.group_image} : groupImg}
           />
         </View>
       </View>
@@ -181,16 +161,16 @@ const GroupBox = ({item, index, navigation}) => {
           )}
           {groupUsers?.length > 3 && (
             <View>
-              <Text
+              <Typography
+                size={'sm'}
+                light
                 style={{
-                  fontSize: fs_sm,
-                  color: blackAlpha500,
                   textAlign: 'center',
                   marginLeft: 10,
                 }}>
                 {'+'}
                 {groupUsers?.length - 3}
-              </Text>
+              </Typography>
             </View>
           )}
         </View>

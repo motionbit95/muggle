@@ -54,13 +54,13 @@ function WebViewPayment({navigation, route}) {
           await addDocument('matching', {
             matching_state: 0,
             pid: documentSnapshot.id,
-            sender: auth().currentUser.uid,
+            sender: auth().currentUser?.uid,
             receiver: receiver,
           })
             .then(async id => {
               await addMessage({
                 mid: id,
-                sender: auth().currentUser.uid,
+                sender: auth().currentUser?.uid,
                 receiver: receiver,
                 last_message: '',
                 doc_id: 'chat_info',
@@ -70,12 +70,12 @@ function WebViewPayment({navigation, route}) {
                 timestamp: new Date(),
               });
 
-              navigation.navigate('Chat', {
+              navigation.navigate('채팅', {
                 screen: '매칭룸',
                 params: {
                   data: {
                     mid: id,
-                    sender: auth().currentUser.uid,
+                    sender: auth().currentUser?.uid,
                     receiver: receiver,
                     last_message: '',
                     doc_id: 'chat_info',

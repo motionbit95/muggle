@@ -107,7 +107,7 @@ export const userGroups = async uid => {
     list.push({...doc.data(), doc_id: doc.id});
   });
 
-  console.log('uid ===> ', list);
+  // console.log('uid ===> ', list);
 
   return list;
 };

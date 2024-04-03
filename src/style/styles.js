@@ -406,18 +406,20 @@ export const whiteAlpha700 = 'rgba(255, 255, 255, 0.64)';
 export const whiteAlpha800 = 'rgba(255, 255, 255, 0.8)';
 export const whiteAlpha900 = 'rgba(255, 255, 255, 0.92)';
 
+export const font_family = 'Pretendard';
+
 // typograpy
-export const fs_2xs = 10;
-export const fs_xs = 12;
-export const fs_sm = 14;
-export const fs_md = 16;
-export const fs_lg = 18;
-export const fs_xl = 20;
-export const fs_2xl = 24;
-export const fs_3xl = 30;
-export const fs_4xl = 36;
-export const fs_5xl = 48;
-export const fs_6xl = 60;
+export const fs_2xs = 8;
+export const fs_xs = 10;
+export const fs_sm = 12;
+export const fs_md = 14;
+export const fs_lg = 16;
+export const fs_xl = 18;
+export const fs_2xl = 20;
+export const fs_3xl = 24;
+export const fs_4xl = 30;
+export const fs_5xl = 36;
+export const fs_6xl = 48;
 
 export const lh_component = '150%';
 export const lh_title = '100%';
@@ -431,19 +433,6 @@ export const t_align_center = 'center';
 export const t_align_left = 'left';
 export const t_align_right = 'right';
 export const t_align_justify = 'justify';
-
-// title
-export const title = {
-  fontSize: fs_xl,
-  // lineHeight: lh_title,
-  fontWeight: fw_bold,
-  color: blackAlpha900,
-};
-export const description = {
-  fontSize: fs_md,
-  // lineHeight: lh_title,
-  color: blackAlpha500,
-};
 
 export const shadow_xs = {
   shadowColor: '#000',

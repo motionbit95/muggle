@@ -9,6 +9,7 @@ import {
   View,
 } from 'react-native';
 import {component_height, font_md} from '../firebase/api';
+import Typography from './Typography';
 
 const DropDown = ({items, ...props}) => {
   const [openDropdown, setOpenDropdown] = useState(false);
@@ -24,7 +25,7 @@ const DropDown = ({items, ...props}) => {
     <View>
       <TouchableOpacity onPress={() => setOpenDropdown(!openDropdown)}>
         <View style={styles.container}>
-          <Text style={styles.text}>{selectedValue}</Text>
+          <Typography>{selectedValue}</Typography>
           <View style={{width: 20, height: 20, justifyContent: 'center'}}>
             <Image source={require('../assets/downarrow.png')} />
           </View>
@@ -51,7 +52,7 @@ const DropDown = ({items, ...props}) => {
                       : styles.button
                   }
                   onPress={() => handleValueChange(item)}>
-                  <Text style={styles.text}>{item}</Text>
+                  <Typography>{item}</Typography>
                 </TouchableOpacity>
               ))}
             </ScrollView>

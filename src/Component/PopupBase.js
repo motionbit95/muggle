@@ -11,14 +11,18 @@ import {
   Platform,
 } from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
-import {blackAlpha900, fs_sm, fs_xs} from '../style/styles';
+import {blackAlpha900, f_full, fs_sm, fs_xs, w_full} from '../style/styles';
+import Typography from './Typography';
 
-const PopupBase = ({icon, contents}) => {
+const PopupBase = ({icon, contents, ...props}) => {
   const [modalVisible, setModalVisible] = useState(false);
 
   return (
-    <View style={styles.container}>
-      <TouchableOpacity
+    <View style={f_full}>
+      <TouchableOpacity style={w_full} onPress={() => setModalVisible(true)}>
+        {props.children}
+      </TouchableOpacity>
+      {/* <TouchableOpacity
         style={{
           width: 30,
           height: 30,
@@ -26,8 +30,8 @@ const PopupBase = ({icon, contents}) => {
           alignItems: 'center',
         }}
         onPress={() => setModalVisible(true)}>
-        <Image source={icon} />
-      </TouchableOpacity>
+        <Image source={icon} /> 
+      </TouchableOpacity> */}
       <Modal
         animationType="slide"
         transparent={true}
@@ -48,9 +52,7 @@ const PopupBase = ({icon, contents}) => {
                   style={{width: 20, height: 20}}
                 />
               </TouchableOpacity>
-              <Text style={{color: blackAlpha900, fontSize: fs_xs}}>
-                {contents}
-              </Text>
+              <Typography size={'sm'}>{contents}</Typography>
               <Button title="Close" onPress={() => setModalVisible(false)} />
             </View>
           </ScrollView>

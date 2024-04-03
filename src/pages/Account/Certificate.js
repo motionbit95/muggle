@@ -62,7 +62,7 @@ const Certificate = ({navigation}) => {
     // console.log(req[0]);
 
     if (req?.length > 0) {
-      navigation.navigate('홈');
+      navigation.navigate('모임');
     } else {
       navigation.navigate('SignUp');
     }
@@ -214,9 +214,9 @@ const Certificate = ({navigation}) => {
                 }}>
                 서비스 이용약관 동의
               </Text>
-              <PopupBase
-                icon={require('../../assets/rightarrow.png')}
-                contents={terms}></PopupBase>
+              <PopupBase contents={terms}>
+                <Image source={require('../../assets/rightarrow.png')} />
+              </PopupBase>
               {/* <TouchableOpacity onPress={() => alert('약관 표시')}>
                 <View style={{width: 20, height: 20, justifyContent: 'center'}}>
                   <Image source={require('../../assets/rightarrow.png')} />

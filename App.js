@@ -5,7 +5,7 @@
  * @format
  */
 
-import React from 'react';
+import React, {useState} from 'react';
 import {
   Button,
   Image,
@@ -45,20 +45,36 @@ import GroupCreate from './src/pages/Main/GroupCreate';
 import MatchHistory from './src/pages/Matching/MatchHistory';
 import MatchPayment from './src/pages/Matching/MatchPayment';
 import {
+  align_center,
   center,
   circle_30,
   circle_40,
   circle_50,
+  f_full,
+  flex_column,
+  flex_row,
+  fs_sm,
+  fs_xs,
   img_sm,
   img_xs,
+  justify_around,
+  justify_between,
+  justify_center,
+  p_2,
+  p_3,
   radius_full,
   shadow_2xl,
   shadow_md,
+  sp_1,
   xs,
 } from './src/style/styles';
 import {primary_color} from './src/firebase/api';
 import WebViewPayment from './src/pages/Matching/WebViewPayment';
 import DirectRoom from './src/pages/Chat/DirectRoom';
+import {getDocList} from './src/firebase/firebase_func';
+import GroupView from './src/pages/Main/GroupView';
+import Typography from './src/Component/Typography';
+import Terms from './src/pages/Account/Terms';
 
 const App = () => {
   // const isDarkMode = useColorScheme() === 'dark';
@@ -66,6 +82,22 @@ const App = () => {
   // const backgroundStyle = {
   //   backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   // };
+
+  const tabBarSelectIcon = [
+    require('./src/assets/navIcon/home_select.png'),
+    require('./src/assets/navIcon/user_select.png'),
+    require('./src/assets/Plus.png'),
+    require('./src/assets/navIcon/chat_select.png'),
+    require('./src/assets/navIcon/user_select.png'),
+  ];
+
+  const tabBarIcon = [
+    require('./src/assets/navIcon/home_unselect.png'),
+    require('./src/assets/navIcon/user_unselect.png'),
+    require('./src/assets/Plus.png'),
+    require('./src/assets/navIcon/chat_unselect.png'),
+    require('./src/assets/navIcon/user_unselect.png'),
+  ];
 
   const Tab = createBottomTabNavigator();
 
@@ -94,22 +126,6 @@ const App = () => {
               style={{height: 26, width: 102}}
               source={require('./src/assets/icons/logo.png')}
             />
-            // <TouchableOpacity
-            //   style={{marginLeft: 20}}
-            //   onPress={() => alert('여긴 홈인데용!')}>
-            // <Text
-            //   style={[
-            //     {
-            //       color: 'black',
-            //       marginLeft: 10,
-
-            //       fontWeight: 'bold',
-            //     },
-            //     xs,
-            //   ]}>
-            //   MUGGLE
-            // </Text>
-            // </TouchableOpacity>
           ),
           headerRight: () => (
             <TouchableOpacity
@@ -146,17 +162,46 @@ const App = () => {
         })}
       />
       <HomeStack.Screen
+        name="모임리스트"
+        component={GroupView}
+        options={({navigation}) => ({
+          title: '모임리스트',
+          headerLeft: () => (
+            <TouchableOpacity onPress={() => navigation.navigate('Muggle')}>
+              <Image
+                style={img_sm}
+                source={require('./src/assets/icons/left_arrow.png')}
+              />
+            </TouchableOpacity>
+          ),
+          headerStyle: {
+            backgroundColor: '#fff',
+          },
+          headerTintColor: '#black',
+          headerTitleStyle: {
+            fontWeight: 'bold',
+          },
+        })}
+      />
+      <HomeStack.Screen
         name="모임개설"
         component={GroupCreate}
         options={({navigation}) => ({
           title: '모임개설',
-          // headerLeft: () => (
-          //   <Button
-          //     onPress={() => navigation.goBack()}
-          //     title="Back"
-          //     color="black"
-          //   />
-          // ),
+          headerStyle: {
+            backgroundColor: '#fff',
+          },
+          headerTintColor: '#black',
+          headerTitleStyle: {
+            fontWeight: 'bold',
+          },
+        })}
+      />
+      <HomeStack.Screen
+        name="이용약관"
+        component={Terms}
+        options={({navigation}) => ({
+          title: '이용약관',
           headerStyle: {
             backgroundColor: '#fff',
           },
@@ -187,14 +232,14 @@ const App = () => {
 
   const ChatStackNavigate = () => (
     <ChatStack.Navigator>
-      <ChatStack.Screen name="채팅" component={Chat} />
+      <ChatStack.Screen name="채팅방" component={Chat} />
       <ChatStack.Screen
         name="채팅룸"
         component={ChatRoom}
         options={({navigation}) => ({
           title: '채팅룸',
           headerLeft: () => (
-            <TouchableOpacity onPress={() => navigation.navigate('채팅')}>
+            <TouchableOpacity onPress={() => navigation.navigate('채팅방')}>
               <Image
                 style={img_sm}
                 source={require('./src/assets/icons/left_arrow.png')}
@@ -237,6 +282,36 @@ const App = () => {
 
   const MatchingStackNavigate = () => (
     <MatchingStack.Navigator>
+      <MatchingStack.Screen
+        name="매칭"
+        component={Matching}
+        options={({navigation}) => ({
+          title: '',
+          headerLeft: ({onPress}) => (
+            <Image
+              style={{height: 26, width: 102}}
+              source={require('./src/assets/icons/logo.png')}
+            />
+          ),
+          headerRight: () => (
+            <TouchableOpacity
+              style={{marginRight: 10}}
+              onPress={() => alert('알림 페이지 전달')}>
+              <Image
+                style={{width: 24, height: 24}}
+                source={require('./src/assets/Notification.png')}
+              />
+            </TouchableOpacity>
+          ),
+          headerStyle: {
+            backgroundColor: '#fff',
+          },
+          headerTintColor: '#black',
+          headerTitleStyle: {
+            fontWeight: 'bold',
+          },
+        })}
+      />
       <MatchingStack.Screen name="매칭내역" component={MatchHistory} />
       <MatchingStack.Screen
         name="매칭중"
@@ -251,58 +326,10 @@ const App = () => {
           title: '결제',
           headerLeft: () => (
             <TouchableOpacity
-              onPress={() =>
-                navigation.navigate('커피매칭신청', {screen: '매칭중'})
-              }>
+              onPress={() => navigation.navigate('매칭', {screen: '매칭중'})}>
               <Image
                 style={img_sm}
                 source={require('./src/assets/icons/left_arrow.png')}
-              />
-            </TouchableOpacity>
-          ),
-          headerStyle: {
-            backgroundColor: '#fff',
-          },
-          headerTintColor: '#black',
-          headerTitleStyle: {
-            fontWeight: 'bold',
-          },
-        })}
-      />
-      <MatchingStack.Screen
-        name="커피매칭"
-        component={Matching}
-        options={({navigation}) => ({
-          title: '',
-          headerLeft: ({onPress}) => (
-            <Image
-              style={{height: 26, width: 102}}
-              source={require('./src/assets/icons/logo.png')}
-            />
-            // <TouchableOpacity
-            //   style={{marginLeft: 20}}
-            //   onPress={() => alert('여긴 홈인데용!')}>
-            // <Text
-            //   style={[
-            //     {
-            //       color: 'black',
-            //       marginLeft: 10,
-
-            //       fontWeight: 'bold',
-            //     },
-            //     xs,
-            //   ]}>
-            //   MUGGLE
-            // </Text>
-            // </TouchableOpacity>
-          ),
-          headerRight: () => (
-            <TouchableOpacity
-              style={{marginRight: 10}}
-              onPress={() => alert('알림 페이지 전달')}>
-              <Image
-                style={{width: 24, height: 24}}
-                source={require('./src/assets/Notification.png')}
               />
             </TouchableOpacity>
           ),
@@ -330,11 +357,105 @@ const App = () => {
     </SignUpStack.Navigator>
   );
 
+  const CustomTabBar = ({state, descriptors, navigation}) => {
+    return (
+      <SafeAreaView>
+        <View style={styles.tabContainer}>
+          {state.routes.map((route, index) => {
+            const {options} = descriptors[route.key];
+            const label =
+              options.tabBarLabel !== undefined
+                ? options.tabBarLabel
+                : options.title !== undefined
+                ? options.title
+                : route.name;
+            const isFocused = state.index === index;
+
+            const onPress = () => {
+              const event = navigation.emit({
+                type: 'tabPress',
+                target: route.key,
+                canPreventDefault: true,
+              });
+
+              if (!isFocused && !event.defaultPrevented) {
+                navigation.navigate(route.name);
+              }
+            };
+
+            const onLongPress = () => {
+              navigation.emit({
+                type: 'tabLongPress',
+                target: route.key,
+              });
+            };
+
+            return (
+              <TouchableOpacity
+                accessibilityRole="button"
+                accessibilityState={isFocused ? {selected: true} : {}}
+                accessibilityLabel={options.tabBarAccessibilityLabel}
+                testID={options.tabBarTestID}
+                onPress={onPress}
+                onLongPress={onLongPress}
+                style={[{flex: 1}, center]}
+                key={index}>
+                <View
+                  style={
+                    index === 2
+                      ? [center, radius_full, circle_40, p_2]
+                      : [styles.tabItem, sp_1]
+                  }>
+                  <Image
+                    style={{width: 20, height: 20}}
+                    source={
+                      isFocused ? tabBarSelectIcon[index] : tabBarIcon[index]
+                    }
+                  />
+                  {label && (
+                    <Typography
+                      size={'sm'}
+                      style={{
+                        color: isFocused ? primary_color : '#8c8c8c',
+                      }}>
+                      {label}
+                    </Typography>
+                  )}
+                </View>
+              </TouchableOpacity>
+            );
+          })}
+        </View>
+      </SafeAreaView>
+    );
+  };
+
+  const styles = StyleSheet.create({
+    container: {
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
+    tabContainer: {
+      flexDirection: 'row',
+      // height: 60,
+      paddingVertical: 10,
+      borderTopWidth: 1,
+      borderTopColor: '#f1f1f1',
+      backgroundColor: '#fff',
+    },
+    tabItem: {
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
+  });
+
   return (
     <NavigationContainer independent={true}>
-      <Tab.Navigator>
+      <Tab.Navigator tabBar={props => <CustomTabBar {...props} />}>
         <Tab.Screen
-          name="홈"
+          name="모임"
           component={HomeStackNavigate}
           options={{
             tabBarActiveTintColor: '#FF634F',
@@ -353,21 +474,11 @@ const App = () => {
           }}
         />
         <Tab.Screen
-          name="커피매칭신청"
+          name="매칭"
           component={MatchingStackNavigate}
           options={{
             headerShown: false,
             tabBarActiveTintColor: '#FF634F',
-            tabBarIcon: ({focused}) => (
-              <Image
-                style={img_sm}
-                source={
-                  focused
-                    ? require('./src/assets/navIcon/coffee_select.png')
-                    : require('./src/assets/navIcon/coffee_unselect.png')
-                }
-              />
-            ),
             unmountOnBlur: true,
           }}
         />
@@ -376,64 +487,27 @@ const App = () => {
           component={GroupCreate}
           options={{
             tabBarLabel: '',
-
-            tabBarIcon: ({focused}) => (
-              <View style={{marginTop: 20}}>
-                <View style={[center, radius_full, circle_40]}>
-                  <Image
-                    style={img_xs}
-                    source={require('./src/assets/Plus.png')}
-                  />
-                </View>
-              </View>
-            ),
             unmountOnBlur: true,
           }}
         />
         <Tab.Screen
-          name="Chat"
+          name="채팅"
           component={ChatStackNavigate}
           options={{
             headerShown: false,
             tabBarActiveTintColor: '#FF634F',
-            tabBarIcon: ({focused}) => (
-              <Image
-                style={img_sm}
-                source={
-                  focused
-                    ? require('./src/assets/navIcon/chat_select.png')
-                    : require('./src/assets/navIcon/chat_unselect.png')
-                }
-              />
-            ),
             unmountOnBlur: true,
           }}
         />
         <Tab.Screen
-          name="마이페이지"
+          name="마이"
           component={UserStackNavigate}
           options={{
             headerShown: false,
             tabBarActiveTintColor: '#FF634F',
-            tabBarIcon: ({focused}) => (
-              <Image
-                style={img_sm}
-                source={
-                  focused
-                    ? require('./src/assets/navIcon/user_select.png')
-                    : require('./src/assets/navIcon/user_unselect.png')
-                }
-              />
-            ),
             unmountOnBlur: true,
           }}
         />
-        {/* <Tab.Screen
-          name="Account"
-          component={SignUpStackNavigate}
-          options={{headerShown: false}}
-        />
-        <Tab.Screen name="채팅룸" component={ChatRoom} /> */}
       </Tab.Navigator>
     </NavigationContainer>
   );

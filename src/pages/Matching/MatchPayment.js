@@ -66,7 +66,7 @@ const MatchPayment = ({navigation, route}) => {
 
     // 유저정보
     const user = await getUser(auth().currentUser?.uid);
-    console.log(user.uid, '->', data.uid);
+    // console.log(user.uid, '->', data.uid);
 
     // 구매정보 수정
 
@@ -77,7 +77,7 @@ const MatchPayment = ({navigation, route}) => {
     content.current.buy_total = amount;
     content.current.order_num = createOid();
 
-    navigation.navigate('커피매칭신청', {
+    navigation.navigate('매칭', {
       screen: '결제',
       params: {
         data: content.current,
