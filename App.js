@@ -63,8 +63,6 @@ import {
   p_2,
   p_3,
   radius_full,
-  shadow_2xl,
-  shadow_md,
   sp_1,
   xs,
 } from './src/style/styles';
@@ -75,6 +73,7 @@ import {getDocList} from './src/firebase/firebase_func';
 import GroupView from './src/pages/Main/GroupView';
 import Typography from './src/Component/Typography';
 import Terms from './src/pages/Account/Terms';
+import Privacy from './src/pages/Account/Privacy';
 
 const App = () => {
   // const isDarkMode = useColorScheme() === 'dark';
@@ -197,20 +196,6 @@ const App = () => {
           },
         })}
       />
-      <HomeStack.Screen
-        name="이용약관"
-        component={Terms}
-        options={({navigation}) => ({
-          title: '이용약관',
-          headerStyle: {
-            backgroundColor: '#fff',
-          },
-          headerTintColor: '#black',
-          headerTitleStyle: {
-            fontWeight: 'bold',
-          },
-        })}
-      />
     </HomeStack.Navigator>
   );
 
@@ -283,7 +268,7 @@ const App = () => {
   const MatchingStackNavigate = () => (
     <MatchingStack.Navigator>
       <MatchingStack.Screen
-        name="매칭"
+        name="커피친구"
         component={Matching}
         options={({navigation}) => ({
           title: '',
@@ -324,15 +309,6 @@ const App = () => {
         options={({navigation}) => ({
           headerShown: true,
           title: '결제',
-          headerLeft: () => (
-            <TouchableOpacity
-              onPress={() => navigation.navigate('매칭', {screen: '매칭중'})}>
-              <Image
-                style={img_sm}
-                source={require('./src/assets/icons/left_arrow.png')}
-              />
-            </TouchableOpacity>
-          ),
           headerStyle: {
             backgroundColor: '#fff',
           },

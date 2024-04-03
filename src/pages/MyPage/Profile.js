@@ -1,7 +1,6 @@
 import React, {useState} from 'react';
 import {
   Alert,
-  Image,
   ScrollView,
   Text,
   TextInput,
@@ -11,22 +10,20 @@ import {
 
 import styles, {
   align_center,
-  blackAlpha100,
-  blackAlpha300,
+  blackAlpha50,
   blackAlpha900,
-  btn_primary,
-  btn_secondary,
   center,
   flex_row,
   fs_md,
-  fs_xs,
   justify_center,
+  p_2,
+  radius_full,
 } from '../../style/styles';
 import DropDown from '../../Component/PickerComponent';
-import {banks, cities, districts} from '../../firebase/api';
-import ImagePicker from '../../Component/ProfilePicker';
+import {banks, cities, districts, primary_color} from '../../firebase/api';
 import ProfilePicker from '../../Component/ProfilePicker';
 import {updateDocument} from '../../firebase/firebase_func';
+import Typography from '../../Component/Typography';
 
 const Profile = ({navigation, route}) => {
   const {data} = route.params ? route.params : {data: null};
@@ -148,7 +145,9 @@ const Profile = ({navigation, route}) => {
             />
             <View style={styles.rowBox}>
               <View style={{flex: 1}}>
-                <Text style={styles.contentTitle}>이름</Text>
+                <Typography size="lg" bold>
+                  이름
+                </Typography>
               </View>
               <TextInput
                 style={[
@@ -165,7 +164,9 @@ const Profile = ({navigation, route}) => {
             </View>
             <View style={styles.rowBox}>
               <View style={{flex: 1}}>
-                <Text style={styles.contentTitle}>소개</Text>
+                <Typography size="lg" bold>
+                  소개
+                </Typography>
               </View>
               <TextInput
                 multiline
@@ -186,7 +187,9 @@ const Profile = ({navigation, route}) => {
           <View style={styles.hr} />
           <View style={{gap: 20}}>
             <View style={styles.columnBox}>
-              <Text style={styles.contentTitle}>성별</Text>
+              <Typography size="lg" bold>
+                성별
+              </Typography>
               <View style={styles.buttoncontainer}>
                 <TouchableOpacity
                   style={[
@@ -195,14 +198,10 @@ const Profile = ({navigation, route}) => {
                       styles.selectedButton,
                   ]}
                   onPress={() => selectGender('male')}>
-                  <Text
-                    style={[
-                      styles.genderbuttonText,
-                      (selectedGender === 'male' || selectedGender === '남') &&
-                        styles.selectedButtonText,
-                    ]}>
+                  <Typography
+                    red={selectedGender === 'male' || selectedGender === '남'}>
                     남성
-                  </Text>
+                  </Typography>
                 </TouchableOpacity>
                 <TouchableOpacity
                   style={[
@@ -211,20 +210,19 @@ const Profile = ({navigation, route}) => {
                       styles.selectedButton,
                   ]}
                   onPress={() => selectGender('female')}>
-                  <Text
-                    style={[
-                      styles.genderbuttonText,
-                      (selectedGender === 'female' ||
-                        selectedGender === '여') &&
-                        styles.selectedButtonText,
-                    ]}>
+                  <Typography
+                    red={
+                      selectedGender === 'female' || selectedGender === '여'
+                    }>
                     여성
-                  </Text>
+                  </Typography>
                 </TouchableOpacity>
               </View>
             </View>
             <View style={styles.columnBox}>
-              <Text style={styles.contentTitle}>생년월일</Text>
+              <Typography size="lg" bold>
+                생년월일
+              </Typography>
               <View
                 style={{
                   justifyContent: 'stretch',
@@ -255,7 +253,9 @@ const Profile = ({navigation, route}) => {
               </View>
             </View>
             <View style={styles.columnBox}>
-              <Text style={styles.contentTitle}>지역</Text>
+              <Typography size="lg" bold>
+                지역
+              </Typography>
               <View
                 style={{
                   justifyContent: 'stretch',
@@ -279,7 +279,9 @@ const Profile = ({navigation, route}) => {
               </View>
             </View>
             <View style={styles.columnBox}>
-              <Text style={styles.contentTitle}>나의 커피 매칭권 금액은?</Text>
+              <Typography size="lg" bold>
+                나의 커피 매칭권 금액은?
+              </Typography>
               <View style={styles.contentBox}>
                 <View
                   style={[
@@ -295,17 +297,14 @@ const Profile = ({navigation, route}) => {
                     onChange={e => setUserPrice(e.nativeEvent.text)}
                     defaultValue={userPrice}
                   />
-                  <Text style={[{color: blackAlpha900, fontSize: fs_md}]}>
-                    {' '}
-                    만원
-                  </Text>
+                  <Typography>만원</Typography>
                 </View>
               </View>
             </View>
             <View style={styles.columnBox}>
-              <Text style={styles.contentTitle}>
+              <Typography size="lg" bold>
                 커피ㅣ 매칭 부수입 정산 받으실 계좌(선택)
-              </Text>
+              </Typography>
               <View
                 style={{
                   justifyContent: 'stretch',
@@ -330,14 +329,16 @@ const Profile = ({navigation, route}) => {
             </View>
           </View>
           <View style={styles.hr} />
-          <View>
-            <Text style={styles.contentTitle}>관심사</Text>
+          <View style={{flex: 1}}>
+            <Typography size="lg" bold>
+              관심사
+            </Typography>
           </View>
           <View style={center}>
             <View
               style={{
-                rowGap: 20,
-                columnGap: 0,
+                rowGap: 5,
+                columnGap: 5,
                 flexDirection: 'row',
                 flexWrap: 'wrap',
               }}>
@@ -362,29 +363,18 @@ const Profile = ({navigation, route}) => {
               ].map((item, index) => (
                 <TouchableOpacity
                   key={index}
-                  style={{
-                    justifyContent: 'flex-start',
-                    alignItems: 'center',
-                    gap: 5,
-                    margin: 2,
-                    width: 65,
-                    height: 100,
-                    backgroundColor: interest.includes(item)
-                      ? blackAlpha100
-                      : 'white',
-                    padding: 5,
-                    borderRadius: 10,
-                  }}
+                  style={[
+                    p_2,
+                    radius_full,
+                    {
+                      backgroundColor: interest?.includes(item)
+                        ? primary_color
+                        : blackAlpha50,
+                    },
+                  ]}
                   onPress={() => handleInterest(item)}>
-                  <View style={styles.interestButton}></View>
-                  <Text
-                    style={{
-                      color: blackAlpha900,
-                      fontSize: fs_xs,
-                      textAlign: 'center',
-                    }}>
-                    {item}
-                  </Text>
+                  {/* <View style={styles.interestButton}></View> */}
+                  <Typography size={'md'}>{item}</Typography>
                 </TouchableOpacity>
               ))}
             </View>
@@ -394,7 +384,9 @@ const Profile = ({navigation, route}) => {
           <TouchableOpacity
             style={[styles.button, styles.buttonMargin]}
             onPress={handleSaveProfile}>
-            <Text style={styles.buttonText}>저장</Text>
+            <Typography size="lg" bold>
+              저장
+            </Typography>
           </TouchableOpacity>
         </View>
       </ScrollView>

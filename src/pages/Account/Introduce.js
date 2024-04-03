@@ -16,21 +16,23 @@ import {
   font_md,
 } from '../../firebase/api';
 import {SceneMap, TabBar, TabView} from 'react-native-tab-view';
+import Typography from '../../Component/Typography';
+import {align_center, sp_1} from '../../style/styles';
 
 const Intro1 = () => (
   <View style={{flex: 1, padding: 20, gap: 20}}>
     <View style={{alignItems: 'center', gap: 10}}>
-      <Text style={{fontSize: 26, color: 'black', fontWeight: 'bold'}}>
+      <Typography size="3xl" bold>
         우리 동네, 밥 머글 사람?
-      </Text>
+      </Typography>
     </View>
-    <View style={{alignItems: 'center'}}>
-      <Text style={{fontSize: 15, color: 'gray'}}>
+    <View style={[align_center, sp_1]}>
+      <Typography size="lg" light>
         지역별로 식사 모임, 비즈니스 모임을
-      </Text>
-      <Text style={{fontSize: 15, color: 'gray'}}>
+      </Typography>
+      <Typography size="lg" light>
         참여하고 만들 수 있어요.
-      </Text>
+      </Typography>
     </View>
   </View>
 );
@@ -38,20 +40,20 @@ const Intro1 = () => (
 const Intro2 = () => (
   <View style={{flex: 1, padding: 20, gap: 20}}>
     <View style={{alignItems: 'center', gap: 10}}>
-      <Text style={{fontSize: 26, color: 'black', fontWeight: 'bold'}}>
+      <Typography size="3xl" bold>
         새로운 이성과
-      </Text>
-      <Text style={{fontSize: 26, color: 'black', fontWeight: 'bold'}}>
+      </Typography>
+      <Typography size="3xl" bold>
         커피 한잔 어떠신가요?
-      </Text>
+      </Typography>
     </View>
-    <View style={{alignItems: 'center', gap: 10}}>
-      <Text style={{fontSize: 15, color: 'gray'}}>
+    <View style={[align_center, sp_1]}>
+      <Typography size="lg" light>
         내가 원하는 새로운 이성과
-      </Text>
-      <Text style={{fontSize: 15, color: 'gray'}}>
+      </Typography>
+      <Typography size="lg" light>
         오프라인 커피 매칭 시켜 드려요.
-      </Text>
+      </Typography>
     </View>
     <Image
       source={require('../../assets/introimage1.png')}
@@ -61,11 +63,13 @@ const Intro2 = () => (
         resizeMode: 'contain',
       }}
     />
-    <View style={{alignItems: 'center', gap: 10}}>
-      <Text style={{fontSize: 15, color: 'gray'}}>
+    <View style={[align_center, sp_1]}>
+      <Typography size="lg" light>
         나의 매칭권 금액을 설정하고
-      </Text>
-      <Text style={{fontSize: 15, color: 'gray'}}>부수입을 만들어보세요.</Text>
+      </Typography>
+      <Typography size="lg" light>
+        부수입을 만들어보세요.
+      </Typography>
     </View>
   </View>
 );
@@ -125,8 +129,10 @@ const Introduce = ({navigation}) => {
       />
       <TouchableOpacity
         style={styles.button}
-        onPress={() => navigation.navigate('홈', {screen: 'Muggle'})}>
-        <Text style={styles.buttonText}>시작하기</Text>
+        onPress={() => navigation.navigate('모임', {screen: 'Muggle'})}>
+        <Typography bold size="lg">
+          시작하기
+        </Typography>
       </TouchableOpacity>
     </View>
   );

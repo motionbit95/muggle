@@ -125,7 +125,7 @@ const Home = ({navigation}) => {
   useEffect(() => {
     Dimensions.addEventListener('change', handleScreenSizeChange);
     return () => {
-      Dimensions.removeEventListener('change', handleScreenSizeChange);
+      // Dimensions.removeEventListener('change', handleScreenSizeChange);
     };
   }, []);
 
@@ -184,8 +184,7 @@ const Home = ({navigation}) => {
             })
           }>
           <View style={[flex_row, justify_center, align_center, sp_2]}>
-            <Text
-              style={{color: blackAlpha800, fontSize: fs_md}}>{`더보기`}</Text>
+            <Typography>{`더보기`}</Typography>
             <Image
               style={img_xxs}
               source={require('../../assets/icons/right_arrow.png')}
@@ -228,9 +227,12 @@ const Home = ({navigation}) => {
                       );
                     }}>
                     <View style={[under_button(selectedGroup === category)]}>
-                      <Text style={[text_selected(selectedGroup === category)]}>
+                      <Typography
+                        bold
+                        black={selectedGroup === category}
+                        light={selectedGroup !== category}>
                         {category}
-                      </Text>
+                      </Typography>
                     </View>
                   </TouchableOpacity>
                 ),
@@ -253,7 +255,7 @@ const Home = ({navigation}) => {
             ]}>
             <View style={[flex_row, sp_4, p_3, align_center]}>
               <Image style={img_sm_2} source={alertIcon} />
-              <Text>새로운 업데이트 소식 전해드릴게요.</Text>
+              <Typography>새로운 업데이트 소식 전해드릴게요.</Typography>
             </View>
             <Image style={img_xs} source={_x} />
           </View>
@@ -274,17 +276,10 @@ const Home = ({navigation}) => {
                 style={img_full}
                 source={bannerList.image[index]}>
                 <View style={[sp_3, align_center, m_4]}>
-                  <Text
-                    style={{
-                      fontSize: fs_xl,
-                      fontWeight: fw_bold,
-                      color: whiteAlpha900,
-                    }}>
+                  <Typography white bold size={'xl'}>
                     Title
-                  </Text>
-                  <Text style={{fontSize: fs_md, color: whiteAlpha800}}>
-                    서브텍스트가 들어갑니다
-                  </Text>
+                  </Typography>
+                  <Typography white>서브텍스트가 들어갑니다</Typography>
                   <View
                     style={[
                       {
@@ -295,9 +290,9 @@ const Home = ({navigation}) => {
                       radius_full,
                       align_center,
                     ]}>
-                    <Text style={{fontSize: fs_sm, color: whiteAlpha900}}>
+                    <Typography white size={'sm'}>
                       {index + 1} / {bannerList.image?.length}
-                    </Text>
+                    </Typography>
                   </View>
                 </View>
               </ImageBackground>

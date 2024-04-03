@@ -409,8 +409,8 @@ export const whiteAlpha900 = 'rgba(255, 255, 255, 0.92)';
 export const font_family = 'Pretendard';
 
 // typograpy
-export const fs_2xs = 8;
-export const fs_xs = 10;
+export const fs_2xs = 10;
+export const fs_xs = 11;
 export const fs_sm = 12;
 export const fs_md = 14;
 export const fs_lg = 16;

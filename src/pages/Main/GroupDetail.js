@@ -8,12 +8,14 @@ import {
   View,
 } from 'react-native';
 import styles, {
+  blackAlpha500,
   blackAlpha900,
   fs_md,
   fw_bold,
   img_md,
   img_sm,
   p_2,
+  radius_sm,
 } from '../../style/styles';
 import {
   calculateDday,
@@ -22,9 +24,11 @@ import {
   formatDateTime,
   defaultMale,
   defaultFemale,
+  primary_color,
 } from '../../firebase/api';
 import auth from '@react-native-firebase/auth';
 import {singleQuery, updateDocument} from '../../firebase/firebase_func';
+import Typography from '../../Component/Typography';
 
 const GroupDetail = ({navigation, route}) => {
   const {data, userList} = route.params ? route.params : {data: null};
@@ -137,11 +141,19 @@ const GroupDetail = ({navigation, route}) => {
               gap: 20,
             }}>
             <View style={[{justifyContent: 'space-between'}, styles.rowBox]}>
-              <Text style={{fontSize: 18, fontWeight: '600', color: 'black'}}>
+              <Typography bold size="lg">
                 {data?.group_name}
-              </Text>
-              <View style={styles.d_daytag}>
-                <Text style={styles.dayText}>{displayDday(dday)}</Text>
+              </Typography>
+              <View
+                style={[
+                  radius_sm,
+                  {
+                    backgroundColor: primary_color,
+                    paddingHorizontal: 5,
+                    paddingVertical: 3,
+                  },
+                ]}>
+                <Typography white>{displayDday(dday)}</Typography>
               </View>
             </View>
             <View style={styles.gap10}>
@@ -150,23 +162,14 @@ const GroupDetail = ({navigation, route}) => {
                   style={img_sm}
                   source={require('../../assets/icons/calendar.png')}
                 />
-                <Text style={{fontSize: 16, color: 'black'}}>
-                  {formatDateTime(data?.group_time)}
-                </Text>
+                <Typography>{formatDateTime(data?.group_time)}</Typography>
               </View>
               <View style={styles.rowBox}>
                 <Image
                   style={img_sm}
                   source={require('../../assets/icons/map.png')}
                 />
-                <Text style={{fontSize: 16, color: 'black'}}>
-                  {data?.group_place}
-                </Text>
-                {/* <TouchableOpacity
-                  style={styles.mapButton}
-                  onPress={() => alert('지도보기')}>
-                  <Text style={{fontSize: 14, color: 'black'}}>지도보기</Text>
-                </TouchableOpacity> */}
+                <Typography>{data?.group_place}</Typography>
               </View>
 
               <View style={styles.rowBox}>
@@ -174,26 +177,24 @@ const GroupDetail = ({navigation, route}) => {
                   style={img_sm}
                   source={require('../../assets/icons/money.png')}
                 />
-                <Text style={{fontSize: 16, color: 'black'}}>
+                <Typography>
                   {data?.group_price ? data?.group_price : '나누기'}
-                </Text>
+                </Typography>
               </View>
               <View style={styles.rowBox}>
                 <Image
                   style={img_sm}
                   source={require('../../assets/icons/user.png')}
                 />
-                <Text style={{fontSize: 16, color: 'black'}}>
+                <Typography>
                   {data?.group_users?.length} / {data?.group_personnel} (
                   {data?.group_personnel - data?.group_users?.length}자리 남음)
-                </Text>
+                </Typography>
               </View>
             </View>
 
             <View style={{flex: 1}}>
-              <Text style={{color: 'black', fontSize: fs_md, lineHeight: 24}}>
-                {data?.group_target}
-              </Text>
+              <Typography>{data?.group_target}</Typography>
             </View>
             <View style={styles.hr} />
           </View>
@@ -205,14 +206,9 @@ const GroupDetail = ({navigation, route}) => {
               gap: 20,
             }}>
             <View>
-              <Text
-                style={{
-                  color: blackAlpha900,
-                  fontWeight: fw_bold,
-                  fontSize: fs_md,
-                }}>
+              <Typography bold>
                 참여인원 ( {data?.group_users?.length} )
-              </Text>
+              </Typography>
             </View>
             <View
               style={{
@@ -242,9 +238,9 @@ const GroupDetail = ({navigation, route}) => {
                         height={30}
                         borderRadius={50}
                       />
-                      <Text style={{fontSize: 14, color: 'black'}}>
-                        {user?.user_name}
-                      </Text>
+                      <Typography black={user} light={!user}>
+                        {user ? user?.user_name : '탈퇴한 회원입니다.'}
+                      </Typography>
                     </View>
                   ),
               )}
@@ -261,11 +257,11 @@ const GroupDetail = ({navigation, route}) => {
         <TouchableOpacity
           style={[styles.button, {flex: 5}]}
           onPress={handleEnterGroup}>
-          <Text style={styles.buttonText}>
+          <Typography size="lg" bold>
             {data?.group_users.includes(auth().currentUser.uid)
               ? '채팅하기'
               : '참여하기'}
-          </Text>
+          </Typography>
         </TouchableOpacity>
       </View>
     </View>

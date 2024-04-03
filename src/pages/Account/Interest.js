@@ -12,11 +12,18 @@ import {
 import {addDocument} from '../../firebase/firebase_func';
 import styles, {
   blackAlpha100,
+  blackAlpha50,
   blackAlpha900,
   center,
   fs_xs,
+  p_1,
+  p_2,
+  radius_full,
+  radius_sm,
 } from '../../style/styles';
 import ProfilePicker from '../../Component/ProfilePicker';
+import Typography from '../../Component/Typography';
+import {primary_color} from '../../firebase/api';
 
 const Interest = ({navigation, route}) => {
   const {data} = route.params ? route.params : {data: null};
@@ -48,7 +55,9 @@ const Interest = ({navigation, route}) => {
             <ProfilePicker onChangeValue={uri => (data.user_profile = uri)} />
             <View style={styles.rowBox}>
               <View style={{flex: 1}}>
-                <Text style={styles.contentTitle}>소개</Text>
+                <Typography size={'lg'} bold>
+                  소개
+                </Typography>
               </View>
               <TextInput
                 onChange={e => (data.user_info = e.nativeEvent.text)}
@@ -67,11 +76,16 @@ const Interest = ({navigation, route}) => {
             </View>
           </View>
           <View style={styles.hr} />
+          <View style={{flex: 1}}>
+            <Typography size={'lg'} bold>
+              관심사
+            </Typography>
+          </View>
           <View style={center}>
             <View
               style={{
-                rowGap: 20,
-                columnGap: 0,
+                rowGap: 5,
+                columnGap: 5,
                 flexDirection: 'row',
                 flexWrap: 'wrap',
               }}>
@@ -96,44 +110,28 @@ const Interest = ({navigation, route}) => {
               ].map((item, index) => (
                 <TouchableOpacity
                   key={index}
-                  style={{
-                    justifyContent: 'flex-start',
-                    alignItems: 'center',
-                    gap: 5,
-                    margin: 2,
-                    width: 65,
-                    height: 100,
-                    backgroundColor: interest.includes(item)
-                      ? blackAlpha100
-                      : 'white',
-                    padding: 5,
-                    borderRadius: 10,
-                  }}
+                  style={[
+                    p_2,
+                    radius_full,
+                    {
+                      backgroundColor: interest.includes(item)
+                        ? primary_color
+                        : blackAlpha50,
+                    },
+                  ]}
                   onPress={() => handleInterest(item)}>
-                  <View style={styles.interestButton}></View>
-                  <Text
-                    style={{
-                      color: blackAlpha900,
-                      fontSize: fs_xs,
-                      textAlign: 'center',
-                    }}>
-                    {item}
-                  </Text>
+                  <Typography size={'md'}>{item}</Typography>
                 </TouchableOpacity>
               ))}
             </View>
           </View>
-
-          {/* <TouchableOpacity
-            style={[styles.button, styles.buttonBox]}
-            onPress={() => navigation.navigate('상세 관심사 선택')}>
-            <Text>상세 관심사 선택</Text>
-          </TouchableOpacity> */}
         </View>
       </ScrollView>
       <View style={styles.buttonBox}>
         <TouchableOpacity style={styles.button} onPress={signupUser}>
-          <Text style={styles.buttonText}>가입완료</Text>
+          <Typography size={'lg'} bold>
+            가입완료
+          </Typography>
         </TouchableOpacity>
       </View>
     </View>

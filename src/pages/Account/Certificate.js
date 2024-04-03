@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {
-  Button,
+  Dimensions,
   Image,
   SafeAreaView,
   StyleSheet,
@@ -20,6 +20,9 @@ import auth from '@react-native-firebase/auth';
 import {singleQuery} from '../../firebase/firebase_func';
 import PopupBase from '../../Component/PopupBase';
 import {terms} from '../../assets/terms';
+import Typography from '../../Component/Typography';
+import {blackAlpha500, blackAlpha900} from '../../style/styles';
+import WebView from 'react-native-webview';
 
 const Certificate = ({navigation}) => {
   // 테스트 정보 : 번호 01012341234 / 코드 101010
@@ -73,13 +76,12 @@ const Certificate = ({navigation}) => {
       <SafeAreaView style={{flex: 1}}>
         <View style={{gap: 20}}>
           <View style={{width: '100%', gap: 15, paddingTop: 10}}>
-            <Text
-              style={{color: 'black', fontSize: font_lg, fontWeight: 'bold'}}>
+            <Typography size={'xl'} bold>
               휴대폰 본인인증
-            </Text>
-            <Text style={{fontSize: font_md, color: 'gray'}}>
+            </Typography>
+            <Typography size={'md'} light>
               전화번호를 입력하세요.
-            </Text>
+            </Typography>
           </View>
           <View style={{width: '100%', gap: 10}}>
             <View
@@ -117,14 +119,14 @@ const Certificate = ({navigation}) => {
                   alignItems: 'center',
                   justifyContent: 'center',
                 }}>
-                <Text
+                <Typography
+                  size={'md'}
+                  bold
                   style={{
-                    fontSize: font_md,
-                    color: !phoneNumber ? '#BBBBBB' : 'black',
-                    fontWeight: 'bold',
+                    color: !phoneNumber ? blackAlpha500 : blackAlpha900,
                   }}>
                   인증 요청
-                </Text>
+                </Typography>
               </TouchableOpacity>
             </View>
             <TextInput
@@ -159,15 +161,7 @@ const Certificate = ({navigation}) => {
                     justifyContent: 'center',
                   }}
                   onPress={confirmCode}>
-                  <Text
-                    style={{
-                      color: 'black',
-                      fontSize: font_md,
-                      fontWeight: 'bold',
-                      color: 'black',
-                    }}>
-                    인증확인
-                  </Text>
+                  <Typography bold>인증확인</Typography>
                 </TouchableOpacity>
               </View>
             )}
@@ -204,24 +198,23 @@ const Certificate = ({navigation}) => {
                 flexDirection: 'row',
                 width: '100%',
                 alignItems: 'center',
+                justifyContent: 'space-between',
               }}>
-              <Text
-                style={{
-                  color: 'black',
-                  flex: 9,
-                  fontSize: 15,
-                  fontWeight: 'bold',
-                }}>
-                서비스 이용약관 동의
-              </Text>
-              <PopupBase contents={terms}>
-                <Image source={require('../../assets/rightarrow.png')} />
-              </PopupBase>
-              {/* <TouchableOpacity onPress={() => alert('약관 표시')}>
-                <View style={{width: 20, height: 20, justifyContent: 'center'}}>
+              <Typography bold>서비스 이용약관 동의</Typography>
+              <PopupBase
+                button={
                   <Image source={require('../../assets/rightarrow.png')} />
-                </View>
-              </TouchableOpacity> */}
+                }>
+                <WebView
+                  source={{
+                    uri: 'https://firebasestorage.googleapis.com/v0/b/dinnermate-8d37b.appspot.com/o/files%2F%E1%84%86%E1%85%A5%E1%84%80%E1%85%B3%E1%86%AF%2B%E1%84%89%E1%85%A5%E1%84%87%E1%85%B5%E1%84%89%E1%85%B3%2B%E1%84%8B%E1%85%B5%E1%84%8B%E1%85%AD%E1%86%BC%E1%84%8B%E1%85%A3%E1%86%A8%E1%84%80%E1%85%AA%E1%86%AB%2B%E1%84%86%E1%85%A6%E1%84%86%E1%85%A9%2B%E1%84%89%E1%85%A1%E1%86%A8%E1%84%8C%E1%85%A6%2B%E1%84%87%E1%85%A9%E1%86%AB%2B240401.docx?alt=media&token=20c0dd2d-11af-4e71-8536-5f141f763983',
+                  }} // 표시할 웹 페이지의 URL
+                  style={{
+                    width: Dimensions.get('window').width,
+                    height: Dimensions.get('window').height,
+                  }}
+                />
+              </PopupBase>
             </View>
           </View>
         </View>
@@ -242,14 +235,12 @@ const Certificate = ({navigation}) => {
             justifyContent: 'center',
           }}
           onPress={moveNextStep}>
-          <Text
-            style={{
-              fontSize: font_md,
-              fontWeight: 'bold',
-              color: !tempAgree || !isActive ? '#BBBBBB' : 'black',
-            }}>
+          <Typography
+            bold
+            light={!tempAgree || !isActive}
+            black={tempAgree && isActive}>
             다음
-          </Text>
+          </Typography>
         </TouchableOpacity>
       </View>
     </View>

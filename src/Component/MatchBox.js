@@ -78,7 +78,7 @@ const MatchBox = ({user, index, userList, navigation}) => {
             style={btn_primary}
             onPressOut={() =>
               navigation.navigate('매칭', {
-                screen: '매칭',
+                screen: '커피친구',
                 params: {data: user, userList: userList, index: index},
               })
             }>

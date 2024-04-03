@@ -33,6 +33,7 @@ import {
   formatDateTime,
   primary_color,
 } from '../../firebase/api';
+import Typography from '../../Component/Typography';
 
 const DmBox = ({navigation, data}) => {
   const [user, setUser] = React.useState({});
@@ -74,13 +75,13 @@ const DmBox = ({navigation, data}) => {
             </View>
           </View>
           <View>
-            <Text style={{color: 'black'}}>{user?.user_name}</Text>
-            <Text style={{color: 'black'}}>{data?.last_message}</Text>
+            <Typography>{user?.user_name}</Typography>
+            <Typography>{data?.last_message}</Typography>
           </View>
         </View>
-        <Text style={{color: 'black'}}>
+        <Typography>
           {compareTimestampWithCurrentTime(data?.timestamp)}
-        </Text>
+        </Typography>
       </TouchableOpacity>
     </View>
   );
@@ -92,9 +93,9 @@ const ChatTabBar = props => (
     getLabelText={({route}) => route.title}
     indicatorStyle={{backgroundColor: 'red'}}
     renderLabel={({route, focused}) => (
-      <Text style={{color: focused ? 'red' : 'gray', margin: 8}}>
+      <Typography red={focused} style={{margin: 8}}>
         {route.title}
-      </Text>
+      </Typography>
     )}
     style={{backgroundColor: 'white'}}
   />
@@ -159,7 +160,7 @@ const Chat = ({navigation}) => {
       <View style={[f_full]}>
         {groups?.length === 0 && (
           <View style={[f_full, center, flex_row, sp_2]}>
-            <Text style={{color: blackAlpha500}}>채팅 내역이 없어요</Text>
+            <Typography light>채팅 내역이 없어요</Typography>
             <Image
               style={img_sm}
               source={require('../../assets/icons/BsChat.png')}
@@ -193,26 +194,19 @@ const Chat = ({navigation}) => {
                 </View>
               </View>
               <View style={sp_1}>
-                <Text style={{color: blackAlpha900, fontWeight: fw_bold}}>
+                <Typography size="lg" bold>
                   {group?.group_name}
-                </Text>
-                <Text style={{color: blackAlpha500}}>
+                </Typography>
+                <Typography light>
                   {formatDateTime(group?.group_time)}
-                </Text>
+                </Typography>
               </View>
             </View>
             <View style={flex_row}>
-              <Text
-                style={{
-                  color: blackAlpha900,
-                  fontWeight: fw_bold,
-                  color: primary_color,
-                }}>
+              <Typography red bold>
                 {group?.group_users.length}{' '}
-              </Text>
-              <Text style={{color: blackAlpha900}}>
-                / {group?.group_personnel}
-              </Text>
+              </Typography>
+              <Typography>/ {group?.group_personnel}</Typography>
             </View>
           </TouchableOpacity>
         ))}
@@ -226,7 +220,7 @@ const Chat = ({navigation}) => {
       <View style={[f_full]}>
         {matchings?.length === 0 && (
           <View style={[f_full, flex_row, center, sp_2]}>
-            <Text style={{color: blackAlpha500}}>채팅 내역이 없어요</Text>
+            <Typography light>채팅 내역이 없어요</Typography>
             <Image
               style={img_sm}
               source={require('../../assets/icons/BsChat.png')}
@@ -235,46 +229,6 @@ const Chat = ({navigation}) => {
         )}
         {dmList?.map((dm, index) => (
           <DmBox navigation={navigation} data={dm} />
-          // <View>
-          //   <TouchableOpacity
-          //     style={{
-          //       backgroundColor: 'white',
-          //       padding: 20,
-          //       flexDirection: 'row',
-          //       gap: 10,
-          //       justifyContent: 'space-between',
-          //       alignItems: 'center',
-          //     }}
-          //     // onPress={() => alert('채팅하겠습니까')}
-          //     onPress={() =>
-          //       navigation.navigate('채팅', {
-          //         screen: '채팅룸',
-          //       })
-          //     }>
-          //     <View
-          //       style={{flexDirection: 'row', gap: 10, alignItems: 'center'}}>
-          //       <View>
-          //         <View style={styles.Avartar50}>
-          //           <Image
-          //             style={{width: '90%', height: '90%'}}
-          //             source={require('../../assets/avartar.png')}
-          //           />
-          //         </View>
-          //       </View>
-          //       <View>
-          //         <Text style={{color: 'black'}}>
-          //           {dm?.receiver === auth().currentUser.uid
-          //             ? dm?.sender
-          //             : dm?.receiver}
-          //         </Text>
-          //         <Text style={{color: 'black'}}>{dm?.last_message}</Text>
-          //       </View>
-          //     </View>
-          //     <Text style={{color: 'black'}}>
-          //       {compareTimestampWithCurrentTime(dm?.timestamp)}
-          //     </Text>
-          //   </TouchableOpacity>
-          // </View>
         ))}
       </View>
     );

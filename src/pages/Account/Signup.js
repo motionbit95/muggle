@@ -15,8 +15,15 @@ import {
   formatTwoDigits,
 } from '../../firebase/api';
 import DropDown from '../../Component/PickerComponent';
-import styles from '../../style/styles';
+import styles, {
+  align_center,
+  blackAlpha900,
+  flex_row,
+  fs_md,
+  justify_center,
+} from '../../style/styles';
 import auth from '@react-native-firebase/auth';
+import Typography from '../../Component/Typography';
 
 const SignUp = ({navigation}) => {
   const [userName, serUserName] = useState('');
@@ -134,13 +141,14 @@ const SignUp = ({navigation}) => {
         <ScrollView style={styles.scrollViewStyle}>
           <View style={{width: '100%', gap: 15, padding: 20}}>
             <View style={{width: '100%'}}>
-              <Text
-                style={{color: 'black', fontSize: font_lg, fontWeight: 'bold'}}>
+              <Typography bold size={'xl'}>
                 회원가입
-              </Text>
+              </Typography>
             </View>
             <View style={styles.columnBox}>
-              <Text style={styles.contentTitle}>이름</Text>
+              <Typography bold size={'lg'}>
+                이름
+              </Typography>
               <TextInput
                 style={[
                   {
@@ -155,7 +163,9 @@ const SignUp = ({navigation}) => {
               />
             </View>
             <View style={styles.columnBox}>
-              <Text style={styles.contentTitle}>성별</Text>
+              <Typography bold size={'lg'}>
+                성별
+              </Typography>
               <View style={styles.buttoncontainer}>
                 <TouchableOpacity
                   style={[
@@ -163,13 +173,7 @@ const SignUp = ({navigation}) => {
                     selectedGender === '남' && styles.selectedButton,
                   ]}
                   onPress={() => selectGender('남')}>
-                  <Text
-                    style={[
-                      styles.genderbuttonText,
-                      selectedGender === '남' && styles.selectedButtonText,
-                    ]}>
-                    남성
-                  </Text>
+                  <Typography red={selectedGender === '남'}>남성</Typography>
                 </TouchableOpacity>
                 <TouchableOpacity
                   style={[
@@ -177,18 +181,14 @@ const SignUp = ({navigation}) => {
                     selectedGender === '여' && styles.selectedButton,
                   ]}
                   onPress={() => selectGender('여')}>
-                  <Text
-                    style={[
-                      styles.genderbuttonText,
-                      selectedGender === '여' && styles.selectedButtonText,
-                    ]}>
-                    여성
-                  </Text>
+                  <Typography red={selectedGender === '여'}>여성</Typography>
                 </TouchableOpacity>
               </View>
             </View>
             <View style={styles.columnBox}>
-              <Text style={styles.contentTitle}>생년월일</Text>
+              <Typography bold size={'lg'}>
+                생년월일
+              </Typography>
               <View
                 style={{
                   justifyContent: 'stretch',
@@ -219,7 +219,9 @@ const SignUp = ({navigation}) => {
               </View>
             </View>
             <View style={styles.columnBox}>
-              <Text style={styles.contentTitle}>지역</Text>
+              <Typography bold size={'lg'}>
+                지역
+              </Typography>
               <View
                 style={{
                   justifyContent: 'stretch',
@@ -243,23 +245,32 @@ const SignUp = ({navigation}) => {
               </View>
             </View>
             <View style={styles.columnBox}>
-              <Text style={styles.contentTitle}>나의 커피 매칭권 금액은?</Text>
-              <View>
-                <TextInput
-                  keyboardType="numeric"
+              <Typography bold size={'lg'}>
+                나의 커피 매칭권 금액은?
+              </Typography>
+              <View style={styles.contentBox}>
+                <View
                   style={[
-                    {color: 'black', width: '100%', height: 50},
-                    styles.contentBox,
-                  ]}
-                  placeholder="최소 2만원 이상"
-                  onChange={e => setUserPrice(e.nativeEvent.text)}
-                />
+                    flex_row,
+                    justify_center,
+                    align_center,
+                    {height: 30},
+                  ]}>
+                  <TextInput
+                    keyboardType="numeric"
+                    style={[{color: blackAlpha900, fontSize: fs_md}]}
+                    placeholder="0"
+                    onChange={e => setUserPrice(e.nativeEvent.text)}
+                    defaultValue={userPrice}
+                  />
+                  <Typography> 만원</Typography>
+                </View>
               </View>
             </View>
             <View style={styles.columnBox}>
-              <Text style={styles.contentTitle}>
+              <Typography bold size={'lg'}>
                 커피ㅣ 매칭 부수입 정산 받으실 계좌(선택)
-              </Text>
+              </Typography>
               <View
                 style={{
                   justifyContent: 'stretch',
@@ -286,7 +297,9 @@ const SignUp = ({navigation}) => {
             <TouchableOpacity
               style={[styles.button, styles.buttonMargin]}
               onPress={handleSignup}>
-              <Text style={styles.buttonText}>다음</Text>
+              <Typography bold size={'md'}>
+                다음
+              </Typography>
             </TouchableOpacity>
           </View>
         </ScrollView>

@@ -25,6 +25,7 @@ import styles, {
   fw_bold,
   img_sm,
   justify_between,
+  p_1,
   p_2,
   radius_full,
   sp_1,
@@ -43,6 +44,7 @@ import {
 } from '../../firebase/firebase_func';
 import auth from '@react-native-firebase/auth';
 import $ from 'jquery';
+import Typography from '../../Component/Typography';
 
 const DirectRoom = ({navigation, route}) => {
   const {data} = route.params ? route.params : {data: null};
@@ -177,7 +179,7 @@ const DirectRoom = ({navigation, route}) => {
         <View style={[flex_row, justify_between, align_center]}>
           <View style={[flex_row, align_start, {gap: 10}]}>
             <Image
-              style={styles.Avartar30}
+              style={styles.Avartar40}
               source={
                 user?.user_profile
                   ? user?.user_profile
@@ -185,60 +187,39 @@ const DirectRoom = ({navigation, route}) => {
               }
             />
             <View style={[flex_column, sp_1]}>
-              <Text
-                style={[
-                  {fontSize: fs_md, fontWeight: fw_bold, color: blackAlpha900},
-                ]}>
+              <Typography bold size="lg">
                 {user?.user_name}
-              </Text>
-              <View style={[flex_row, align_center, {gap: 5}]}>
-                <Text style={[{fontSize: fs_sm, color: blackAlpha700}]}>
+              </Typography>
+              <View style={[flex_row, align_center, sp_1]}>
+                <Typography light>
                   {getDisplayAge(user?.user_birth)}세
-                </Text>
-                <Text
-                  style={[
-                    {
-                      fontSize: fs_sm,
-                      color: primary_color,
-                      backgroundColor: whiteAlpha900,
-                      borderRadius: 5,
-                      padding: 5,
-                    },
-                  ]}>
-                  {user?.user_gender}자
-                </Text>
+                </Typography>
+                <View style={[p_1, {backgroundColor: whiteAlpha900}]}>
+                  <Typography red>{user?.user_gender}자</Typography>
+                </View>
               </View>
-              <Text style={[{fontSize: fs_sm, color: blackAlpha700}]}>
-                {user?.user_place}
-              </Text>
+              <Typography light>{user?.user_place}</Typography>
             </View>
           </View>
           <View style={[flex_column, sp_1]}>
-            <TouchableOpacity
-              style={[btn_yellow, flex_row, p_2, sp_2, {height: 30}]}>
+            <TouchableOpacity style={[btn_yellow, flex_row, p_1, sp_2]}>
               <Image
                 style={img_sm}
                 source={require('../../assets/Calendar.png')}
               />
-              <Text style={{color: blackAlpha900, fontWeight: fw_bold}}>
-                약속잡기
-              </Text>
+              <Typography bold>약속잡기</Typography>
             </TouchableOpacity>
             <TouchableOpacity
               onPress={matchingSuccess}
-              style={[btn_yellow, flex_row, p_2, sp_2, {height: 30}]}>
+              style={[btn_yellow, flex_row, p_1, sp_2]}>
               <Image style={img_sm} source={require('../../assets/o.png')} />
-              <Text style={{color: blackAlpha900, fontWeight: fw_bold}}>
-                매칭완료
-              </Text>
+              <Typography bold>매칭완료</Typography>
             </TouchableOpacity>
             <TouchableOpacity
               onPress={matchingFail}
-              style={[btn_yellow, flex_row, p_2, sp_2, {height: 30}]}>
+              style={[btn_yellow, flex_row, p_1, sp_2]}>
               <Image style={img_sm} source={require('../../assets/x.png')} />
-              <Text style={{color: blackAlpha900, fontWeight: fw_bold}}>
-                매칭거절
-              </Text>
+              <Typography bold>매칭거절</Typography>
             </TouchableOpacity>
           </View>
         </View>
@@ -272,9 +253,9 @@ const DirectRoom = ({navigation, route}) => {
                       />
                     </View>
                   </View>
-                  <Text style={{color: 'black'}}>
+                  <Typography size="sm">
                     {chat?.user_info?.user_name}
-                  </Text>
+                  </Typography>
                 </View>
                 <View style={{alignItems: 'flex-end', gap: 5}}>
                   <View
@@ -286,14 +267,13 @@ const DirectRoom = ({navigation, route}) => {
                       borderTopRightRadius: 0,
                       maxWidth: 290,
                     }}>
-                    <Text
-                      style={{color: blackAlpha900, whiteSpace: 'pre-wrap'}}>
+                    <Typography size="sm" style={{whiteSpace: 'pre-wrap'}}>
                       {`${chat?.chat}`}
-                    </Text>
+                    </Typography>
                   </View>
-                  <Text style={{color: blackAlpha500, fontSize: fs_xs}}>
+                  <Typography size="sm" light>
                     {formatDateTime(chat?.createdAt).split(' ')[1]}
-                  </Text>
+                  </Typography>
                 </View>
               </View>
             ) : (
@@ -311,10 +291,9 @@ const DirectRoom = ({navigation, route}) => {
                       />
                     </View>
                   </View>
-                  <Text style={{color: 'black'}}>
-                    {' '}
+                  <Typography size="sm">
                     {chat?.user_info?.user_name}
-                  </Text>
+                  </Typography>
                 </View>
                 <View style={{alignItems: 'flex-start', gap: 5}}>
                   <View
@@ -325,14 +304,13 @@ const DirectRoom = ({navigation, route}) => {
                       borderRadius: 15,
                       borderTopLeftRadius: 0,
                     }}>
-                    <Text
-                      style={{color: blackAlpha900, whiteSpace: 'pre-wrap'}}>
+                    <Typography size="sm" style={{whiteSpace: 'pre-wrap'}}>
                       {`${chat?.chat}`}
-                    </Text>
+                    </Typography>
                   </View>
-                  <Text style={{color: blackAlpha500, fontSize: fs_xs}}>
+                  <Typography size="xs" light>
                     {formatDateTime(chat?.createdAt).split(' ')[1]}
-                  </Text>
+                  </Typography>
                 </View>
               </View>
             ),

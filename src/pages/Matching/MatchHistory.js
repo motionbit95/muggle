@@ -20,6 +20,7 @@ import styles, {
   img_md,
   img_sm,
   justify_end,
+  p_1,
   radius_full,
   sp_1,
   sp_2,
@@ -36,6 +37,7 @@ import {
   primary_color,
 } from '../../firebase/api';
 import auth from '@react-native-firebase/auth';
+import Typography from '../../Component/Typography';
 
 const MatchHistory = ({navigation}) => {
   const [userList, setUserList] = useState(null);
@@ -114,7 +116,7 @@ const MatchHistory = ({navigation}) => {
                     }
                   />
                 </View>
-                <Text style={{fontSize: fs_md, color: blackAlpha900}}>
+                <Typography>
                   {matching.matching_state < 2
                     ? '매칭중'
                     : matching.matching_state === 2
@@ -122,7 +124,7 @@ const MatchHistory = ({navigation}) => {
                     : matching.matching_state === 400
                     ? '매칭거절'
                     : ''}
-                </Text>
+                </Typography>
               </View>
               <View style={styles.rowBox}>
                 <Image
@@ -140,62 +142,34 @@ const MatchHistory = ({navigation}) => {
 
                 <View style={{gap: 10}}>
                   <View style={[flex_column, sp_1]}>
-                    <Text
-                      style={[
-                        {
-                          fontSize: fs_md,
-                          fontWeight: fw_bold,
-                          color: blackAlpha900,
-                        },
-                      ]}>
+                    <Typography size="lg" bold>
                       {user?.user_name}
-                    </Text>
+                    </Typography>
                     <View style={[flex_row, align_center, {gap: 5}]}>
-                      <Text style={[{fontSize: fs_sm, color: blackAlpha700}]}>
+                      <Typography>
                         {getDisplayAge(user?.user_birth)}세
-                      </Text>
-                      <Text
-                        style={[
-                          {
-                            fontSize: fs_sm,
-                            color: primary_color,
-                            backgroundColor: whiteAlpha900,
-                            borderRadius: 5,
-                            padding: 5,
-                          },
-                        ]}>
-                        {user?.user_gender}자
-                      </Text>
+                      </Typography>
+                      <View style={[p_1, {backgroundColor: whiteAlpha900}]}>
+                        <Typography red>{user?.user_gender}자</Typography>
+                      </View>
                     </View>
-                    <Text style={[{fontSize: fs_sm, color: blackAlpha700}]}>
-                      {user?.user_place}
-                    </Text>
+                    <Typography>{user?.user_place}</Typography>
                   </View>
                 </View>
               </View>
             </View>
             {matching.matching_state < 2 && (
               <View style={styles.outlineTagBox}>
-                <Text
-                  style={{
-                    fontSize: 15,
-                    fontWeight: 'bold',
-                    color: 'rgba(255, 99, 79, 1)',
-                  }}>
+                <Typography red bold>
                   정산대기중
-                </Text>
+                </Typography>
               </View>
             )}
             {matching.matching_state == 2 && (
               <View style={styles.outlineTagBox}>
-                <Text
-                  style={{
-                    fontSize: 15,
-                    fontWeight: 'bold',
-                    color: 'rgba(255, 99, 79, 1)',
-                  }}>
+                <Typography red bold>
                   정산완료
-                </Text>
+                </Typography>
               </View>
             )}
             {matching.matching_state == 400 && (
@@ -208,14 +182,9 @@ const MatchHistory = ({navigation}) => {
                     borderWidth: 1,
                   },
                 ]}>
-                <Text
-                  style={{
-                    fontSize: fs_md,
-                    fontWeight: fw_bold,
-                    color: blackAlpha500,
-                  }}>
+                <Typography light bold>
                   매칭거절
-                </Text>
+                </Typography>
               </View>
             )}
           </View>
@@ -239,9 +208,9 @@ const MatchHistory = ({navigation}) => {
         <View style={[justify_end]}>
           <View>
             <View>
-              <Text style={{fontSize: fs_lg, fontWeight: fw_bold}}>
+              <Typography size="lg" bold>
                 커피 매칭 친구 추천
-              </Text>
+              </Typography>
             </View>
             <ScrollView
               horizontal={true}

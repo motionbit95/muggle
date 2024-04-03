@@ -42,6 +42,7 @@ import {defaultFemale, defaultMale, getDisplayAge} from '../../firebase/api';
 import {InnerScreen} from 'react-native-screens';
 import {getDocList} from '../../firebase/firebase_func';
 import Swiper from 'react-native-swiper';
+import Typography from '../../Component/Typography';
 
 const Matching = ({navigation, route}) => {
   const [userList, setUserList] = React.useState(
@@ -121,40 +122,23 @@ const Matching = ({navigation, route}) => {
                         style={img_sm}
                         source={require('../../assets/icons/subtract.png')}
                       />
-                      <Text
-                        style={{
-                          color: whiteAlpha900,
-                          fontSize: fs_sm,
-                          fontWeight: '400',
-                        }}>
-                        근처
-                      </Text>
+                      <Typography white>근처</Typography>
                     </View>
 
-                    <Text
-                      style={{
-                        color: whiteAlpha900,
-                        fontSize: fs_2xl,
-                        fontWeight: '900',
-                      }}>
+                    <Typography white bold size="3xl">
                       {item?.user_name} {getDisplayAge(item?.user_birth)}
-                    </Text>
-                    <Text
-                      style={{
-                        color: whiteAlpha900,
-                        fontSize: fs_lg,
-                        fontWeight: fw_medium,
-                      }}>
+                    </Typography>
+                    <Typography white size="lg">
                       {item?.user_place?.[0]}
-                    </Text>
+                    </Typography>
                   </View>
                   <TouchableOpacity
-                    onPressOut={() =>
+                    onPressOut={() => {
                       navigation.navigate('매칭', {
                         screen: '매칭중',
                         params: {data: item},
-                      })
-                    }>
+                      });
+                    }}>
                     <Image
                       style={img_lg}
                       source={require('../../assets/icons/matching_button.png')}

@@ -14,6 +14,7 @@ import DropDown from '../../Component/PickerComponent';
 import DateTimeInput from '../../Component/DateTimeInput';
 import {group_category} from './Home';
 import BannerPicker from '../../Component/BannerPicker';
+import Typography from '../../Component/Typography';
 
 const GroupCreate = ({navigation}) => {
   const [selectedCity, setSelectedCity] = useState('');
@@ -121,7 +122,9 @@ const GroupCreate = ({navigation}) => {
         <View style={{width: '100%', gap: 15, padding: 20}}>
           <View style={styles.columnBox}>
             <BannerPicker onChangeValue={setMatchImage} />
-            <Text style={styles.contentTitle}>지역</Text>
+            <Typography size="lg" bold>
+              지역
+            </Typography>
             <View
               style={{
                 justifyContent: 'stretch',
@@ -158,7 +161,9 @@ const GroupCreate = ({navigation}) => {
             </View>
           </View>
           <View style={styles.columnBox}>
-            <Text style={styles.contentTitle}>모임종류</Text>
+            <Typography size="lg" bold>
+              모임종류
+            </Typography>
             <View
               style={{
                 justifyContent: 'stretch',
@@ -177,7 +182,9 @@ const GroupCreate = ({navigation}) => {
             </View>
           </View>
           <View style={styles.columnBox}>
-            <Text style={styles.contentTitle}>모임 이름</Text>
+            <Typography size="lg" bold>
+              모임 이름
+            </Typography>
             <TextInput
               onChange={e => setMatchName(e.nativeEvent.text)}
               style={[
@@ -191,7 +198,9 @@ const GroupCreate = ({navigation}) => {
             />
           </View>
           <View style={styles.columnBox}>
-            <Text style={styles.contentTitle}>모임 일정</Text>
+            <Typography size="lg" bold>
+              모임 일정
+            </Typography>
             <DateTimeInput onChange={e => setMatchDateTime(e)} />
             {/* <TextInput
               onChange={e => setMatchDateTime(e.nativeEvent.text)}
@@ -206,7 +215,9 @@ const GroupCreate = ({navigation}) => {
             /> */}
           </View>
           <View style={styles.columnBox}>
-            <Text style={styles.contentTitle}>더치페이 여부</Text>
+            <Typography size="lg" bold>
+              더치페이 여부
+            </Typography>
             <View
               style={{
                 justifyContent: 'stretch',
@@ -232,7 +243,9 @@ const GroupCreate = ({navigation}) => {
           </View>
 
           <View style={styles.columnBox}>
-            <Text style={styles.contentTitle}>모임목표</Text>
+            <Typography size="lg" bold>
+              모임목표
+            </Typography>
             <TextInput
               onChange={e => setMatchTarget(e.nativeEvent.text)}
               multiline
@@ -248,7 +261,9 @@ const GroupCreate = ({navigation}) => {
             />
           </View>
           <View style={styles.columnBox}>
-            <Text style={styles.contentTitle}>정원</Text>
+            <Typography size="lg" bold>
+              정원
+            </Typography>
             <TextInput
               onChange={e => setMatchPersonnel(e.nativeEvent.text)}
               style={[
@@ -265,7 +280,9 @@ const GroupCreate = ({navigation}) => {
         </View>
         <View style={styles.buttonBox}>
           <TouchableOpacity style={styles.button} onPress={createGroup}>
-            <Text style={styles.buttonText}>모임 만들기</Text>
+            <Typography size="lg" bold>
+              모임 만들기
+            </Typography>
           </TouchableOpacity>
         </View>
       </ScrollView>

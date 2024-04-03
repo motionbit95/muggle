@@ -11,6 +11,7 @@ import styles, {
   f_full,
   radius_full,
 } from '../style/styles';
+import Typography from './Typography';
 
 const ProfilePicker = props => {
   const [imageUri, setImageUri] = useState(
@@ -98,7 +99,7 @@ const ProfilePicker = props => {
         />
       </View>
       <TouchableOpacity style={btn_normal} onPress={handleChoosePhoto}>
-        <Text style={{color: blackAlpha900}}>이미지 선택</Text>
+        <Typography>이미지 선택</Typography>
       </TouchableOpacity>
     </View>
   );

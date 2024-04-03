@@ -26,6 +26,7 @@ import {mapImg, moneyImg, userImg} from '../../Component/GroupBox';
 import firestore from '@react-native-firebase/firestore';
 import {addDocument, getUser} from '../../firebase/firebase_func';
 import auth from '@react-native-firebase/auth';
+import Typography from '../../Component/Typography';
 
 const ChatRoom = ({navigation, route}) => {
   const {data, userList} = route.params ? route.params : {data: null};
@@ -101,71 +102,32 @@ const ChatRoom = ({navigation, route}) => {
         ]}>
         <View style={[flex_row, justify_between]}>
           <View style={{gap: 5}}>
-            <Text
-              style={{
-                fontSize: fs_md,
-                fontWeight: fw_bold,
-                color: blackAlpha900,
-              }}>
+            <Typography size="md" bold>
               {data?.group_name}
-            </Text>
+            </Typography>
             <View style={[flex_row, align_center, sp_2]}>
-              <Text
-                style={{
-                  fontSize: fs_sm,
-                  fontWeight: '400',
-                  color: blackAlpha500,
-                }}>
+              <Typography size="sm" light>
                 {formatDateTime(data?.group_date)}
-              </Text>
-              {/* <View
-                  style={[
-                    radius_sm,
-                    {
-                      backgroundColor: primary_color,
-                      paddingHorizontal: 5,
-                      paddingVertical: 3,
-                    },
-                  ]}>
-                  <Text
-                    style={[
-                      {
-                        fontWeight: fw_bold,
-                        fontSize: fs_sm,
-                        color: whiteAlpha900,
-                      },
-                    ]}>
-                    {displayDday(calculateDday(formatDate(data?.group_time)))}
-                  </Text>
-                </View> */}
+              </Typography>
             </View>
 
             <View style={{gap: 5}}>
               <View style={[styles.rowBox, {gap: 5}]}>
                 <Image style={{width: 16, height: 16}} source={mapImg} />
-                <Text style={{color: blackAlpha900, fontSize: fs_sm}}>
-                  {data?.group_place}
-                </Text>
+                <Typography size="sm">{data?.group_place}</Typography>
               </View>
               <View style={[styles.rowBox, {gap: 5}]}>
                 <Image style={{width: 16, height: 16}} source={moneyImg} />
-                <Text style={{color: blackAlpha900, fontSize: fs_sm}}>
-                  {data?.group_price}
-                </Text>
+                <Typography size="sm">{data?.group_price}</Typography>
                 <Image style={{width: 16, height: 16}} source={userImg} />
-                <Text
-                  style={{
-                    color: primary_color,
-                    fontWeight: fw_bold,
-                    fontSize: fs_sm,
-                  }}>
+                <Typography red bold>
                   {data?.group_users.length}
-                </Text>
-                <Text style={{color: blackAlpha900, fontSize: fs_sm}}>
+                </Typography>
+                <Typography size="sm">
                   / {data?.group_personnel} (
                   {data?.group_personnel - data?.group_users.length}
                   자리 남음)
-                </Text>
+                </Typography>
               </View>
             </View>
           </View>
@@ -200,9 +162,9 @@ const ChatRoom = ({navigation, route}) => {
                       />
                     </View>
                   </View>
-                  <Text style={{color: 'black'}}>
+                  <Typography size="sm">
                     {chat?.user_info?.user_name}
-                  </Text>
+                  </Typography>
                 </View>
                 <View style={{alignItems: 'flex-end', gap: 5}}>
                   <View
@@ -214,14 +176,13 @@ const ChatRoom = ({navigation, route}) => {
                       borderTopRightRadius: 0,
                       maxWidth: 290,
                     }}>
-                    <Text
-                      style={{color: blackAlpha900, whiteSpace: 'pre-wrap'}}>
+                    <Typography size="sm" style={{whiteSpace: 'pre-wrap'}}>
                       {`${chat?.chat}`}
-                    </Text>
+                    </Typography>
                   </View>
-                  <Text style={{color: blackAlpha500, fontSize: fs_xs}}>
+                  <Typography light size="xs">
                     {formatDateTime(chat?.createdAt).split(' ')[1]}
-                  </Text>
+                  </Typography>
                 </View>
               </View>
             ) : (
@@ -239,10 +200,9 @@ const ChatRoom = ({navigation, route}) => {
                       />
                     </View>
                   </View>
-                  <Text style={{color: 'black'}}>
-                    {' '}
+                  <Typography size="sm">
                     {chat?.user_info?.user_name}
-                  </Text>
+                  </Typography>
                 </View>
                 <View style={{alignItems: 'flex-start', gap: 5}}>
                   <View
@@ -253,14 +213,13 @@ const ChatRoom = ({navigation, route}) => {
                       borderRadius: 15,
                       borderTopLeftRadius: 0,
                     }}>
-                    <Text
-                      style={{color: blackAlpha900, whiteSpace: 'pre-wrap'}}>
+                    <Typography size="sm" style={{whiteSpace: 'pre-wrap'}}>
                       {`${chat?.chat}`}
-                    </Text>
+                    </Typography>
                   </View>
-                  <Text style={{color: blackAlpha500, fontSize: fs_xs}}>
+                  <Typography light size="xs">
                     {formatDateTime(chat?.createdAt).split(' ')[1]}
-                  </Text>
+                  </Typography>
                 </View>
               </View>
             ),

@@ -11,27 +11,30 @@ import {
   Platform,
 } from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
-import {blackAlpha900, f_full, fs_sm, fs_xs, w_full} from '../style/styles';
+import {
+  align_end,
+  blackAlpha900,
+  btn_primary,
+  center,
+  f_full,
+  flex_column,
+  fs_sm,
+  fs_xs,
+  justify_end,
+  p_3,
+  w_full,
+} from '../style/styles';
 import Typography from './Typography';
+import WebView from 'react-native-webview';
 
 const PopupBase = ({icon, contents, ...props}) => {
   const [modalVisible, setModalVisible] = useState(false);
 
   return (
-    <View style={f_full}>
+    <View>
       <TouchableOpacity style={w_full} onPress={() => setModalVisible(true)}>
-        {props.children}
+        {props.button}
       </TouchableOpacity>
-      {/* <TouchableOpacity
-        style={{
-          width: 30,
-          height: 30,
-          justifyContent: 'center',
-          alignItems: 'center',
-        }}
-        onPress={() => setModalVisible(true)}>
-        <Image source={icon} /> 
-      </TouchableOpacity> */}
       <Modal
         animationType="slide"
         transparent={true}
@@ -39,23 +42,23 @@ const PopupBase = ({icon, contents, ...props}) => {
         onRequestClose={() => {
           setModalVisible(!modalVisible);
         }}>
-        <View style={[styles.centeredView]}>
-          <ScrollView>
-            <View
-              style={[
-                styles.modalView,
-                {paddingTop: Platform.OS === 'ios' ? 50 : 20},
-              ]}>
-              <TouchableOpacity onPress={() => setModalVisible(false)}>
-                <Image
-                  source={require('../assets/icons/_x.png')}
-                  style={{width: 20, height: 20}}
-                />
+        <View style={[w_full]}>
+          <View
+            style={[
+              flex_column,
+              justify_end,
+              align_end,
+              {backgroundColor: 'white'},
+            ]}>
+            <ScrollView height={'100%'}>{props.children}</ScrollView>
+            <View style={[center, w_full, p_3, {marginBottom: 30}]}>
+              <TouchableOpacity
+                style={[btn_primary, w_full]}
+                onPress={() => setModalVisible(false)}>
+                <Typography>닫기</Typography>
               </TouchableOpacity>
-              <Typography size={'sm'}>{contents}</Typography>
-              <Button title="Close" onPress={() => setModalVisible(false)} />
             </View>
-          </ScrollView>
+          </View>
         </View>
       </Modal>
     </View>
