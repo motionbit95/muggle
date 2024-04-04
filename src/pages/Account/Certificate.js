@@ -19,7 +19,6 @@ import {
 import auth from '@react-native-firebase/auth';
 import {singleQuery} from '../../firebase/firebase_func';
 import PopupBase from '../../Component/PopupBase';
-import {terms} from '../../assets/terms';
 import Typography from '../../Component/Typography';
 import {blackAlpha500, blackAlpha900} from '../../style/styles';
 import WebView from 'react-native-webview';

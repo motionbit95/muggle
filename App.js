@@ -72,8 +72,6 @@ import DirectRoom from './src/pages/Chat/DirectRoom';
 import {getDocList} from './src/firebase/firebase_func';
 import GroupView from './src/pages/Main/GroupView';
 import Typography from './src/Component/Typography';
-import Terms from './src/pages/Account/Terms';
-import Privacy from './src/pages/Account/Privacy';
 import Alarm from './src/pages/MyPage/Alarm';
 
 const App = () => {
