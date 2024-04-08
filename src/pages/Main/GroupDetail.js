@@ -43,7 +43,6 @@ const GroupDetail = ({navigation, route}) => {
     const getUserInfo = async user => {
       singleQuery('user', 'uid', auth().currentUser.uid).then(res => {
         setMyInfo(res[0]);
-        handleView(data.doc_id);
         if (res[0].goods?.includes(data?.doc_id)) {
           setIcon(require('../../assets/icons/heart_fill.png'));
         }
@@ -81,6 +80,10 @@ const GroupDetail = ({navigation, route}) => {
 
     await updateDocument('user', myInfo.doc_id, myInfo);
   };
+
+  useEffect(() => {
+    if (myInfo) handleView(data.doc_id);
+  }, [myInfo]);
 
   const handleView = async gid => {
     if (!myInfo) return;
