@@ -1,6 +1,7 @@
 import React, {useEffect, useRef, useState} from 'react';
 import {
   Image,
+  Modal,
   ScrollView,
   TextInput,
   TouchableOpacity,
@@ -9,19 +10,38 @@ import {
 import styles, {
   align_center,
   align_start,
+  blackAlpha200,
+  blackAlpha300,
+  blackAlpha700,
+  btn_primary,
   btn_yellow,
+  center,
   f_full,
   flex_column,
   flex_row,
   img_sm,
   justify_between,
+  justify_center,
   p_1,
+  p_2,
+  p_4,
   radius_full,
+  radius_md,
+  radius_sm,
   sp_1,
+  sp_16,
   sp_2,
+  sp_8,
+  w_full,
   whiteAlpha900,
 } from '../../style/styles';
-import {formatDateTime, getDisplayAge, primary_color} from '../../firebase/api';
+import {
+  cities,
+  districts,
+  formatDateTime,
+  getDisplayAge,
+  primary_color,
+} from '../../firebase/api';
 import {mapImg, moneyImg, userImg} from '../../Component/GroupBox';
 import firestore from '@react-native-firebase/firestore';
 import {
@@ -34,10 +54,13 @@ import auth from '@react-native-firebase/auth';
 import $ from 'jquery';
 import Typography from '../../Component/Typography';
 import MessageBox from '../../Component/MessageBox';
+import DateTimeInput from '../../Component/DateTimeInput';
+import DropDown from '../../Component/PickerComponent';
 
 const DirectRoom = ({navigation, route}) => {
   const {data} = route.params ? route.params : {data: null};
   const [chat, setChat] = useState(null);
+  const [openModal, setOpenModal] = useState(false);
   const [matchingInfo, setMatchingInfo] = useState(null);
   const [chatList, setChatList] = useState([]);
   const [message, setMessage] = useState({
@@ -46,6 +69,21 @@ const DirectRoom = ({navigation, route}) => {
     message: '',
     type: 'success',
   });
+
+  const [promise_time, setPromiseTime] = useState(new Date());
+  const [promise_place, setPlace] = useState(null);
+  const [selectedCity, setSelectedCity] = useState(null);
+  const [selectedDistrict, setSelectedDistrict] = useState(null);
+  const [view, setView] = useState(false);
+
+  const handleCityChange = value => {
+    setSelectedCity(value);
+    setSelectedDistrict('');
+  };
+
+  const handleDistrictChange = value => {
+    setSelectedDistrict(value);
+  };
 
   // ScrollView의 ref를 생성합니다.
   const scrollViewRef = useRef();
@@ -91,7 +129,7 @@ const DirectRoom = ({navigation, route}) => {
     return () => unsubscribe();
   }, []);
 
-  const handleAddChat = async () => {
+  const handleAddChat = async chat => {
     if (!chat) return;
 
     // console.log('chat ===> ', chat, data.gid, auth().currentUser.uid);
@@ -130,6 +168,95 @@ const DirectRoom = ({navigation, route}) => {
     });
   };
 
+  const addPromise = async () => {
+    parsing(
+      '//약속//' +
+        promise_time.toLocaleDateString('ko-Kr') +
+        '//' +
+        promise_time.toLocaleTimeString('ko-Kr') +
+        '//' +
+        selectedCity +
+        '//' +
+        selectedDistrict +
+        '//' +
+        promise_place,
+    );
+
+    if (
+      promise_time === null ||
+      promise_place === null ||
+      selectedCity === null ||
+      selectedDistrict === null
+    ) {
+      setMessage({
+        mode: 'error',
+        // isView: true,
+        message: '모든 정보를 입력하세요.',
+      });
+      return;
+    }
+
+    setMessage({
+      mode: '',
+      isView: false,
+      message: '',
+      type: '',
+    });
+
+    handleAddChat(
+      '//약속//' +
+        promise_time.toLocaleDateString('ko-Kr', {
+          year: 'numeric',
+          month: '2-digit',
+          day: '2-digit',
+        }) +
+        '//' +
+        promise_time.toLocaleTimeString('ko-Kr', {
+          hour: '2-digit',
+          minute: '2-digit',
+        }) +
+        '//' +
+        selectedCity +
+        '//' +
+        selectedDistrict +
+        '//' +
+        promise_place,
+    );
+
+    setPromiseTime(new Date());
+    setPlace(null);
+    setSelectedCity(null);
+    setSelectedDistrict(null);
+    setView(false);
+
+    setOpenModal(false);
+  };
+
+  const parsing = data => {
+    console.log(data);
+    const year = Number(data.split('//')[2].split('.')[0]);
+    const month = Number(data.split('//')[2].split('.')[1]);
+    const day = Number(data.split('//')[2].split('.')[2].split('(')[0]);
+
+    const hour = Number(data.split('//')[3].split(' ')[1].split(':')[0]);
+    const minute = Number(data.split('//')[3].split(' ')[1].split(':')[1]);
+
+    const gmtCustomDate = new Date(
+      Date.UTC(year, month - 1, day, hour, minute),
+    );
+
+    console.log(gmtCustomDate);
+    setPromiseTime(gmtCustomDate);
+
+    setSelectedCity(data.split('//')[4]);
+    setSelectedDistrict(data.split('//')[5]);
+    setPlace(data.split('//')[6]);
+
+    console.log(data.split('//')[4], data.split('//')[5], data.split('//')[6]);
+
+    // setPlace(data.split('//')[3]);
+  };
+
   return (
     <View style={styles.screenStyle}>
       {message.isView && (
@@ -152,6 +279,97 @@ const DirectRoom = ({navigation, route}) => {
             setMessage({mode: '', isView: false, message: ''});
           }}
         />
+      )}
+      {openModal && (
+        <Modal>
+          <View style={[flex_column, p_4, sp_8]}>
+            <TouchableOpacity
+              onPress={() => {
+                setView(false);
+                setPromiseTime(new Date());
+                setPlace(null);
+                setSelectedCity(null);
+                setSelectedDistrict(null);
+                setOpenModal(false);
+              }}>
+              <Image
+                style={{opacity: 0.5, width: 30, height: 30}}
+                source={require('../../assets/icons/left_arrow.png')}
+              />
+            </TouchableOpacity>
+            <Typography bold size="2xl">
+              {user?.user_name}님과 약속
+            </Typography>
+            <View style={[flex_column, sp_2]}>
+              <Typography size="lg" bold>
+                약속일시
+              </Typography>
+              <View style={w_full}>
+                {/* <Typography size="lg" light>
+                  {formatDateTime(promise_time)}
+                </Typography> */}
+                <DateTimeInput
+                  defaultValue={promise_time}
+                  onChange={e => setPromiseTime(e)}
+                />
+              </View>
+            </View>
+            <View style={[flex_column, sp_2]}>
+              <Typography size="lg" bold>
+                약속장소
+              </Typography>
+              <View
+                style={{
+                  justifyContent: 'stretch',
+                  flexDirection: 'row',
+                  gap: 10,
+                }}>
+                <View style={{flex: 1}}>
+                  <DropDown
+                    items={cities}
+                    defaultValue={selectedCity ? selectedCity : '전체'}
+                    onChangeValue={handleCityChange}
+                  />
+                </View>
+                <View style={{flex: 1}}>
+                  <DropDown
+                    items={districts[selectedCity]}
+                    defaultValue={selectedDistrict ? selectedDistrict : '전체'}
+                    onChangeValue={handleDistrictChange}
+                  />
+                </View>
+              </View>
+              <View>
+                <TextInput
+                  value={promise_place}
+                  onChange={e => setPlace(e.nativeEvent.text)}
+                  style={[
+                    {
+                      width: '100%',
+                      height: 50,
+                    },
+                    styles.contentBox,
+                  ]}
+                  placeholder="상세 주소를 입력하세요."
+                />
+              </View>
+            </View>
+            {message.mode === 'error' && (
+              <Typography size="lg" color="red">
+                {message.message}
+              </Typography>
+            )}
+            {!view && (
+              <TouchableOpacity style={btn_primary} onPress={addPromise}>
+                <View style={[flex_row, sp_1, align_center, justify_center]}>
+                  <Typography bold white size="lg">
+                    완료
+                  </Typography>
+                </View>
+              </TouchableOpacity>
+            )}
+          </View>
+        </Modal>
       )}
       <View
         style={[
@@ -190,7 +408,12 @@ const DirectRoom = ({navigation, route}) => {
             </View>
           </View>
           <View style={[flex_column, sp_1]}>
-            <TouchableOpacity style={[btn_yellow, flex_row, p_1, sp_2]}>
+            <TouchableOpacity
+              style={[btn_yellow, flex_row, p_1, sp_2]}
+              onPress={() => {
+                setView(false);
+                setOpenModal(true);
+              }}>
               <Image
                 style={img_sm}
                 source={require('../../assets/Calendar.png')}
@@ -256,9 +479,49 @@ const DirectRoom = ({navigation, route}) => {
                       borderTopRightRadius: 0,
                       maxWidth: 290,
                     }}>
-                    <Typography size="sm" style={{whiteSpace: 'pre-wrap'}}>
-                      {`${chat?.chat}`}
-                    </Typography>
+                    {chat?.chat.includes('//약속//') ? (
+                      <View style={[flex_column, sp_2]}>
+                        <Typography size="lg">
+                          {chat?.chat.split('//')[1]}을 만들었어요.
+                        </Typography>
+                        <Typography size="md" light>
+                          날짜 : {chat?.chat.split('//')[2]}
+                        </Typography>
+                        <Typography size="md" light>
+                          시간 : {chat?.chat.split('//')[3]}
+                        </Typography>
+                        <TouchableOpacity
+                          style={[
+                            {backgroundColor: blackAlpha700},
+                            center,
+                            flex_row,
+                            p_2,
+                            sp_2,
+                            radius_md,
+                          ]}
+                          onPress={() => {
+                            setView(true);
+                            parsing(chat?.chat);
+                            setOpenModal(true);
+                          }}>
+                          <View
+                            style={[
+                              flex_row,
+                              sp_1,
+                              align_center,
+                              justify_center,
+                            ]}>
+                            <Typography size="md" white bold>
+                              약속보기
+                            </Typography>
+                          </View>
+                        </TouchableOpacity>
+                      </View>
+                    ) : (
+                      <Typography size="sm" style={{whiteSpace: 'pre-wrap'}}>
+                        {`${chat?.chat}`}
+                      </Typography>
+                    )}
                   </View>
                   <Typography size="sm" light>
                     {formatDateTime(chat?.createdAt).split(' ')[1]}
@@ -342,7 +605,7 @@ const DirectRoom = ({navigation, route}) => {
               alignItems: 'center',
               justifyContent: 'center',
             }}
-            onPress={handleAddChat}>
+            onPress={() => handleAddChat(chat)}>
             <Image source={require('../../assets/send.png')} />
           </TouchableOpacity>
         </View>

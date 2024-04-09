@@ -1,4 +1,4 @@
-import React, {useRef, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {
   View,
   Button,
@@ -25,9 +25,16 @@ import {formatDateTime} from '../firebase/api';
 import Typography from './Typography';
 
 const DateTimeInput = props => {
-  const [dateTime, setDateTime] = useState(new Date());
+  const [dateTime, setDateTime] = useState(
+    props.defaultValue ? props.defaultValue : new Date(),
+  );
   const [showPicker, setShowPicker] = useState(false);
   const [mode, setMode] = useState('date');
+
+  useEffect(() => {
+    console.log('props.defaultValue ==>', props.defaultValue);
+    setDateTime(props.defaultValue ? props.defaultValue : new Date());
+  }, [props.defaultValue]);
 
   const onChange = (event, selectedDate) => {
     setShowPicker(Platform.OS === 'ios');
