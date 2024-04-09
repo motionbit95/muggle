@@ -13,12 +13,14 @@ import styles, {
   blackAlpha200,
   blackAlpha300,
   blackAlpha700,
+  blackAlpha900,
   btn_primary,
   btn_yellow,
   center,
   f_full,
   flex_column,
   flex_row,
+  font_family,
   img_sm,
   justify_between,
   justify_center,
@@ -345,8 +347,10 @@ const DirectRoom = ({navigation, route}) => {
                   onChange={e => setPlace(e.nativeEvent.text)}
                   style={[
                     {
+                      fontFamily: font_family,
                       width: '100%',
                       height: 50,
+                      color: blackAlpha900,
                     },
                     styles.contentBox,
                   ]}
@@ -622,6 +626,7 @@ const DirectRoom = ({navigation, route}) => {
           ]}>
           <TextInput
             style={{
+              fontFamily: font_family,
               alignItems: 'center',
               justifyContent: 'center',
               height: 50,

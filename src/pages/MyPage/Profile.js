@@ -15,6 +15,7 @@ import styles, {
   blackAlpha900,
   center,
   flex_row,
+  font_family,
   fs_md,
   img_sm_2,
   justify_center,
@@ -22,7 +23,13 @@ import styles, {
   radius_full,
 } from '../../style/styles';
 import DropDown from '../../Component/PickerComponent';
-import {banks, cities, districts, primary_color} from '../../firebase/api';
+import {
+  banks,
+  cities,
+  districts,
+  font_md,
+  primary_color,
+} from '../../firebase/api';
 import ProfilePicker from '../../Component/ProfilePicker';
 import {updateDocument} from '../../firebase/firebase_func';
 import Typography from '../../Component/Typography';
@@ -286,6 +293,11 @@ const Profile = ({navigation, route}) => {
               <TextInput
                 style={[
                   {
+                    width: '100%',
+                    height: 50,
+                    fontFamily: font_family,
+                    fontSize: font_md,
+                    color: blackAlpha900,
                     flex: 4,
                     height: 50,
                   },
@@ -309,6 +321,9 @@ const Profile = ({navigation, route}) => {
                     flex: 4,
                     height: 100,
                     textAlignVertical: 'top',
+                    fontFamily: font_family,
+                    fontSize: font_md,
+                    color: blackAlpha900,
                   },
                   styles.contentBox,
                 ]}
@@ -447,6 +462,7 @@ const Profile = ({navigation, route}) => {
                       color: blackAlpha900,
                       fontSize: fs_md,
                       padding: 0,
+                      fontFamily: font_family,
                     },
                   ]}
                   placeholder="0"
@@ -475,7 +491,15 @@ const Profile = ({navigation, route}) => {
                 </View>
                 <TextInput
                   keyboardType="numeric"
-                  style={[{flex: 1.5}, styles.contentBox]}
+                  style={[
+                    {
+                      flex: 1.5,
+                      fontFamily: font_family,
+                      fontSize: font_md,
+                      color: blackAlpha900,
+                    },
+                    styles.contentBox,
+                  ]}
                   placeholder="번호를 입력해주세요."
                   defaultValue={accountNumber}
                   onChange={e => setAccountNumber(e.nativeEvent.text)}

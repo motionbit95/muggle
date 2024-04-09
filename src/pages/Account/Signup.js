@@ -20,6 +20,7 @@ import styles, {
   align_center,
   blackAlpha900,
   flex_row,
+  font_family,
   fs_md,
   img_sm_2,
   justify_center,
@@ -200,6 +201,7 @@ const SignUp = ({navigation}) => {
               <TextInput
                 style={[
                   {
+                    fontFamily: font_family,
                     color: 'black',
                     width: '100%',
                     height: 50,
@@ -335,6 +337,7 @@ const SignUp = ({navigation}) => {
                   keyboardType="numeric"
                   style={[
                     {
+                      fontFamily: font_family,
                       color: blackAlpha900,
                       fontSize: fs_md,
                       padding: 0,
@@ -366,7 +369,10 @@ const SignUp = ({navigation}) => {
                 </View>
                 <TextInput
                   keyboardType="numeric"
-                  style={[{flex: 1.5, color: 'black'}, styles.contentBox]}
+                  style={[
+                    {fontFamily: font_family, flex: 1.5, color: 'black'},
+                    styles.contentBox,
+                  ]}
                   placeholder="번호를 입력해주세요."
                   onChange={e => setAccountNumber(e.nativeEvent.text)}
                 />

@@ -5,6 +5,7 @@ import {addDocument} from '../../firebase/firebase_func';
 import styles, {
   blackAlpha50,
   center,
+  font_family,
   p_2,
   radius_full,
 } from '../../style/styles';
@@ -110,6 +111,7 @@ const Interest = ({navigation, route}) => {
                 multiline
                 style={[
                   {
+                    fontFamily: font_family,
                     color: 'black',
                     flex: 4,
                     height: 100,

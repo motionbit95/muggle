@@ -20,7 +20,12 @@ import auth from '@react-native-firebase/auth';
 import {singleQuery} from '../../firebase/firebase_func';
 import PopupBase from '../../Component/PopupBase';
 import Typography from '../../Component/Typography';
-import {blackAlpha500, blackAlpha900, flex_row} from '../../style/styles';
+import {
+  blackAlpha500,
+  blackAlpha900,
+  flex_row,
+  font_family,
+} from '../../style/styles';
 import WebView from 'react-native-webview';
 
 const Certificate = ({navigation}) => {
@@ -93,6 +98,7 @@ const Certificate = ({navigation}) => {
               }}>
               <TextInput
                 style={{
+                  fontFamily: font_family,
                   flex: 7,
                   height: component_height,
                   borderColor: '#d9d9d9',
@@ -132,6 +138,7 @@ const Certificate = ({navigation}) => {
             </View>
             <TextInput
               style={{
+                fontFamily: font_family,
                 width: '100%',
                 height: component_height,
                 borderColor: '#d9d9d9',

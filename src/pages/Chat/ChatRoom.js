@@ -13,6 +13,7 @@ import styles, {
   blackAlpha900,
   f_full,
   flex_row,
+  font_family,
   fs_md,
   fs_sm,
   fs_xs,
@@ -295,6 +296,7 @@ const ChatRoom = ({navigation, route}) => {
           ]}>
           <TextInput
             style={{
+              fontFamily: font_family,
               alignItems: 'center',
               justifyContent: 'center',
               height: 50,

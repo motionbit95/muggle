@@ -7,8 +7,13 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import {cities, districts} from '../../firebase/api';
-import styles, {f_full, justify_between} from '../../style/styles';
+import {cities, districts, font_md} from '../../firebase/api';
+import styles, {
+  blackAlpha900,
+  f_full,
+  font_family,
+  justify_between,
+} from '../../style/styles';
 import {addChat, addDocument} from '../../firebase/firebase_func';
 import auth from '@react-native-firebase/auth';
 import DropDown from '../../Component/PickerComponent';
@@ -232,6 +237,9 @@ const GroupCreate = ({navigation, route}) => {
                       {
                         width: '100%',
                         height: 50,
+                        fontFamily: font_family,
+                        fontSize: font_md,
+                        color: blackAlpha900,
                       },
                       styles.contentBox,
                     ]}
@@ -272,6 +280,9 @@ const GroupCreate = ({navigation, route}) => {
                     {
                       width: '100%',
                       height: 50,
+                      fontFamily: font_family,
+                      fontSize: font_md,
+                      color: blackAlpha900,
                     },
                     styles.contentBox,
                   ]}
@@ -319,7 +330,17 @@ const GroupCreate = ({navigation, route}) => {
                           <TextInput
                             onChange={e => setMatchPrice(e.nativeEvent.text)}
                             keyboardType="numeric"
-                            style={[{flex: 1.5}, styles.contentBox]}
+                            style={[
+                              {
+                                flex: 1.5,
+                                width: '100%',
+                                height: 50,
+                                fontFamily: font_family,
+                                fontSize: font_md,
+                                color: blackAlpha900,
+                              },
+                              styles.contentBox,
+                            ]}
                             placeholder="모임 금액을 입력해주세요."
                             // onChange={null}
                           />
@@ -342,12 +363,15 @@ const GroupCreate = ({navigation, route}) => {
                       width: '100%',
                       height: 100,
                       textAlignVertical: 'top',
+                      fontFamily: font_family,
+                      fontSize: font_md,
+                      color: blackAlpha900,
                     },
                   ]}
                   placeholder={
                     data?.type === 'personal'
                       ? '모임목적, 시간, 장소를 작성해주세요.'
-                      : '모임목표을 설명해주세요.'
+                      : '모임목표를 설명해주세요.'
                   }
                 />
               </View>
@@ -363,6 +387,9 @@ const GroupCreate = ({navigation, route}) => {
                       {
                         width: '100%',
                         height: 50,
+                        fontFamily: font_family,
+                        fontSize: font_md,
+                        color: blackAlpha900,
                       },
                       styles.contentBox,
                     ]}
