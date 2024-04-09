@@ -283,6 +283,17 @@ const User = ({navigation, route}) => {
                 </View>
                 <Image source={require('../../assets/rightarrow.png')} />
               </TouchableOpacity>
+              <TouchableOpacity
+                style={styles.TouchButtonStyle}
+                onPress={() =>
+                  navigation.navigate('마이', {screen: '자주묻는질문'})
+                }>
+                <View style={styles.rowBox}>
+                  <Image source={require('../../assets/menuicon1.png')} />
+                  <Typography>자주묻는질문</Typography>
+                </View>
+                <Image source={require('../../assets/rightarrow.png')} />
+              </TouchableOpacity>
               <PopupBase
                 button={
                   <View style={styles.TouchButtonStyle}>

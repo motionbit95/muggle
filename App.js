@@ -74,6 +74,7 @@ import GroupView from './src/pages/Main/GroupView';
 import Typography from './src/Component/Typography';
 import Alarm from './src/pages/MyPage/Alarm';
 import UserView from './src/pages/Main/UserView';
+import FAQ from './src/pages/MyPage/FAQ';
 
 const App = () => {
   // const isDarkMode = useColorScheme() === 'dark';
@@ -247,6 +248,7 @@ const App = () => {
         options={{headerShown: false}}
       />
       <UserStack.Screen name="알림" component={Alarm} />
+      <UserStack.Screen name="자주묻는질문" component={FAQ} />
     </UserStack.Navigator>
   );
 
