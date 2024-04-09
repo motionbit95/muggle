@@ -45,12 +45,19 @@ import {
 import auth from '@react-native-firebase/auth';
 import $ from 'jquery';
 import Typography from '../../Component/Typography';
+import MessageBox from '../../Component/MessageBox';
 
 const DirectRoom = ({navigation, route}) => {
   const {data} = route.params ? route.params : {data: null};
   const [chat, setChat] = useState(null);
   const [matchingInfo, setMatchingInfo] = useState(null);
   const [chatList, setChatList] = useState([]);
+  const [message, setMessage] = useState({
+    mode: 'error',
+    isView: false,
+    message: '',
+    type: 'success',
+  });
 
   // ScrollView의 ref를 생성합니다.
   const scrollViewRef = useRef();
@@ -118,53 +125,46 @@ const DirectRoom = ({navigation, route}) => {
   };
 
   const matchingSuccess = async () => {
-    Alert.alert(
-      '확인',
-      '매칭 완료 하시겠습니까?',
-      [
-        {
-          text: '취소',
-          onPress: () => console.log('취소'),
-          style: '취소',
-        },
-        {
-          text: '확인',
-          onPress: async () => {
-            await updateDocument('matching', data?.mid, {
-              matching_state: 2,
-            });
-          },
-        },
-      ],
-      {cancelable: false},
-    );
+    setMessage({
+      mode: 'confirm',
+      isView: true,
+      message: '매칭 완료 하시겠습니까?',
+      type: 'success',
+    });
   };
 
   const matchingFail = async () => {
-    Alert.alert(
-      '확인',
-      '매칭 거절 하시겠습니까?',
-      [
-        {
-          text: '취소',
-          onPress: () => console.log('취소'),
-          style: '취소',
-        },
-        {
-          text: '확인',
-          onPress: async () => {
-            await updateDocument('matching', data?.mid, {
-              matching_state: 400,
-            });
-          },
-        },
-      ],
-      {cancelable: false},
-    );
+    setMessage({
+      mode: 'confirm',
+      isView: true,
+      message: '매칭 취소 하시겠습니까?',
+      type: 'refund',
+    });
   };
 
   return (
     <View style={styles.screenStyle}>
+      {message.isView && (
+        <MessageBox
+          visible={message.isView}
+          mode={message.mode}
+          message={message.message}
+          onCancel={() => setMessage({mode: '', isView: false, message: ''})}
+          onOK={async () => {
+            // 메세지 박스 닫기
+            if (message.type === 'success') {
+              await updateDocument('matching', data?.mid, {
+                matching_state: 2,
+              });
+            } else if (message.type === 'refund') {
+              await updateDocument('matching', data?.mid, {
+                matching_state: 400,
+              });
+            }
+            setMessage({mode: '', isView: false, message: ''});
+          }}
+        />
+      )}
       <View
         style={[
           {

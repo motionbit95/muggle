@@ -306,7 +306,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     width: '100%',
-    paddingVertical: 30,
+    paddingVertical: 20,
   },
 
   // MatchComponet
@@ -406,7 +406,7 @@ export const whiteAlpha700 = 'rgba(255, 255, 255, 0.64)';
 export const whiteAlpha800 = 'rgba(255, 255, 255, 0.8)';
 export const whiteAlpha900 = 'rgba(255, 255, 255, 0.92)';
 
-export const font_family = 'Pretendard';
+export const font_family = 'S-CoreDream-4Regular';
 
 // typograpy
 export const fs_2xs = 10;

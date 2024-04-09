@@ -9,14 +9,18 @@ import {
   View,
 } from 'react-native';
 import styles, {
+  align_center,
   center,
   f_full,
+  flex_row,
   p_3,
   p_4,
   radius_full,
   radius_lg,
   shadow_md,
+  sp_2,
   sp_3,
+  w_full,
 } from '../../style/styles';
 import auth from '@react-native-firebase/auth';
 import {
@@ -33,6 +37,7 @@ import {privacy, terms} from '../../terms';
 import WebView from 'react-native-webview';
 import Typography from '../../Component/Typography';
 import RenderHtml from 'react-native-render-html';
+import MessageBox from '../../Component/MessageBox';
 
 const User = ({navigation, route}) => {
   const {data} = route.params ? route.params : {data: null};
@@ -145,23 +150,25 @@ const User = ({navigation, route}) => {
       </View>
       <SafeAreaView>
         <View style={styles.contentStyle}>
-          <View style={styles.UserStackStyle}>
-            <View style={styles.rowBox}>
-              <View>
-                <View style={styles.Avartar70}>
-                  <Image
-                    style={[f_full, radius_full]}
-                    source={
-                      myInfo?.user_profile
-                        ? {uri: myInfo?.user_profile}
-                        : require('../../assets/avartar.png')
-                    }
-                  />
-                </View>
+          <View style={[styles.UserStackStyle]}>
+            <View style={[w_full, flex_row, align_center, sp_3]}>
+              <View style={styles.Avartar70}>
+                <Image
+                  style={[f_full, radius_full]}
+                  source={
+                    myInfo?.user_profile
+                      ? {uri: myInfo?.user_profile}
+                      : require('../../assets/avartar.png')
+                  }
+                />
               </View>
-              <View style={{justifyContent: 'center', gap: 10}}>
+              <View style={[w_full, sp_3]}>
                 <View
-                  style={{flexDirection: 'row', gap: 5, alignItems: 'center'}}>
+                  style={{
+                    flexDirection: 'row',
+                    gap: 5,
+                    alignItems: 'center',
+                  }}>
                   <Typography size="xl" bold>
                     {myInfo?.user_name}님
                   </Typography>
@@ -178,7 +185,7 @@ const User = ({navigation, route}) => {
                   <Typography>|</Typography>
                   <Typography>{myInfo?.user_place[0]}</Typography>
                 </View>
-                <View style={{flexDirection: 'row', gap: 10, flexWrap: 'wrap'}}>
+                <View style={[flex_row, sp_2]}>
                   {myInfo?.user_interest?.map((item, index) => (
                     <View
                       style={{

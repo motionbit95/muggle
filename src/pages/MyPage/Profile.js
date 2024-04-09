@@ -24,9 +24,16 @@ import {banks, cities, districts, primary_color} from '../../firebase/api';
 import ProfilePicker from '../../Component/ProfilePicker';
 import {updateDocument} from '../../firebase/firebase_func';
 import Typography from '../../Component/Typography';
+import MessageBox from '../../Component/MessageBox';
 
 const Profile = ({navigation, route}) => {
   const {data} = route.params ? route.params : {data: null};
+  const [message, setMessage] = useState({
+    mode: 'error',
+    isView: false,
+    message: '',
+    type: '',
+  });
 
   const [userName, setUserName] = useState(data?.user_name);
   const [userInfo, setUserInfo] = useState(data?.user_info);
@@ -110,56 +117,79 @@ const Profile = ({navigation, route}) => {
     setSelectbank(value);
   };
 
+  const confirmSave = () => {
+    setMessage({
+      mode: 'confirm',
+      isView: true,
+      message: '프로필을 수정하시겠습니까?',
+      type: 'success',
+    });
+  };
+
   const handleSaveProfile = () => {
     if (!userName) {
-      Alert.alert('회원 이름을 입력하세요.');
+      setMessage({
+        mode: 'error',
+        isView: true,
+        message: '사용자 이름를 입력하세요.',
+      });
       return;
     }
 
     if (!userInfo) {
-      Alert.alert('소개말을 입력하세요!');
+      setMessage({
+        mode: 'error',
+        isView: true,
+        message: '소개말을 입력하세요.',
+      });
       return;
     }
 
     if (!selectedGender) {
-      Alert.alert('성별을 선택하세요.');
+      setMessage({
+        mode: 'error',
+        isView: true,
+        message: '성별을 선택하세요.',
+      });
       return;
     }
 
     if (!selectyear || !selectmonth || !selectday) {
-      Alert.alert('생년월일을 선택하세요.');
+      setMessage({
+        mode: 'error',
+        isView: true,
+        message: '생년월일을 선택하세요.',
+      });
       return;
     }
 
     if (!userPrice) {
-      Alert.alert('매칭권 금액을 입력하세요.');
+      setMessage({
+        mode: 'error',
+        isView: true,
+        message: '매칭권 금액을 입력하세요.',
+      });
       return;
     }
 
     if (userPrice < 2) {
-      Alert.alert('매칭권 금액을 2만원 이상으로 설정하세요.');
+      setMessage({
+        mode: 'error',
+        isView: true,
+        message: '매칭권 금액을 2만원 이상으로 설정하세요.',
+      });
       return;
     }
 
     if (!selectedCity || !selectedDistrict) {
-      Alert.alert('지역을 선택하세요.');
+      setMessage({
+        mode: 'error',
+        isView: true,
+        message: '지역을 선택하세요.',
+      });
       return;
     }
 
-    console.log({
-      ...data,
-      user_name: userName,
-      user_info: userInfo,
-      user_interest: interest,
-      user_price: userPrice,
-      user_gender: selectedGender,
-      user_place: [`${selectedCity} ${selectedDistrict}`],
-      user_birth: `${selectyear}${selectmonth}${selectday}`,
-      user_bank: {
-        bank_name: selectbank,
-        account_number: accountNumber,
-      },
-    });
     updateDocument('user', data?.doc_id, {
       ...data,
       user_name: userName,
@@ -175,32 +205,65 @@ const Profile = ({navigation, route}) => {
       },
     });
 
-    Alert.alert('확인', '프로필이 수정되었습니다.', [
-      {
-        text: '확인',
-        onPress: () =>
-          navigation.navigate('User', {
-            data: {
-              ...data,
-              user_name: userName,
-              user_info: userInfo,
-              user_interest: interest,
-              user_price: userPrice,
-              user_gender: selectedGender,
-              user_place: [`${selectedCity} ${selectedDistrict}`],
-              user_birth: `${selectyear}${selectmonth}${selectday}`,
-              user_bank: {
-                bank_name: selectbank,
-                account_number: accountNumber,
-              },
-            },
-          }),
+    navigation.navigate('User', {
+      data: {
+        ...data,
+        user_name: userName,
+        user_info: userInfo,
+        user_interest: interest,
+        user_price: userPrice,
+        user_gender: selectedGender,
+        user_place: [`${selectedCity} ${selectedDistrict}`],
+        user_birth: `${selectyear}${selectmonth}${selectday}`,
+        user_bank: {
+          bank_name: selectbank,
+          account_number: accountNumber,
+        },
       },
-    ]);
+    });
+
+    // Alert.alert('확인', '프로필이 수정되었습니다.', [
+    //   {
+    //     text: '확인',
+    //     onPress: () =>
+    //       navigation.navigate('User', {
+    //         data: {
+    //           ...data,
+    //           user_name: userName,
+    //           user_info: userInfo,
+    //           user_interest: interest,
+    //           user_price: userPrice,
+    //           user_gender: selectedGender,
+    //           user_place: [`${selectedCity} ${selectedDistrict}`],
+    //           user_birth: `${selectyear}${selectmonth}${selectday}`,
+    //           user_bank: {
+    //             bank_name: selectbank,
+    //             account_number: accountNumber,
+    //           },
+    //         },
+    //       }),
+    //   },
+    // ]);
   };
 
   return (
     <View style={styles.screenStyle}>
+      {message.isView && (
+        <MessageBox
+          visible={message.isView}
+          message={message.message}
+          mode={message.mode}
+          onCancel={() =>
+            setMessage({mode: 'error', isView: false, message: ''})
+          }
+          onOK={() => {
+            if (message.type === 'success') {
+              handleSaveProfile();
+            }
+            setMessage({mode: 'error', isView: false, message: ''});
+          }}
+        />
+      )}
       <ScrollView style={styles.scrollViewStyle}>
         <View style={[styles.contentStyle, {gap: 20}]}>
           <View
@@ -447,7 +510,7 @@ const Profile = ({navigation, route}) => {
         <View style={styles.buttonBox}>
           <TouchableOpacity
             style={[styles.button, styles.buttonMargin]}
-            onPress={handleSaveProfile}>
+            onPress={confirmSave}>
             <Typography size="lg" bold>
               저장
             </Typography>

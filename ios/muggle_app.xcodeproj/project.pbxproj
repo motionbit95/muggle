@@ -11,20 +11,10 @@
 		13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.mm */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
-		3BDE2E693830448A8B5DF6AF /* Pretendard-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 3182C712CC1A470FA43140D3 /* Pretendard-Bold.otf */; };
-		44214442341B4044821AB2DB /* Pretendard-ExtraLight.otf in Resources */ = {isa = PBXBuildFile; fileRef = 92EEC20D998345C7A3EF1862 /* Pretendard-ExtraLight.otf */; };
-		5BEBBF77AAED4BCFB09D48D2 /* PyeongChangPeace-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = CC085BC4123C4AB1BF9E8B1D /* PyeongChangPeace-Bold.otf */; };
+		4DC52F488DD443A7BA94277E /* S-CoreDream-4Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 875A4B8A90F7427C9977C8C2 /* S-CoreDream-4Regular.otf */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
-		908A4EEE093F438884F5C3A8 /* Pretendard-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = EB823C560FAD4E5394D2C9FA /* Pretendard-Regular.otf */; };
-		922016E205FC46B1970714BE /* Pretendard-Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = 1272EAC5A1F1480BA032D566 /* Pretendard-Thin.otf */; };
-		A26A684DBE6D48F6820E0111 /* Pretendard-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = A0FD4EE672A74B538B8EB2AF /* Pretendard-Medium.otf */; };
 		B28A2A9917DE724CDC0EFCED /* Pods_muggle_app_muggle_appTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3BA39644D0DC0937B2742391 /* Pods_muggle_app_muggle_appTests.framework */; };
 		B2AD86D42BA3535300C6DB27 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B2AD86D32BA3535300C6DB27 /* GoogleService-Info.plist */; };
-		BF6B5A54BD3045639135D5EF /* Pretendard-ExtraBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = A04194877A0540979D4735C9 /* Pretendard-ExtraBold.otf */; };
-		C6EB0633483343A99AC41DC7 /* Pretendard-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 555D22200FE84BE5BAFAEBF3 /* Pretendard-SemiBold.otf */; };
-		DE69F5CE7F2B4CF588716A5C /* Pretendard-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = 485BECCC23F6470193351771 /* Pretendard-Black.otf */; };
-		E7B69DDB859A4042B9087F41 /* PyeongChangPeace-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 30BD2B6DB7B6424BA0BD6E3E /* PyeongChangPeace-Light.otf */; };
-		EFC07E9E9A894A4CA9220786 /* Pretendard-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = BCB458CA2AA64D43801D9CD0 /* Pretendard-Light.otf */; };
 		FE5FC89D2AB2372EA8A08130 /* Pods_muggle_app.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 67C19231366781BA4BEE6D2E /* Pods_muggle_app.framework */; };
 /* End PBXBuildFile section */
 
@@ -42,7 +32,6 @@
 		00E356EE1AD99517003FC87E /* muggle_appTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = muggle_appTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* muggle_appTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = muggle_appTests.m; sourceTree = "<group>"; };
-		1272EAC5A1F1480BA032D566 /* Pretendard-Thin.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Pretendard-Thin.otf"; path = "../src/assets/fonts/Pretendard-Thin.otf"; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* muggle_app.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = muggle_app.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = muggle_app/AppDelegate.h; sourceTree = "<group>"; };
 		13B07FB01A68108700A75B9A /* AppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = AppDelegate.mm; path = muggle_app/AppDelegate.mm; sourceTree = "<group>"; };
@@ -50,23 +39,14 @@
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = muggle_app/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = muggle_app/main.m; sourceTree = "<group>"; };
 		2A100F40BAAC207C87C02E47 /* Pods-muggle_app.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-muggle_app.debug.xcconfig"; path = "Target Support Files/Pods-muggle_app/Pods-muggle_app.debug.xcconfig"; sourceTree = "<group>"; };
-		30BD2B6DB7B6424BA0BD6E3E /* PyeongChangPeace-Light.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "PyeongChangPeace-Light.otf"; path = "../src/assets/fonts/PyeongChangPeace-Light.otf"; sourceTree = "<group>"; };
-		3182C712CC1A470FA43140D3 /* Pretendard-Bold.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Pretendard-Bold.otf"; path = "../src/assets/fonts/Pretendard-Bold.otf"; sourceTree = "<group>"; };
 		3BA39644D0DC0937B2742391 /* Pods_muggle_app_muggle_appTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_muggle_app_muggle_appTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4149CDBF9261EF9473C7E4EE /* Pods-muggle_app.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-muggle_app.release.xcconfig"; path = "Target Support Files/Pods-muggle_app/Pods-muggle_app.release.xcconfig"; sourceTree = "<group>"; };
-		485BECCC23F6470193351771 /* Pretendard-Black.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Pretendard-Black.otf"; path = "../src/assets/fonts/Pretendard-Black.otf"; sourceTree = "<group>"; };
-		555D22200FE84BE5BAFAEBF3 /* Pretendard-SemiBold.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Pretendard-SemiBold.otf"; path = "../src/assets/fonts/Pretendard-SemiBold.otf"; sourceTree = "<group>"; };
 		67C19231366781BA4BEE6D2E /* Pods_muggle_app.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_muggle_app.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = muggle_app/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		92EEC20D998345C7A3EF1862 /* Pretendard-ExtraLight.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Pretendard-ExtraLight.otf"; path = "../src/assets/fonts/Pretendard-ExtraLight.otf"; sourceTree = "<group>"; };
-		A04194877A0540979D4735C9 /* Pretendard-ExtraBold.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Pretendard-ExtraBold.otf"; path = "../src/assets/fonts/Pretendard-ExtraBold.otf"; sourceTree = "<group>"; };
-		A0FD4EE672A74B538B8EB2AF /* Pretendard-Medium.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Pretendard-Medium.otf"; path = "../src/assets/fonts/Pretendard-Medium.otf"; sourceTree = "<group>"; };
+		875A4B8A90F7427C9977C8C2 /* S-CoreDream-4Regular.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "S-CoreDream-4Regular.otf"; path = "../src/assets/fonts/S-CoreDream-4Regular.otf"; sourceTree = "<group>"; };
 		B2AD86D32BA3535300C6DB27 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
-		BCB458CA2AA64D43801D9CD0 /* Pretendard-Light.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Pretendard-Light.otf"; path = "../src/assets/fonts/Pretendard-Light.otf"; sourceTree = "<group>"; };
 		C0AA1424160F60119D7D8437 /* Pods-muggle_app-muggle_appTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-muggle_app-muggle_appTests.debug.xcconfig"; path = "Target Support Files/Pods-muggle_app-muggle_appTests/Pods-muggle_app-muggle_appTests.debug.xcconfig"; sourceTree = "<group>"; };
-		CC085BC4123C4AB1BF9E8B1D /* PyeongChangPeace-Bold.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "PyeongChangPeace-Bold.otf"; path = "../src/assets/fonts/PyeongChangPeace-Bold.otf"; sourceTree = "<group>"; };
 		D16C3B1FADE6B7F0897AED28 /* Pods-muggle_app-muggle_appTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-muggle_app-muggle_appTests.release.xcconfig"; path = "Target Support Files/Pods-muggle_app-muggle_appTests/Pods-muggle_app-muggle_appTests.release.xcconfig"; sourceTree = "<group>"; };
-		EB823C560FAD4E5394D2C9FA /* Pretendard-Regular.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Pretendard-Regular.otf"; path = "../src/assets/fonts/Pretendard-Regular.otf"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -177,17 +157,7 @@
 		FA442C5D01BA4321B33F0E74 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				485BECCC23F6470193351771 /* Pretendard-Black.otf */,
-				3182C712CC1A470FA43140D3 /* Pretendard-Bold.otf */,
-				A04194877A0540979D4735C9 /* Pretendard-ExtraBold.otf */,
-				92EEC20D998345C7A3EF1862 /* Pretendard-ExtraLight.otf */,
-				BCB458CA2AA64D43801D9CD0 /* Pretendard-Light.otf */,
-				A0FD4EE672A74B538B8EB2AF /* Pretendard-Medium.otf */,
-				EB823C560FAD4E5394D2C9FA /* Pretendard-Regular.otf */,
-				555D22200FE84BE5BAFAEBF3 /* Pretendard-SemiBold.otf */,
-				1272EAC5A1F1480BA032D566 /* Pretendard-Thin.otf */,
-				CC085BC4123C4AB1BF9E8B1D /* PyeongChangPeace-Bold.otf */,
-				30BD2B6DB7B6424BA0BD6E3E /* PyeongChangPeace-Light.otf */,
+				875A4B8A90F7427C9977C8C2 /* S-CoreDream-4Regular.otf */,
 			);
 			name = Resources;
 			path = "";
@@ -290,17 +260,7 @@
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				B2AD86D42BA3535300C6DB27 /* GoogleService-Info.plist in Resources */,
-				DE69F5CE7F2B4CF588716A5C /* Pretendard-Black.otf in Resources */,
-				3BDE2E693830448A8B5DF6AF /* Pretendard-Bold.otf in Resources */,
-				BF6B5A54BD3045639135D5EF /* Pretendard-ExtraBold.otf in Resources */,
-				44214442341B4044821AB2DB /* Pretendard-ExtraLight.otf in Resources */,
-				EFC07E9E9A894A4CA9220786 /* Pretendard-Light.otf in Resources */,
-				A26A684DBE6D48F6820E0111 /* Pretendard-Medium.otf in Resources */,
-				908A4EEE093F438884F5C3A8 /* Pretendard-Regular.otf in Resources */,
-				C6EB0633483343A99AC41DC7 /* Pretendard-SemiBold.otf in Resources */,
-				922016E205FC46B1970714BE /* Pretendard-Thin.otf in Resources */,
-				5BEBBF77AAED4BCFB09D48D2 /* PyeongChangPeace-Bold.otf in Resources */,
-				E7B69DDB859A4042B9087F41 /* PyeongChangPeace-Light.otf in Resources */,
+				4DC52F488DD443A7BA94277E /* S-CoreDream-4Regular.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

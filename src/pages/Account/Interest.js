@@ -1,25 +1,12 @@
 import React, {useState} from 'react';
-import {
-  Alert,
-  Image,
-  ScrollView,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import {ScrollView, TextInput, TouchableOpacity, View} from 'react-native';
 
 import {addDocument} from '../../firebase/firebase_func';
 import styles, {
-  blackAlpha100,
   blackAlpha50,
-  blackAlpha900,
   center,
-  fs_xs,
-  p_1,
   p_2,
   radius_full,
-  radius_sm,
 } from '../../style/styles';
 import ProfilePicker from '../../Component/ProfilePicker';
 import Typography from '../../Component/Typography';
