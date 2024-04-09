@@ -20,7 +20,7 @@ const GroupCreate = ({navigation}) => {
   const [selectedCity, setSelectedCity] = useState('');
   const [selectedDistrict, setSelectedDistrict] = useState('');
   const [matchPlace, setPlace] = useState('');
-  const [selectedMatch, setSelectedMatch] = useState('머글 모임');
+  const [selectedMatch, setSelectedMatch] = useState('머글(식사, 취미) 모임');
 
   const [matchName, setMatchName] = useState('');
   const [matchTarget, setMatchTarget] = useState('');
@@ -30,6 +30,12 @@ const GroupCreate = ({navigation}) => {
   const [matchImage, setMatchImage] = useState('');
 
   const matchProps = ['나누기', '회비 없음', '직접 입력'];
+
+  const group_category = [
+    '머글(식사, 취미) 모임',
+    '클래스 모임',
+    '비지니스 모임',
+  ];
 
   const handleCityChange = value => {
     setSelectedCity(value);
