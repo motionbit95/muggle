@@ -61,6 +61,7 @@ import UserView from './src/pages/Main/UserView';
 import FAQ from './src/pages/MyPage/FAQ';
 import MatchingView from './src/pages/Main/MatchingView';
 import MyActivity from './src/pages/MyPage/MyActivity';
+import Setting from './src/pages/MyPage/Setting';
 
 const App = () => {
   // const isDarkMode = useColorScheme() === 'dark';
@@ -251,6 +252,15 @@ const App = () => {
       <UserStack.Screen
         name="활동내역"
         component={MyActivity}
+        options={() => ({
+          headerTitleStyle: {
+            fontFamily: font_family_bold,
+          },
+        })}
+      />
+      <UserStack.Screen
+        name="설정"
+        component={Setting}
         options={() => ({
           headerTitleStyle: {
             fontFamily: font_family_bold,

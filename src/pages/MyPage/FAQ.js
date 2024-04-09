@@ -27,9 +27,9 @@ function FAQ(props) {
   return (
     <>
       <View style={[f_full, flex_column, p_4, sp_4]}>
-        <Typography bold size="3xl">
+        {/* <Typography bold size="3xl">
           자주묻는질문
-        </Typography>
+        </Typography> */}
         <ScrollView style={[f_full, flex_column, sp_4]}>
           <View
             style={[

@@ -10,9 +10,13 @@ import {
 } from 'react-native';
 import styles, {
   align_center,
+  align_end,
   center,
   f_full,
   flex_row,
+  img_md,
+  img_sm,
+  justify_end,
   p_3,
   p_4,
   radius_full,
@@ -150,6 +154,15 @@ const User = ({navigation, route}) => {
       </View>
       <SafeAreaView>
         <View style={styles.contentStyle}>
+          <View style={[w_full, flex_row, align_end, justify_end, sp_3]}>
+            <TouchableOpacity
+              onPress={() => navigation.navigate('마이', {screen: '설정'})}>
+              <Image
+                style={img_md}
+                source={require('../../assets/icons/AiOutlineSetting.png')}
+              />
+            </TouchableOpacity>
+          </View>
           <View style={[styles.UserStackStyle]}>
             <View style={[w_full, flex_row, align_center, sp_3]}>
               <View style={styles.Avartar70}>

@@ -556,9 +556,49 @@ const DirectRoom = ({navigation, route}) => {
                       borderRadius: 15,
                       borderTopLeftRadius: 0,
                     }}>
-                    <Typography size="sm" style={{whiteSpace: 'pre-wrap'}}>
-                      {`${chat?.chat}`}
-                    </Typography>
+                    {chat?.chat.includes('//약속//') ? (
+                      <View style={[flex_column, sp_2]}>
+                        <Typography size="lg">
+                          {chat?.chat.split('//')[1]}을 만들었어요.
+                        </Typography>
+                        <Typography size="md" light>
+                          날짜 : {chat?.chat.split('//')[2]}
+                        </Typography>
+                        <Typography size="md" light>
+                          시간 : {chat?.chat.split('//')[3]}
+                        </Typography>
+                        <TouchableOpacity
+                          style={[
+                            {backgroundColor: blackAlpha700},
+                            center,
+                            flex_row,
+                            p_2,
+                            sp_2,
+                            radius_md,
+                          ]}
+                          onPress={() => {
+                            setView(true);
+                            parsing(chat?.chat);
+                            setOpenModal(true);
+                          }}>
+                          <View
+                            style={[
+                              flex_row,
+                              sp_1,
+                              align_center,
+                              justify_center,
+                            ]}>
+                            <Typography size="md" white bold>
+                              약속보기
+                            </Typography>
+                          </View>
+                        </TouchableOpacity>
+                      </View>
+                    ) : (
+                      <Typography size="sm" style={{whiteSpace: 'pre-wrap'}}>
+                        {`${chat?.chat}`}
+                      </Typography>
+                    )}
                   </View>
                   <Typography size="xs" light>
                     {formatDateTime(chat?.createdAt).split(' ')[1]}
