@@ -15,19 +15,27 @@ import DateTimeInput from '../../Component/DateTimeInput';
 import {group_category} from './Home';
 import BannerPicker from '../../Component/BannerPicker';
 import Typography from '../../Component/Typography';
+import MessageBox from '../../Component/MessageBox';
 
 const GroupCreate = ({navigation}) => {
-  const [selectedCity, setSelectedCity] = useState('');
-  const [selectedDistrict, setSelectedDistrict] = useState('');
+  const [selectedCity, setSelectedCity] = useState(null);
+  const [selectedDistrict, setSelectedDistrict] = useState(null);
   const [matchPlace, setPlace] = useState('');
   const [selectedMatch, setSelectedMatch] = useState('머글(식사, 취미) 모임');
 
-  const [matchName, setMatchName] = useState('');
-  const [matchTarget, setMatchTarget] = useState('');
+  const [matchName, setMatchName] = useState(null);
+  const [matchTarget, setMatchTarget] = useState(null);
   const [matchPersonnel, setMatchPersonnel] = useState(0);
   const [matchDateTime, setMatchDateTime] = useState(new Date());
   const [matchPrice, setMatchPrice] = useState('나누기');
-  const [matchImage, setMatchImage] = useState('');
+  const [matchImage, setMatchImage] = useState(null);
+
+  const [message, setMessage] = useState({
+    mode: 'error',
+    isView: false,
+    message: '',
+    type: '',
+  });
 
   const matchProps = ['나누기', '회비 없음', '직접 입력'];
 
@@ -46,38 +54,52 @@ const GroupCreate = ({navigation}) => {
     setSelectedDistrict(value);
   };
 
+  const confirmCreate = () => {
+    setMessage({
+      mode: 'confirm',
+      isView: true,
+      message: '모임를 생성하시겠습니까?',
+      type: 'success',
+    });
+  };
+
   const createGroup = async () => {
+    let message;
     if (!auth().currentUser) {
-      alert('회원만 모임을 생성할 수 있습니다.');
-      return;
+      message = '회원만 모임을 생성할 수 있습니다.';
+    }
+    if (!matchImage) {
+      message = '모임 이미지를 선택하세요.';
     }
     if (!selectedCity || !selectedDistrict) {
-      alert('지역을 선택하세요.');
-      return;
+      message = '지역을 선택하세요.';
     }
     if (!selectedMatch) {
-      alert('모임종류를 선택하세요.');
-      return;
+      message = '모임종류를 선택하세요.';
     }
     if (!matchName) {
-      alert('모임 이름을 입력하세요.');
-      return;
+      message = '모임 이름을 입력하세요.';
     }
     if (!matchDateTime) {
-      alert('모임 시간을 입력하세요.');
-      return;
+      message = '모임 시간을 입력하세요.';
     }
     if (!matchTarget) {
-      alert('모임 목표를 입력하세요.');
-      return;
+      message = '모임 목표를 입력하세요.';
     }
     if (!matchPersonnel) {
-      alert('모임 정원을 입력하세요.');
-      return;
+      message = '모임 정원을 입력하세요.';
     }
 
     if (matchPersonnel > 30) {
-      alert('30명 이하로 입력하세요.');
+      message = '30명 이하로 입력하세요.';
+    }
+
+    if (message) {
+      setMessage({
+        mode: 'error',
+        isView: true,
+        message: message,
+      });
       return;
     }
 
@@ -124,6 +146,22 @@ const GroupCreate = ({navigation}) => {
 
   return (
     <View style={[styles.screenStyle, styles.spaceBetween]}>
+      {message.isView && (
+        <MessageBox
+          visible={message.isView}
+          message={message.message}
+          mode={message.mode}
+          onCancel={() =>
+            setMessage({mode: 'error', isView: false, message: ''})
+          }
+          onOK={() => {
+            if (message.type === 'success') {
+              createGroup();
+            }
+            setMessage({mode: 'error', isView: false, message: ''});
+          }}
+        />
+      )}
       <ScrollView style={styles.scrollViewStyle}>
         <View style={{width: '100%', gap: 15, padding: 20}}>
           <View style={styles.columnBox}>
@@ -286,7 +324,7 @@ const GroupCreate = ({navigation}) => {
           </View>
         </View>
         <View style={styles.buttonBox}>
-          <TouchableOpacity style={styles.button} onPress={createGroup}>
+          <TouchableOpacity style={styles.button} onPress={confirmCreate}>
             <Typography size="lg" bold>
               모임 만들기
             </Typography>

@@ -40,8 +40,14 @@ const styles = StyleSheet.create({
   },
 
   // Font
-  contentTitle: {color: 'black', fontSize: 15, fontWeight: '600'},
+  contentTitle: {
+    fontFamily: font_family,
+    color: 'black',
+    fontSize: 15,
+    fontWeight: '600',
+  },
   contentText: {
+    fontFamily: font_family,
     fontSize: 16,
     fontWeight: '400',
     color: 'rgba(187, 187, 187, 1)',
@@ -58,7 +64,7 @@ const styles = StyleSheet.create({
   buttonText: {
     fontSize: 18,
     color: 'black',
-    fontWeight: 'bold',
+    fontWeight: '900',
   },
   genderbuttonText: {
     color: 'gray',
@@ -68,6 +74,7 @@ const styles = StyleSheet.create({
     color: 'rgba(255, 99, 79, 1)', // 선택된 상태의 버튼 텍스트 색
   },
   boxTitleFont: {
+    fontFamily: font_family,
     fontSize: 16,
     fontWeight: 'bold',
     color: 'black',
@@ -76,7 +83,12 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: 'rgba(153, 153, 153, 1)',
   },
-  dayText: {fontSize: 12, color: 'rgba(255, 99, 79, 1)', fontWeight: 'bold'},
+  dayText: {
+    fontFamily: font_family,
+    fontSize: 12,
+    color: 'rgba(255, 99, 79, 1)',
+    fontWeight: 'bold',
+  },
 
   // Image
   cardImage: {
@@ -407,6 +419,7 @@ export const whiteAlpha800 = 'rgba(255, 255, 255, 0.8)';
 export const whiteAlpha900 = 'rgba(255, 255, 255, 0.92)';
 
 export const font_family = 'S-CoreDream-4Regular';
+export const font_family_bold = 'S-CoreDream-6Bold';
 
 // typograpy
 export const fs_2xs = 10;

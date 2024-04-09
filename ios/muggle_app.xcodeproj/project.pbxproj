@@ -16,6 +16,7 @@
 		B28A2A9917DE724CDC0EFCED /* Pods_muggle_app_muggle_appTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3BA39644D0DC0937B2742391 /* Pods_muggle_app_muggle_appTests.framework */; };
 		B2AD86D42BA3535300C6DB27 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B2AD86D32BA3535300C6DB27 /* GoogleService-Info.plist */; };
 		FE5FC89D2AB2372EA8A08130 /* Pods_muggle_app.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 67C19231366781BA4BEE6D2E /* Pods_muggle_app.framework */; };
+		7927FA20BAFF4983A2722B2E /* S-CoreDream-6Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 37F9F2D5181D47FB9BFDFF28 /* S-CoreDream-6Bold.otf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +49,7 @@
 		C0AA1424160F60119D7D8437 /* Pods-muggle_app-muggle_appTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-muggle_app-muggle_appTests.debug.xcconfig"; path = "Target Support Files/Pods-muggle_app-muggle_appTests/Pods-muggle_app-muggle_appTests.debug.xcconfig"; sourceTree = "<group>"; };
 		D16C3B1FADE6B7F0897AED28 /* Pods-muggle_app-muggle_appTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-muggle_app-muggle_appTests.release.xcconfig"; path = "Target Support Files/Pods-muggle_app-muggle_appTests/Pods-muggle_app-muggle_appTests.release.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
+		37F9F2D5181D47FB9BFDFF28 /* S-CoreDream-6Bold.otf */ = {isa = PBXFileReference; name = "S-CoreDream-6Bold.otf"; path = "../src/assets/fonts/S-CoreDream-6Bold.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -158,6 +160,7 @@
 			isa = PBXGroup;
 			children = (
 				875A4B8A90F7427C9977C8C2 /* S-CoreDream-4Regular.otf */,
+				37F9F2D5181D47FB9BFDFF28 /* S-CoreDream-6Bold.otf */,
 			);
 			name = Resources;
 			path = "";
@@ -261,6 +264,7 @@
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				B2AD86D42BA3535300C6DB27 /* GoogleService-Info.plist in Resources */,
 				4DC52F488DD443A7BA94277E /* S-CoreDream-4Regular.otf in Resources */,
+				7927FA20BAFF4983A2722B2E /* S-CoreDream-6Bold.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

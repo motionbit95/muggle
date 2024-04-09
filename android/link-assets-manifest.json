@@ -4,6 +4,10 @@
     {
       "path": "src/assets/fonts/S-CoreDream-4Regular.otf",
       "sha1": "e6378dc3d63ca129425e562f909f43b1fc66b589"
+    },
+    {
+      "path": "src/assets/fonts/S-CoreDream-6Bold.otf",
+      "sha1": "f58b1d53ee5815f4a1a762b0d536bb4c28249f73"
     }
   ]
 }

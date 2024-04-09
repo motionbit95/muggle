@@ -24,8 +24,15 @@ import styles, {
 } from '../../style/styles';
 import auth from '@react-native-firebase/auth';
 import Typography from '../../Component/Typography';
+import MessageBox from '../../Component/MessageBox';
 
 const SignUp = ({navigation}) => {
+  const [message, setMessage] = useState({
+    mode: 'error',
+    isView: false,
+    message: '',
+    type: '',
+  });
   const [userName, serUserName] = useState('');
   const [userPrice, setUserPrice] = useState('');
 
@@ -89,32 +96,65 @@ const SignUp = ({navigation}) => {
 
   const handleSignup = () => {
     if (!userName) {
-      alert('회원 이름을 입력하세요.');
+      setMessage({
+        mode: 'error',
+        isView: true,
+        message: '사용자 이름를 입력하세요.',
+      });
+      return;
+    }
+
+    if (!userInfo) {
+      setMessage({
+        mode: 'error',
+        isView: true,
+        message: '소개말을 입력하세요.',
+      });
       return;
     }
 
     if (!selectedGender) {
-      alert('성별을 선택하세요.');
+      setMessage({
+        mode: 'error',
+        isView: true,
+        message: '성별을 선택하세요.',
+      });
       return;
     }
 
     if (!selectyear || !selectmonth || !selectday) {
-      alert('생년월일을 선택하세요.');
-      return;
-    }
-
-    if (!selectedCity || !selectedDistrict) {
-      alert('지역을 선택하세요.');
+      setMessage({
+        mode: 'error',
+        isView: true,
+        message: '생년월일을 선택하세요.',
+      });
       return;
     }
 
     if (!userPrice) {
-      alert('매칭권 금액을 입력하세요.');
+      setMessage({
+        mode: 'error',
+        isView: true,
+        message: '매칭권 금액을 입력하세요.',
+      });
       return;
     }
 
     if (userPrice < 2) {
-      alert('매칭권 금액을 2만원 이상으로 입력하세요.');
+      setMessage({
+        mode: 'error',
+        isView: true,
+        message: '매칭권 금액을 2만원 이상으로 설정하세요.',
+      });
+      return;
+    }
+
+    if (!selectedCity || !selectedDistrict) {
+      setMessage({
+        mode: 'error',
+        isView: true,
+        message: '지역을 선택하세요.',
+      });
       return;
     }
 
@@ -137,6 +177,19 @@ const SignUp = ({navigation}) => {
 
   return (
     <View style={styles.screenStyle}>
+      {message.isView && (
+        <MessageBox
+          visible={message.isView}
+          message={message.message}
+          mode={message.mode}
+          onCancel={() =>
+            setMessage({mode: 'error', isView: false, message: ''})
+          }
+          onOK={() => {
+            setMessage({mode: 'error', isView: false, message: ''});
+          }}
+        />
+      )}
       <SafeAreaView style={{width: '100%'}}>
         <ScrollView style={styles.scrollViewStyle}>
           <View style={{width: '100%', gap: 15, padding: 20}}>

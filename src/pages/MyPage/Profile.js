@@ -221,8 +221,6 @@ const Profile = ({navigation, route}) => {
         },
       },
     });
-
-    // Alert.alert('확인', '프로필이 수정되었습니다.', [
     //   {
     //     text: '확인',
     //     onPress: () =>

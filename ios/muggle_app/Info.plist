@@ -103,6 +103,7 @@
 	<key>UIAppFonts</key>
 	<array>
 		<string>S-CoreDream-4Regular.otf</string>
+		<string>S-CoreDream-6Bold.otf</string>
 	</array>
 </dict>
 </plist>
