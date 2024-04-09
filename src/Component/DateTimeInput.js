@@ -65,7 +65,7 @@ const DateTimeInput = props => {
               value={dateTime}
               mode={mode} // 날짜와 시간을 함께 선택
               is24Hour={true} // 24시간 표시 여부
-              display="default" // 기본 시간 선택기 사용
+              display="spinner" // 기본 시간 선택기 사용
               onChange={onChange}
             />
           )}
