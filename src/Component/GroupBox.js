@@ -77,8 +77,10 @@ const GroupBox = ({item, index, myInfo, navigation}) => {
             );
           }}>
           <View style={[flex_row, justify_between]}>
-            <View style={[sp_1, justify_center]}>
-              <Typography bold>{item.group_name}</Typography>
+            <View style={[sp_1, justify_center, {maxWidth: '70%'}]}>
+              <Typography bold numberOfLines={1}>
+                {item.group_name}
+              </Typography>
               <View style={[flex_row, align_center, sp_2]}>
                 <Typography size={'sm'} light bold>
                   {formatDateTime(item.group_time)}

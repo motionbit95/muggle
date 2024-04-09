@@ -279,10 +279,26 @@ const User = ({navigation, route}) => {
               <TouchableOpacity
                 style={styles.TouchButtonStyle}
                 onPress={() =>
+                  navigation.navigate('마이', {
+                    screen: '활동내역',
+                    params: {myInfo: myInfo},
+                  })
+                }>
+                <View style={styles.rowBox}>
+                  <Image source={require('../../assets/icons/Order.png')} />
+                  <Typography>활동내역</Typography>
+                </View>
+                <Image source={require('../../assets/rightarrow.png')} />
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={styles.TouchButtonStyle}
+                onPress={() =>
                   navigation.navigate('매칭', {screen: '매칭내역'})
                 }>
                 <View style={styles.rowBox}>
-                  <Image source={require('../../assets/menuicon1.png')} />
+                  <Image
+                    source={require('../../assets/icons/User_add_alt.png')}
+                  />
                   <Typography>매칭내역</Typography>
                 </View>
                 <Image source={require('../../assets/rightarrow.png')} />
@@ -291,109 +307,8 @@ const User = ({navigation, route}) => {
                 style={styles.TouchButtonStyle}
                 onPress={() => navigation.navigate('마이', {screen: '알림'})}>
                 <View style={styles.rowBox}>
-                  <Image source={require('../../assets/menuicon1.png')} />
+                  <Image source={require('../../assets/icons/Bell.png')} />
                   <Typography>알림설정</Typography>
-                </View>
-                <Image source={require('../../assets/rightarrow.png')} />
-              </TouchableOpacity>
-              <TouchableOpacity
-                style={styles.TouchButtonStyle}
-                onPress={() =>
-                  navigation.navigate('마이', {screen: '자주묻는질문'})
-                }>
-                <View style={styles.rowBox}>
-                  <Image source={require('../../assets/menuicon1.png')} />
-                  <Typography>자주묻는질문</Typography>
-                </View>
-                <Image source={require('../../assets/rightarrow.png')} />
-              </TouchableOpacity>
-              <TouchableOpacity
-                style={styles.TouchButtonStyle}
-                onPress={() =>
-                  navigation.navigate('마이', {
-                    screen: '활동내역',
-                    params: {myInfo: myInfo},
-                  })
-                }>
-                <View style={styles.rowBox}>
-                  <Image source={require('../../assets/menuicon1.png')} />
-                  <Typography>활동내역</Typography>
-                </View>
-                <Image source={require('../../assets/rightarrow.png')} />
-              </TouchableOpacity>
-              <PopupBase
-                button={
-                  <View style={styles.TouchButtonStyle}>
-                    <View style={styles.rowBox}>
-                      <Image source={require('../../assets/menuicon1.png')} />
-                      <Typography>이용약관</Typography>
-                    </View>
-                    <Image source={require('../../assets/rightarrow.png')} />
-                  </View>
-                }>
-                {Platform.OS === 'ios' ? (
-                  <WebView
-                    source={{
-                      uri: 'https://muggle.life/terms',
-                    }} // 표시할 웹 페이지의 URL
-                    style={{
-                      width: Dimensions.get('window').width,
-                      height: Dimensions.get('window').height,
-                    }}
-                  />
-                ) : (
-                  <View style={p_3}>
-                    <RenderHtml
-                      contentWidth={Dimensions.get('window').width}
-                      source={{html: terms}}
-                    />
-                  </View>
-                )}
-              </PopupBase>
-              <PopupBase
-                button={
-                  <View style={styles.TouchButtonStyle}>
-                    <View style={styles.rowBox}>
-                      <Image source={require('../../assets/menuicon1.png')} />
-                      <Typography>개인정보 처리방침</Typography>
-                    </View>
-                    <Image source={require('../../assets/rightarrow.png')} />
-                  </View>
-                }>
-                {Platform.OS === 'ios' ? (
-                  <WebView
-                    source={{
-                      uri: 'https://muggle.life/privacy',
-                    }} // 표시할 웹 페이지의 URL
-                    style={{
-                      width: Dimensions.get('window').width,
-                      height: Dimensions.get('window').height,
-                    }}
-                  />
-                ) : (
-                  <View style={p_3}>
-                    <RenderHtml
-                      contentWidth={Dimensions.get('window').width}
-                      source={{html: privacy}}
-                    />
-                  </View>
-                )}
-              </PopupBase>
-              <TouchableOpacity
-                style={styles.TouchButtonStyle}
-                onPress={onLogout}>
-                <View style={styles.rowBox}>
-                  <Image source={require('../../assets/menuicon1.png')} />
-                  <Typography>로그아웃</Typography>
-                </View>
-                <Image source={require('../../assets/rightarrow.png')} />
-              </TouchableOpacity>
-              <TouchableOpacity
-                style={styles.TouchButtonStyle}
-                onPress={onDeleteUser}>
-                <View style={styles.rowBox}>
-                  <Image source={require('../../assets/menuicon1.png')} />
-                  <Typography>탈퇴하기</Typography>
                 </View>
                 <Image source={require('../../assets/rightarrow.png')} />
               </TouchableOpacity>
