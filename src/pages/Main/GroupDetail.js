@@ -1,26 +1,47 @@
 import React, {useEffect, useState} from 'react';
 import {
+  Alert,
   Button,
   Image,
+  Modal,
   ScrollView,
+  StyleSheet,
   Text,
   TouchableOpacity,
   View,
 } from 'react-native';
 import styles, {
+  align_center,
+  align_end,
   blackAlpha500,
   blackAlpha900,
+  btn_normal,
+  btn_primary,
+  btn_secondary,
   center,
+  f_full,
+  flex_column,
   flex_row,
   fs_md,
   fw_bold,
   img_md,
   img_sm,
+  justify_center,
+  justify_end,
   p_2,
+  p_3,
+  p_4,
+  p_5,
+  p_6,
   radius_lg,
+  radius_md,
   radius_sm,
   radius_xl,
+  sp_1,
+  sp_2,
   sp_3,
+  sp_4,
+  sp_6,
   w_full,
 } from '../../style/styles';
 import {
@@ -36,15 +57,26 @@ import {
 import auth from '@react-native-firebase/auth';
 import {singleQuery, updateDocument} from '../../firebase/firebase_func';
 import Typography from '../../Component/Typography';
+import MessageBox from '../../Component/MessageBox';
 
 const GroupDetail = ({navigation, route}) => {
   const {data, userList} = route.params ? route.params : {data: null};
+  const [openModal, setOpenModal] = useState(false);
+  const [isPoint, setIsPoint] = useState(false);
+  const [inAppIndex, setInAppIndex] = useState(0);
   // console.log(data ? data : 'no data');
   // 디데이 계산 및 표시
   var dday = calculateDday(formatDate(data?.group_time));
   const [myInfo, setMyInfo] = useState(null);
   const [icon, setIcon] = useState(require('../../assets/icons/heart.png'));
   const [groupUsers, setGroupUsers] = useState([]);
+
+  const [message, setMessage] = useState({
+    mode: 'error',
+    isView: false,
+    message: '',
+    type: '',
+  });
 
   useEffect(() => {
     const getUserInfo = async user => {
@@ -109,7 +141,12 @@ const GroupDetail = ({navigation, route}) => {
 
   const handleEnterGroup = async () => {
     if (!auth().currentUser) {
-      alert('회원만 모임에 참가할 수 있습니다.');
+      setMessage({
+        mode: 'error',
+        isView: true,
+        message: '회원만 모임에 참여할 수 있습니다.',
+        type: 'login',
+      });
       return;
     }
 
@@ -137,6 +174,21 @@ const GroupDetail = ({navigation, route}) => {
 
   return (
     <View style={styles.screenStyle}>
+      {message.isView && (
+        <MessageBox
+          visible={message.isView}
+          mode={message.mode}
+          message={message.message}
+          onCancel={() => setMessage({mode: '', isView: false, message: ''})}
+          onOK={async () => {
+            // 메세지 박스 닫기
+            if (message.type === 'success') {
+              handleEnterGroup();
+            }
+            setMessage({mode: '', isView: false, message: ''});
+          }}
+        />
+      )}
       <ScrollView style={styles.scrollViewStyle}>
         <Image
           source={{uri: data?.group_image}}
@@ -297,6 +349,7 @@ const GroupDetail = ({navigation, route}) => {
                 }}>
                 {groupUsers?.map((user, index) => (
                   <TouchableOpacity
+                    key={index}
                     onPress={() =>
                       navigation.navigate('모임', {
                         screen: '유저',
@@ -342,7 +395,10 @@ const GroupDetail = ({navigation, route}) => {
       <View style={[styles.buttonBox, styles.rowBox]}>
         <TouchableOpacity
           style={[styles.button, {flex: 1}]}
-          onPress={handleEnterGroup}>
+          onPress={() => {
+            setIsPoint(false);
+            setOpenModal(true);
+          }}>
           <Typography size="lg" bold white>
             참여하기
             {/* {data?.group_users.includes(auth().currentUser.uid)
@@ -353,6 +409,203 @@ const GroupDetail = ({navigation, route}) => {
         <TouchableOpacity onPress={() => handleGoods(data.doc_id)}>
           <Image source={icon} style={img_md} />
         </TouchableOpacity>
+        <Modal visible={openModal} animationType="fade" transparent={true}>
+          <View
+            style={[
+              w_full,
+              align_end,
+              justify_end,
+              {flex: 1, backgroundColor: 'rgba(0,0,0,0.5)'},
+            ]}>
+            <View
+              style={[
+                w_full,
+                flex_column,
+                justify_end,
+                align_end,
+                p_6,
+                {
+                  backgroundColor: 'white',
+                  borderTopLeftRadius: 20,
+                  borderTopRightRadius: 20,
+                },
+              ]}>
+              <TouchableOpacity onPress={() => setOpenModal(false)}>
+                <Image
+                  source={require('../../assets/icons/_x.png')}
+                  style={[img_sm, {opacity: 0.5}]}
+                />
+              </TouchableOpacity>
+              {isPoint ? (
+                <View style={[w_full, sp_3]}>
+                  <Typography size="xl" bold>
+                    참여 신청하시겠어요?
+                  </Typography>
+                  <Typography light>하트를 구매해 참여할 수 있어요.</Typography>
+                  <View style={[w_full, flex_row, sp_2]}>
+                    <TouchableOpacity
+                      onPress={() => setInAppIndex(0)}
+                      style={[
+                        radius_md,
+                        center,
+                        sp_6,
+                        p_3,
+                        {
+                          backgroundColor:
+                            inAppIndex === 0 ? '#f1f1f1' : 'white',
+                          borderWidth: inAppIndex === 0 ? 2 : 1,
+                          borderColor: inAppIndex === 0 ? '#8c8c8c' : '#d9d9d9',
+                          flex: 1,
+                        },
+                      ]}>
+                      <View style={[center, sp_6]}>
+                        <View style={[flex_row, align_center, justify_center]}>
+                          <Image
+                            style={img_md}
+                            source={require('../../assets/icons/heart_fill.png')}
+                          />
+                          <Typography bold size="3xl">
+                            180
+                          </Typography>
+                        </View>
+                        <View>
+                          <Typography bold size="lg">
+                            {'₩8,800'}
+                          </Typography>
+                        </View>
+                      </View>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                      onPress={() => setInAppIndex(1)}
+                      style={[
+                        radius_md,
+                        center,
+                        sp_6,
+                        p_3,
+                        {
+                          backgroundColor:
+                            inAppIndex === 1 ? '#f1f1f1' : 'white',
+                          borderWidth: inAppIndex === 1 ? 2 : 1,
+                          borderColor: inAppIndex === 1 ? '#8c8c8c' : '#d9d9d9',
+                          flex: 1,
+                        },
+                      ]}>
+                      <View style={[center, sp_6]}>
+                        <View style={[flex_row, align_center, justify_center]}>
+                          <Image
+                            style={img_md}
+                            source={require('../../assets/icons/heart_fill.png')}
+                          />
+                          <Typography bold size="3xl">
+                            550
+                          </Typography>
+                        </View>
+                        <View>
+                          <Typography bold size="lg">
+                            {'₩22,000'}
+                          </Typography>
+                        </View>
+                      </View>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                      onPress={() => setInAppIndex(2)}
+                      style={[
+                        radius_md,
+                        center,
+                        sp_6,
+                        p_3,
+                        {
+                          backgroundColor:
+                            inAppIndex === 2 ? '#f1f1f1' : 'white',
+                          borderWidth: inAppIndex === 2 ? 2 : 1,
+                          borderColor: inAppIndex === 2 ? '#8c8c8c' : '#d9d9d9',
+                          flex: 1,
+                        },
+                      ]}>
+                      <View style={[center, sp_6]}>
+                        <View style={[flex_row, align_center, justify_center]}>
+                          <Image
+                            style={img_md}
+                            source={require('../../assets/icons/heart_fill.png')}
+                          />
+                          <Typography bold size="3xl">
+                            1000
+                          </Typography>
+                        </View>
+                        <View>
+                          <Typography bold size="lg">
+                            {'₩39,000'}
+                          </Typography>
+                        </View>
+                      </View>
+                    </TouchableOpacity>
+                  </View>
+                  <TouchableOpacity
+                    style={btn_primary}
+                    onPress={() => {
+                      setOpenModal(false);
+                      setMessage({
+                        mode: 'error',
+                        isView: true,
+                        message:
+                          '스토어 앱 등록 후 확인 가능합니다. 확인 클릭 시 채팅방으로 이동',
+                        type: 'success',
+                      });
+                    }}>
+                    <View
+                      style={[flex_row, sp_1, align_center, justify_center]}>
+                      <Typography bold white size="lg">
+                        즉시 구매하기
+                      </Typography>
+                    </View>
+                  </TouchableOpacity>
+                  <TouchableOpacity
+                    style={btn_secondary}
+                    onPress={() => setOpenModal(false)}>
+                    <View
+                      style={[flex_row, sp_1, align_center, justify_center]}>
+                      <Typography size="md" light>
+                        다음에 하기
+                      </Typography>
+                    </View>
+                  </TouchableOpacity>
+                </View>
+              ) : (
+                <View style={[w_full, sp_3]}>
+                  <Typography size="xl" bold>
+                    참여 신청하시겠어요?
+                  </Typography>
+                  <Typography light>
+                    상대에게 내 프로필이 공개되며, 참여 신청 후 1:1 채팅방으로
+                    연결됩니다.
+                  </Typography>
+                  <TouchableOpacity
+                    style={btn_primary}
+                    onPress={() => {
+                      // 여기서 포인트 있는지 없는지 검사
+                      setIsPoint(true);
+                    }}>
+                    <View
+                      style={[flex_row, sp_1, align_center, justify_center]}>
+                      <Typography bold white size="lg">
+                        참여신청
+                      </Typography>
+                      <View style={[flex_row, align_center, justify_center]}>
+                        <Image
+                          style={[img_sm, {opacity: 0.5}]}
+                          source={require('../../assets/icons/heart_fill_black.png')}
+                        />
+                        <Typography size="sm" light>
+                          40
+                        </Typography>
+                      </View>
+                    </View>
+                  </TouchableOpacity>
+                </View>
+              )}
+            </View>
+          </View>
+        </Modal>
       </View>
     </View>
   );
