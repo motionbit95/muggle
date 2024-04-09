@@ -143,7 +143,7 @@ const App = () => {
           //       }>
           //       <Image
           //         style={{width: 24, height: 24}}
-          //         source={require('./src/assets/icons/heart_fill_black.png')}
+          //         source={require('./src/assets/icons/heart_black.png')}
           //       />
           //     </TouchableOpacity>
           //     <TouchableOpacity
