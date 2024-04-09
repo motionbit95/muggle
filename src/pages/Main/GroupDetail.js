@@ -17,7 +17,10 @@ import styles, {
   img_md,
   img_sm,
   p_2,
+  radius_lg,
   radius_sm,
+  radius_xl,
+  sp_3,
   w_full,
 } from '../../style/styles';
 import {
@@ -28,6 +31,7 @@ import {
   defaultMale,
   defaultFemale,
   primary_color,
+  getDisplayAge,
 } from '../../firebase/api';
 import auth from '@react-native-firebase/auth';
 import {singleQuery, updateDocument} from '../../firebase/firebase_func';
@@ -136,7 +140,7 @@ const GroupDetail = ({navigation, route}) => {
       <ScrollView style={styles.scrollViewStyle}>
         <Image
           source={{uri: data?.group_image}}
-          style={[styles.banner, {backgroundColor: '#d9d9d9'}]}
+          style={[radius_xl, styles.banner, {backgroundColor: '#d9d9d9'}]}
         />
         <View style={styles.contentStyle}>
           <View
@@ -149,130 +153,205 @@ const GroupDetail = ({navigation, route}) => {
               <Typography bold size="lg">
                 {data?.group_name}
               </Typography>
-              <View
-                style={[
-                  radius_sm,
-                  {
-                    backgroundColor: primary_color,
-                    paddingHorizontal: 5,
-                    paddingVertical: 3,
-                  },
-                ]}>
-                <Typography white>{displayDday(dday)}</Typography>
-              </View>
+              {data?.group_type !== '일상 모임' && (
+                <View
+                  style={[
+                    radius_sm,
+                    {
+                      backgroundColor: primary_color,
+                      paddingHorizontal: 5,
+                      paddingVertical: 3,
+                    },
+                  ]}>
+                  <Typography white>{displayDday(dday)}</Typography>
+                </View>
+              )}
             </View>
-            <View style={styles.gap10}>
-              <View style={styles.rowBox}>
-                <Image
-                  style={img_sm}
-                  source={require('../../assets/icons/calendar.png')}
-                />
-                <Typography>{formatDateTime(data?.group_time)}</Typography>
+            {data?.group_type !== '일상 모임' ? (
+              <View style={styles.gap10}>
+                <View style={styles.rowBox}>
+                  <Image
+                    style={img_sm}
+                    source={require('../../assets/icons/calendar.png')}
+                  />
+                  <Typography>{formatDateTime(data?.group_time)}</Typography>
+                </View>
+                <View style={styles.rowBox}>
+                  <Image
+                    style={img_sm}
+                    source={require('../../assets/icons/map.png')}
+                  />
+                  <Typography>{data?.group_place}</Typography>
+                </View>
+                <View style={styles.rowBox}>
+                  <Image
+                    style={img_sm}
+                    source={require('../../assets/icons/money.png')}
+                  />
+                  <Typography>
+                    {data?.group_price ? data?.group_price : '나누기'}
+                  </Typography>
+                </View>
+                <View style={styles.rowBox}>
+                  <Image
+                    style={img_sm}
+                    source={require('../../assets/icons/user.png')}
+                  />
+                  <Typography>
+                    {data?.group_users?.length} / {data?.group_personnel} (
+                    {data?.group_personnel - data?.group_users?.length}자리
+                    남음)
+                  </Typography>
+                </View>
               </View>
-              <View style={styles.rowBox}>
-                <Image
-                  style={img_sm}
-                  source={require('../../assets/icons/map.png')}
-                />
-                <Typography>{data?.group_place}</Typography>
+            ) : (
+              <View style={styles.gap10}>
+                <View style={styles.rowBox}>
+                  <Image
+                    style={img_sm}
+                    source={require('../../assets/icons/map.png')}
+                  />
+                  <Typography>{data?.group_place}</Typography>
+                </View>
               </View>
-
-              <View style={styles.rowBox}>
-                <Image
-                  style={img_sm}
-                  source={require('../../assets/icons/money.png')}
-                />
-                <Typography>
-                  {data?.group_price ? data?.group_price : '나누기'}
-                </Typography>
-              </View>
-              <View style={styles.rowBox}>
-                <Image
-                  style={img_sm}
-                  source={require('../../assets/icons/user.png')}
-                />
-                <Typography>
-                  {data?.group_users?.length} / {data?.group_personnel} (
-                  {data?.group_personnel - data?.group_users?.length}자리 남음)
-                </Typography>
-              </View>
-            </View>
+            )}
 
             <View style={{flex: 1}}>
               <Typography>{data?.group_target}</Typography>
             </View>
             <View style={styles.hr} />
           </View>
-          <View
-            style={{
-              width: '100%',
-              flex: 1,
-              paddingTop: 20,
-              gap: 20,
-            }}>
-            <View>
-              <Typography bold>
-                참여인원 ( {data?.group_users?.length} )
-              </Typography>
-            </View>
+
+          {data?.group_type !== '일상 모임' ? (
             <View
               style={{
-                rowGap: 20,
-                columnGap: 0,
-                flexDirection: 'row',
-                flexWrap: 'wrap',
+                width: '100%',
+                flex: 1,
+                paddingTop: 20,
+                gap: 20,
               }}>
-              {groupUsers?.map((user, index) => (
-                <TouchableOpacity
-                  onPress={() =>
-                    navigation.navigate('모임', {
-                      screen: '유저',
-                      params: {data: user, userList: userList},
-                    })
-                  }
-                  style={[styles.rowBox, {width: '50%'}]}>
-                  <View key={index} style={[flex_row, center]}>
-                    <Image
-                      source={{
-                        uri: user?.user_profile
-                          ? user?.user_profile
-                          : user?.user_gender === '남'
-                          ? defaultMale
-                          : defaultFemale,
-                        // ? user?.user_profile
-                        // : user?.user_gender === 'male' ||
-                        //   user?.user_gender === '남'
-                        // ? defaultMale
-                        // : defaultFemale,
-                      }}
-                      width={30}
-                      height={30}
-                      borderRadius={50}
-                    />
-                    <Typography black={user} light={!user}>
-                      {user ? user?.user_name : '탈퇴한 회원입니다.'}
-                    </Typography>
-                  </View>
-                </TouchableOpacity>
-              ))}
+              <View>
+                <Typography bold>
+                  참여인원 ( {data?.group_users?.length} )
+                </Typography>
+              </View>
+              <View
+                style={{
+                  rowGap: 20,
+                  columnGap: 0,
+                  flexDirection: 'row',
+                  flexWrap: 'wrap',
+                }}>
+                {groupUsers?.map((user, index) => (
+                  <TouchableOpacity
+                    onPress={() =>
+                      navigation.navigate('모임', {
+                        screen: '유저',
+                        params: {data: user, userList: userList},
+                      })
+                    }
+                    style={[styles.rowBox, {width: '50%'}]}>
+                    <View key={index} style={[flex_row, center]}>
+                      <Image
+                        source={{
+                          uri: user?.user_profile
+                            ? user?.user_profile
+                            : user?.user_gender === '남'
+                            ? defaultMale
+                            : defaultFemale,
+                          // ? user?.user_profile
+                          // : user?.user_gender === 'male' ||
+                          //   user?.user_gender === '남'
+                          // ? defaultMale
+                          // : defaultFemale,
+                        }}
+                        width={30}
+                        height={30}
+                        borderRadius={50}
+                      />
+                      <Typography black={user} light={!user}>
+                        {user ? user?.user_name : '탈퇴한 회원입니다.'}
+                      </Typography>
+                    </View>
+                  </TouchableOpacity>
+                ))}
+              </View>
             </View>
-          </View>
+          ) : (
+            <View
+              style={{
+                width: '100%',
+                flex: 1,
+                paddingTop: 20,
+                gap: 20,
+              }}>
+              <View>
+                <Typography bold>상대 프로필</Typography>
+              </View>
+              <View
+                style={{
+                  rowGap: 20,
+                  columnGap: 0,
+                  flexDirection: 'row',
+                  flexWrap: 'wrap',
+                }}>
+                {groupUsers?.map((user, index) => (
+                  <TouchableOpacity
+                    onPress={() =>
+                      navigation.navigate('모임', {
+                        screen: '유저',
+                        params: {data: user, userList: userList},
+                      })
+                    }
+                    style={[styles.rowBox, {width: '50%'}]}>
+                    <View key={index} style={[flex_row, sp_3, center]}>
+                      <Image
+                        source={{
+                          uri: user?.user_profile
+                            ? user?.user_profile
+                            : user?.user_gender === '남'
+                            ? defaultMale
+                            : defaultFemale,
+                          // ? user?.user_profile
+                          // : user?.user_gender === 'male' ||
+                          //   user?.user_gender === '남'
+                          // ? defaultMale
+                          // : defaultFemale,
+                        }}
+                        width={60}
+                        height={60}
+                        borderRadius={50}
+                      />
+                      <Typography black={user} light={!user}>
+                        {user
+                          ? user?.user_name +
+                            '(' +
+                            user?.user_gender +
+                            ') ' +
+                            getDisplayAge(user?.user_birth)
+                          : '탈퇴한 회원입니다.'}
+                      </Typography>
+                    </View>
+                  </TouchableOpacity>
+                ))}
+              </View>
+            </View>
+          )}
         </View>
       </ScrollView>
       <View style={[styles.buttonBox, styles.rowBox]}>
         <TouchableOpacity
-          style={{flex: 1}}
-          onPress={() => handleGoods(data.doc_id)}>
-          <Image source={icon} style={img_md} />
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={[styles.button, {flex: 5}]}
+          style={[styles.button, {flex: 1}]}
           onPress={handleEnterGroup}>
-          <Typography size="lg" bold>
-            {data?.group_users.includes(auth().currentUser.uid)
+          <Typography size="lg" bold white>
+            참여하기
+            {/* {data?.group_users.includes(auth().currentUser.uid)
               ? '채팅하기'
-              : '참여하기'}
+              : '참여하기'} */}
           </Typography>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => handleGoods(data.doc_id)}>
+          <Image source={icon} style={img_md} />
         </TouchableOpacity>
       </View>
     </View>

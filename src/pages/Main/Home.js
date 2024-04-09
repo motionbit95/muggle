@@ -230,7 +230,12 @@ const Home = ({navigation}) => {
     <View style={{backgroundColor: 'white'}}>
       <SafeAreaView>
         <View
-          style={[w_full, flex_row, justify_between, {paddingHorizontal: 20}]}>
+          style={[
+            w_full,
+            flex_row,
+            justify_between,
+            {marginTop: 10, paddingHorizontal: 20},
+          ]}>
           <Image
             source={require('../../assets/muggle.png')}
             style={{height: 25, width: 100}}
@@ -250,7 +255,7 @@ const Home = ({navigation}) => {
               }>
               <Image
                 style={{width: 24, height: 24}}
-                source={require('../../assets/icons/heart_fill_black.png')}
+                source={require('../../assets/icons/heart_black.png')}
               />
             </TouchableOpacity>
             <TouchableOpacity
@@ -276,6 +281,20 @@ const Home = ({navigation}) => {
               {paddingBottom: 0, backgroundColor: 'white'},
             ]}>
             <View style={[flex_row, sp_2]}>
+              <TouchableOpacity
+                onPress={() => {
+                  // setSelectedGroup('일상 모임');
+                  navigation.navigate('일상 모임', {myInfo: myInfo});
+                }}>
+                <View style={[under_button(selectedGroup === '일상 모임')]}>
+                  <Typography
+                    bold
+                    black={selectedGroup === '일상 모임'}
+                    light={selectedGroup !== '일상 모임'}>
+                    {'일상모임'}
+                  </Typography>
+                </View>
+              </TouchableOpacity>
               {group_category.map(
                 (category, index) =>
                   index !== 1 && (

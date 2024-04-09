@@ -53,6 +53,8 @@ import {
   f_full,
   flex_column,
   flex_row,
+  font_family,
+  font_family_bold,
   fs_sm,
   fs_xs,
   img_sm,
@@ -75,6 +77,7 @@ import Typography from './src/Component/Typography';
 import Alarm from './src/pages/MyPage/Alarm';
 import UserView from './src/pages/Main/UserView';
 import FAQ from './src/pages/MyPage/FAQ';
+import MatchingView from './src/pages/Main/MatchingView';
 
 const App = () => {
   // const isDarkMode = useColorScheme() === 'dark';
@@ -177,7 +180,8 @@ const App = () => {
           },
           headerTintColor: '#black',
           headerTitleStyle: {
-            fontWeight: 'bold',
+            // fontWeight: 'bold',
+            fontFamily: font_family_bold,
           },
         })}
       />
@@ -199,7 +203,7 @@ const App = () => {
           },
           headerTintColor: '#black',
           headerTitleStyle: {
-            fontWeight: 'bold',
+            fontFamily: font_family_bold,
           },
         })}
       />
@@ -213,7 +217,7 @@ const App = () => {
           },
           headerTintColor: '#black',
           headerTitleStyle: {
-            fontWeight: 'bold',
+            fontFamily: font_family_bold,
           },
         })}
       />
@@ -227,7 +231,36 @@ const App = () => {
           },
           headerTintColor: '#black',
           headerTitleStyle: {
-            fontWeight: 'bold',
+            fontFamily: font_family_bold,
+          },
+        })}
+      />
+      <HomeStack.Screen
+        name="일상 모임"
+        component={MatchingView}
+        options={({navigation}) => ({
+          title: '일상 모임',
+          headerStyle: {
+            backgroundColor: '#fff',
+          },
+          headerTintColor: '#black',
+          headerTitleStyle: {
+            fontFamily: font_family_bold,
+          },
+        })}
+      />
+
+      <HomeStack.Screen
+        name="일상모임생성"
+        component={GroupCreate}
+        options={({navigation}) => ({
+          title: '일상 모임 만들기',
+          headerStyle: {
+            backgroundColor: '#fff',
+          },
+          headerTintColor: '#black',
+          headerTitleStyle: {
+            fontFamily: font_family_bold,
           },
         })}
       />
@@ -273,7 +306,7 @@ const App = () => {
           },
           headerTintColor: '#black',
           headerTitleStyle: {
-            fontWeight: 'bold',
+            fontFamily: font_family_bold,
           },
         })}
       />
@@ -295,7 +328,7 @@ const App = () => {
           },
           headerTintColor: '#black',
           headerTitleStyle: {
-            fontWeight: 'bold',
+            fontFamily: font_family_bold,
           },
         })}
       />
@@ -330,7 +363,7 @@ const App = () => {
           },
           headerTintColor: '#black',
           headerTitleStyle: {
-            fontWeight: 'bold',
+            fontFamily: font_family_bold,
           },
         })}
       />
@@ -351,7 +384,7 @@ const App = () => {
           },
           headerTintColor: '#black',
           headerTitleStyle: {
-            fontWeight: 'bold',
+            fontFamily: font_family_bold,
           },
         })}
       />
