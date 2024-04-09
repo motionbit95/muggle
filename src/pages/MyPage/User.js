@@ -176,13 +176,15 @@ const User = ({navigation}) => {
                   {myInfo?.user_interest?.map((item, index) => (
                     <View
                       style={{
-                        paddingVertical: 5,
-                        paddingHorizontal: 8,
+                        paddingVertical: 3,
+                        paddingHorizontal: 4,
                         borderRadius: 30,
                         borderWidth: 1,
                         borderColor: 'white',
                       }}>
-                      <Typography white>{item}</Typography>
+                      <Typography size="sm" white>
+                        {item}
+                      </Typography>
                     </View>
                   ))}
                 </View>

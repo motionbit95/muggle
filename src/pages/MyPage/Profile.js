@@ -71,7 +71,9 @@ const Profile = ({navigation, route}) => {
     if (interest.includes(content)) {
       setInterest(interest.filter(item => item !== content));
     } else {
-      setInterest([...interest, content]);
+      if (interest.length < 3) {
+        setInterest([...interest, content]);
+      }
     }
   };
 
