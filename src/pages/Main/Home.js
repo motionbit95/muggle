@@ -264,7 +264,7 @@ const Home = ({navigation}) => {
           </View>
         </View>
         <ScrollView
-          style={[w_full, bg_body]}
+          style={[w_full]}
           ref={scrollViewRef}
           stickyHeaderIndices={[0]}>
           {/* TAB */}
@@ -306,7 +306,7 @@ const Home = ({navigation}) => {
             </View>
           </View>
           {/* ALERT */}
-          <View style={[w_full, p_4, sp_4]}>
+          <View style={[w_full, p_4, sp_4, bg_body]}>
             <View
               style={[
                 banner(true),
