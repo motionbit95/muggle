@@ -8,9 +8,18 @@ import styles, {
   blackAlpha900,
   btn_normal,
   btn_primary,
+  center,
   f_full,
   flex_column,
+  fs_lg,
+  fs_md,
+  img_lg,
+  img_md,
+  img_ml,
+  img_ml_2,
+  img_sm,
   radius_full,
+  radius_lg,
   sp_2,
 } from '../style/styles';
 import Typography from './Typography';
@@ -94,16 +103,40 @@ const BannerPicker = props => {
 
   return (
     <View style={(flex_column, sp_2)}>
-      <Image
-        style={[
-          // radius_full,
-          f_full,
-          {height: 150, backgroundColor: '#d9d9d9'},
-        ]}
-        source={imageUri ? {uri: imageUri} : null}
-      />
-      <TouchableOpacity style={btn_normal} onPress={handleChoosePhoto}>
-        <Typography>모임 배너 이미지 선택</Typography>
+      <TouchableOpacity onPress={handleChoosePhoto}>
+        {imageUri ? (
+          <Image
+            style={[
+              // radius_full,
+              radius_lg,
+              f_full,
+              {height: 150, backgroundColor: '#d9d9d9'},
+            ]}
+            source={imageUri ? {uri: imageUri} : null}
+          />
+        ) : (
+          <View
+            style={[
+              f_full,
+              center,
+              sp_2,
+              {
+                height: 150,
+                borderRadius: 10,
+                borderWidth: 2,
+                borderStyle: 'dashed',
+                marginBottom: 10,
+              },
+            ]}>
+            <Image
+              source={require('../assets/AiOutlinePicture.png')}
+              style={{width: 50, height: 50, opacity: 0.5}}
+            />
+            <Text style={{fontSize: fs_lg, opacity: 0.5}}>
+              우리 모임의 사진을 올려보세요.
+            </Text>
+          </View>
+        )}
       </TouchableOpacity>
     </View>
   );
