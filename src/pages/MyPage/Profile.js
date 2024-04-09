@@ -341,23 +341,28 @@ const Profile = ({navigation, route}) => {
               <Typography size="lg" bold>
                 나의 커피 매칭권 금액은?
               </Typography>
-              <View style={styles.contentBox}>
-                <View
+              <View
+                style={[
+                  flex_row,
+                  justify_center,
+                  align_center,
+                  styles.contentBox,
+                  {height: 50},
+                ]}>
+                <TextInput
+                  keyboardType="numeric"
                   style={[
-                    flex_row,
-                    justify_center,
-                    align_center,
-                    {height: 30},
-                  ]}>
-                  <TextInput
-                    keyboardType="numeric"
-                    style={[{color: blackAlpha900, fontSize: fs_md}]}
-                    placeholder="0"
-                    onChange={e => setUserPrice(e.nativeEvent.text)}
-                    defaultValue={userPrice}
-                  />
-                  <Typography>만원</Typography>
-                </View>
+                    {
+                      color: blackAlpha900,
+                      fontSize: fs_md,
+                      padding: 0,
+                    },
+                  ]}
+                  placeholder="0"
+                  onChange={e => setUserPrice(e.nativeEvent.text)}
+                  defaultValue={userPrice}
+                />
+                <Typography>만원</Typography>
               </View>
             </View>
             <View style={styles.columnBox}>
