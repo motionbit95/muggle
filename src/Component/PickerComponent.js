@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   Image,
   Modal,
@@ -20,6 +20,10 @@ const DropDown = ({items, ...props}) => {
     setOpenDropdown(false);
     props.onChangeValue(value);
   }
+
+  useEffect(() => {
+    setSelectedValue(props.defaultValue);
+  }, [props.defaultValue]);
 
   return (
     <View>
