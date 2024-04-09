@@ -49,7 +49,7 @@ const MatchBox = ({user, index, userList, navigation}) => {
       style={[img_xl, radius_lg]}>
       <LinearGradient colors={[blackAlpha100, blackAlpha700]} style={radius_lg}>
         <View style={[sp_3, justify_end, f_full, radius_lg, p_4]}>
-          <View
+          {/* <View
             style={[
               radius_full,
               flex_row,
@@ -66,7 +66,7 @@ const MatchBox = ({user, index, userList, navigation}) => {
             <Typography size={'sm'} white>
               근처
             </Typography>
-          </View>
+          </View> */}
 
           <View style={sp_1}>
             <Typography size={'lg'} white bold>

@@ -154,6 +154,85 @@ const Chat = ({navigation}) => {
     getUserGroups();
   }, []);
 
+  const ChoreRoute = () => {
+    return (
+      // 모임 채팅방 목록
+      <View style={[f_full]}>
+        {groups?.length === 0 && (
+          <View style={[f_full, center, flex_row, sp_2]}>
+            <Typography light>채팅 내역이 없어요</Typography>
+            <Image
+              style={img_sm}
+              source={require('../../assets/icons/BsChat.png')}
+            />
+          </View>
+        )}
+        {groups?.map(
+          (group, index) =>
+            group.group_type === '일상 모임' && (
+              <TouchableOpacity
+                key={index}
+                style={{
+                  backgroundColor: 'white',
+                  padding: 20,
+                  flexDirection: 'row',
+                  gap: 10,
+                  justifyContent: 'space-between',
+                  alignItems: 'center',
+                }}
+                // onPress={() => alert('채팅하겠습니까')}
+                onPress={() => {
+                  navigation.navigate('채팅', {
+                    screen: '채팅룸',
+                    params: {
+                      data: {
+                        ...group,
+                        group:
+                          group.group_type === '일상 모임'
+                            ? group?.doc_id +
+                              '_' +
+                              auth().currentUser.uid +
+                              '_' +
+                              group?.group_admin
+                            : group.doc_id,
+                      },
+                    },
+                  });
+                }}>
+                <View
+                  style={{flexDirection: 'row', gap: 10, alignItems: 'center'}}>
+                  <View>
+                    <View style={styles.Avartar50}>
+                      <Image
+                        style={[f_full, radius_full]}
+                        source={
+                          group
+                            ? {uri: group?.group_image}
+                            : require('../../assets/avartar.png')
+                        }
+                      />
+                    </View>
+                  </View>
+                  <View style={sp_1}>
+                    <Typography size="lg" bold>
+                      {group?.group_name}
+                    </Typography>
+                    <Typography light>{group?.group_place}</Typography>
+                  </View>
+                </View>
+                {/* <View style={flex_row}>
+                  <Typography red bold>
+                    {group?.group_users.length}{' '}
+                  </Typography>
+                  <Typography>/ {group?.group_personnel}</Typography>
+                </View> */}
+              </TouchableOpacity>
+            ),
+        )}
+      </View>
+    );
+  };
+
   const ClassRoute = () => {
     return (
       // 모임 채팅방 목록
@@ -167,62 +246,70 @@ const Chat = ({navigation}) => {
             />
           </View>
         )}
-        {groups?.map((group, index) => (
-          <TouchableOpacity
-            key={index}
-            style={{
-              backgroundColor: 'white',
-              padding: 20,
-              flexDirection: 'row',
-              gap: 10,
-              justifyContent: 'space-between',
-              alignItems: 'center',
-            }}
-            // onPress={() => alert('채팅하겠습니까')}
-            onPress={() => {
-              navigation.navigate('채팅', {
-                screen: '채팅룸',
-                params: {
-                  data: {
-                    ...group,
-                    group:
-                      group.group_type === '일상 모임'
-                        ? group?.doc_id +
-                          '_' +
-                          auth().currentUser.uid +
-                          '_' +
-                          group?.group_admin
-                        : group.doc_id,
-                  },
-                },
-              });
-            }}>
-            <View style={{flexDirection: 'row', gap: 10, alignItems: 'center'}}>
-              <View>
-                <View style={styles.Avartar50}>
-                  <Image
-                    style={[f_full, radius_full]}
-                    source={require('../../assets/avartar.png')}
-                  />
+        {groups?.map(
+          (group, index) =>
+            group.group_type === '원데이 클래스' && (
+              <TouchableOpacity
+                key={index}
+                style={{
+                  backgroundColor: 'white',
+                  padding: 20,
+                  flexDirection: 'row',
+                  gap: 10,
+                  justifyContent: 'space-between',
+                  alignItems: 'center',
+                }}
+                // onPress={() => alert('채팅하겠습니까')}
+                onPress={() => {
+                  navigation.navigate('채팅', {
+                    screen: '채팅룸',
+                    params: {
+                      data: {
+                        ...group,
+                        group:
+                          group.group_type === '일상 모임'
+                            ? group?.doc_id +
+                              '_' +
+                              auth().currentUser.uid +
+                              '_' +
+                              group?.group_admin
+                            : group.doc_id,
+                      },
+                    },
+                  });
+                }}>
+                <View
+                  style={{flexDirection: 'row', gap: 10, alignItems: 'center'}}>
+                  <View>
+                    <View style={styles.Avartar50}>
+                      <Image
+                        style={[f_full, radius_full]}
+                        source={
+                          group
+                            ? {uri: group?.group_image}
+                            : require('../../assets/avartar.png')
+                        }
+                      />
+                    </View>
+                  </View>
+                  <View style={sp_1}>
+                    <Typography size="lg" bold>
+                      {group?.group_name}
+                    </Typography>
+                    <Typography light>
+                      {formatDateTime(group?.group_time)}
+                    </Typography>
+                  </View>
                 </View>
-              </View>
-              <View style={sp_1}>
-                <Typography size="lg" bold>
-                  {group?.group_name}
-                </Typography>
-                <Typography light>
-                  {formatDateTime(group?.group_time)}
-                </Typography>
-              </View>
-            </View>
-            <View style={flex_row}>
-              <Typography red bold>
-                {group?.group_users.length}{' '}
-              </Typography>
-              <Typography>/ {group?.group_personnel}</Typography>
-            </View>
-          </TouchableOpacity>
-        ))}
+                <View style={flex_row}>
+                  <Typography red bold>
+                    {group?.group_users.length}{' '}
+                  </Typography>
+                  <Typography>/ {group?.group_personnel}</Typography>
+                </View>
+              </TouchableOpacity>
+            ),
+        )}
       </View>
     );
   };
@@ -248,14 +335,16 @@ const Chat = ({navigation}) => {
   };
 
   const renderScene = SceneMap({
-    Class: ClassRoute,
+    Chore: ChoreRoute,
     Matching: MatchingRoute,
+    Class: ClassRoute,
   });
 
   const [index, setIndex] = React.useState(0);
   const [routes] = React.useState([
-    {key: 'Class', title: '모임'},
-    {key: 'Matching', title: '매칭'},
+    {key: 'Chore', title: '일상'},
+    {key: 'Matching', title: '커피'},
+    {key: 'Class', title: '클래스'},
   ]);
 
   return (

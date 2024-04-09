@@ -1,7 +1,8 @@
 import React, {useEffect} from 'react';
-import {ScrollView, Text, View} from 'react-native';
-import {f_full, p_3} from '../../style/styles';
+import {Image, ScrollView, Text, View} from 'react-native';
+import {center, f_full, flex_row, img_sm, p_3, sp_2} from '../../style/styles';
 import GroupBox from '../../Component/GroupBox';
+import Typography from '../../Component/Typography';
 
 function GroupView({navigation, route}) {
   const {data, userList, title} = route.params
@@ -20,17 +21,24 @@ function GroupView({navigation, route}) {
   }, [data]);
 
   return (
-    <ScrollView style={[f_full, p_3]}>
-      {data?.map((item, index) => (
-        <GroupBox
-          key={index}
-          userList={userList}
-          index={index}
-          item={item}
-          navigation={navigation}
-        />
-      ))}
-    </ScrollView>
+    <View style={[f_full, {backgroundColor: 'white'}]}>
+      {(!data || data?.length === 0) && (
+        <View style={[f_full, center, flex_row, sp_2]}>
+          <Typography light>모임 내역이 없습니다.</Typography>
+        </View>
+      )}
+      <ScrollView style={[f_full, p_3]}>
+        {data?.map((item, index) => (
+          <GroupBox
+            key={index}
+            userList={userList}
+            index={index}
+            item={item}
+            navigation={navigation}
+          />
+        ))}
+      </ScrollView>
+    </View>
   );
 }
 

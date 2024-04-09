@@ -357,7 +357,9 @@ const Home = ({navigation}) => {
               ]}>
               <View style={[flex_row, sp_4, p_3, align_center]}>
                 <Image style={img_sm_2} source={alertIcon} />
-                <Typography>새로운 업데이트 소식 전해드릴게요.</Typography>
+                <Typography white>
+                  새로운 업데이트 소식 전해드릴게요.
+                </Typography>
               </View>
               <Image style={img_xs} source={_x} />
             </View>

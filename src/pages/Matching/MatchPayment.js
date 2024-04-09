@@ -314,7 +314,7 @@ const MatchPayment = ({navigation, route}) => {
         <TouchableOpacity
           style={[styles.button, styles.buttonMargin]}
           onPress={handlePayment}>
-          <Typography size="lg" bold>
+          <Typography size="lg" bold white>
             결제하기
           </Typography>
         </TouchableOpacity>
