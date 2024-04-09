@@ -60,6 +60,7 @@ import Alarm from './src/pages/MyPage/Alarm';
 import UserView from './src/pages/Main/UserView';
 import FAQ from './src/pages/MyPage/FAQ';
 import MatchingView from './src/pages/Main/MatchingView';
+import MyActivity from './src/pages/MyPage/MyActivity';
 
 const App = () => {
   // const isDarkMode = useColorScheme() === 'dark';
@@ -215,14 +216,47 @@ const App = () => {
         options={{headerShown: false}}
         component={User}
       />
-      <UserStack.Screen name="프로필 편집" component={Profile} />
+      <UserStack.Screen
+        name="프로필 편집"
+        component={Profile}
+        options={() => ({
+          headerTitleStyle: {
+            fontFamily: font_family_bold,
+          },
+        })}
+      />
       <UserStack.Screen
         name="Account"
         component={SignUpStackNavigate}
         options={{headerShown: false}}
       />
-      <UserStack.Screen name="알림" component={Alarm} />
-      <UserStack.Screen name="자주묻는질문" component={FAQ} />
+      <UserStack.Screen
+        name="알림"
+        component={Alarm}
+        options={() => ({
+          headerTitleStyle: {
+            fontFamily: font_family_bold,
+          },
+        })}
+      />
+      <UserStack.Screen
+        name="자주묻는질문"
+        component={FAQ}
+        options={() => ({
+          headerTitleStyle: {
+            fontFamily: font_family_bold,
+          },
+        })}
+      />
+      <UserStack.Screen
+        name="활동내역"
+        component={MyActivity}
+        options={() => ({
+          headerTitleStyle: {
+            fontFamily: font_family_bold,
+          },
+        })}
+      />
     </UserStack.Navigator>
   );
 

@@ -66,7 +66,7 @@ const GroupBox = ({item, index, myInfo, navigation}) => {
           style={[
             radius_md,
             p_2,
-            {backgroundColor: whiteAlpha900, marginBottom: 10},
+            {backgroundColor: '#FFF5F4', marginBottom: 10},
           ]}
           onPress={() => {
             // console.log({...item, gid: item.doc_id});

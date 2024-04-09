@@ -118,6 +118,22 @@ const Home = ({navigation}) => {
     };
   }, []);
 
+  useEffect(() => {
+    const unsubscribe = auth().onAuthStateChanged(async user => {
+      if (user) {
+        updateUser();
+        updateGroup();
+      } else {
+        // console.log('없음!!');
+        navigation.navigate('Account', {screen: '휴대폰 본인인증'});
+      }
+    });
+
+    return () => {
+      unsubscribe();
+    };
+  }, []);
+
   const updateUser = async () => {
     let list = await getDocList('user');
     // console.log('유저리스트 ===> ', list);

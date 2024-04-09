@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import {
   Alert,
+  Image,
   ScrollView,
   Text,
   TextInput,
@@ -15,6 +16,7 @@ import styles, {
   center,
   flex_row,
   fs_md,
+  img_sm_2,
   justify_center,
   p_2,
   radius_full,
@@ -25,9 +27,11 @@ import ProfilePicker from '../../Component/ProfilePicker';
 import {updateDocument} from '../../firebase/firebase_func';
 import Typography from '../../Component/Typography';
 import MessageBox from '../../Component/MessageBox';
+import Tooltip from 'react-native-walkthrough-tooltip';
 
 const Profile = ({navigation, route}) => {
   const {data} = route.params ? route.params : {data: null};
+  const [tooltipVisible, setTooltipVisible] = useState(false);
   const [message, setMessage] = useState({
     mode: 'error',
     isView: false,
@@ -399,9 +403,35 @@ const Profile = ({navigation, route}) => {
               </View>
             </View>
             <View style={styles.columnBox}>
-              <Typography size="lg" bold>
-                나의 커피 매칭권 금액은?
-              </Typography>
+              <View style={flex_row}>
+                <Typography bold size={'lg'}>
+                  내 커피 매칭권 금액
+                </Typography>
+                <Tooltip
+                  backgroundColor="rgba(0,0,0,0.1)"
+                  contentStyle={{
+                    width: 200,
+                    height: 70,
+                  }}
+                  isVisible={tooltipVisible}
+                  content={
+                    <View>
+                      <Typography light size="sm">
+                        커피 매칭권 신청을 받으시면 설정하신 금액의 70%를
+                        수익으로 정산해드립니다.
+                      </Typography>
+                    </View>
+                  }
+                  placement="top"
+                  onClose={() => setTooltipVisible(false)}>
+                  <TouchableOpacity onPress={() => setTooltipVisible(true)}>
+                    <Image
+                      style={[img_sm_2, {opacity: 0.5}]}
+                      source={require('../../assets/Question.png')}
+                    />
+                  </TouchableOpacity>
+                </Tooltip>
+              </View>
               <View
                 style={[
                   flex_row,

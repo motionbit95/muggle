@@ -46,7 +46,7 @@ const PopupBase = ({icon, contents, ...props}) => {
               {backgroundColor: 'white'},
             ]}>
             <ScrollView height={'100%'}>{props.children}</ScrollView>
-            <View style={[center, w_full, p_3, {marginBottom: 30}]}>
+            <View style={[center, w_full, p_3, {marginBottom: 4}]}>
               <TouchableOpacity
                 style={[btn_primary, w_full]}
                 onPress={() => setModalVisible(false)}>

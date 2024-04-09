@@ -132,7 +132,13 @@ function MatchingView({navigation, route}) {
             무료 일상 모임 만들기
           </Typography>
         </TouchableOpacity>
-        <TouchableOpacity>
+        <TouchableOpacity
+          onPress={() =>
+            navigation.navigate('마이', {
+              screen: '활동내역',
+              params: {myInfo: myInfo, tab: 0},
+            })
+          }>
           <Image
             source={require('../../assets/menuIcon.png')}
             style={{width: 40, height: 40}}

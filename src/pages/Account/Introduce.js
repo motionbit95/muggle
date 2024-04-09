@@ -130,7 +130,7 @@ const Introduce = ({navigation}) => {
       <TouchableOpacity
         style={styles.button}
         onPress={() => navigation.navigate('모임', {screen: 'Muggle'})}>
-        <Typography bold size="lg">
+        <Typography bold size="lg" white>
           시작하기
         </Typography>
       </TouchableOpacity>

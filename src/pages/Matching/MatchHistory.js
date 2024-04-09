@@ -19,8 +19,10 @@ import styles, {
   fw_bold,
   img_md,
   img_sm,
+  justify_between,
   justify_end,
   p_1,
+  p_4,
   radius_full,
   sp_1,
   sp_2,
@@ -194,9 +196,17 @@ const MatchHistory = ({navigation}) => {
   };
 
   return (
-    <View style={[styles.screenStyle, styles.contentStyle]}>
+    <View
+      style={[
+        // flex_column,
+        // justify_between,
+        // styles.screenStyle,
+        // styles.contentStyle,
+        p_4,
+        {flex: 1},
+      ]}>
       <ScrollView style={[styles.scrollViewStyle]}>
-        <View>
+        <View style={{flex: 1}}>
           {matchings?.map((matching, index) => (
             <MatchingBox key={index} matching={matching} index={index} />
           ))}
@@ -204,30 +214,29 @@ const MatchHistory = ({navigation}) => {
             <MatchingBox key={index} matching={matching} index={index} />
           ))} */}
         </View>
-
-        <View style={[justify_end]}>
-          <View>
-            <View>
-              <Typography size="lg" bold>
-                커피 매칭 친구 추천
-              </Typography>
-            </View>
-            <ScrollView
-              horizontal={true}
-              contentContainerStyle={styles.horizontalScrollViewStyle}
-              showsHorizontalScrollIndicator={false}>
-              {userList?.map((user, index) => (
-                <MatchBox
-                  key={index}
-                  user={user}
-                  index={index}
-                  navigation={navigation}
-                />
-              ))}
-            </ScrollView>
-          </View>
-        </View>
       </ScrollView>
+      <View>
+        <View>
+          <View>
+            <Typography size="lg" bold>
+              커피 매칭 친구 추천
+            </Typography>
+          </View>
+          <ScrollView
+            horizontal={true}
+            contentContainerStyle={styles.horizontalScrollViewStyle}
+            showsHorizontalScrollIndicator={false}>
+            {userList?.map((user, index) => (
+              <MatchBox
+                key={index}
+                user={user}
+                index={index}
+                navigation={navigation}
+              />
+            ))}
+          </ScrollView>
+        </View>
+      </View>
     </View>
   );
 };

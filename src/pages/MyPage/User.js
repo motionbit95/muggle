@@ -118,9 +118,9 @@ const User = ({navigation, route}) => {
       }
     });
 
-    return () => {
-      unsubscribe();
-    };
+    // return () => {
+    //   unsubscribe();
+    // };
   }, []);
 
   const onLogout = () => {
@@ -294,6 +294,20 @@ const User = ({navigation, route}) => {
                 </View>
                 <Image source={require('../../assets/rightarrow.png')} />
               </TouchableOpacity>
+              <TouchableOpacity
+                style={styles.TouchButtonStyle}
+                onPress={() =>
+                  navigation.navigate('마이', {
+                    screen: '활동내역',
+                    params: {myInfo: myInfo},
+                  })
+                }>
+                <View style={styles.rowBox}>
+                  <Image source={require('../../assets/menuicon1.png')} />
+                  <Typography>활동내역</Typography>
+                </View>
+                <Image source={require('../../assets/rightarrow.png')} />
+              </TouchableOpacity>
               <PopupBase
                 button={
                   <View style={styles.TouchButtonStyle}>
@@ -307,7 +321,7 @@ const User = ({navigation, route}) => {
                 {Platform.OS === 'ios' ? (
                   <WebView
                     source={{
-                      uri: 'https://firebasestorage.googleapis.com/v0/b/dinnermate-8d37b.appspot.com/o/files%2F%E1%84%86%E1%85%A5%E1%84%80%E1%85%B3%E1%86%AF%2B%E1%84%89%E1%85%A5%E1%84%87%E1%85%B5%E1%84%89%E1%85%B3%2B%E1%84%8B%E1%85%B5%E1%84%8B%E1%85%AD%E1%86%BC%E1%84%8B%E1%85%A3%E1%86%A8%E1%84%80%E1%85%AA%E1%86%AB%2B%E1%84%86%E1%85%A6%E1%84%86%E1%85%A9%2B%E1%84%89%E1%85%A1%E1%86%A8%E1%84%8C%E1%85%A6%2B%E1%84%87%E1%85%A9%E1%86%AB%2B240401.docx?alt=media&token=20c0dd2d-11af-4e71-8536-5f141f763983',
+                      uri: 'https://muggle.life/terms',
                     }} // 표시할 웹 페이지의 URL
                     style={{
                       width: Dimensions.get('window').width,
@@ -336,7 +350,7 @@ const User = ({navigation, route}) => {
                 {Platform.OS === 'ios' ? (
                   <WebView
                     source={{
-                      uri: 'https://firebasestorage.googleapis.com/v0/b/dinnermate-8d37b.appspot.com/o/files%2F%E1%84%86%E1%85%A5%E1%84%80%E1%85%B3%E1%86%AF%2B%E1%84%80%E1%85%A2%E1%84%8B%E1%85%B5%E1%86%AB%E1%84%8C%E1%85%A5%E1%86%BC%E1%84%87%E1%85%A9%E1%84%8E%E1%85%A5%E1%84%85%E1%85%B5%E1%84%87%E1%85%A1%E1%86%BC%E1%84%8E%E1%85%B5%E1%86%B7%2B%E1%84%86%E1%85%A6%E1%84%86%E1%85%A9%2B%E1%84%89%E1%85%A1%E1%86%A8%E1%84%8C%E1%85%A6%E1%84%87%E1%85%A9%E1%86%AB%2B240401.docx?alt=media&token=c88e43c5-af85-4184-8504-9b54b7d81ae3',
+                      uri: 'https://muggle.life/privacy',
                     }} // 표시할 웹 페이지의 URL
                     style={{
                       width: Dimensions.get('window').width,

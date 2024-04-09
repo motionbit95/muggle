@@ -11,27 +11,82 @@ import styles, {
 import ProfilePicker from '../../Component/ProfilePicker';
 import Typography from '../../Component/Typography';
 import {primary_color} from '../../firebase/api';
+import MessageBox from '../../Component/MessageBox';
 
 const Interest = ({navigation, route}) => {
   const {data} = route.params ? route.params : {data: null};
-  const [interest, setInterest] = useState([]);
+  const [message, setMessage] = useState({
+    mode: '',
+    isView: false,
+    message: '',
+  });
+  const [interest, setInterest] = useState(null);
 
   const signupUser = () => {
+    if (!data.user_profile) {
+      setMessage({
+        mode: 'error',
+        isView: true,
+        message: '프로필 사진을 등록하세요',
+      });
+      return;
+    }
+
+    if (!data.user_info) {
+      setMessage({
+        mode: 'error',
+        isView: true,
+        message: '소개말을 입력하세요.',
+      });
+      return;
+    }
+
+    if (!interest && interest?.length < 2) {
+      setMessage({
+        mode: 'error',
+        isView: true,
+        message: '관심사를 2개 이상 선택해주세요.',
+      });
+      return;
+    }
+
+    setMessage({
+      mode: 'confirm',
+      isView: true,
+      message: '가입을 완료하시겠습니까?',
+      type: 'success',
+    });
+
     data.user_interest = interest;
     // console.log('data ===> ', data);
-    addDocument('user', data);
-    navigation.navigate('인트로');
   };
 
   const handleInterest = content => {
-    if (interest.includes(content)) {
-      setInterest(interest.filter(item => item !== content));
+    if (interest?.includes(content)) {
+      setInterest(interest?.filter(item => item !== content));
     } else {
       setInterest([...interest, content]);
     }
   };
   return (
     <View style={styles.screenStyle}>
+      {message.isView && (
+        <MessageBox
+          visible={message.isView}
+          message={message.message}
+          mode={message.mode}
+          onCancel={() =>
+            setMessage({mode: 'error', isView: false, message: ''})
+          }
+          onOK={() => {
+            if (message.type === 'success') {
+              addDocument('user', data);
+              navigation.navigate('인트로');
+            }
+            setMessage({mode: 'error', isView: false, message: ''});
+          }}
+        />
+      )}
       <ScrollView style={styles.scrollViewStyle}>
         <View style={[styles.contentStyle, {gap: 20}]}>
           <View
@@ -39,7 +94,11 @@ const Interest = ({navigation, route}) => {
               width: '100%',
               gap: 20,
             }}>
-            <ProfilePicker onChangeValue={uri => (data.user_profile = uri)} />
+            <ProfilePicker
+              onChangeValue={uri => {
+                data.user_profile = uri;
+              }}
+            />
             <View style={styles.rowBox}>
               <View style={{flex: 1}}>
                 <Typography size={'lg'} bold>
@@ -101,7 +160,7 @@ const Interest = ({navigation, route}) => {
                     p_2,
                     radius_full,
                     {
-                      backgroundColor: interest.includes(item)
+                      backgroundColor: interest?.includes(item)
                         ? primary_color
                         : blackAlpha50,
                     },
@@ -116,7 +175,7 @@ const Interest = ({navigation, route}) => {
       </ScrollView>
       <View style={styles.buttonBox}>
         <TouchableOpacity style={styles.button} onPress={signupUser}>
-          <Typography size={'lg'} bold>
+          <Typography size={'lg'} bold white>
             가입완료
           </Typography>
         </TouchableOpacity>

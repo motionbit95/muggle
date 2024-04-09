@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import {
+  Image,
   SafeAreaView,
   ScrollView,
   Text,
@@ -20,13 +21,16 @@ import styles, {
   blackAlpha900,
   flex_row,
   fs_md,
+  img_sm_2,
   justify_center,
 } from '../../style/styles';
 import auth from '@react-native-firebase/auth';
 import Typography from '../../Component/Typography';
 import MessageBox from '../../Component/MessageBox';
+import Tooltip from 'react-native-walkthrough-tooltip';
 
 const SignUp = ({navigation}) => {
+  const [tooltipVisible, setTooltipVisible] = useState(false);
   const [message, setMessage] = useState({
     mode: 'error',
     isView: false,
@@ -100,15 +104,6 @@ const SignUp = ({navigation}) => {
         mode: 'error',
         isView: true,
         message: '사용자 이름를 입력하세요.',
-      });
-      return;
-    }
-
-    if (!userInfo) {
-      setMessage({
-        mode: 'error',
-        isView: true,
-        message: '소개말을 입력하세요.',
       });
       return;
     }
@@ -298,26 +293,58 @@ const SignUp = ({navigation}) => {
               </View>
             </View>
             <View style={styles.columnBox}>
-              <Typography bold size={'lg'}>
-                나의 커피 매칭권 금액은?
-              </Typography>
-              <View style={styles.contentBox}>
-                <View
+              <View style={flex_row}>
+                <Typography bold size={'lg'}>
+                  내 커피 매칭권 금액
+                </Typography>
+                <Tooltip
+                  backgroundColor="rgba(0,0,0,0)"
+                  contentStyle={{
+                    backgroundColor: '#f1f1f1',
+                    width: 200,
+                    height: 70,
+                  }}
+                  isVisible={tooltipVisible}
+                  content={
+                    <View>
+                      <Typography light size="sm">
+                        커피 매칭권 신청을 받으시면 설정하신 금액의 70%를
+                        수익으로 정산해드립니다.
+                      </Typography>
+                    </View>
+                  }
+                  placement="top"
+                  onClose={() => setTooltipVisible(false)}>
+                  <TouchableOpacity onPress={() => setTooltipVisible(true)}>
+                    <Image
+                      style={[img_sm_2, {opacity: 0.5}]}
+                      source={require('../../assets/Question.png')}
+                    />
+                  </TouchableOpacity>
+                </Tooltip>
+              </View>
+              <View
+                style={[
+                  flex_row,
+                  justify_center,
+                  align_center,
+                  styles.contentBox,
+                  {height: 50},
+                ]}>
+                <TextInput
+                  keyboardType="numeric"
                   style={[
-                    flex_row,
-                    justify_center,
-                    align_center,
-                    {height: 30},
-                  ]}>
-                  <TextInput
-                    keyboardType="numeric"
-                    style={[{color: blackAlpha900, fontSize: fs_md}]}
-                    placeholder="0"
-                    onChange={e => setUserPrice(e.nativeEvent.text)}
-                    defaultValue={userPrice}
-                  />
-                  <Typography> 만원</Typography>
-                </View>
+                    {
+                      color: blackAlpha900,
+                      fontSize: fs_md,
+                      padding: 0,
+                    },
+                  ]}
+                  placeholder="0"
+                  onChange={e => setUserPrice(e.nativeEvent.text)}
+                  // defaultValue={userPrice}
+                />
+                <Typography>만원</Typography>
               </View>
             </View>
             <View style={styles.columnBox}>
@@ -350,7 +377,7 @@ const SignUp = ({navigation}) => {
             <TouchableOpacity
               style={[styles.button, styles.buttonMargin]}
               onPress={handleSignup}>
-              <Typography bold size={'md'}>
+              <Typography bold size={'md'} white>
                 다음
               </Typography>
             </TouchableOpacity>

@@ -442,7 +442,12 @@ const GroupDetail = ({navigation, route}) => {
         ) : (
           <TouchableOpacity
             style={[styles.button, {flex: 1}]}
-            disabled={data?.group_users.length >= data?.group_personnel}
+            disabled={
+              data?.group_type === '일상 모임' ||
+              data?.group_users.length < data?.group_personnel
+                ? false
+                : true
+            }
             onPress={() => {
               setIsPoint(false);
               setOpenModal(true);
