@@ -29,7 +29,7 @@ const GroupCreate = ({navigation}) => {
   const [matchPrice, setMatchPrice] = useState('나누기');
   const [matchImage, setMatchImage] = useState('');
 
-  const matchProps = ['나누기', '직접 입력'];
+  const matchProps = ['나누기', '회비 없음', '직접 입력'];
 
   const handleCityChange = value => {
     setSelectedCity(value);
@@ -70,8 +70,8 @@ const GroupCreate = ({navigation}) => {
       return;
     }
 
-    if (matchPersonnel > 300) {
-      alert('300명 이하로 입력하세요.');
+    if (matchPersonnel > 30) {
+      alert('30명 이하로 입력하세요.');
       return;
     }
 
@@ -231,14 +231,15 @@ const GroupCreate = ({navigation}) => {
                   onChangeValue={setMatchPrice}
                 />
               </View>
-              <TextInput
-                readOnly={matchPrice === '나누기'}
-                onChange={e => setMatchPrice(e.nativeEvent.text)}
-                keyboardType="numeric"
-                style={[{flex: 1.5}, styles.contentBox]}
-                placeholder="모임 금액을 입력해주세요."
-                // onChange={null}
-              />
+              {matchPrice !== '나누기' && matchPrice !== '회비 없음' && (
+                <TextInput
+                  onChange={e => setMatchPrice(e.nativeEvent.text)}
+                  keyboardType="numeric"
+                  style={[{flex: 1.5}, styles.contentBox]}
+                  placeholder="모임 금액을 입력해주세요."
+                  // onChange={null}
+                />
+              )}
             </View>
           </View>
 
@@ -274,7 +275,7 @@ const GroupCreate = ({navigation}) => {
                 styles.contentBox,
               ]}
               keyboardType="number-pad"
-              placeholder="정원을 입력해주세요. (최대 300명)"
+              placeholder="정원을 입력해주세요. (최대 30명)"
             />
           </View>
         </View>
