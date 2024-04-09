@@ -10,12 +10,15 @@ import {
 import styles, {
   blackAlpha500,
   blackAlpha900,
+  center,
+  flex_row,
   fs_md,
   fw_bold,
   img_md,
   img_sm,
   p_2,
   radius_sm,
+  w_full,
 } from '../../style/styles';
 import {
   calculateDday,
@@ -219,33 +222,39 @@ const GroupDetail = ({navigation, route}) => {
                 flexDirection: 'row',
                 flexWrap: 'wrap',
               }}>
-              {groupUsers?.map(
-                (user, index) =>
-                  index < 3 && (
-                    <View key={index} style={[styles.rowBox, {width: '50%'}]}>
-                      <Image
-                        source={{
-                          uri: user?.user_profile
-                            ? user?.user_profile
-                            : user?.user_gender === '남'
-                            ? defaultMale
-                            : defaultFemale,
-                          // ? user?.user_profile
-                          // : user?.user_gender === 'male' ||
-                          //   user?.user_gender === '남'
-                          // ? defaultMale
-                          // : defaultFemale,
-                        }}
-                        width={30}
-                        height={30}
-                        borderRadius={50}
-                      />
-                      <Typography black={user} light={!user}>
-                        {user ? user?.user_name : '탈퇴한 회원입니다.'}
-                      </Typography>
-                    </View>
-                  ),
-              )}
+              {groupUsers?.map((user, index) => (
+                <TouchableOpacity
+                  onPress={() =>
+                    navigation.navigate('모임', {
+                      screen: '유저',
+                      params: {data: user, userList: userList},
+                    })
+                  }
+                  style={[styles.rowBox, {width: '50%'}]}>
+                  <View key={index} style={[flex_row, center]}>
+                    <Image
+                      source={{
+                        uri: user?.user_profile
+                          ? user?.user_profile
+                          : user?.user_gender === '남'
+                          ? defaultMale
+                          : defaultFemale,
+                        // ? user?.user_profile
+                        // : user?.user_gender === 'male' ||
+                        //   user?.user_gender === '남'
+                        // ? defaultMale
+                        // : defaultFemale,
+                      }}
+                      width={30}
+                      height={30}
+                      borderRadius={50}
+                    />
+                    <Typography black={user} light={!user}>
+                      {user ? user?.user_name : '탈퇴한 회원입니다.'}
+                    </Typography>
+                  </View>
+                </TouchableOpacity>
+              ))}
             </View>
           </View>
         </View>

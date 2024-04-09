@@ -698,6 +698,11 @@ export const img_sm_2 = {
   height: 20,
 };
 
+export const img_ml_2 = {
+  width: 80,
+  height: 80,
+};
+
 export const img_lg = {
   width: 100,
   height: 100,

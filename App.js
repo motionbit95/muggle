@@ -73,6 +73,7 @@ import {getDocList} from './src/firebase/firebase_func';
 import GroupView from './src/pages/Main/GroupView';
 import Typography from './src/Component/Typography';
 import Alarm from './src/pages/MyPage/Alarm';
+import UserView from './src/pages/Main/UserView';
 
 const App = () => {
   // const isDarkMode = useColorScheme() === 'dark';
@@ -186,6 +187,20 @@ const App = () => {
         component={GroupCreate}
         options={({navigation}) => ({
           title: '모임개설',
+          headerStyle: {
+            backgroundColor: '#fff',
+          },
+          headerTintColor: '#black',
+          headerTitleStyle: {
+            fontWeight: 'bold',
+          },
+        })}
+      />
+      <HomeStack.Screen
+        name="유저"
+        component={UserView}
+        options={({navigation}) => ({
+          title: '유저',
           headerStyle: {
             backgroundColor: '#fff',
           },
