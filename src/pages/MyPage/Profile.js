@@ -30,7 +30,9 @@ const Profile = ({navigation, route}) => {
 
   const [userName, setUserName] = useState(data?.user_name);
   const [userInfo, setUserInfo] = useState(data?.user_info);
-  const [interest, setInterest] = useState(data?.user_interest);
+  const [interest, setInterest] = useState(
+    data?.user_interest ? data?.user_interest : [],
+  );
 
   const [userPrice, setUserPrice] = useState(data?.user_price);
 
@@ -109,6 +111,55 @@ const Profile = ({navigation, route}) => {
   };
 
   const handleSaveProfile = () => {
+    if (!userName) {
+      Alert.alert('회원 이름을 입력하세요.');
+      return;
+    }
+
+    if (!userInfo) {
+      Alert.alert('소개말을 입력하세요!');
+      return;
+    }
+
+    if (!selectedGender) {
+      Alert.alert('성별을 선택하세요.');
+      return;
+    }
+
+    if (!selectyear || !selectmonth || !selectday) {
+      Alert.alert('생년월일을 선택하세요.');
+      return;
+    }
+
+    if (!userPrice) {
+      Alert.alert('매칭권 금액을 입력하세요.');
+      return;
+    }
+
+    if (userPrice < 2) {
+      Alert.alert('매칭권 금액을 2만원 이상으로 설정하세요.');
+      return;
+    }
+
+    if (!selectedCity || !selectedDistrict) {
+      Alert.alert('지역을 선택하세요.');
+      return;
+    }
+
+    console.log({
+      ...data,
+      user_name: userName,
+      user_info: userInfo,
+      user_interest: interest,
+      user_price: userPrice,
+      user_gender: selectedGender,
+      user_place: [`${selectedCity} ${selectedDistrict}`],
+      user_birth: `${selectyear}${selectmonth}${selectday}`,
+      user_bank: {
+        bank_name: selectbank,
+        account_number: accountNumber,
+      },
+    });
     updateDocument('user', data?.doc_id, {
       ...data,
       user_name: userName,
@@ -127,7 +178,23 @@ const Profile = ({navigation, route}) => {
     Alert.alert('확인', '프로필이 수정되었습니다.', [
       {
         text: '확인',
-        onPress: () => navigation.goBack(),
+        onPress: () =>
+          navigation.navigate('User', {
+            data: {
+              ...data,
+              user_name: userName,
+              user_info: userInfo,
+              user_interest: interest,
+              user_price: userPrice,
+              user_gender: selectedGender,
+              user_place: [`${selectedCity} ${selectedDistrict}`],
+              user_birth: `${selectyear}${selectmonth}${selectday}`,
+              user_bank: {
+                bank_name: selectbank,
+                account_number: accountNumber,
+              },
+            },
+          }),
       },
     ]);
   };
@@ -196,28 +263,18 @@ const Profile = ({navigation, route}) => {
                 <TouchableOpacity
                   style={[
                     styles.genderButton,
-                    (selectedGender === 'male' || selectedGender === '남') &&
-                      styles.selectedButton,
+                    selectedGender === '남' && styles.selectedButton,
                   ]}
-                  onPress={() => selectGender('male')}>
-                  <Typography
-                    red={selectedGender === 'male' || selectedGender === '남'}>
-                    남성
-                  </Typography>
+                  onPress={() => selectGender('남')}>
+                  <Typography red={selectedGender === '남'}>남성</Typography>
                 </TouchableOpacity>
                 <TouchableOpacity
                   style={[
                     styles.genderButton,
-                    (selectedGender === 'female' || selectedGender === '여') &&
-                      styles.selectedButton,
+                    selectedGender === '여' && styles.selectedButton,
                   ]}
-                  onPress={() => selectGender('female')}>
-                  <Typography
-                    red={
-                      selectedGender === 'female' || selectedGender === '여'
-                    }>
-                    여성
-                  </Typography>
+                  onPress={() => selectGender('여')}>
+                  <Typography red={selectedGender === '여'}>여성</Typography>
                 </TouchableOpacity>
               </View>
             </View>
@@ -333,7 +390,7 @@ const Profile = ({navigation, route}) => {
           <View style={styles.hr} />
           <View style={{flex: 1}}>
             <Typography size="lg" bold>
-              관심사
+              관심사 (최대 3개까지 설정 가능합니다.)
             </Typography>
           </View>
           <View style={center}>

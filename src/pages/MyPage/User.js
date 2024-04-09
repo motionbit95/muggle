@@ -12,7 +12,9 @@ import styles, {
   center,
   f_full,
   p_3,
+  p_4,
   radius_full,
+  radius_lg,
   shadow_md,
   sp_3,
 } from '../../style/styles';
@@ -32,10 +34,15 @@ import WebView from 'react-native-webview';
 import Typography from '../../Component/Typography';
 import RenderHtml from 'react-native-render-html';
 
-const User = ({navigation}) => {
-  const [myInfo, setMyInfo] = useState(null);
+const User = ({navigation, route}) => {
+  const {data} = route.params ? route.params : {data: null};
+  const [myInfo, setMyInfo] = useState(data ? data : null);
   const [goods, setGoods] = useState(null);
   const [views, setViews] = useState(null);
+
+  useEffect(() => {
+    setMyInfo(data);
+  }, [data]);
 
   useEffect(() => {
     const getGroups = async () => {
@@ -73,6 +80,7 @@ const User = ({navigation}) => {
   }, [myInfo]);
 
   useEffect(() => {
+    console.log('data ===> ', data);
     const unsubscribe = auth().onAuthStateChanged(async user => {
       if (user) {
         await singleQuery('user', 'uid', user.uid).then(res => {
@@ -129,11 +137,11 @@ const User = ({navigation}) => {
   return (
     <View style={styles.screenStyle}>
       <View style={styles.bgStyle}>
-        <LinearGradient
+        {/* <LinearGradient
           style={styles.bgStyle}
           start={{x: 0, y: 0}}
           colors={[primary_color, '#FF794F']}
-        />
+        /> */}
       </View>
       <SafeAreaView>
         <View style={styles.contentStyle}>
@@ -154,23 +162,21 @@ const User = ({navigation}) => {
               <View style={{justifyContent: 'center', gap: 10}}>
                 <View
                   style={{flexDirection: 'row', gap: 5, alignItems: 'center'}}>
-                  <Typography white size="xl" bold>
+                  <Typography size="xl" bold>
                     {myInfo?.user_name}님
                   </Typography>
                   <Image source={require('../../assets/star.png')} />
-                  <Typography white size="xl" bold>
+                  <Typography size="xl" bold>
                     {(0).toFixed(1)}
                   </Typography>
                 </View>
                 <View
                   style={{flexDirection: 'row', gap: 5, alignItems: 'center'}}>
-                  <Typography white>
-                    {getDisplayAge(myInfo?.user_birth)}세
-                  </Typography>
-                  <Typography white>|</Typography>
-                  <Typography white>{myInfo?.user_gender}자</Typography>
-                  <Typography white>|</Typography>
-                  <Typography white>{myInfo?.user_place[0]}</Typography>
+                  <Typography>{getDisplayAge(myInfo?.user_birth)}세</Typography>
+                  <Typography>|</Typography>
+                  <Typography>{myInfo?.user_gender}자</Typography>
+                  <Typography>|</Typography>
+                  <Typography>{myInfo?.user_place[0]}</Typography>
                 </View>
                 <View style={{flexDirection: 'row', gap: 10, flexWrap: 'wrap'}}>
                   {myInfo?.user_interest?.map((item, index) => (
@@ -179,26 +185,26 @@ const User = ({navigation}) => {
                         paddingVertical: 3,
                         paddingHorizontal: 4,
                         borderRadius: 30,
-                        borderWidth: 1,
-                        borderColor: 'white',
+                        backgroundColor: '#f1f1f1',
+                        // borderWidth: 1,
+                        // borderColor: 'white',
                       }}>
-                      <Typography size="sm" white>
-                        {item}
-                      </Typography>
+                      <Typography size="sm">{item}</Typography>
                     </View>
                   ))}
                 </View>
               </View>
             </View>
-            <View>
-              <TouchableOpacity
-                onPress={() =>
-                  navigation.navigate('프로필 편집', {data: myInfo})
-                }>
-                <Image source={require('../../assets/Setting.png')} />
-              </TouchableOpacity>
-            </View>
           </View>
+          <TouchableOpacity
+            onPress={() => navigation.navigate('프로필 편집', {data: myInfo})}>
+            <View
+              style={[center, p_4, radius_lg, {backgroundColor: '#FF5E5B'}]}>
+              <Typography bold white size="lg">
+                프로필 수정
+              </Typography>
+            </View>
+          </TouchableOpacity>
           <View style={[sp_3, shadow_md]}>
             <View style={[styles.rowBox, styles.itembox]}>
               <TouchableOpacity
