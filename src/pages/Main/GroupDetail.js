@@ -55,7 +55,11 @@ import {
   getDisplayAge,
 } from '../../firebase/api';
 import auth from '@react-native-firebase/auth';
-import {singleQuery, updateDocument} from '../../firebase/firebase_func';
+import {
+  addChat,
+  singleQuery,
+  updateDocument,
+} from '../../firebase/firebase_func';
 import Typography from '../../Component/Typography';
 import MessageBox from '../../Component/MessageBox';
 
@@ -140,6 +144,11 @@ const GroupDetail = ({navigation, route}) => {
   };
 
   const handleEnterGroup = async () => {
+    const chat_id =
+      data.group_type === '일상 모임'
+        ? data?.doc_id + '_' + auth().currentUser.uid + '_' + data?.group_admin
+        : data?.doc_id;
+
     if (!auth().currentUser) {
       setMessage({
         mode: 'error',
@@ -160,6 +169,31 @@ const GroupDetail = ({navigation, route}) => {
       // );
     } else {
       data.group_users.push(auth().currentUser.uid);
+
+      if (data.group_type === '일상 모임') {
+        addChat({
+          gid:
+            data?.doc_id +
+            '_' +
+            auth().currentUser.uid +
+            '_' +
+            data?.group_admin,
+          group_info: data?.group_info,
+          doc_id: 'chat_info',
+          last_message: '',
+          createAt: new Date(),
+          chat_users: [
+            {
+              uid: data?.group_admin,
+              unRead: 0,
+            },
+            {
+              uid: auth()?.currentUser?.uid,
+              unRead: 0,
+            },
+          ],
+        });
+      }
     }
 
     // console.log(data.group_users);
@@ -168,7 +202,7 @@ const GroupDetail = ({navigation, route}) => {
 
     navigation.navigate('채팅', {
       screen: '채팅룸',
-      params: {data: {...data, gid: data.doc_id}, userList: userList},
+      params: {data: {...data, gid: chat_id}, userList: userList},
     });
   };
 
@@ -303,7 +337,7 @@ const GroupDetail = ({navigation, route}) => {
                       })
                     }
                     style={[styles.rowBox, {width: '50%'}]}>
-                    <View key={index} style={[flex_row, center]}>
+                    <View key={index} style={[flex_row, center, sp_2]}>
                       <Image
                         source={{
                           uri: user?.user_profile
@@ -347,65 +381,83 @@ const GroupDetail = ({navigation, route}) => {
                   flexDirection: 'row',
                   flexWrap: 'wrap',
                 }}>
-                {groupUsers?.map((user, index) => (
-                  <TouchableOpacity
-                    key={index}
-                    onPress={() =>
-                      navigation.navigate('모임', {
-                        screen: '유저',
-                        params: {data: user, userList: userList},
-                      })
-                    }
-                    style={[styles.rowBox, {width: '50%'}]}>
-                    <View key={index} style={[flex_row, sp_3, center]}>
-                      <Image
-                        source={{
-                          uri: user?.user_profile
-                            ? user?.user_profile
-                            : user?.user_gender === '남'
-                            ? defaultMale
-                            : defaultFemale,
-                          // ? user?.user_profile
-                          // : user?.user_gender === 'male' ||
-                          //   user?.user_gender === '남'
-                          // ? defaultMale
-                          // : defaultFemale,
-                        }}
-                        width={60}
-                        height={60}
-                        borderRadius={50}
-                      />
-                      <Typography black={user} light={!user}>
-                        {user
-                          ? user?.user_name +
-                            '(' +
-                            user?.user_gender +
-                            ') ' +
-                            getDisplayAge(user?.user_birth)
-                          : '탈퇴한 회원입니다.'}
-                      </Typography>
-                    </View>
-                  </TouchableOpacity>
-                ))}
+                {groupUsers?.map(
+                  (user, index) =>
+                    user?.uid === data?.group_admin && (
+                      <TouchableOpacity
+                        key={index}
+                        onPress={() =>
+                          navigation.navigate('모임', {
+                            screen: '유저',
+                            params: {data: user, userList: userList},
+                          })
+                        }
+                        style={[styles.rowBox, {width: '50%'}]}>
+                        <View key={index} style={[flex_row, sp_3, center]}>
+                          <Image
+                            source={{
+                              uri: user?.user_profile
+                                ? user?.user_profile
+                                : user?.user_gender === '남'
+                                ? defaultMale
+                                : defaultFemale,
+                              // ? user?.user_profile
+                              // : user?.user_gender === 'male' ||
+                              //   user?.user_gender === '남'
+                              // ? defaultMale
+                              // : defaultFemale,
+                            }}
+                            width={60}
+                            height={60}
+                            borderRadius={50}
+                          />
+                          <Typography black={user} light={!user}>
+                            {user
+                              ? user?.user_name +
+                                '(' +
+                                user?.user_gender +
+                                ') ' +
+                                getDisplayAge(user?.user_birth)
+                              : '탈퇴한 회원입니다.'}
+                          </Typography>
+                        </View>
+                      </TouchableOpacity>
+                    ),
+                )}
               </View>
             </View>
           )}
         </View>
       </ScrollView>
       <View style={[styles.buttonBox, styles.rowBox]}>
-        <TouchableOpacity
-          style={[styles.button, {flex: 1}]}
-          onPress={() => {
-            setIsPoint(false);
-            setOpenModal(true);
-          }}>
-          <Typography size="lg" bold white>
-            참여하기
-            {/* {data?.group_users.includes(auth().currentUser.uid)
+        {data?.group_admin === auth().currentUser.uid ? (
+          <TouchableOpacity disabled style={[btn_normal, {flex: 1}]}>
+            <Typography size="lg" bold light>
+              모임의 주최자입니다.
+              {/* {data?.group_users.includes(auth().currentUser.uid)
+                    ? '채팅하기'
+                    : '참여하기'} */}
+            </Typography>
+          </TouchableOpacity>
+        ) : (
+          <TouchableOpacity
+            style={[styles.button, {flex: 1}]}
+            disabled={data?.group_users.length >= data?.group_personnel}
+            onPress={() => {
+              setIsPoint(false);
+              setOpenModal(true);
+            }}>
+            <Typography size="lg" bold white>
+              {data?.group_type === '일상 모임' ||
+              data?.group_users.length < data?.group_personnel
+                ? '참여하기'
+                : '제한 인원 마감'}
+              {/* {data?.group_users.includes(auth().currentUser.uid)
               ? '채팅하기'
               : '참여하기'} */}
-          </Typography>
-        </TouchableOpacity>
+            </Typography>
+          </TouchableOpacity>
+        )}
         <TouchableOpacity onPress={() => handleGoods(data.doc_id)}>
           <Image source={icon} style={img_md} />
         </TouchableOpacity>

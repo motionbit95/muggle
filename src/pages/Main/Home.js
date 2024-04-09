@@ -4,32 +4,20 @@ import {
   Image,
   ImageBackground,
   ScrollView,
-  Text,
   TouchableOpacity,
   View,
 } from 'react-native';
-import {getDocList, updateDocument} from '../../firebase/firebase_func';
+import {getDocList} from '../../firebase/firebase_func';
 import {
   align_center,
   align_start,
   banner,
   bg_body,
   blackAlpha500,
-  blackAlpha800,
-  blackAlpha900,
-  btn_primary,
   btn_secondary,
-  description,
   flex_column,
   flex_row,
-  font_description,
-  font_title,
-  fs_md,
-  fs_sm,
-  fs_xl,
-  fw_bold,
   img_full,
-  img_sm,
   img_sm_2,
   img_xs,
   img_xxs,
@@ -44,12 +32,8 @@ import {
   sp_2,
   sp_3,
   sp_4,
-  text_selected,
-  title,
   under_button,
   w_full,
-  whiteAlpha800,
-  whiteAlpha900,
 } from '../../style/styles';
 import Swiper from 'react-native-swiper';
 import GroupBox from '../../Component/GroupBox';
@@ -62,6 +46,7 @@ import Typography from '../../Component/Typography';
 
 import auth from '@react-native-firebase/auth';
 import {SafeAreaView} from 'react-native-safe-area-context';
+import firestore from '@react-native-firebase/firestore';
 
 export const group_category = [
   '머글 모임',
@@ -180,6 +165,22 @@ const Home = ({navigation}) => {
     setMuggleClassList(muggleClassList);
     setMuggleBusinessList(muggleBusinessList);
   };
+
+  useEffect(() => {
+    firestore()
+      .collection('group')
+      .onSnapshot(() => {
+        updateGroup();
+        console.log('그룹이 업데이트 되었습니다!!!');
+      });
+
+    firestore()
+      .collection('user')
+      .onSnapshot(() => {
+        updateUser();
+        console.log('유저가 업데이트 되었습니다!!!');
+      });
+  }, []);
 
   const ItemList = ({items, index}) => {
     const [visibleItems, setVisibleItems] = useState(3);

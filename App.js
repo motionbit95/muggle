@@ -45,35 +45,17 @@ import GroupCreate from './src/pages/Main/GroupCreate';
 import MatchHistory from './src/pages/Matching/MatchHistory';
 import MatchPayment from './src/pages/Matching/MatchPayment';
 import {
-  align_center,
   center,
-  circle_30,
   circle_40,
-  circle_50,
-  f_full,
-  flex_column,
-  flex_row,
-  font_family,
   font_family_bold,
-  fs_sm,
-  fs_xs,
   img_sm,
-  img_xs,
-  justify_around,
-  justify_between,
-  justify_center,
   p_2,
-  p_3,
   radius_full,
   sp_1,
-  xs,
 } from './src/style/styles';
-import {primary_color} from './src/firebase/api';
 import WebViewPayment from './src/pages/Matching/WebViewPayment';
 import DirectRoom from './src/pages/Chat/DirectRoom';
-import {getDocList} from './src/firebase/firebase_func';
 import GroupView from './src/pages/Main/GroupView';
-import Typography from './src/Component/Typography';
 import Alarm from './src/pages/MyPage/Alarm';
 import UserView from './src/pages/Main/UserView';
 import FAQ from './src/pages/MyPage/FAQ';
@@ -87,19 +69,19 @@ const App = () => {
   // };
 
   const tabBarSelectIcon = [
-    require('./src/assets/navIcon/home_select.png'),
-    require('./src/assets/navIcon/user_select.png'),
+    require('./src/assets/Home_s.png'),
+    require('./src/assets/Favorite_s.png'),
     require('./src/assets/Plus.png'),
-    require('./src/assets/navIcon/chat_select.png'),
-    require('./src/assets/navIcon/user_select.png'),
+    require('./src/assets/Message_s.png'),
+    require('./src/assets/User_s.png'),
   ];
 
   const tabBarIcon = [
-    require('./src/assets/navIcon/home_unselect.png'),
-    require('./src/assets/navIcon/user_unselect.png'),
+    require('./src/assets/home.png'),
+    require('./src/assets/Favorite.png'),
     require('./src/assets/Plus.png'),
-    require('./src/assets/navIcon/chat_unselect.png'),
-    require('./src/assets/navIcon/user_unselect.png'),
+    require('./src/assets/Message.png'),
+    require('./src/assets/User.png'),
   ];
 
   const Tab = createBottomTabNavigator();
@@ -118,48 +100,6 @@ const App = () => {
         options={({navigation}) => ({
           title: 'Home',
           headerShown: false,
-          // headerTintColor: '#ffffff',
-          // headerTitleStyle: {
-          //   fontWeight: 'bold',
-          //   fontSize: 20,
-          // },
-          // headerBackVisible: false,
-          // headerTitle: '',
-          // headerLeft: ({onPress}) => (
-          //   <Image
-          //     style={{height: 79.61 * 0.25, width: 515.92 * 0.25}}
-          //     source={require('./src/assets/icons/logo.png')}
-          //   />
-          // ),
-          // headerRight: () => (
-          //   <View style={{flexDirection: 'row'}}>
-          //     <TouchableOpacity
-          //       style={{marginRight: 10}}
-          //       onPress={() =>
-          //         navigation.navigate('모임', {
-          //           screen: '모임리스트',
-          //           params: {
-          //             data: goods,
-          //             // userList: userList,
-          //             title: '찜모임',
-          //           },
-          //         })
-          //       }>
-          //       <Image
-          //         style={{width: 24, height: 24}}
-          //         source={require('./src/assets/icons/heart_black.png')}
-          //       />
-          //     </TouchableOpacity>
-          //     <TouchableOpacity
-          //       style={{marginRight: 10}}
-          //       onPress={() => alert('알림 페이지 전달')}>
-          //       <Image
-          //         style={{width: 24, height: 24}}
-          //         source={require('./src/assets/Notification.png')}
-          //       />
-          //     </TouchableOpacity>
-          //   </View>
-          // ),
         })}
       />
       <HomeStack.Screen
@@ -225,21 +165,7 @@ const App = () => {
         name="유저"
         component={UserView}
         options={({navigation}) => ({
-          title: '유저',
-          headerStyle: {
-            backgroundColor: '#fff',
-          },
-          headerTintColor: '#black',
-          headerTitleStyle: {
-            fontFamily: font_family_bold,
-          },
-        })}
-      />
-      <HomeStack.Screen
-        name="일상 모임"
-        component={MatchingView}
-        options={({navigation}) => ({
-          title: '일상 모임',
+          title: '유저정보',
           headerStyle: {
             backgroundColor: '#fff',
           },
@@ -255,6 +181,21 @@ const App = () => {
         component={GroupCreate}
         options={({navigation}) => ({
           title: '일상 모임 만들기',
+          headerStyle: {
+            backgroundColor: '#fff',
+          },
+          headerTintColor: '#black',
+          headerTitleStyle: {
+            fontFamily: font_family_bold,
+          },
+        })}
+      />
+
+      <HomeStack.Screen
+        name="일상 모임"
+        component={MatchingView}
+        options={({navigation}) => ({
+          title: '일상 모임',
           headerStyle: {
             backgroundColor: '#fff',
           },
@@ -316,7 +257,7 @@ const App = () => {
         options={({navigation}) => ({
           title: '매칭룸',
           headerLeft: () => (
-            <TouchableOpacity onPress={() => navigation.navigate('채팅')}>
+            <TouchableOpacity onPress={() => navigation.goBack()}>
               <Image
                 style={img_sm}
                 source={require('./src/assets/icons/left_arrow.png')}
@@ -344,8 +285,8 @@ const App = () => {
           title: '',
           headerLeft: ({onPress}) => (
             <Image
-              style={{height: 79.61 * 0.25, width: 515.92 * 0.25}}
-              source={require('./src/assets/icons/logo.png')}
+              style={{height: 27, width: 100}}
+              source={require('./src/assets/muggle.png')}
             />
           ),
           headerRight: () => (
@@ -453,12 +394,12 @@ const App = () => {
                       : [styles.tabItem, sp_1]
                   }>
                   <Image
-                    style={{width: 20, height: 20}}
+                    style={{width: 24, height: 24}}
                     source={
                       isFocused ? tabBarSelectIcon[index] : tabBarIcon[index]
                     }
                   />
-                  {label && (
+                  {/* {label && (
                     <Typography
                       size={'sm'}
                       style={{
@@ -466,7 +407,7 @@ const App = () => {
                       }}>
                       {label}
                     </Typography>
-                  )}
+                  )} */}
                 </View>
               </TouchableOpacity>
             );
@@ -499,6 +440,7 @@ const App = () => {
 
   return (
     <NavigationContainer independent={true}>
+      <StatusBar barStyle="dark-content" backgroundColor="#fff" />
       <Tab.Navigator tabBar={props => <CustomTabBar {...props} />}>
         <Tab.Screen
           name="모임"
@@ -506,17 +448,6 @@ const App = () => {
           options={{
             tabBarActiveTintColor: '#FF634F',
             headerShown: false,
-            tabBarIcon: ({focused}) => (
-              <Image
-                style={{width: 26, height: 26}}
-                source={
-                  focused
-                    ? require('./src/assets/navIcon/home_select.png')
-                    : require('./src/assets/navIcon/home_unselect.png')
-                }
-              />
-            ),
-            unmountOnBlur: true,
           }}
         />
         <Tab.Screen

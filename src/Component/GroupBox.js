@@ -219,7 +219,9 @@ const GroupBox = ({item, index, myInfo, navigation}) => {
           }}>
           <View style={[flex_row, justify_between]}>
             <View style={[sp_1, justify_center, {maxWidth: '70%'}]}>
-              <Typography bold>{item.group_name}</Typography>
+              <Typography bold numberOfLines={1}>
+                {item.group_name}
+              </Typography>
 
               <View style={[sp_1]}>
                 <View style={[styles.rowBox, sp_2]}>

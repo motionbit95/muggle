@@ -1,28 +1,17 @@
 import React, {useState} from 'react';
-import {View, Button, Image, Alert, TouchableOpacity, Text} from 'react-native';
+import {View, Image, Alert, TouchableOpacity, Text} from 'react-native';
 import storage from '@react-native-firebase/storage';
-import ImagePicker, {launchImageLibrary} from 'react-native-image-picker';
+import {launchImageLibrary} from 'react-native-image-picker';
 
 import {PermissionsAndroid} from 'react-native';
-import styles, {
-  blackAlpha900,
-  btn_normal,
-  btn_primary,
+import {
   center,
   f_full,
   flex_column,
   fs_lg,
-  fs_md,
-  img_lg,
-  img_md,
-  img_ml,
-  img_ml_2,
-  img_sm,
-  radius_full,
   radius_lg,
   sp_2,
 } from '../style/styles';
-import Typography from './Typography';
 
 const BannerPicker = props => {
   const [imageUri, setImageUri] = useState(
@@ -110,7 +99,7 @@ const BannerPicker = props => {
               // radius_full,
               radius_lg,
               f_full,
-              {height: 150, backgroundColor: '#d9d9d9'},
+              {height: 200, backgroundColor: '#d9d9d9'},
             ]}
             source={imageUri ? {uri: imageUri} : null}
           />
@@ -121,7 +110,7 @@ const BannerPicker = props => {
               center,
               sp_2,
               {
-                height: 150,
+                height: 200,
                 borderRadius: 10,
                 borderWidth: 2,
                 borderStyle: 'dashed',

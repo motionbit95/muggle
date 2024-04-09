@@ -20,7 +20,6 @@ import {
   sp_3,
 } from '../../style/styles';
 import {getDocList} from '../../firebase/firebase_func';
-import {auth} from '../../firebase/firebase_config';
 import GroupBox from '../../Component/GroupBox';
 
 function UserView({navigation, route}) {
@@ -58,7 +57,7 @@ function UserView({navigation, route}) {
                   ? {uri: data?.user_profile}
                   : require('../../assets/avartar.png')
               }
-              style={img_ml_2}
+              style={[img_ml_2, radius_full]}
             />
           </View>
           <View style={[flex_column, sp_2]}>

@@ -509,7 +509,7 @@ const Profile = ({navigation, route}) => {
           <TouchableOpacity
             style={[styles.button, styles.buttonMargin]}
             onPress={confirmSave}>
-            <Typography size="lg" bold>
+            <Typography size="lg" bold white>
               저장
             </Typography>
           </TouchableOpacity>

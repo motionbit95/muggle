@@ -4,13 +4,7 @@ import storage from '@react-native-firebase/storage';
 import ImagePicker, {launchImageLibrary} from 'react-native-image-picker';
 
 import {PermissionsAndroid} from 'react-native';
-import styles, {
-  blackAlpha900,
-  btn_normal,
-  btn_primary,
-  f_full,
-  radius_full,
-} from '../style/styles';
+import styles, {btn_normal, f_full, radius_full} from '../style/styles';
 import Typography from './Typography';
 
 const ProfilePicker = props => {

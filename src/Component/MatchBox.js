@@ -82,7 +82,7 @@ const MatchBox = ({user, index, userList, navigation}) => {
                 params: {data: user, userList: userList, index: index},
               })
             }>
-            <Typography bold size={'lg'}>
+            <Typography bold size={'lg'} white>
               커피 매칭 신청
             </Typography>
           </TouchableOpacity>

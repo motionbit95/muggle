@@ -13,19 +13,14 @@ import {
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {
   align_end,
-  blackAlpha900,
   btn_primary,
   center,
-  f_full,
   flex_column,
-  fs_sm,
-  fs_xs,
   justify_end,
   p_3,
   w_full,
 } from '../style/styles';
 import Typography from './Typography';
-import WebView from 'react-native-webview';
 
 const PopupBase = ({icon, contents, ...props}) => {
   const [modalVisible, setModalVisible] = useState(false);
@@ -55,7 +50,7 @@ const PopupBase = ({icon, contents, ...props}) => {
               <TouchableOpacity
                 style={[btn_primary, w_full]}
                 onPress={() => setModalVisible(false)}>
-                <Typography>닫기</Typography>
+                <Typography white>닫기</Typography>
               </TouchableOpacity>
             </View>
           </View>

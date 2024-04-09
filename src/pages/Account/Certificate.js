@@ -20,7 +20,7 @@ import auth from '@react-native-firebase/auth';
 import {singleQuery} from '../../firebase/firebase_func';
 import PopupBase from '../../Component/PopupBase';
 import Typography from '../../Component/Typography';
-import {blackAlpha500, blackAlpha900} from '../../style/styles';
+import {blackAlpha500, blackAlpha900, flex_row} from '../../style/styles';
 import WebView from 'react-native-webview';
 
 const Certificate = ({navigation}) => {
@@ -51,10 +51,11 @@ const Certificate = ({navigation}) => {
   const confirmCode = async () => {
     try {
       await confirmation.confirm(code);
-      alert('인증 성공');
+      // alert('인증 성공');
       setIsActive(true);
     } catch (error) {
-      alert('인증 실패:', error);
+      setIsActive(false);
+      // alert('인증 실패:', error);
     }
   };
 
@@ -121,6 +122,7 @@ const Certificate = ({navigation}) => {
                 <Typography
                   size={'md'}
                   bold
+                  white
                   style={{
                     color: !phoneNumber ? blackAlpha500 : blackAlpha900,
                   }}>
@@ -152,15 +154,23 @@ const Certificate = ({navigation}) => {
                   borderColor: '#f1f1f1',
                 }}>
                 <TouchableOpacity
-                  style={{
-                    backgroundColor: primary_color,
-                    borderRadius: component_radius,
-                    height: component_height,
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                  }}
+                  style={[
+                    flex_row,
+                    {
+                      backgroundColor: primary_color,
+                      borderRadius: component_radius,
+                      height: component_height,
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                    },
+                  ]}
                   onPress={confirmCode}>
-                  <Typography bold>인증확인</Typography>
+                  {isActive && (
+                    <Image source={require('../../assets/checked.png')} />
+                  )}
+                  <Typography bold white>
+                    인증확인
+                  </Typography>
                 </TouchableOpacity>
               </View>
             )}
@@ -235,6 +245,7 @@ const Certificate = ({navigation}) => {
           }}
           onPress={moveNextStep}>
           <Typography
+            white
             bold
             light={!tempAgree || !isActive}
             black={tempAgree && isActive}>

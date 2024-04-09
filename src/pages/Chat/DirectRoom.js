@@ -1,9 +1,7 @@
 import React, {useEffect, useRef, useState} from 'react';
 import {
-  Alert,
   Image,
   ScrollView,
-  Text,
   TextInput,
   TouchableOpacity,
   View,
@@ -11,26 +9,16 @@ import {
 import styles, {
   align_center,
   align_start,
-  blackAlpha500,
-  blackAlpha700,
-  blackAlpha900,
-  btn_primary,
   btn_yellow,
   f_full,
   flex_column,
   flex_row,
-  fs_md,
-  fs_sm,
-  fs_xs,
-  fw_bold,
   img_sm,
   justify_between,
   p_1,
-  p_2,
   radius_full,
   sp_1,
   sp_2,
-  sp_3,
   whiteAlpha900,
 } from '../../style/styles';
 import {formatDateTime, getDisplayAge, primary_color} from '../../firebase/api';
@@ -233,6 +221,7 @@ const DirectRoom = ({navigation, route}) => {
           {chatList?.map(chat =>
             chat?.uid === auth().currentUser.uid ? (
               <View
+                key={chat?.createdAt}
                 style={[
                   {
                     alignItems: 'flex-start',

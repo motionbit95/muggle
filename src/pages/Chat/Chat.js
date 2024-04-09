@@ -169,6 +169,7 @@ const Chat = ({navigation}) => {
         )}
         {groups?.map((group, index) => (
           <TouchableOpacity
+            key={index}
             style={{
               backgroundColor: 'white',
               padding: 20,
@@ -181,7 +182,19 @@ const Chat = ({navigation}) => {
             onPress={() => {
               navigation.navigate('채팅', {
                 screen: '채팅룸',
-                params: {data: {...group, group: group.doc_id}},
+                params: {
+                  data: {
+                    ...group,
+                    group:
+                      group.group_type === '일상 모임'
+                        ? group?.doc_id +
+                          '_' +
+                          auth().currentUser.uid +
+                          '_' +
+                          group?.group_admin
+                        : group.doc_id,
+                  },
+                },
               });
             }}>
             <View style={{flexDirection: 'row', gap: 10, alignItems: 'center'}}>
@@ -228,7 +241,7 @@ const Chat = ({navigation}) => {
           </View>
         )}
         {dmList?.map((dm, index) => (
-          <DmBox navigation={navigation} data={dm} />
+          <DmBox key={index} navigation={navigation} data={dm} />
         ))}
       </View>
     );

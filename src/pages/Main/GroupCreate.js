@@ -17,6 +17,7 @@ import {group_category} from './Home';
 import BannerPicker from '../../Component/BannerPicker';
 import Typography from '../../Component/Typography';
 import MessageBox from '../../Component/MessageBox';
+import Geolocation from '@react-native-community/geolocation'; // 라이브러리 import
 
 const GroupCreate = ({navigation, route}) => {
   const {data} = route.params ? route.params : {data: null};
@@ -43,7 +44,7 @@ const GroupCreate = ({navigation, route}) => {
 
   const group_category = [
     '머글(식사, 취미) 모임',
-    '클래스 모임',
+    '원데이 클래스',
     '비지니스 모임',
   ];
 
@@ -57,48 +58,66 @@ const GroupCreate = ({navigation, route}) => {
   };
 
   const createGroup = async () => {
-    const matchInfo = {
-      createAt: new Date(),
-      group_place:
-        selectedCity + ' ' + selectedDistrict + ' ' + matchPlace
-          ? selectedCity + ' ' + selectedDistrict + ' ' + matchPlace
-          : '',
-      group_type: selectedMatch ? selectedMatch : '일상 모임',
-      group_name: matchName,
-      group_target: matchTarget,
-      group_personnel: matchPersonnel ? matchPersonnel : 0,
-      group_users: [auth().currentUser.uid] ? [auth().currentUser.uid] : [],
-      // group_images: [],
-      group_time: matchDateTime ? matchDateTime : new Date(),
-      group_price: matchPrice ? matchPrice : '나누기',
-      group_admin: auth().currentUser.uid ? auth().currentUser.uid : '',
-      group_image: matchImage ? matchImage : '',
-    };
-
-    await addDocument('group', matchInfo)
-      .then(id => {
-        addChat({
-          gid: id,
-          group_info: matchInfo,
-          doc_id: 'chat_info',
-          last_message: '',
+    Geolocation.getCurrentPosition(
+      async pos => {
+        const matchInfo = {
           createAt: new Date(),
-          chat_users: [
-            {
-              uid: auth().currentUser.uid,
-              unRead: 0,
-            },
-          ],
-        });
+          group_place:
+            selectedCity + ' ' + selectedDistrict + ' ' + matchPlace
+              ? selectedCity + ' ' + selectedDistrict + ' ' + matchPlace
+              : '',
+          group_type: selectedMatch
+            ? selectedMatch === '머글(식사, 취미) 모임'
+              ? '머글 모임'
+              : selectedMatch
+            : '일상 모임',
+          group_name: matchName,
+          group_target: matchTarget,
+          group_personnel: matchPersonnel ? matchPersonnel : 0,
+          group_users: [auth().currentUser.uid] ? [auth().currentUser.uid] : [],
+          // group_images: [],
+          group_time: matchDateTime ? matchDateTime : new Date(),
+          group_price: matchPrice ? matchPrice : '나누기',
+          group_admin: auth().currentUser.uid ? auth().currentUser.uid : '',
+          group_image: matchImage ? matchImage : '',
+          group_position: {
+            latitude: pos?.coords.latitude ? pos?.coords.latitude : 0,
+            longitude: pos?.coords.longitude ? pos?.coords.longitude : 0,
+          },
+        };
 
-        navigation.navigate('모임', {
-          screen: '모임상세',
-          params: {data: {...matchInfo, gid: id}},
-        });
-      })
-      .catch(err => {
-        console.log(err);
-      });
+        await addDocument('group', matchInfo)
+          .then(id => {
+            if (selectedMatch) {
+              addChat({
+                gid: id,
+                group_info: matchInfo,
+                doc_id: 'chat_info',
+                last_message: '',
+                createAt: new Date(),
+                chat_users: [
+                  {
+                    uid: auth().currentUser.uid,
+                    unRead: 0,
+                  },
+                ],
+              });
+            }
+
+            navigation.navigate('모임', {
+              screen: '모임상세',
+              params: {data: {...matchInfo, gid: id}},
+            });
+          })
+          .catch(err => {
+            console.log(err);
+          });
+      },
+      error => {
+        console.error(error);
+      },
+      {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000},
+    );
   };
 
   const confirmCreate = async () => {
@@ -291,7 +310,7 @@ const GroupCreate = ({navigation, route}) => {
                       <View style={{flex: 1}}>
                         <DropDown
                           items={matchProps}
-                          defaultValue={matchPrice}
+                          defaultValue={matchPrice ? matchPrice : '직접입력'}
                           onChangeValue={setMatchPrice}
                         />
                       </View>
