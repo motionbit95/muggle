@@ -81,27 +81,6 @@ const App = () => {
   // const backgroundStyle = {
   //   backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   // };
-  const [myInfo, setMyInfo] = useState(null);
-  const [goods, setGoods] = useState(null);
-
-  useEffect(() => {
-    const getGroups = async () => {
-      await getDocList('group').then(res => {
-        let goodList = [];
-        res.forEach(group => {
-          myInfo?.goods?.forEach(async gid => {
-            if (gid === group.doc_id) {
-              goodList.push(group);
-              console.log(new Date(), '찜했습니다.', goodList);
-              setGoods(goodList);
-            }
-          });
-        });
-      });
-    };
-
-    getGroups();
-  }, [myInfo]);
 
   const tabBarSelectIcon = [
     require('./src/assets/navIcon/home_select.png'),
@@ -134,48 +113,49 @@ const App = () => {
         component={Home}
         options={({navigation}) => ({
           title: 'Home',
-          headerTintColor: '#ffffff',
-          headerTitleStyle: {
-            fontWeight: 'bold',
-            fontSize: 20,
-          },
-          headerBackVisible: false,
-          headerTitle: '',
-          headerLeft: ({onPress}) => (
-            <Image
-              style={{height: 79.61 * 0.25, width: 515.92 * 0.25}}
-              source={require('./src/assets/icons/logo.png')}
-            />
-          ),
-          headerRight: () => (
-            <View style={{flexDirection: 'row'}}>
-              <TouchableOpacity
-                style={{marginRight: 10}}
-                onPress={() =>
-                  navigation.navigate('모임', {
-                    screen: '모임리스트',
-                    params: {
-                      data: goods,
-                      // userList: userList,
-                      title: '찜모임',
-                    },
-                  })
-                }>
-                <Image
-                  style={{width: 24, height: 24}}
-                  source={require('./src/assets/icons/heart_fill_black.png')}
-                />
-              </TouchableOpacity>
-              <TouchableOpacity
-                style={{marginRight: 10}}
-                onPress={() => alert('알림 페이지 전달')}>
-                <Image
-                  style={{width: 24, height: 24}}
-                  source={require('./src/assets/Notification.png')}
-                />
-              </TouchableOpacity>
-            </View>
-          ),
+          headerShown: false,
+          // headerTintColor: '#ffffff',
+          // headerTitleStyle: {
+          //   fontWeight: 'bold',
+          //   fontSize: 20,
+          // },
+          // headerBackVisible: false,
+          // headerTitle: '',
+          // headerLeft: ({onPress}) => (
+          //   <Image
+          //     style={{height: 79.61 * 0.25, width: 515.92 * 0.25}}
+          //     source={require('./src/assets/icons/logo.png')}
+          //   />
+          // ),
+          // headerRight: () => (
+          //   <View style={{flexDirection: 'row'}}>
+          //     <TouchableOpacity
+          //       style={{marginRight: 10}}
+          //       onPress={() =>
+          //         navigation.navigate('모임', {
+          //           screen: '모임리스트',
+          //           params: {
+          //             data: goods,
+          //             // userList: userList,
+          //             title: '찜모임',
+          //           },
+          //         })
+          //       }>
+          //       <Image
+          //         style={{width: 24, height: 24}}
+          //         source={require('./src/assets/icons/heart_fill_black.png')}
+          //       />
+          //     </TouchableOpacity>
+          //     <TouchableOpacity
+          //       style={{marginRight: 10}}
+          //       onPress={() => alert('알림 페이지 전달')}>
+          //       <Image
+          //         style={{width: 24, height: 24}}
+          //         source={require('./src/assets/Notification.png')}
+          //       />
+          //     </TouchableOpacity>
+          //   </View>
+          // ),
         })}
       />
       <HomeStack.Screen

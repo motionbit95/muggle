@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {ScrollView, Text, View} from 'react-native';
 import {f_full, p_3} from '../../style/styles';
 import GroupBox from '../../Component/GroupBox';
@@ -14,6 +14,10 @@ function GroupView({navigation, route}) {
       title: title,
     });
   }, [navigation, title]);
+
+  useEffect(() => {
+    console.log(data);
+  }, [data]);
 
   return (
     <ScrollView style={[f_full, p_3]}>

@@ -61,6 +61,7 @@ import _x from '../../assets/icons/_x.png';
 import Typography from '../../Component/Typography';
 
 import auth from '@react-native-firebase/auth';
+import {SafeAreaView} from 'react-native-safe-area-context';
 
 export const group_category = [
   '머글 모임',
@@ -140,6 +141,27 @@ const Home = ({navigation}) => {
     setMyInfo(list.find(user => user.uid === auth().currentUser?.uid));
   };
 
+  const [goods, setGoods] = useState(null);
+
+  useEffect(() => {
+    const getGroups = async () => {
+      await getDocList('group').then(res => {
+        let goodList = [];
+        res.forEach(group => {
+          myInfo?.goods?.forEach(async gid => {
+            if (gid === group.doc_id) {
+              goodList.push(group);
+              // console.log(new Date(), '찜했습니다.', goodList);
+              setGoods(goodList);
+            }
+          });
+        });
+      });
+    };
+
+    getGroups();
+  }, [myInfo]);
+
   const updateGroup = async () => {
     let list = await getDocList('group');
     // console.log('그룹리스트 ===> ', list);
@@ -205,173 +227,209 @@ const Home = ({navigation}) => {
   };
 
   return (
-    <View>
-      <ScrollView
-        style={[w_full]}
-        ref={scrollViewRef}
-        stickyHeaderIndices={[0]}>
-        {/* TAB */}
+    <View style={{backgroundColor: 'white'}}>
+      <SafeAreaView>
         <View
-          style={[
-            align_start,
-            w_full,
-            p_3,
-            {paddingBottom: 0, backgroundColor: 'white'},
-          ]}>
-          <View style={[flex_row, sp_2]}>
-            {group_category.map(
-              (category, index) =>
-                index !== 1 && (
-                  <TouchableOpacity
-                    key={index}
-                    onPress={() => {
-                      console.log('category ===> ', category, index);
-                      setSelectedGroup(category);
-                      scrollToComponent(
-                        index === 0
-                          ? firstComponentRef
-                          : index === 2
-                          ? secondComponentRef
-                          : thirdComponentRef,
-                      );
-                    }}>
-                    <View style={[under_button(selectedGroup === category)]}>
-                      <Typography
-                        bold
-                        black={selectedGroup === category}
-                        light={selectedGroup !== category}>
-                        {category}
-                      </Typography>
-                    </View>
-                  </TouchableOpacity>
-                ),
-            )}
+          style={[w_full, flex_row, justify_between, {paddingHorizontal: 20}]}>
+          <Image
+            source={require('../../assets/muggle.png')}
+            style={{height: 25, width: 100}}
+          />
+          <View style={flex_row}>
+            <TouchableOpacity
+              style={{marginRight: 10}}
+              onPress={() =>
+                navigation.navigate('모임', {
+                  screen: '모임리스트',
+                  params: {
+                    data: goods,
+                    // userList: userList,
+                    title: '찜모임',
+                  },
+                })
+              }>
+              <Image
+                style={{width: 24, height: 24}}
+                source={require('../../assets/icons/heart_fill_black.png')}
+              />
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={{marginRight: 10}}
+              onPress={() => alert('알림 페이지 전달')}>
+              <Image
+                style={{width: 24, height: 24}}
+                source={require('../../assets/Notification.png')}
+              />
+            </TouchableOpacity>
           </View>
         </View>
-        {/* ALERT */}
-        <View style={[w_full, p_4, sp_4]}>
+        <ScrollView
+          style={[w_full, bg_body]}
+          ref={scrollViewRef}
+          stickyHeaderIndices={[0]}>
+          {/* TAB */}
           <View
             style={[
-              banner(true),
-              radius_lg,
-              flex_row,
+              align_start,
               w_full,
-              sp_4,
-              p_0,
-              justify_between,
-              align_center,
-              {paddingHorizontal: 10},
+              p_3,
+              {paddingBottom: 0, backgroundColor: 'white'},
             ]}>
-            <View style={[flex_row, sp_4, p_3, align_center]}>
-              <Image style={img_sm_2} source={alertIcon} />
-              <Typography>새로운 업데이트 소식 전해드릴게요.</Typography>
-            </View>
-            <Image style={img_xs} source={_x} />
-          </View>
-          {/* SLIDER */}
-          <Swiper
-            autoplay={false}
-            loop={true}
-            showsPagination={false}
-            autoplayTimeout={5}
-            containerStyle={{
-              width: screenWidth - 16 * 2,
-              height: screenWidth - 16 * 2,
-            }}>
-            {bannerList.image.map((image, index) => (
-              <ImageBackground
-                key={index}
-                imageStyle={radius_lg}
-                style={img_full}
-                source={bannerList.image[index]}>
-                <View style={[sp_3, align_center, m_4]}>
-                  <Typography white bold size={'xl'}>
-                    Title
-                  </Typography>
-                  <Typography white>서브텍스트가 들어갑니다</Typography>
-                  <View
-                    style={[
-                      {
-                        backgroundColor: blackAlpha500,
-                        paddingHorizontal: 16,
-                        paddingVertical: 4,
-                      },
-                      radius_full,
-                      align_center,
-                    ]}>
-                    <Typography white size={'sm'}>
-                      {index + 1} / {bannerList.image?.length}
-                    </Typography>
-                  </View>
-                </View>
-              </ImageBackground>
-            ))}
-          </Swiper>
-
-          {group_category.map((category, index) => (
-            <View
-              key={index}
-              style={[w_full, sp_3]}
-              ref={
-                index === 0
-                  ? firstComponentRef
-                  : index === 2
-                  ? secondComponentRef
-                  : thirdComponentRef
-              }>
-              <View style={[flex_column, sp_2]}>
-                <Typography size={'lg'} bold>
-                  {category}
-                </Typography>
-                <Typography size={'md'} light>
-                  {index === 0 || index === 2
-                    ? '우리 동네, 밥 머글 사람?'
-                    : index === 1
-                    ? '새로운 이성과 커피 친구 해보세요.'
-                    : '각 분야 정보를 공유해보세요.'}
-                </Typography>
-              </View>
-
-              {index === 1 ? (
-                <View
-                  style={{
-                    width: '100%',
-                    marginBottom: 20,
-                    gap: 20,
-                  }}>
-                  <ScrollView
-                    horizontal={true}
-                    contentContainerStyle={{
-                      gap: 10,
-                    }}
-                    showsHorizontalScrollIndicator={false}>
-                    {userList?.map((user, index) => (
-                      <MatchBox
-                        key={index}
-                        user={user}
-                        index={index}
-                        navigation={navigation}
-                        userList={userList}
-                      />
-                    ))}
-                  </ScrollView>
-                </View>
-              ) : (
-                <ItemList
-                  index={index}
-                  items={
-                    index === 0
-                      ? muggleGroupList
-                      : index === 2
-                      ? muggleClassList
-                      : muggleBusinessList
-                  }
-                />
+            <View style={[flex_row, sp_2]}>
+              {group_category.map(
+                (category, index) =>
+                  index !== 1 && (
+                    <TouchableOpacity
+                      key={index}
+                      onPress={() => {
+                        console.log('category ===> ', category, index);
+                        setSelectedGroup(category);
+                        scrollToComponent(
+                          index === 0
+                            ? firstComponentRef
+                            : index === 2
+                            ? secondComponentRef
+                            : thirdComponentRef,
+                        );
+                      }}>
+                      <View style={[under_button(selectedGroup === category)]}>
+                        <Typography
+                          bold
+                          black={selectedGroup === category}
+                          light={selectedGroup !== category}>
+                          {category}
+                        </Typography>
+                      </View>
+                    </TouchableOpacity>
+                  ),
               )}
             </View>
-          ))}
-        </View>
-      </ScrollView>
+          </View>
+          {/* ALERT */}
+          <View style={[w_full, p_4, sp_4]}>
+            <View
+              style={[
+                banner(true),
+                radius_lg,
+                flex_row,
+                w_full,
+                sp_4,
+                p_0,
+                justify_between,
+                align_center,
+                {paddingHorizontal: 10},
+              ]}>
+              <View style={[flex_row, sp_4, p_3, align_center]}>
+                <Image style={img_sm_2} source={alertIcon} />
+                <Typography>새로운 업데이트 소식 전해드릴게요.</Typography>
+              </View>
+              <Image style={img_xs} source={_x} />
+            </View>
+            {/* SLIDER */}
+            <Swiper
+              autoplay={false}
+              loop={true}
+              showsPagination={false}
+              autoplayTimeout={5}
+              containerStyle={{
+                width: screenWidth - 16 * 2,
+                height: screenWidth - 16 * 2,
+              }}>
+              {bannerList.image.map((image, index) => (
+                <ImageBackground
+                  key={index}
+                  imageStyle={radius_lg}
+                  style={img_full}
+                  source={bannerList.image[index]}>
+                  <View style={[sp_3, align_center, m_4]}>
+                    <Typography white bold size={'xl'}>
+                      Title
+                    </Typography>
+                    <Typography white>서브텍스트가 들어갑니다</Typography>
+                    <View
+                      style={[
+                        {
+                          backgroundColor: blackAlpha500,
+                          paddingHorizontal: 16,
+                          paddingVertical: 4,
+                        },
+                        radius_full,
+                        align_center,
+                      ]}>
+                      <Typography white size={'sm'}>
+                        {index + 1} / {bannerList.image?.length}
+                      </Typography>
+                    </View>
+                  </View>
+                </ImageBackground>
+              ))}
+            </Swiper>
+
+            {group_category.map((category, index) => (
+              <View
+                key={index}
+                style={[w_full, sp_3]}
+                ref={
+                  index === 0
+                    ? firstComponentRef
+                    : index === 2
+                    ? secondComponentRef
+                    : thirdComponentRef
+                }>
+                <View style={[flex_column, sp_2]}>
+                  <Typography size={'lg'} bold>
+                    {category}
+                  </Typography>
+                  <Typography size={'md'} light>
+                    {index === 0 || index === 2
+                      ? '우리 동네, 밥 머글 사람?'
+                      : index === 1
+                      ? '새로운 이성과 커피 친구 해보세요.'
+                      : '각 분야 정보를 공유해보세요.'}
+                  </Typography>
+                </View>
+
+                {index === 1 ? (
+                  <View
+                    style={{
+                      width: '100%',
+                      marginBottom: 20,
+                      gap: 20,
+                    }}>
+                    <ScrollView
+                      horizontal={true}
+                      contentContainerStyle={{
+                        gap: 10,
+                      }}
+                      showsHorizontalScrollIndicator={false}>
+                      {userList?.map((user, index) => (
+                        <MatchBox
+                          key={index}
+                          user={user}
+                          index={index}
+                          navigation={navigation}
+                          userList={userList}
+                        />
+                      ))}
+                    </ScrollView>
+                  </View>
+                ) : (
+                  <ItemList
+                    index={index}
+                    items={
+                      index === 0
+                        ? muggleGroupList
+                        : index === 2
+                        ? muggleClassList
+                        : muggleBusinessList
+                    }
+                  />
+                )}
+              </View>
+            ))}
+          </View>
+        </ScrollView>
+      </SafeAreaView>
     </View>
   );
 };
