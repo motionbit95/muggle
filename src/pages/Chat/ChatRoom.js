@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 import styles, {
   align_center,
+  blackAlpha400,
   blackAlpha500,
   blackAlpha900,
   f_full,
@@ -295,6 +296,7 @@ const ChatRoom = ({navigation, route}) => {
             {flexDirection: 'row', alignItems: 'center', gap: -40},
           ]}>
           <TextInput
+            placeholderTextColor={blackAlpha400}
             style={{
               fontFamily: font_family,
               alignItems: 'center',

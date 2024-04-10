@@ -12,6 +12,7 @@ import styles, {
   align_start,
   blackAlpha200,
   blackAlpha300,
+  blackAlpha400,
   blackAlpha700,
   blackAlpha900,
   btn_primary,
@@ -343,6 +344,7 @@ const DirectRoom = ({navigation, route}) => {
               </View>
               <View>
                 <TextInput
+                  placeholderTextColor={blackAlpha400}
                   value={promise_place}
                   onChange={e => setPlace(e.nativeEvent.text)}
                   style={[
@@ -625,6 +627,7 @@ const DirectRoom = ({navigation, route}) => {
             {flexDirection: 'row', alignItems: 'center', gap: -40},
           ]}>
           <TextInput
+            placeholderTextColor={blackAlpha400}
             style={{
               fontFamily: font_family,
               alignItems: 'center',

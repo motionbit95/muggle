@@ -11,6 +11,7 @@ import {
 
 import styles, {
   align_center,
+  blackAlpha400,
   blackAlpha50,
   blackAlpha900,
   center,
@@ -291,6 +292,7 @@ const Profile = ({navigation, route}) => {
                 </Typography>
               </View>
               <TextInput
+                placeholderTextColor={blackAlpha400}
                 style={[
                   {
                     width: '100%',
@@ -315,6 +317,7 @@ const Profile = ({navigation, route}) => {
                 </Typography>
               </View>
               <TextInput
+                placeholderTextColor={blackAlpha400}
                 multiline
                 style={[
                   {
@@ -456,6 +459,7 @@ const Profile = ({navigation, route}) => {
                   {height: 50},
                 ]}>
                 <TextInput
+                  placeholderTextColor={blackAlpha400}
                   keyboardType="numeric"
                   style={[
                     {
@@ -490,6 +494,7 @@ const Profile = ({navigation, route}) => {
                   />
                 </View>
                 <TextInput
+                  placeholderTextColor={blackAlpha400}
                   keyboardType="numeric"
                   style={[
                     {

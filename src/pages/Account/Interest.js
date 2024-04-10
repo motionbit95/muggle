@@ -3,6 +3,7 @@ import {ScrollView, TextInput, TouchableOpacity, View} from 'react-native';
 
 import {addDocument} from '../../firebase/firebase_func';
 import styles, {
+  blackAlpha400,
   blackAlpha50,
   center,
   font_family,
@@ -107,6 +108,7 @@ const Interest = ({navigation, route}) => {
                 </Typography>
               </View>
               <TextInput
+                placeholderTextColor={blackAlpha400}
                 onChange={e => (data.user_info = e.nativeEvent.text)}
                 multiline
                 style={[

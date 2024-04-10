@@ -21,6 +21,7 @@ import {singleQuery} from '../../firebase/firebase_func';
 import PopupBase from '../../Component/PopupBase';
 import Typography from '../../Component/Typography';
 import {
+  blackAlpha400,
   blackAlpha500,
   blackAlpha900,
   flex_row,
@@ -97,6 +98,7 @@ const Certificate = ({navigation}) => {
                 gap: 10,
               }}>
               <TextInput
+                placeholderTextColor={blackAlpha400}
                 style={{
                   fontFamily: font_family,
                   flex: 7,
@@ -137,6 +139,7 @@ const Certificate = ({navigation}) => {
               </TouchableOpacity>
             </View>
             <TextInput
+              placeholderTextColor={blackAlpha400}
               style={{
                 fontFamily: font_family,
                 width: '100%',

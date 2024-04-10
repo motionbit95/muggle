@@ -18,6 +18,7 @@ import {
 import DropDown from '../../Component/PickerComponent';
 import styles, {
   align_center,
+  blackAlpha400,
   blackAlpha900,
   flex_row,
   font_family,
@@ -199,6 +200,7 @@ const SignUp = ({navigation}) => {
                 이름
               </Typography>
               <TextInput
+                placeholderTextColor={blackAlpha400}
                 style={[
                   {
                     fontFamily: font_family,
@@ -334,6 +336,7 @@ const SignUp = ({navigation}) => {
                   {height: 50},
                 ]}>
                 <TextInput
+                  placeholderTextColor={blackAlpha400}
                   keyboardType="numeric"
                   style={[
                     {
@@ -368,6 +371,7 @@ const SignUp = ({navigation}) => {
                   />
                 </View>
                 <TextInput
+                  placeholderTextColor={blackAlpha400}
                   keyboardType="numeric"
                   style={[
                     {fontFamily: font_family, flex: 1.5, color: 'black'},

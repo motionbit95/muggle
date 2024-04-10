@@ -12,6 +12,7 @@ import {
   radius_lg,
   sp_2,
 } from '../style/styles';
+import Typography from './Typography';
 
 const BannerPicker = props => {
   const [imageUri, setImageUri] = useState(
@@ -121,9 +122,7 @@ const BannerPicker = props => {
               source={require('../assets/AiOutlinePicture.png')}
               style={{width: 50, height: 50, opacity: 0.5}}
             />
-            <Text style={{fontSize: fs_lg, opacity: 0.5}}>
-              우리 모임의 사진을 올려보세요.
-            </Text>
+            <Typography light>우리 모임의 사진을 올려보세요.</Typography>
           </View>
         )}
       </TouchableOpacity>

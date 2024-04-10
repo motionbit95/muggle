@@ -1,26 +1,20 @@
 import React, {useEffect} from 'react';
-import {Image, ScrollView, Text, View} from 'react-native';
+import {Image, ScrollView, View} from 'react-native';
 import {
   blackAlpha100,
-  blackAlpha500,
   f_full,
   flex_column,
   flex_row,
-  fs_lg,
-  fs_md,
-  fs_xl,
-  img_lg,
-  img_md,
   img_ml_2,
   p_1,
   p_3,
   radius_full,
-  radius_sm,
   sp_2,
   sp_3,
 } from '../../style/styles';
 import {getDocList} from '../../firebase/firebase_func';
 import GroupBox from '../../Component/GroupBox';
+import Typography from '../../Component/Typography';
 
 function UserView({navigation, route}) {
   const {data, userList} = route.params;
@@ -61,15 +55,15 @@ function UserView({navigation, route}) {
             />
           </View>
           <View style={[flex_column, sp_2]}>
-            <Text style={{fontSize: fs_xl, fontWeight: 'bold'}}>
+            <Typography size="xl" bold>
               {data?.user_name}
-            </Text>
-            <Text style={{fontSize: fs_md, color: blackAlpha500}}>
+            </Typography>
+            <Typography light>
               {data?.user_place} • {data?.user_birth.substring(0, 4)}.
               {data?.user_birth.substring(4, 6)}.
               {data?.user_birth.substring(6, 8)}
-            </Text>
-            <Text>{data?.user_info}</Text>
+            </Typography>
+            <Typography>{data?.user_info}</Typography>
           </View>
         </View>
         <View style={[flex_row, sp_2]}>
@@ -81,7 +75,7 @@ function UserView({navigation, route}) {
                 radius_full,
                 {backgroundColor: blackAlpha100, paddingHorizontal: 6},
               ]}>
-              <Text key={index}>{item}</Text>
+              <Typography key={index}>{item}</Typography>
             </View>
           ))}
         </View>
@@ -89,12 +83,13 @@ function UserView({navigation, route}) {
 
       <View style={[p_3, {backgroundColor: '#f1f1f1'}]}>
         <View style={{marginBottom: 10}}>
-          <Text style={{fontSize: fs_lg, fontWeight: 'bold'}}>가입한 모임</Text>
+          <Typography size="lg" bold>
+            가입한 모임
+          </Typography>
         </View>
         <ScrollView>
           <ScrollView style={[f_full]}>
             {groupList?.map((item, index) => (
-              // <Text key={index}>{item?.doc_id}</Text>
               <GroupBox
                 key={index}
                 userList={userList}

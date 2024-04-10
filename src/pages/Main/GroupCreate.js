@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 import {cities, districts, font_md} from '../../firebase/api';
 import styles, {
+  blackAlpha400,
   blackAlpha900,
   f_full,
   font_family,
@@ -232,6 +233,7 @@ const GroupCreate = ({navigation, route}) => {
                 </View>
                 <View>
                   <TextInput
+                    placeholderTextColor={blackAlpha400}
                     onChange={e => setPlace(e.nativeEvent.text)}
                     style={[
                       {
@@ -275,6 +277,7 @@ const GroupCreate = ({navigation, route}) => {
                   모임 이름
                 </Typography>
                 <TextInput
+                  placeholderTextColor={blackAlpha400}
                   onChange={e => setMatchName(e.nativeEvent.text)}
                   style={[
                     {
@@ -328,6 +331,7 @@ const GroupCreate = ({navigation, route}) => {
                       {matchPrice !== '나누기' &&
                         matchPrice !== '회비 없음' && (
                           <TextInput
+                            placeholderTextColor={blackAlpha400}
                             onChange={e => setMatchPrice(e.nativeEvent.text)}
                             keyboardType="numeric"
                             style={[
@@ -355,6 +359,7 @@ const GroupCreate = ({navigation, route}) => {
                   모임목표
                 </Typography>
                 <TextInput
+                  placeholderTextColor={blackAlpha400}
                   onChange={e => setMatchTarget(e.nativeEvent.text)}
                   multiline
                   style={[
@@ -382,6 +387,7 @@ const GroupCreate = ({navigation, route}) => {
                     정원
                   </Typography>
                   <TextInput
+                    placeholderTextColor={blackAlpha400}
                     onChange={e => setMatchPersonnel(e.nativeEvent.text)}
                     style={[
                       {
