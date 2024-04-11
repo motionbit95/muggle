@@ -55,12 +55,12 @@ function FAQ(props) {
                   justify_between,
                   {backgroundColor: 'white'},
                 ]}>
-                <View style={[flex_row, align_center]}>
+                <View style={[flex_row, align_center, w_full]}>
                   <Image
                     style={img_md}
                     source={require('../../assets/icons/Q.png')}
                   />
-                  <Typography bold size="lg">
+                  <Typography bold size="md">
                     머글은 어떤 서비스인가요?
                   </Typography>
                 </View>
@@ -81,7 +81,7 @@ function FAQ(props) {
                   style={[img_md, {marginLeft: 2}]}
                   source={require('../../assets/icons/A.png')}
                 />
-                <Typography>
+                <Typography size="sm">
                   {`머글은 모임, 이성 매칭 2가지 카테고리로 운영되고 있으며 모임에는 식사모임, 원데이 클래스, 비지니스 모임으로 다양한 취미 및 정보 공유의 커뮤니티를 제공합니다.
 
 이성 매칭은 오프라인 커피 이성 친구 매칭으로 남성유저의 경우 매칭권을 결제하여 마음에 드는 여성 유저에게 매칭 신청을 할 수 있는 시스템입니다.`}
@@ -113,12 +113,12 @@ function FAQ(props) {
                   justify_between,
                   {backgroundColor: 'white'},
                 ]}>
-                <View style={[flex_row, align_center]}>
+                <View style={[flex_row, align_center, w_full]}>
                   <Image
                     style={img_md}
                     source={require('../../assets/icons/Q.png')}
                   />
-                  <Typography bold size="lg">
+                  <Typography bold size="md">
                     머글의 모임방 입장은 무료인가요?
                   </Typography>
                 </View>
@@ -139,7 +139,7 @@ function FAQ(props) {
                   style={[img_md, {marginLeft: 2}]}
                   source={require('../../assets/icons/A.png')}
                 />
-                <Typography>
+                <Typography size="sm">
                   {`네! 무료입니다. 현재 머글의 모든 모임 서비스 입장은 무료로 운영되고 있어요
 단, 원데이 클래스 등의 회비는 개인적으로 부담하셔야합니다!
 
@@ -172,12 +172,12 @@ function FAQ(props) {
                   justify_between,
                   {backgroundColor: 'white'},
                 ]}>
-                <View style={[flex_row, align_center]}>
+                <View style={[flex_row, align_center, w_full]}>
                   <Image
                     style={img_md}
                     source={require('../../assets/icons/Q.png')}
                   />
-                  <Typography bold size="lg">
+                  <Typography bold size="md">
                     커피 이성친구 매칭 서비스는 무엇인가요?
                   </Typography>
                 </View>
@@ -198,7 +198,7 @@ function FAQ(props) {
                   style={[img_md, {marginLeft: 2}]}
                   source={require('../../assets/icons/A.png')}
                 />
-                <Typography>
+                <Typography size="sm">
                   {`호감 가는 이성과 오프라인 커피 자리를 매칭해주는 서비스입니다.
 
 여성 유저
@@ -240,12 +240,12 @@ function FAQ(props) {
                   justify_between,
                   {backgroundColor: 'white'},
                 ]}>
-                <View style={[flex_row, align_center]}>
+                <View style={[flex_row, align_center, w_full]}>
                   <Image
                     style={img_md}
                     source={require('../../assets/icons/Q.png')}
                   />
-                  <Typography bold size="lg">
+                  <Typography bold size="md">
                     커피 매칭 후 정산은 어떻게 이루어지나요?
                   </Typography>
                 </View>
@@ -266,7 +266,7 @@ function FAQ(props) {
                   style={[img_md, {marginLeft: 2}]}
                   source={require('../../assets/icons/A.png')}
                 />
-                <Typography>
+                <Typography size="sm">
                   {`남성 유저에게 매칭 신청을 받고 커피 매칭을 완료한 여성 유저는 2영업일 내로 회원가입시 기재해주신 정산 계좌로 매칭권의 70%의 대금을 정산해드립니다!
 
 회원가입시 계좌를 기입하지 않으셨다면 앱 내 마이페이지 프로필 수정에 계좌를 기재하여 주시고 마이페이지 - 정산 신청 해주시면 됩니다!`}

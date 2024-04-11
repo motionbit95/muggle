@@ -43,7 +43,10 @@ const PopupBase = ({icon, contents, ...props}) => {
               flex_column,
               justify_end,
               align_end,
-              {backgroundColor: 'white'},
+              {
+                backgroundColor: 'white',
+                paddingTop: Platform.OS === 'ios' ? 40 : 0,
+              },
             ]}>
             <ScrollView height={'100%'}>{props.children}</ScrollView>
             <View style={[center, w_full, p_3, {marginBottom: 4}]}>

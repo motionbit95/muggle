@@ -342,7 +342,7 @@ const DirectRoom = ({navigation, route}) => {
                   />
                 </View>
               </View>
-              <View>
+              {/* <View>
                 <TextInput
                   placeholderTextColor={blackAlpha400}
                   value={promise_place}
@@ -358,7 +358,7 @@ const DirectRoom = ({navigation, route}) => {
                   ]}
                   placeholder="상세 주소를 입력하세요."
                 />
-              </View>
+              </View> */}
             </View>
             {message.mode === 'error' && (
               <Typography size="lg" color="red">

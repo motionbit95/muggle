@@ -17,7 +17,7 @@ import {
   w_full,
 } from '../../style/styles';
 
-function Alarm(props) {
+function AlarmSetting(props) {
   const [isAlarm, setIsAlarm] = React.useState(true);
   const [isMarketing, setIsMarketing] = React.useState(true);
   return (
@@ -87,4 +87,4 @@ function Alarm(props) {
   );
 }
 
-export default Alarm;
+export default AlarmSetting;

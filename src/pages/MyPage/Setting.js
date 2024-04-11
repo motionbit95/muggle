@@ -165,10 +165,12 @@ const Setting = ({navigation, route}) => {
                 sp_2,
                 {borderRadius: 10, padding: 10},
               ]}>
-              <View style={(flex_column, sp_2)}>
-                <Typography size="lg" bold>
-                  안내
-                </Typography>
+              <View style={(flex_column, sp_2, p_2)}>
+                <View style={{marginBottom: 10}}>
+                  <Typography size="lg" bold>
+                    안내
+                  </Typography>
+                </View>
                 <TouchableOpacity
                   style={[w_full, styles.TouchButtonStyle]}
                   onPress={() =>
@@ -180,10 +182,12 @@ const Setting = ({navigation, route}) => {
                   <Image source={require('../../assets/rightarrow.png')} />
                 </TouchableOpacity>
               </View>
-              <View style={(flex_column, sp_2)}>
-                <Typography size="lg" bold>
-                  계정관리
-                </Typography>
+              <View style={(flex_column, sp_2, p_2)}>
+                <View style={{marginBottom: 10}}>
+                  <Typography size="lg" bold>
+                    계정관리
+                  </Typography>
+                </View>
                 <TouchableOpacity
                   style={styles.TouchButtonStyle}
                   onPress={onLogout}>
@@ -200,18 +204,15 @@ const Setting = ({navigation, route}) => {
                   </View>
                   <Image source={require('../../assets/rightarrow.png')} />
                 </TouchableOpacity>
-              </View>
-
-              <PopupBase
-                button={
-                  <View style={styles.TouchButtonStyle}>
-                    <View style={styles.rowBox}>
-                      <Typography>이용약관</Typography>
+                <PopupBase
+                  button={
+                    <View style={styles.TouchButtonStyle}>
+                      <View style={styles.rowBox}>
+                        <Typography>이용약관</Typography>
+                      </View>
+                      <Image source={require('../../assets/rightarrow.png')} />
                     </View>
-                    <Image source={require('../../assets/rightarrow.png')} />
-                  </View>
-                }>
-                {Platform.OS === 'ios' ? (
+                  }>
                   <WebView
                     source={{
                       uri: 'https://muggle.life/terms',
@@ -221,25 +222,16 @@ const Setting = ({navigation, route}) => {
                       height: Dimensions.get('window').height,
                     }}
                   />
-                ) : (
-                  <View style={p_3}>
-                    <RenderHtml
-                      contentWidth={Dimensions.get('window').width}
-                      source={{html: terms}}
-                    />
-                  </View>
-                )}
-              </PopupBase>
-              <PopupBase
-                button={
-                  <View style={styles.TouchButtonStyle}>
-                    <View style={styles.rowBox}>
-                      <Typography>개인정보 처리방침</Typography>
+                </PopupBase>
+                <PopupBase
+                  button={
+                    <View style={styles.TouchButtonStyle}>
+                      <View style={styles.rowBox}>
+                        <Typography>개인정보 처리방침</Typography>
+                      </View>
+                      <Image source={require('../../assets/rightarrow.png')} />
                     </View>
-                    <Image source={require('../../assets/rightarrow.png')} />
-                  </View>
-                }>
-                {Platform.OS === 'ios' ? (
+                  }>
                   <WebView
                     source={{
                       uri: 'https://muggle.life/privacy',
@@ -249,15 +241,8 @@ const Setting = ({navigation, route}) => {
                       height: Dimensions.get('window').height,
                     }}
                   />
-                ) : (
-                  <View style={p_3}>
-                    <RenderHtml
-                      contentWidth={Dimensions.get('window').width}
-                      source={{html: privacy}}
-                    />
-                  </View>
-                )}
-              </PopupBase>
+                </PopupBase>
+              </View>
             </View>
           </View>
         </View>

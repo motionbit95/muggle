@@ -128,7 +128,7 @@ function ClassView({navigation, myInfo}) {
         <TouchableOpacity
           style={[styles.button, {flex: 1}]}
           onPress={() =>
-            navigation.navigate('모임생성', {data: {type: 'class'}})
+            navigation.navigate('모임개설', {data: {type: 'class'}})
           }>
           <Typography size="lg" bold white>
             무료 클래스 만들기

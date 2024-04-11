@@ -9,9 +9,11 @@ import {
 } from 'react-native';
 import {cities, districts, font_md} from '../../firebase/api';
 import styles, {
+  align_center,
   blackAlpha400,
   blackAlpha900,
   f_full,
+  flex_row,
   font_family,
   justify_between,
 } from '../../style/styles';
@@ -72,11 +74,7 @@ const GroupCreate = ({navigation, route}) => {
             selectedCity + ' ' + selectedDistrict + ' ' + matchPlace
               ? selectedCity + ' ' + selectedDistrict + ' ' + matchPlace
               : '',
-          group_type: selectedMatch
-            ? selectedMatch === '머글(식사, 취미) 모임'
-              ? '머글 모임'
-              : selectedMatch
-            : '일상 모임',
+          group_type: data?.type !== 'personal' ? '일상 모임' : '원데이 클래스',
           group_name: matchName,
           group_target: matchTarget,
           group_personnel: matchPersonnel ? matchPersonnel : 0,
@@ -145,9 +143,9 @@ const GroupCreate = ({navigation, route}) => {
     }
 
     if (data?.type !== 'personal') {
-      if (!selectedMatch) {
-        message = '모임종류를 선택하세요.';
-      }
+      // if (!selectedMatch) {
+      //   message = '모임종류를 선택하세요.';
+      // }
 
       if (!matchDateTime) {
         message = '모임 시간을 입력하세요.';
@@ -182,7 +180,7 @@ const GroupCreate = ({navigation, route}) => {
   };
 
   return (
-    <View style={[styles.screenStyle, styles.spaceBetween]}>
+    <View style={[styles.screenStyle, styles.spaceBetween, f_full]}>
       {message.isView && (
         <MessageBox
           visible={message.isView}
@@ -205,77 +203,113 @@ const GroupCreate = ({navigation, route}) => {
             <View style={[{width: '100%', gap: 15, padding: 20}]}>
               <View style={styles.columnBox}>
                 <BannerPicker onChangeValue={setMatchImage} />
-                <Typography size="lg" bold>
-                  지역
-                </Typography>
-                <View
-                  style={{
-                    justifyContent: 'stretch',
-                    flexDirection: 'row',
-                    gap: 10,
-                  }}>
-                  <View style={{flex: 1}}>
-                    <DropDown
-                      items={cities}
-                      defaultValue={selectedCity ? selectedCity : '전체'}
-                      onChangeValue={handleCityChange}
-                    />
+                <View style={[flex_row, align_center]}>
+                  <View style={{width: '20%'}}>
+                    <Typography size="md" bold>
+                      지역
+                    </Typography>
                   </View>
-                  <View style={{flex: 1}}>
-                    <DropDown
-                      items={districts[selectedCity]}
-                      defaultValue={
-                        selectedDistrict ? selectedDistrict : '전체'
-                      }
-                      onChangeValue={handleDistrictChange}
-                    />
-                  </View>
-                </View>
-                <View>
-                  <TextInput
-                    placeholderTextColor={blackAlpha400}
-                    onChange={e => setPlace(e.nativeEvent.text)}
-                    style={[
-                      {
-                        width: '100%',
-                        height: 50,
-                        fontFamily: font_family,
-                        fontSize: font_md,
-                        color: blackAlpha900,
-                      },
-                      styles.contentBox,
-                    ]}
-                    placeholder="상세 주소를 입력하세요."
-                  />
-                </View>
-              </View>
-              {data?.type !== 'personal' && (
-                <View style={styles.columnBox}>
-                  <Typography size="lg" bold>
-                    모임종류
-                  </Typography>
                   <View
                     style={{
+                      width: '80%',
                       justifyContent: 'stretch',
                       flexDirection: 'row',
                       gap: 10,
                     }}>
                     <View style={{flex: 1}}>
                       <DropDown
-                        items={group_category.filter(
-                          item => item !== '커피 친구 추천',
-                        )}
-                        defaultValue={selectedMatch ? selectedMatch : '전체'}
-                        onChangeValue={setSelectedMatch}
+                        items={cities}
+                        defaultValue={selectedCity ? selectedCity : '전체'}
+                        onChangeValue={handleCityChange}
+                      />
+                    </View>
+                    <View style={{flex: 1}}>
+                      <DropDown
+                        items={districts[selectedCity]}
+                        defaultValue={
+                          selectedDistrict ? selectedDistrict : '전체'
+                        }
+                        onChangeValue={handleDistrictChange}
                       />
                     </View>
                   </View>
                 </View>
+              </View>
+              {data?.type !== 'personal' && (
+                <>
+                  <View style={[flex_row, align_center]}>
+                    <View style={{width: '20%'}}>
+                      <Typography size="md" bold>
+                        모임 일정
+                      </Typography>
+                    </View>
+                    <View style={{width: '80%'}}>
+                      <DateTimeInput onChange={e => setMatchDateTime(e)} />
+                    </View>
+                  </View>
+                  <View style={[flex_row, align_center]}>
+                    <View style={{width: '20%'}}>
+                      <Typography size="md" bold>
+                        모임회비
+                      </Typography>
+                    </View>
+                    <View
+                      style={[
+                        {
+                          width: '80%',
+                          justifyContent: 'stretch',
+                          flexDirection: 'row',
+                          gap: 10,
+                        },
+                      ]}>
+                      <TextInput
+                        placeholderTextColor={blackAlpha400}
+                        onChange={e => setMatchPrice(e.nativeEvent.text)}
+                        keyboardType="numeric"
+                        style={[
+                          {
+                            width: '100%',
+                            height: 50,
+                            fontFamily: font_family,
+                            fontSize: font_md,
+                            color: blackAlpha900,
+                          },
+                          styles.contentBox,
+                        ]}
+                        placeholder="인당 회비를 작성해주세요."
+                        // onChange={null}
+                      />
+                    </View>
+                  </View>
+                  <View style={[flex_row, align_center]}>
+                    <View style={{width: '20%'}}>
+                      <Typography size="md" bold>
+                        모임 정원
+                      </Typography>
+                    </View>
+                    <View style={{width: '80%'}}>
+                      <TextInput
+                        placeholderTextColor={blackAlpha400}
+                        onChange={e => setMatchPersonnel(e.nativeEvent.text)}
+                        style={[
+                          {
+                            width: '100%',
+                            height: 50,
+                            fontFamily: font_family,
+                            fontSize: font_md,
+                            color: blackAlpha900,
+                          },
+                          styles.contentBox,
+                        ]}
+                        keyboardType="number-pad"
+                        placeholder="최대 인원 30명"
+                      />
+                    </View>
+                  </View>
+                </>
               )}
+
               <View style={styles.columnBox}>
-                <Typography size="lg" bold>
-                  모임 이름
-                </Typography>
                 <TextInput
                   placeholderTextColor={blackAlpha400}
                   onChange={e => setMatchName(e.nativeEvent.text)}
@@ -292,72 +326,8 @@ const GroupCreate = ({navigation, route}) => {
                   placeholder="모임 이름을 입력해주세요."
                 />
               </View>
-              {data?.type !== 'personal' && (
-                <>
-                  <View style={styles.columnBox}>
-                    <Typography size="lg" bold>
-                      모임 일정
-                    </Typography>
-                    <DateTimeInput onChange={e => setMatchDateTime(e)} />
-                    {/* <TextInput
-              onChange={e => setMatchDateTime(e.nativeEvent.text)}
-              style={[
-                {
-                  width: '100%',
-                  height: 50,
-                },
-                styles.contentBox,
-              ]}
-              placeholder="모임 일정을 입력해주세요."
-            /> */}
-                  </View>
-                  <View style={styles.columnBox}>
-                    <Typography size="lg" bold>
-                      더치페이 여부
-                    </Typography>
-                    <View
-                      style={{
-                        justifyContent: 'stretch',
-                        flexDirection: 'row',
-                        gap: 10,
-                      }}>
-                      <View style={{flex: 1}}>
-                        <DropDown
-                          items={matchProps}
-                          defaultValue={matchPrice ? matchPrice : '직접입력'}
-                          onChangeValue={setMatchPrice}
-                        />
-                      </View>
-                      {matchPrice !== '나누기' &&
-                        matchPrice !== '회비 없음' && (
-                          <TextInput
-                            placeholderTextColor={blackAlpha400}
-                            onChange={e => setMatchPrice(e.nativeEvent.text)}
-                            keyboardType="numeric"
-                            style={[
-                              {
-                                flex: 1.5,
-                                width: '100%',
-                                height: 50,
-                                fontFamily: font_family,
-                                fontSize: font_md,
-                                color: blackAlpha900,
-                              },
-                              styles.contentBox,
-                            ]}
-                            placeholder="모임 금액을 입력해주세요."
-                            // onChange={null}
-                          />
-                        )}
-                    </View>
-                  </View>
-                </>
-              )}
 
               <View style={styles.columnBox}>
-                <Typography size="lg" bold>
-                  모임목표
-                </Typography>
                 <TextInput
                   placeholderTextColor={blackAlpha400}
                   onChange={e => setMatchTarget(e.nativeEvent.text)}
@@ -380,41 +350,17 @@ const GroupCreate = ({navigation, route}) => {
                   }
                 />
               </View>
-
-              {data?.type !== 'personal' && (
-                <View style={styles.columnBox}>
-                  <Typography size="lg" bold>
-                    정원
-                  </Typography>
-                  <TextInput
-                    placeholderTextColor={blackAlpha400}
-                    onChange={e => setMatchPersonnel(e.nativeEvent.text)}
-                    style={[
-                      {
-                        width: '100%',
-                        height: 50,
-                        fontFamily: font_family,
-                        fontSize: font_md,
-                        color: blackAlpha900,
-                      },
-                      styles.contentBox,
-                    ]}
-                    keyboardType="number-pad"
-                    placeholder="정원을 입력해주세요. (최대 30명)"
-                  />
-                </View>
-              )}
             </View>
-          </View>
-          <View style={[styles.buttonBox]}>
-            <TouchableOpacity style={styles.button} onPress={confirmCreate}>
-              <Typography size="lg" bold white>
-                모임 만들기
-              </Typography>
-            </TouchableOpacity>
           </View>
         </View>
       </ScrollView>
+      <View style={[styles.buttonBox]}>
+        <TouchableOpacity style={styles.button} onPress={confirmCreate}>
+          <Typography size="lg" bold white>
+            모임 만들기
+          </Typography>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };

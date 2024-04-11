@@ -290,7 +290,7 @@ const User = ({navigation, route}) => {
                 </View>
                 <Image source={require('../../assets/rightarrow.png')} />
               </TouchableOpacity>
-              <TouchableOpacity
+              {/* <TouchableOpacity
                 style={styles.TouchButtonStyle}
                 onPress={() =>
                   navigation.navigate('매칭', {screen: '매칭내역'})
@@ -302,10 +302,12 @@ const User = ({navigation, route}) => {
                   <Typography>매칭내역</Typography>
                 </View>
                 <Image source={require('../../assets/rightarrow.png')} />
-              </TouchableOpacity>
+              </TouchableOpacity> */}
               <TouchableOpacity
                 style={styles.TouchButtonStyle}
-                onPress={() => navigation.navigate('마이', {screen: '알림'})}>
+                onPress={() =>
+                  navigation.navigate('마이', {screen: '알림설정'})
+                }>
                 <View style={styles.rowBox}>
                   <Image source={require('../../assets/icons/Bell.png')} />
                   <Typography>알림설정</Typography>

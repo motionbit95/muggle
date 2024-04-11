@@ -1,5 +1,11 @@
 import React, {useEffect, useRef, useState} from 'react';
-import {Dimensions, Image, TouchableOpacity, View} from 'react-native';
+import {
+  Dimensions,
+  Image,
+  Platform,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import {getDocList} from '../../firebase/firebase_func';
 import {
   align_center,
@@ -10,6 +16,7 @@ import {
   img_xxs,
   justify_between,
   justify_center,
+  p_2,
   sp_2,
   under_button,
 } from '../../style/styles';
@@ -151,13 +158,7 @@ const Home = ({navigation}) => {
     <View style={{backgroundColor: 'white'}}>
       <SafeAreaView>
         {/* HEADER */}
-        <View
-          style={[
-            flex_row,
-            justify_between,
-            align_center,
-            {marginTop: 10, paddingHorizontal: 20},
-          ]}>
+        <View style={[flex_row, justify_between, align_center, p_2]}>
           <View style={[flex_row, align_center]}>
             <Image
               source={require('../../assets/muggle.png')}
@@ -193,7 +194,7 @@ const Home = ({navigation}) => {
           <View style={flex_row}>
             <TouchableOpacity
               style={{marginRight: 10}}
-              onPress={() => alert('알림 페이지 전달')}>
+              onPress={() => navigation.navigate('알림')}>
               <Image
                 style={{width: 24, height: 24}}
                 source={require('../../assets/Notification.png')}
@@ -201,7 +202,8 @@ const Home = ({navigation}) => {
             </TouchableOpacity>
           </View>
         </View>
-        <View style={[f_full, {paddingBottom: 100}]}>
+        <View
+          style={[f_full, {paddingBottom: Platform.OS === 'ios' ? 110 : 150}]}>
           {selectedGroup === '일상' && (
             <MatchingView myInfo={myInfo} navigation={navigation} />
           )}

@@ -214,7 +214,7 @@ const Chat = ({navigation}) => {
                     </View>
                   </View>
                   <View style={sp_1}>
-                    <Typography size="lg" bold>
+                    <Typography size="md" bold>
                       {group?.group_name}
                     </Typography>
                     <Typography light>{group?.group_place}</Typography>
@@ -279,7 +279,12 @@ const Chat = ({navigation}) => {
                   });
                 }}>
                 <View
-                  style={{flexDirection: 'row', gap: 10, alignItems: 'center'}}>
+                  style={{
+                    flexDirection: 'row',
+                    gap: 10,
+                    alignItems: 'center',
+                    width: '80%',
+                  }}>
                   <View>
                     <View style={styles.Avartar50}>
                       <Image
@@ -292,8 +297,8 @@ const Chat = ({navigation}) => {
                       />
                     </View>
                   </View>
-                  <View style={sp_1}>
-                    <Typography size="lg" bold>
+                  <View style={[sp_1, {width: '80%'}]}>
+                    <Typography size="md" bold numberOfLines={1}>
                       {group?.group_name}
                     </Typography>
                     <Typography light>
@@ -301,7 +306,7 @@ const Chat = ({navigation}) => {
                     </Typography>
                   </View>
                 </View>
-                <View style={flex_row}>
+                <View style={[flex_row, {width: '10%'}]}>
                   <Typography red bold>
                     {group?.group_users.length}{' '}
                   </Typography>

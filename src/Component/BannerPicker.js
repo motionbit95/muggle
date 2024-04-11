@@ -100,7 +100,7 @@ const BannerPicker = props => {
               // radius_full,
               radius_lg,
               f_full,
-              {height: 200, backgroundColor: '#d9d9d9'},
+              {height: 150, backgroundColor: '#d9d9d9'},
             ]}
             source={imageUri ? {uri: imageUri} : null}
           />
@@ -111,7 +111,7 @@ const BannerPicker = props => {
               center,
               sp_2,
               {
-                height: 200,
+                height: 150,
                 borderRadius: 10,
                 borderWidth: 2,
                 borderStyle: 'dashed',

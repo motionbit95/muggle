@@ -7,6 +7,7 @@
 
 import React, {useEffect, useState} from 'react';
 import {
+  Alert,
   Button,
   Image,
   SafeAreaView,
@@ -45,6 +46,7 @@ import GroupCreate from './src/pages/Main/GroupCreate';
 import MatchHistory from './src/pages/Matching/MatchHistory';
 import MatchPayment from './src/pages/Matching/MatchPayment';
 import {
+  blackAlpha900,
   center,
   circle_40,
   font_family_bold,
@@ -57,12 +59,13 @@ import {
 import WebViewPayment from './src/pages/Matching/WebViewPayment';
 import DirectRoom from './src/pages/Chat/DirectRoom';
 import GroupView from './src/pages/Main/GroupView';
-import Alarm from './src/pages/MyPage/Alarm';
+import Alarm from './src/pages/Main/Alarm';
 import UserView from './src/pages/Main/UserView';
 import FAQ from './src/pages/MyPage/FAQ';
 import MatchingView from './src/pages/Main/MatchingView';
 import MyActivity from './src/pages/MyPage/MyActivity';
 import Setting from './src/pages/MyPage/Setting';
+import AlarmSetting from './src/pages/MyPage/Alarm';
 
 const App = () => {
   // const isDarkMode = useColorScheme() === 'dark';
@@ -154,7 +157,7 @@ const App = () => {
         name="모임개설"
         component={GroupCreate}
         options={({navigation}) => ({
-          title: '모임개설',
+          title: '클래스 만들기',
           headerStyle: {
             backgroundColor: '#fff',
           },
@@ -208,6 +211,21 @@ const App = () => {
           },
         })}
       />
+
+      <HomeStack.Screen
+        name="알림"
+        component={Alarm}
+        options={({navigation}) => ({
+          title: '알림',
+          headerStyle: {
+            backgroundColor: '#fff',
+          },
+          headerTintColor: '#black',
+          headerTitleStyle: {
+            fontFamily: font_family_bold,
+          },
+        })}
+      />
     </HomeStack.Navigator>
   );
 
@@ -233,10 +251,11 @@ const App = () => {
         options={{headerShown: false}}
       />
       <UserStack.Screen
-        name="알림"
-        component={Alarm}
+        name="알림설정"
+        component={AlarmSetting}
         options={() => ({
           headerTitleStyle: {
+            color: blackAlpha900,
             fontFamily: font_family_bold,
           },
         })}
@@ -285,11 +304,11 @@ const App = () => {
         name="채팅방"
         component={Chat}
         options={({navigation}) => ({
-          headerLeft: () => (
-            <TouchableOpacity onPress={() => navigation.navigate('Muggle')}>
-              <Image style={img_md} source={require('./src/assets/home.png')} />
-            </TouchableOpacity>
-          ),
+          // headerLeft: () => (
+          //   <TouchableOpacity onPress={() => navigation.navigate('Muggle')}>
+          //     <Image style={img_md} source={require('./src/assets/home.png')} />
+          //   </TouchableOpacity>
+          // ),
           title: '채팅방',
           headerStyle: {
             backgroundColor: '#fff',
@@ -363,7 +382,7 @@ const App = () => {
           headerRight: () => (
             <TouchableOpacity
               style={{marginRight: 10}}
-              onPress={() => alert('알림 페이지 전달')}>
+              onPress={() => navigation.navigate('알림')}>
               <Image
                 style={{width: 24, height: 24}}
                 source={require('./src/assets/Notification.png')}
@@ -540,6 +559,7 @@ const App = () => {
             headerTitleStyle: {
               fontFamily: font_family_bold,
             },
+
             tabBarIcon: ({focused}) => (
               <Image
                 source={focused ? tabBarSelectIcon[1] : tabBarIcon[1]}
