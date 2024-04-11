@@ -12,7 +12,7 @@ function GroupView({navigation, route}) {
   // 제목을 헤더 타이틀로 설정
   React.useLayoutEffect(() => {
     navigation.setOptions({
-      title: title,
+      title: title ? title : '찜모임',
     });
   }, [navigation, title]);
 

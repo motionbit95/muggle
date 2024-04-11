@@ -16,7 +16,7 @@ import GroupBox from '../../Component/GroupBox';
 import Geolocation from '@react-native-community/geolocation'; // 라이브러리 import
 import firestore from '@react-native-firebase/firestore';
 
-function MatchingView({navigation, myInfo}) {
+function ClassView({navigation, myInfo}) {
   // const {myInfo} = route.params ? route.params : {myInfo: null};
   const [order, setOrder] = useState(0);
   const [groupList, setGroupList] = React.useState([]);
@@ -25,7 +25,7 @@ function MatchingView({navigation, myInfo}) {
     const groupList = [];
     await getDocList('group').then(res => {
       res.forEach(
-        group => group.group_type === '일상 모임' && groupList.push(group),
+        group => group.group_type === '원데이 클래스' && groupList.push(group),
       );
       // console.log('groupList ==>', groupList);
       // 거리 순일 경우 소팅
@@ -128,17 +128,17 @@ function MatchingView({navigation, myInfo}) {
         <TouchableOpacity
           style={[styles.button, {flex: 1}]}
           onPress={() =>
-            navigation.navigate('일상모임생성', {data: {type: 'personal'}})
+            navigation.navigate('모임생성', {data: {type: 'class'}})
           }>
           <Typography size="lg" bold white>
-            무료 일상 모임 만들기
+            무료 클래스 만들기
           </Typography>
         </TouchableOpacity>
         <TouchableOpacity
           onPress={() =>
             navigation.navigate('마이', {
               screen: '활동내역',
-              params: {myInfo: myInfo, tab: 0},
+              params: {myInfo: myInfo, tab: 2},
             })
           }>
           <Image
@@ -151,4 +151,4 @@ function MatchingView({navigation, myInfo}) {
   );
 }
 
-export default MatchingView;
+export default ClassView;

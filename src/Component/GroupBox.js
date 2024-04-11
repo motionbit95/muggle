@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {Image, Text, TouchableOpacity, View} from 'react-native';
 import styles, {
   align_center,
+  align_start,
   blackAlpha100,
   blackAlpha500,
   blackAlpha900,
@@ -10,6 +11,7 @@ import styles, {
   fs_sm,
   fw_bold,
   img_lg,
+  img_md,
   img_sm,
   justify_between,
   justify_center,
@@ -78,7 +80,7 @@ const GroupBox = ({item, index, myInfo, navigation}) => {
           }}>
           <View style={[flex_row, justify_between]}>
             <View style={[sp_1, justify_center, {maxWidth: '70%'}]}>
-              <Typography bold numberOfLines={1}>
+              <Typography bold numberOfLines={1} size={'md'}>
                 {item.group_name}
               </Typography>
               <View style={[flex_row, align_center, sp_2]}>
@@ -219,9 +221,9 @@ const GroupBox = ({item, index, myInfo, navigation}) => {
               {data: {...item, gid: item.doc_id}},
             );
           }}>
-          <View style={[flex_row, justify_between]}>
+          <View style={[flex_row, justify_between, align_start]}>
             <View style={[sp_1, justify_center, {maxWidth: '70%'}]}>
-              <Typography bold numberOfLines={1}>
+              <Typography bold numberOfLines={1} size={'md'}>
                 {item.group_name}
               </Typography>
 
@@ -230,29 +232,21 @@ const GroupBox = ({item, index, myInfo, navigation}) => {
                   <Image style={{width: 16, height: 16}} source={mapImg} />
                   <Typography size={'sm'}>{item.group_place}</Typography>
                 </View>
-                <Typography numberOfLines={2}>{item?.group_target}</Typography>
+                <Typography numberOfLines={2} size={'sm'}>
+                  {item?.group_target}
+                </Typography>
               </View>
             </View>
-            <View
-              style={[
-                img_lg,
-                radius_md,
-                {
-                  maxWidth: '30%',
-                  // backgroundColor: blackAlpha100,
-                  overflow: 'hidden',
-                },
-              ]}>
-              <View>
-                <Image
-                  style={[radius_full, {width: '100%', height: '100%'}]}
-                  source={
-                    item?.group_image ? {uri: item?.group_image} : groupImg
-                  }
-                />
-              </View>
-            </View>
+            <Image
+              style={[radius_full, styles.Avartar70]}
+              source={
+                groupUsers[0]?.user_profile
+                  ? {uri: groupUsers[0]?.user_profile}
+                  : groupImg
+              }
+            />
           </View>
+
           <Image
             style={[
               img_sm,
@@ -260,8 +254,8 @@ const GroupBox = ({item, index, myInfo, navigation}) => {
                 position: 'absolute',
                 top: 4,
                 right: 4,
-                width: 30,
-                height: 30,
+                width: 24,
+                height: 24,
               },
             ]}
             source={

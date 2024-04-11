@@ -48,6 +48,7 @@ import {
   center,
   circle_40,
   font_family_bold,
+  img_md,
   img_sm,
   p_2,
   radius_full,
@@ -252,7 +253,15 @@ const App = () => {
       <UserStack.Screen
         name="활동내역"
         component={MyActivity}
-        options={() => ({
+        options={({navigation}) => ({
+          headerLeft: () => (
+            <TouchableOpacity onPress={() => navigation.navigate('User')}>
+              <Image
+                style={img_sm}
+                source={require('./src/assets/icons/left_arrow.png')}
+              />
+            </TouchableOpacity>
+          ),
           headerTitleStyle: {
             fontFamily: font_family_bold,
           },
@@ -272,7 +281,25 @@ const App = () => {
 
   const ChatStackNavigate = () => (
     <ChatStack.Navigator>
-      <ChatStack.Screen name="채팅방" component={Chat} />
+      <ChatStack.Screen
+        name="채팅방"
+        component={Chat}
+        options={({navigation}) => ({
+          headerLeft: () => (
+            <TouchableOpacity onPress={() => navigation.navigate('Muggle')}>
+              <Image style={img_md} source={require('./src/assets/home.png')} />
+            </TouchableOpacity>
+          ),
+          title: '채팅방',
+          headerStyle: {
+            backgroundColor: '#fff',
+          },
+          headerTintColor: '#black',
+          headerTitleStyle: {
+            fontFamily: font_family_bold,
+          },
+        })}
+      />
       <ChatStack.Screen
         name="채팅룸"
         component={ChatRoom}
@@ -485,30 +512,40 @@ const App = () => {
   return (
     <NavigationContainer independent={true}>
       <StatusBar barStyle="dark-content" backgroundColor="#fff" />
-      <Tab.Navigator tabBar={props => <CustomTabBar {...props} />}>
+      {/* <Tab.Navigator tabBar={props => <CustomTabBar {...props} />}> */}
+      <Tab.Navigator>
         <Tab.Screen
           name="모임"
           component={HomeStackNavigate}
           options={{
             tabBarActiveTintColor: '#FF634F',
             headerShown: false,
+            tabBarLabelStyle: {display: 'none'},
+            tabBarIcon: ({focused}) => (
+              <Image
+                source={focused ? tabBarSelectIcon[0] : tabBarIcon[0]}
+                style={{width: 24, height: 24}}
+              />
+            ),
           }}
         />
         <Tab.Screen
-          name="매칭"
-          component={MatchingStackNavigate}
+          name="찜모임"
+          component={GroupView}
           options={{
-            headerShown: false,
+            title: '찜모임',
             tabBarActiveTintColor: '#FF634F',
             unmountOnBlur: true,
-          }}
-        />
-        <Tab.Screen
-          name="모임생성"
-          component={GroupCreate}
-          options={{
-            tabBarLabel: '',
-            unmountOnBlur: true,
+            tabBarLabelStyle: {display: 'none'},
+            headerTitleStyle: {
+              fontFamily: font_family_bold,
+            },
+            tabBarIcon: ({focused}) => (
+              <Image
+                source={focused ? tabBarSelectIcon[1] : tabBarIcon[1]}
+                style={{width: 24, height: 24}}
+              />
+            ),
           }}
         />
         <Tab.Screen
@@ -518,6 +555,13 @@ const App = () => {
             headerShown: false,
             tabBarActiveTintColor: '#FF634F',
             unmountOnBlur: true,
+            tabBarLabelStyle: {display: 'none'},
+            tabBarIcon: ({focused}) => (
+              <Image
+                source={focused ? tabBarSelectIcon[3] : tabBarIcon[3]}
+                style={{width: 24, height: 24}}
+              />
+            ),
           }}
         />
         <Tab.Screen
@@ -527,6 +571,30 @@ const App = () => {
             headerShown: false,
             tabBarActiveTintColor: '#FF634F',
             unmountOnBlur: true,
+            tabBarLabelStyle: {display: 'none'},
+            tabBarIcon: ({focused}) => (
+              <Image
+                source={focused ? tabBarSelectIcon[4] : tabBarIcon[4]}
+                style={{width: 24, height: 24}}
+              />
+            ),
+          }}
+        />
+        <Tab.Screen
+          name="매칭"
+          component={MatchingStackNavigate}
+          options={{
+            tabBarButton: () => null,
+            headerShown: false,
+            tabBarActiveTintColor: '#FF634F',
+            unmountOnBlur: true,
+            tabBarLabelStyle: {display: 'none'},
+            tabBarIcon: ({focused}) => (
+              <Image
+                source={focused ? tabBarSelectIcon[4] : tabBarIcon[4]}
+                style={{width: 24, height: 24}}
+              />
+            ),
           }}
         />
       </Tab.Navigator>
