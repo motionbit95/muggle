@@ -43,17 +43,6 @@ const BannerPicker = props => {
         // console.warn(err);
       }
     } else {
-      PERMISSIONS.IOS.PHOTO_LIBRARY.request()
-        .then(status => {
-          if (status === RESULTS.GRANTED) {
-            console.log('You can use the photo library');
-          } else {
-            console.log('Camera permission denied');
-          }
-        })
-        .catch(err => {
-          // console.warn(err);
-        });
     }
 
     try {

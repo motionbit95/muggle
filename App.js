@@ -217,11 +217,11 @@ const App = () => {
           },
         })}
       />
-      <UserStack.Screen
+      {/* <UserStack.Screen
         name="Account"
         component={SignUpStackNavigate}
         options={{headerShown: false}}
-      />
+      /> */}
       <UserStack.Screen
         name="알림설정"
         component={AlarmSetting}
@@ -461,6 +461,19 @@ const App = () => {
   const SignUpStackNavigate = () => (
     <SignUpStack.Navigator>
       <SignUpStack.Screen
+        name="휴대폰 본인인증"
+        component={Certificate}
+        options={{
+          headerStyle: {
+            backgroundColor: '#fff',
+          },
+          headerTintColor: 'black',
+          headerTitleStyle: {
+            fontFamily: font_family_bold,
+          },
+        }}
+      />
+      <SignUpStack.Screen
         name="SignUp"
         component={SignUp}
         options={{
@@ -474,19 +487,7 @@ const App = () => {
           },
         }}
       />
-      <SignUpStack.Screen
-        name="휴대폰 본인인증"
-        component={Certificate}
-        options={{
-          headerStyle: {
-            backgroundColor: '#fff',
-          },
-          headerTintColor: 'black',
-          headerTitleStyle: {
-            fontFamily: font_family_bold,
-          },
-        }}
-      />
+
       <SignUpStack.Screen
         name="프로필 설정"
         component={Interest}
@@ -606,17 +607,18 @@ const App = () => {
         <Tab.Screen
           name="모임"
           component={HomeStackNavigate}
-          options={{
+          options={({navigation}) => ({
             tabBarActiveTintColor: '#FF634F',
             headerShown: false,
             tabBarLabelStyle: {display: 'none'},
-            tabBarIcon: ({focused}) => (
+
+            tabBarIcon: ({focused, navigate}) => (
               <Image
                 source={focused ? tabBarSelectIcon[0] : tabBarIcon[0]}
                 style={{width: 24, height: 24}}
               />
             ),
-          }}
+          })}
         />
         <Tab.Screen
           name="찜 목록"
@@ -673,6 +675,23 @@ const App = () => {
         <Tab.Screen
           name="매칭"
           component={MatchingStackNavigate}
+          options={{
+            tabBarButton: () => null,
+            headerShown: false,
+            tabBarActiveTintColor: '#FF634F',
+            unmountOnBlur: true,
+            tabBarLabelStyle: {display: 'none'},
+            tabBarIcon: ({focused}) => (
+              <Image
+                source={focused ? tabBarSelectIcon[4] : tabBarIcon[4]}
+                style={{width: 24, height: 24}}
+              />
+            ),
+          }}
+        />
+        <Tab.Screen
+          name="계정"
+          component={SignUpStackNavigate}
           options={{
             tabBarButton: () => null,
             headerShown: false,

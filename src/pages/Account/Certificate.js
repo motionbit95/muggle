@@ -24,8 +24,12 @@ import {
   blackAlpha400,
   blackAlpha500,
   blackAlpha900,
+  f_full,
   flex_row,
   font_family,
+  justify_between,
+  p_4,
+  sp_4,
 } from '../../style/styles';
 import WebView from 'react-native-webview';
 
@@ -78,7 +82,8 @@ const Certificate = ({navigation}) => {
   };
 
   return (
-    <View style={styles.screenStyle}>
+    <View
+      style={[f_full, sp_4, p_4, justify_between, {backgroundColor: 'white'}]}>
       <SafeAreaView style={{flex: 1}}>
         <View style={{gap: 20}}>
           <View style={{width: '100%', gap: 15, paddingTop: 10}}>

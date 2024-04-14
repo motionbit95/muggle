@@ -74,7 +74,7 @@ const GroupCreate = ({navigation, route}) => {
             selectedCity + ' ' + selectedDistrict + ' ' + matchPlace
               ? selectedCity + ' ' + selectedDistrict + ' ' + matchPlace
               : '',
-          group_type: data?.type !== 'personal' ? '일상 모임' : '원데이 클래스',
+          group_type: data?.type === 'personal' ? '일상 모임' : '원데이 클래스',
           group_name: matchName,
           group_target: matchTarget,
           group_personnel: matchPersonnel ? matchPersonnel : 0,
@@ -132,9 +132,7 @@ const GroupCreate = ({navigation, route}) => {
     if (!matchImage) {
       message = '모임 이미지를 선택하세요.';
     }
-    if (!selectedCity || !selectedDistrict) {
-      message = '지역을 선택하세요.';
-    }
+
     if (!matchName) {
       message = '모임 이름을 입력하세요.';
     }
@@ -146,6 +144,9 @@ const GroupCreate = ({navigation, route}) => {
       // if (!selectedMatch) {
       //   message = '모임종류를 선택하세요.';
       // }
+      if (!selectedCity || !selectedDistrict) {
+        message = '지역을 선택하세요.';
+      }
 
       if (!matchDateTime) {
         message = '모임 시간을 입력하세요.';

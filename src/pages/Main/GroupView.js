@@ -49,7 +49,7 @@ function GroupView({navigation, route}) {
 
   useEffect(() => {
     console.log(route.params);
-    singleQuery('user', 'uid', auth().currentUser.uid).then(res => {
+    singleQuery('user', 'uid', auth().currentUser?.uid).then(res => {
       setMyInfo(res[0]);
     });
   }, []);
@@ -130,24 +130,26 @@ function GroupView({navigation, route}) {
               </Typography>
             </View>
           </TouchableOpacity>
-          <TouchableOpacity
-            style={[
-              p_1,
-              {
-                flex: 1,
-                borderBottomColor: tab === 1 ? primary_color : 'white',
-                borderBottomWidth: 2,
-              },
-            ]}
-            onPress={() => {
-              setTab(1);
-            }}>
-            <View style={[center]}>
-              <Typography bold red={tab === 1} light={tab !== 1}>
-                {'커피'}
-              </Typography>
-            </View>
-          </TouchableOpacity>
+          {type !== 'views' && (
+            <TouchableOpacity
+              style={[
+                p_1,
+                {
+                  flex: 1,
+                  borderBottomColor: tab === 1 ? primary_color : 'white',
+                  borderBottomWidth: 2,
+                },
+              ]}
+              onPress={() => {
+                setTab(1);
+              }}>
+              <View style={[center]}>
+                <Typography bold red={tab === 1} light={tab !== 1}>
+                  {'커피'}
+                </Typography>
+              </View>
+            </TouchableOpacity>
+          )}
           <TouchableOpacity
             style={[
               p_1,

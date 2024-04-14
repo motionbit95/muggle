@@ -718,14 +718,21 @@ const DirectRoom = ({navigation, route}) => {
                     style={{
                       flex: 1,
                       padding: 15,
-                      backgroundColor: '#FFDA7A',
+                      backgroundColor: '#F1F1F1',
                       borderRadius: 15,
-                      borderTopLeftRadius: 0,
+                      borderTopRightRadius: 0,
+                      maxWidth: 290,
                     }}>
-                    {chat?.chat.includes('//약속//') ? (
+                    {chat?.chat.includes('//등록//') ||
+                    chat?.chat.includes('//수정//') ||
+                    chat?.chat.includes('//취소//') ? (
                       <View style={[flex_column, sp_2]}>
                         <Typography size="lg">
-                          {chat?.chat.split('//')[1]}을 만들었어요.
+                          {chat?.chat.includes('//등록//')
+                            ? '약속을 만들었어요.'
+                            : chat?.chat.includes('//수정//')
+                            ? '약속을 수정했어요.'
+                            : '약속을 취소했어요.'}
                         </Typography>
                         <Typography size="md" light>
                           날짜 : {chat?.chat.split('//')[2]}
@@ -733,32 +740,36 @@ const DirectRoom = ({navigation, route}) => {
                         <Typography size="md" light>
                           시간 : {chat?.chat.split('//')[3]}
                         </Typography>
-                        <TouchableOpacity
-                          style={[
-                            {backgroundColor: blackAlpha700},
-                            center,
-                            flex_row,
-                            p_2,
-                            sp_2,
-                            radius_md,
-                          ]}
-                          onPress={() => {
-                            setView(true);
-                            parsing(chat?.chat);
-                            setOpenModal(true);
-                          }}>
-                          <View
+                        {!chat?.chat.includes('//취소//') && (
+                          <TouchableOpacity
                             style={[
+                              {backgroundColor: blackAlpha700},
+                              center,
                               flex_row,
-                              sp_1,
-                              align_center,
-                              justify_center,
-                            ]}>
-                            <Typography size="md" white bold>
-                              약속보기
-                            </Typography>
-                          </View>
-                        </TouchableOpacity>
+                              p_2,
+                              sp_2,
+                              radius_md,
+                            ]}
+                            onPress={() => {
+                              setView(true);
+                              parsing(
+                                chat?.chat.replace('//등록//', '//보기//'),
+                              );
+                              setOpenModal(true);
+                            }}>
+                            <View
+                              style={[
+                                flex_row,
+                                sp_1,
+                                align_center,
+                                justify_center,
+                              ]}>
+                              <Typography size="md" white bold>
+                                약속보기
+                              </Typography>
+                            </View>
+                          </TouchableOpacity>
+                        )}
                       </View>
                     ) : (
                       <Typography size="sm" style={{whiteSpace: 'pre-wrap'}}>

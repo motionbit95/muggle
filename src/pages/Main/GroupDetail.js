@@ -253,7 +253,7 @@ const GroupDetail = ({navigation, route}) => {
                 </View>
               )}
             </View>
-            {data?.group_type !== '일상 모임' ? (
+            {data?.group_type !== '일상 모임' && (
               <View style={styles.gap10}>
                 <View style={styles.rowBox}>
                   <Image
@@ -288,16 +288,6 @@ const GroupDetail = ({navigation, route}) => {
                     {data?.group_personnel - data?.group_users?.length}자리
                     남음)
                   </Typography>
-                </View>
-              </View>
-            ) : (
-              <View style={styles.gap10}>
-                <View style={styles.rowBox}>
-                  <Image
-                    style={img_sm}
-                    source={require('../../assets/icons/map.png')}
-                  />
-                  <Typography>{data?.group_place}</Typography>
                 </View>
               </View>
             )}

@@ -220,7 +220,7 @@ const Chat = ({navigation}) => {
                     <Typography size="md" bold>
                       {group?.group_name}
                     </Typography>
-                    <Typography light>{group?.group_place}</Typography>
+                    {/* <Typography light>{group?.group_place}</Typography> */}
                   </View>
                 </View>
                 {/* <View style={flex_row}>

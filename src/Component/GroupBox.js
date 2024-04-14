@@ -55,7 +55,7 @@ const GroupBox = ({item, index, myInfo, navigation}) => {
         groupUsers.push(user[0]);
       }
       setGroupUsers(groupUsers);
-      // console.log(groupUsers);
+      console.log(groupUsers);
     };
     getGroupUsers();
   }, []);

@@ -74,8 +74,8 @@ const Home = ({navigation}) => {
         updateUser();
         updateGroup();
       } else {
-        // console.log('없음!!');
-        navigation.navigate('Account', {screen: '휴대폰 본인인증'});
+        console.log('없음!!');
+        navigation.navigate('계정');
       }
     });
 
@@ -149,7 +149,8 @@ const Home = ({navigation}) => {
 
     auth().onAuthStateChanged(async user => {
       if (!user) {
-        navigation.navigate('Account', {screen: '휴대폰 본인인증'});
+        console.log('없음!!');
+        navigation.navigate('계정');
       }
     });
   }, []);

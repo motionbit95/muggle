@@ -10,6 +10,9 @@
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
 	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
+	<key>LSApplicationCategoryType</key>
+	<string>Build input file cannot be found: &apos;/Users/krystal/Project/Downloads/GoogleService-Info.plist&apos;. Did you forget to declare this file as an output of a script phase or custom build rule which produces it?
+</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
@@ -24,7 +27,7 @@
 	<array>
 		<dict>
 			<key>CFBundleURLName</key>
-			<string/>
+			<string></string>
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>app-1-698586027961-ios-72a7ed554d23aa2e97c868</string>
