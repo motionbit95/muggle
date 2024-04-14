@@ -25,6 +25,37 @@ const BannerPicker = props => {
       noData: true,
     };
 
+    if (Platform.OS === 'android') {
+      try {
+        const granted = await PermissionsAndroid.request(
+          PermissionsAndroid.PERMISSIONS.READ_EXTERNAL_STORAGE,
+          {
+            title: 'Camera Permission',
+            message: 'App needs camera permission',
+          },
+        );
+        if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+          console.log('You can use the photo library');
+        } else {
+          console.log('Camera permission denied');
+        }
+      } catch (err) {
+        // console.warn(err);
+      }
+    } else {
+      PERMISSIONS.IOS.PHOTO_LIBRARY.request()
+        .then(status => {
+          if (status === RESULTS.GRANTED) {
+            console.log('You can use the photo library');
+          } else {
+            console.log('Camera permission denied');
+          }
+        })
+        .catch(err => {
+          // console.warn(err);
+        });
+    }
+
     try {
       const pickerOptions = {
         cropping: true,
