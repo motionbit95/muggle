@@ -226,6 +226,22 @@ const Matching = ({navigation, myInfo, userList, ...props}) => {
           timestamp: new Date(),
         });
 
+        await addDocument('alarm', {
+          createAt: new Date(),
+          user_id: user.uid,
+          alarm_type: 'matching-recieve',
+          alarm_message: `${myInfo?.user_name} 님에게 커피 매칭 신청이 도착하였습니다.`,
+          isRead: false,
+        });
+
+        await addDocument('alarm', {
+          createAt: new Date(),
+          user_id: myInfo.uid,
+          alarm_type: 'matching-sender',
+          alarm_message: `${user?.user_name} 님에게 커피 매칭 신청하였습니다.`,
+          isRead: false,
+        });
+
         navigation.navigate('채팅', {
           screen: '매칭룸',
           params: {

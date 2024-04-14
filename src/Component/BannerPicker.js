@@ -13,6 +13,7 @@ import {
   sp_2,
 } from '../style/styles';
 import Typography from './Typography';
+import ImagePicker from 'react-native-image-crop-picker';
 
 const BannerPicker = props => {
   const [imageUri, setImageUri] = useState(
@@ -24,47 +25,67 @@ const BannerPicker = props => {
       noData: true,
     };
 
-    if (Platform.OS === 'android') {
-      try {
-        const granted = await PermissionsAndroid.request(
-          PermissionsAndroid.PERMISSIONS.READ_EXTERNAL_STORAGE,
-          {
-            title: 'Camera Permission',
-            message: 'App needs camera permission',
-          },
-        );
-        if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-          console.log('You can use the photo library');
-          launchImageLibrary(options, response => {
-            if (response.didCancel) {
-              console.log('User cancelled photo picker');
-            } else if (response.error) {
-              console.log('ImagePicker Error: ', response.error);
-            } else if (response.customButton) {
-              console.log('User tapped custom button: ', response.customButton);
-            } else {
-              const source = {uri: response.assets[0].uri};
-              setImageUri(source.uri);
-              uploadImage(source.uri);
-            }
-          });
-        } else {
-          console.log('Camera permission denied');
-        }
-      } catch (err) {
-        // console.warn(err);
+    try {
+      const pickerOptions = {
+        cropping: true,
+        // width: 300,
+        // height: 300,
+        // cropperCircleOverlay: true,
+        mediaType: 'photo',
+      };
+
+      if (Platform.OS === 'ios') {
+        pickerOptions.smartAlbums = ['UserLibrary', 'PhotoStream', 'Panoramas'];
       }
-    } else {
-      launchImageLibrary(options, response => {
-        if (response.assets[0].uri) {
-          setImageUri(response.assets[0].uri);
-          uploadImage(response.assets[0].uri);
-          // Handle image selection
-        } else if (response.error) {
-          Alert.alert('Error', response.error);
-        }
-      });
+
+      const pickedImage = await ImagePicker.openPicker(pickerOptions);
+      setImageUri(pickedImage.path);
+      uploadImage(pickedImage.path);
+    } catch (error) {
+      console.log('Error picking image: ', error);
     }
+
+    // if (Platform.OS === 'android') {
+    //   try {
+    //     const granted = await PermissionsAndroid.request(
+    //       PermissionsAndroid.PERMISSIONS.READ_EXTERNAL_STORAGE,
+    //       {
+    //         title: 'Camera Permission',
+    //         message: 'App needs camera permission',
+    //       },
+    //     );
+    //     if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+    //       console.log('You can use the photo library');
+    //       launchImageLibrary(options, response => {
+    //         if (response.didCancel) {
+    //           console.log('User cancelled photo picker');
+    //         } else if (response.error) {
+    //           console.log('ImagePicker Error: ', response.error);
+    //         } else if (response.customButton) {
+    //           console.log('User tapped custom button: ', response.customButton);
+    //         } else {
+    //           const source = {uri: response.assets[0].uri};
+    //           setImageUri(source.uri);
+    //           uploadImage(source.uri);
+    //         }
+    //       });
+    //     } else {
+    //       console.log('Camera permission denied');
+    //     }
+    //   } catch (err) {
+    //     // console.warn(err);
+    //   }
+    // } else {
+    //   launchImageLibrary(options, response => {
+    //     if (response.assets[0].uri) {
+    //       setImageUri(response.assets[0].uri);
+    //       uploadImage(response.assets[0].uri);
+    //       // Handle image selection
+    //     } else if (response.error) {
+    //       Alert.alert('Error', response.error);
+    //     }
+    //   });
+    // }
 
     // You can also use as a promise without 'callback':
     // const result = await launchImageLibrary(options);
