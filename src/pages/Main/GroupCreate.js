@@ -203,37 +203,39 @@ const GroupCreate = ({navigation, route}) => {
             <View style={[{width: '100%', gap: 15, padding: 20}]}>
               <View style={styles.columnBox}>
                 <BannerPicker onChangeValue={setMatchImage} />
-                <View style={[flex_row, align_center]}>
-                  <View style={{width: '20%'}}>
-                    <Typography size="md" bold>
-                      지역
-                    </Typography>
-                  </View>
-                  <View
-                    style={{
-                      width: '80%',
-                      justifyContent: 'stretch',
-                      flexDirection: 'row',
-                      gap: 10,
-                    }}>
-                    <View style={{flex: 1}}>
-                      <DropDown
-                        items={cities}
-                        defaultValue={selectedCity ? selectedCity : '전체'}
-                        onChangeValue={handleCityChange}
-                      />
+                {data?.type !== 'personal' && (
+                  <View style={[flex_row, align_center]}>
+                    <View style={{width: '20%'}}>
+                      <Typography size="md" bold>
+                        지역
+                      </Typography>
                     </View>
-                    <View style={{flex: 1}}>
-                      <DropDown
-                        items={districts[selectedCity]}
-                        defaultValue={
-                          selectedDistrict ? selectedDistrict : '전체'
-                        }
-                        onChangeValue={handleDistrictChange}
-                      />
+                    <View
+                      style={{
+                        width: '80%',
+                        justifyContent: 'stretch',
+                        flexDirection: 'row',
+                        gap: 10,
+                      }}>
+                      <View style={{flex: 1}}>
+                        <DropDown
+                          items={cities}
+                          defaultValue={selectedCity ? selectedCity : '전체'}
+                          onChangeValue={handleCityChange}
+                        />
+                      </View>
+                      <View style={{flex: 1}}>
+                        <DropDown
+                          items={districts[selectedCity]}
+                          defaultValue={
+                            selectedDistrict ? selectedDistrict : '전체'
+                          }
+                          onChangeValue={handleDistrictChange}
+                        />
+                      </View>
                     </View>
                   </View>
-                </View>
+                )}
               </View>
               {data?.type !== 'personal' && (
                 <>

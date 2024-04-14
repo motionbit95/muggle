@@ -20,16 +20,19 @@ import styles, {
   align_center,
   blackAlpha400,
   blackAlpha900,
+  btn_primary,
   flex_row,
   font_family,
   fs_md,
   img_sm_2,
   justify_center,
+  sp_2,
 } from '../../style/styles';
 import auth from '@react-native-firebase/auth';
 import Typography from '../../Component/Typography';
 import MessageBox from '../../Component/MessageBox';
 import Tooltip from 'react-native-walkthrough-tooltip';
+import {singleQuery} from '../../firebase/firebase_func';
 
 const SignUp = ({navigation}) => {
   const [tooltipVisible, setTooltipVisible] = useState(false);
@@ -53,6 +56,8 @@ const SignUp = ({navigation}) => {
 
   const [selectbank, setSelectbank] = useState('');
   const [accountNumber, setAccountNumber] = useState('');
+
+  const [checkedNickname, setCheckNickname] = useState(false);
 
   const years = [];
   for (let year = 2005; year >= 1900; year--) {
@@ -101,6 +106,14 @@ const SignUp = ({navigation}) => {
   };
 
   const handleSignup = () => {
+    if (!checkedNickname) {
+      setMessage({
+        mode: 'error',
+        isView: true,
+        message: '닉네임 중복 여부를 확인하세요.',
+      });
+      return;
+    }
     if (!userName) {
       setMessage({
         mode: 'error',
@@ -172,6 +185,34 @@ const SignUp = ({navigation}) => {
     navigation.navigate('프로필 설정', {data: userInfo});
   };
 
+  const checkNickname = () => {
+    if (!userName) {
+      setMessage({
+        mode: 'error',
+        isView: true,
+        message: '닉네임을 입력하세요.',
+      });
+      return;
+    }
+    singleQuery('user', 'user_name', userName).then(res => {
+      if (res.length > 0) {
+        setMessage({
+          mode: 'error',
+          isView: true,
+          message: '이미 존재하는 닉네임입니다.',
+        });
+        serUserName('');
+        return;
+      } else
+        setMessage({
+          mode: 'success',
+          isView: true,
+          message: '사용 가능한 닉네임입니다.',
+        });
+      setCheckNickname(true);
+    });
+  };
+
   return (
     <View style={styles.screenStyle}>
       {message.isView && (
@@ -197,22 +238,33 @@ const SignUp = ({navigation}) => {
             </View>
             <View style={styles.columnBox}>
               <Typography bold size={'lg'}>
-                이름
+                닉네임
               </Typography>
-              <TextInput
-                placeholderTextColor={blackAlpha400}
-                style={[
-                  {
-                    fontFamily: font_family,
-                    color: 'black',
-                    width: '100%',
-                    height: 50,
-                  },
-                  styles.contentBox,
-                ]}
-                placeholder="이름을 입력해주세요."
-                onChange={e => serUserName(e.nativeEvent.text)}
-              />
+              <View style={[flex_row, sp_2, {flex: 1}]}>
+                <TextInput
+                  placeholderTextColor={blackAlpha400}
+                  style={[
+                    {
+                      fontFamily: font_family,
+                      color: 'black',
+                      // width: '100%',
+                      height: 50,
+                      flex: 3,
+                    },
+                    styles.contentBox,
+                  ]}
+                  value={userName}
+                  placeholder="닉네임을 입력해주세요."
+                  onChange={e => serUserName(e.nativeEvent.text)}
+                />
+                <TouchableOpacity
+                  style={[btn_primary, {flex: 1}]}
+                  onPress={checkNickname}>
+                  <Typography bold white>
+                    중복확인
+                  </Typography>
+                </TouchableOpacity>
+              </View>
             </View>
             <View style={styles.columnBox}>
               <Typography bold size={'lg'}>
@@ -297,7 +349,7 @@ const SignUp = ({navigation}) => {
               </View>
             </View>
             <View style={styles.columnBox}>
-              <View style={flex_row}>
+              <View style={[flex_row, sp_2]}>
                 <Typography bold size={'lg'}>
                   내 커피 매칭권 금액
                 </Typography>

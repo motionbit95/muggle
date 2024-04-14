@@ -330,12 +330,12 @@ const GroupDetail = ({navigation, route}) => {
                 }}>
                 {groupUsers?.map((user, index) => (
                   <TouchableOpacity
-                    onPress={() =>
-                      navigation.navigate('모임', {
-                        screen: '유저',
-                        params: {data: user, userList: userList},
-                      })
-                    }
+                    // onPress={() =>
+                    //   navigation.navigate('모임', {
+                    //     screen: '유저',
+                    //     params: {data: user, userList: userList},
+                    //   })
+                    // }
                     style={[styles.rowBox, {width: '50%'}]}>
                     <View key={index} style={[flex_row, center, sp_2]}>
                       <Image
@@ -386,12 +386,12 @@ const GroupDetail = ({navigation, route}) => {
                     user?.uid === data?.group_admin && (
                       <TouchableOpacity
                         key={index}
-                        onPress={() =>
-                          navigation.navigate('모임', {
-                            screen: '유저',
-                            params: {data: user, userList: userList},
-                          })
-                        }
+                        // onPress={() =>
+                        //   navigation.navigate('모임', {
+                        //     screen: '유저',
+                        //     params: {data: user, userList: userList},
+                        //   })
+                        // }
                         style={[styles.rowBox, {width: '50%'}]}>
                         <View key={index} style={[flex_row, sp_3, center]}>
                           <Image
@@ -444,7 +444,7 @@ const GroupDetail = ({navigation, route}) => {
             style={[styles.button, {flex: 1}]}
             disabled={
               data?.group_type === '일상 모임' ||
-              data?.group_users.length < data?.group_personnel
+              data?.group_users?.length < data?.group_personnel
                 ? false
                 : true
             }
@@ -454,7 +454,7 @@ const GroupDetail = ({navigation, route}) => {
             }}>
             <Typography size="lg" bold white>
               {data?.group_type === '일상 모임' ||
-              data?.group_users.length < data?.group_personnel
+              data?.group_users?.length < data?.group_personnel
                 ? '참여하기'
                 : '제한 인원 마감'}
               {/* {data?.group_users.includes(auth().currentUser.uid)

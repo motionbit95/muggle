@@ -208,7 +208,12 @@ const Home = ({navigation}) => {
             <MatchingView myInfo={myInfo} navigation={navigation} />
           )}
           {selectedGroup === '커피' && (
-            <Matching userList={userList} index={0} navigation={navigation} />
+            <Matching
+              myInfo={myInfo}
+              userList={userList}
+              index={0}
+              navigation={navigation}
+            />
           )}
           {selectedGroup === '클래스' && (
             <ClassView myInfo={myInfo} navigation={navigation} />

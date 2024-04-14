@@ -137,7 +137,7 @@ const MatchHistory = ({navigation}) => {
                   ]}
                   source={
                     user?.user_profile
-                      ? user?.user_profile
+                      ? {uri: user?.user_profile}
                       : require('../../assets/avartar.png')
                   }
                 />

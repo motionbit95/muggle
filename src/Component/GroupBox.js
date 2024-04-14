@@ -36,7 +36,7 @@ import {
   formatDateTime,
   primary_color,
 } from '../firebase/api';
-import {getUser, singleQuery} from '../firebase/firebase_func';
+import {getUser, singleQuery, updateDocument} from '../firebase/firebase_func';
 import Typography from './Typography';
 
 export const userImg = require('../assets/icons/user.png');
@@ -59,6 +59,25 @@ const GroupBox = ({item, index, myInfo, navigation}) => {
     };
     getGroupUsers();
   }, []);
+
+  const handleGoods = async gid => {
+    if (!myInfo) return;
+    if (!myInfo.goods) {
+      myInfo.goods = [];
+    }
+    if (myInfo.goods.includes(gid)) {
+      // 지우기
+      myInfo.goods = myInfo.goods.filter(g => g !== gid);
+      // setIcon(require('../assets/icons/heart.png'));
+    } else {
+      myInfo.goods.push(gid);
+      // setIcon(require('../assets/icons/heart_fill.png'));
+    }
+
+    console.log(myInfo.goods);
+
+    await updateDocument('user', myInfo.doc_id, myInfo);
+  };
 
   return (
     <>
@@ -112,7 +131,7 @@ const GroupBox = ({item, index, myInfo, navigation}) => {
                   <Typography size={'sm'}>{item.group_price}</Typography>
                   <Image style={{width: 16, height: 16}} source={userImg} />
                   <Typography size={'sm'}>
-                    {item.group_users.length} / {item.group_personnel}
+                    {item.group_users?.length} / {item.group_personnel}
                   </Typography>
                 </View>
               </View>
@@ -133,7 +152,10 @@ const GroupBox = ({item, index, myInfo, navigation}) => {
                     item?.group_image ? {uri: item?.group_image} : groupImg
                   }
                 />
-                <Image
+                <TouchableOpacity
+                  onPress={() => {
+                    handleGoods(item.doc_id);
+                  }}
                   style={[
                     img_sm,
                     {
@@ -143,13 +165,25 @@ const GroupBox = ({item, index, myInfo, navigation}) => {
                       width: 30,
                       height: 30,
                     },
-                  ]}
-                  source={
-                    myInfo?.goods?.includes(item.doc_id)
-                      ? require('../assets/icons/heart_fill.png')
-                      : require('../assets/icons/heart.png')
-                  }
-                />
+                  ]}>
+                  <Image
+                    // style={[
+                    //   img_sm,
+                    //   {
+                    //     position: 'absolute',
+                    //     top: 4,
+                    //     right: 4,
+                    //     width: 30,
+                    //     height: 30,
+                    //   },
+                    // ]}
+                    source={
+                      myInfo?.goods?.includes(item.doc_id)
+                        ? require('../assets/icons/heart_fill.png')
+                        : require('../assets/icons/heart.png')
+                    }
+                  />
+                </TouchableOpacity>
               </View>
             </View>
           </View>
@@ -206,65 +240,65 @@ const GroupBox = ({item, index, myInfo, navigation}) => {
           </View>
         </TouchableOpacity>
       ) : (
-        <TouchableOpacity
-          key={index + '_' + item.doc_id}
-          style={[
-            radius_md,
-            p_4,
-            {backgroundColor: '#FFF5F4', marginBottom: 10},
-          ]}
-          onPress={() => {
-            // console.log({...item, gid: item.doc_id});
-            navigation.navigate(
-              '모임상세',
+        <View>
+          {groupUsers[0]?.user_gender !== myInfo?.user_gender && (
+            <TouchableOpacity
+              key={index + '_' + item.doc_id}
+              style={[
+                radius_md,
+                p_4,
+                flex_row,
+                {backgroundColor: '#FFF5F4', marginBottom: 10, flex: 1},
+              ]}
+              onPress={() => {
+                // console.log({...item, gid: item.doc_id});
+                navigation.navigate(
+                  '모임상세',
 
-              {data: {...item, gid: item.doc_id}},
-            );
-          }}>
-          <View style={[flex_row, justify_between, align_start]}>
-            <View style={[sp_1, justify_center, {maxWidth: '70%'}]}>
-              <Typography bold numberOfLines={1} size={'md'}>
-                {item.group_name}
-              </Typography>
+                  {data: {...item, gid: item.doc_id}},
+                );
+              }}>
+              <View style={[flex_row, justify_between, align_start, {flex: 3}]}>
+                <View style={[sp_1, justify_center, {maxWidth: '70%'}]}>
+                  <Typography bold numberOfLines={1} size={'md'}>
+                    {item.group_name}
+                  </Typography>
 
-              <View style={[sp_1]}>
-                <View style={[styles.rowBox, sp_2]}>
-                  <Image style={{width: 16, height: 16}} source={mapImg} />
-                  <Typography size={'sm'}>{item.group_place}</Typography>
+                  <View style={[sp_1]}>
+                    {/* <View style={[styles.rowBox, sp_2]}>
+                      <Image style={{width: 16, height: 16}} source={mapImg} />
+                      <Typography size={'sm'}>{item.group_place}</Typography>
+                    </View> */}
+                    <Typography numberOfLines={2} size={'sm'}>
+                      {item?.group_target}
+                    </Typography>
+                  </View>
                 </View>
-                <Typography numberOfLines={2} size={'sm'}>
-                  {item?.group_target}
-                </Typography>
               </View>
-            </View>
-            <Image
-              style={[radius_full, styles.Avartar70]}
-              source={
-                groupUsers[0]?.user_profile
-                  ? {uri: groupUsers[0]?.user_profile}
-                  : groupImg
-              }
-            />
-          </View>
-
-          <Image
-            style={[
-              img_sm,
-              {
-                position: 'absolute',
-                top: 4,
-                right: 4,
-                width: 24,
-                height: 24,
-              },
-            ]}
-            source={
-              myInfo?.goods?.includes(item.doc_id)
-                ? require('../assets/icons/heart_fill.png')
-                : require('../assets/icons/heart.png')
-            }
-          />
-        </TouchableOpacity>
+              <View style={[flex_row, justify_between, align_start]}>
+                <Image
+                  style={[radius_full, styles.Avartar70]}
+                  source={
+                    groupUsers[0]?.user_profile
+                      ? {uri: groupUsers[0]?.user_profile}
+                      : groupImg
+                  }
+                />
+                <TouchableOpacity
+                  style={[img_sm]}
+                  onPress={() => handleGoods(item.doc_id)}>
+                  <Image
+                    source={
+                      myInfo?.goods?.includes(item.doc_id)
+                        ? require('../assets/icons/heart_fill.png')
+                        : require('../assets/icons/heart.png')
+                    }
+                  />
+                </TouchableOpacity>
+              </View>
+            </TouchableOpacity>
+          )}
+        </View>
       )}
     </>
   );

@@ -40,7 +40,10 @@ const DmBox = ({navigation, data}) => {
   React.useEffect(() => {
     getUser(
       data?.receiver === auth().currentUser.uid ? data?.sender : data?.receiver,
-    ).then(setUser);
+    ).then(data => {
+      console.log(data);
+      setUser(data);
+    });
   }, []);
 
   return (
@@ -63,16 +66,16 @@ const DmBox = ({navigation, data}) => {
         }>
         <View style={{flexDirection: 'row', gap: 10, alignItems: 'center'}}>
           <View>
-            <View style={styles.Avartar50}>
-              <Image
-                style={{width: '90%', height: '90%'}}
-                source={
-                  user?.user_profile
-                    ? {uri: user?.user_profile}
-                    : require('../../assets/avartar.png')
-                }
-              />
-            </View>
+            {/* <View style={styles.Avartar50}> */}
+            <Image
+              style={styles.Avartar50}
+              source={
+                user?.user_profile
+                  ? {uri: user?.user_profile}
+                  : require('../../assets/avartar.png')
+              }
+            />
+            {/* </View> */}
           </View>
           <View>
             <Typography>{user?.user_name}</Typography>

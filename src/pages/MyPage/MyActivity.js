@@ -105,7 +105,7 @@ function MyActivity({navigation, route}) {
         <ScrollView style={[w_full, p_3]}>
           {groupList?.map(
             (item, index) =>
-              item?.group_admin === myInfo?.uid &&
+              item?.group_users.includes(myInfo?.uid) &&
               item?.group_type === '일상 모임' && (
                 <GroupBox
                   key={index}
@@ -130,7 +130,7 @@ function MyActivity({navigation, route}) {
         <ScrollView style={[w_full, p_3]}>
           {groupList?.map(
             (item, index) =>
-              item?.group_admin === myInfo?.uid &&
+              item?.group_users.includes(myInfo?.uid) &&
               item?.group_type === '원데이 클래스' && (
                 <GroupBox
                   key={index}

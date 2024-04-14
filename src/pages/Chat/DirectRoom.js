@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 import styles, {
   align_center,
+  align_end,
   align_start,
   blackAlpha200,
   blackAlpha300,
@@ -25,6 +26,7 @@ import styles, {
   img_sm,
   justify_between,
   justify_center,
+  justify_end,
   p_1,
   p_2,
   p_4,
@@ -173,7 +175,7 @@ const DirectRoom = ({navigation, route}) => {
 
   const addPromise = async () => {
     parsing(
-      '//약속//' +
+      '//등록//' +
         promise_time.toLocaleDateString('ko-Kr') +
         '//' +
         promise_time.toLocaleTimeString('ko-Kr') +
@@ -207,7 +209,135 @@ const DirectRoom = ({navigation, route}) => {
     });
 
     handleAddChat(
-      '//약속//' +
+      '//등록//' +
+        promise_time.toLocaleDateString('ko-Kr', {
+          year: 'numeric',
+          month: '2-digit',
+          day: '2-digit',
+        }) +
+        '//' +
+        promise_time.toLocaleTimeString('ko-Kr', {
+          hour: '2-digit',
+          minute: '2-digit',
+        }) +
+        '//' +
+        selectedCity +
+        '//' +
+        selectedDistrict +
+        '//' +
+        promise_place,
+    );
+
+    setPromiseTime(new Date());
+    setPlace(null);
+    setSelectedCity(null);
+    setSelectedDistrict(null);
+    setView(false);
+
+    setOpenModal(false);
+  };
+
+  const updatePromise = async () => {
+    parsing(
+      '//수정//' +
+        promise_time.toLocaleDateString('ko-Kr') +
+        '//' +
+        promise_time.toLocaleTimeString('ko-Kr') +
+        '//' +
+        selectedCity +
+        '//' +
+        selectedDistrict +
+        '//' +
+        promise_place,
+    );
+
+    if (
+      promise_time === null ||
+      promise_place === null ||
+      selectedCity === null ||
+      selectedDistrict === null
+    ) {
+      setMessage({
+        mode: 'error',
+        // isView: true,
+        message: '모든 정보를 입력하세요.',
+      });
+      return;
+    }
+
+    setMessage({
+      mode: '',
+      isView: false,
+      message: '',
+      type: '',
+    });
+
+    handleAddChat(
+      '//수정//' +
+        promise_time.toLocaleDateString('ko-Kr', {
+          year: 'numeric',
+          month: '2-digit',
+          day: '2-digit',
+        }) +
+        '//' +
+        promise_time.toLocaleTimeString('ko-Kr', {
+          hour: '2-digit',
+          minute: '2-digit',
+        }) +
+        '//' +
+        selectedCity +
+        '//' +
+        selectedDistrict +
+        '//' +
+        promise_place,
+    );
+
+    setPromiseTime(new Date());
+    setPlace(null);
+    setSelectedCity(null);
+    setSelectedDistrict(null);
+    setView(false);
+
+    setOpenModal(false);
+  };
+
+  const cancelPromise = async () => {
+    parsing(
+      '//취소//' +
+        promise_time.toLocaleDateString('ko-Kr') +
+        '//' +
+        promise_time.toLocaleTimeString('ko-Kr') +
+        '//' +
+        selectedCity +
+        '//' +
+        selectedDistrict +
+        '//' +
+        promise_place,
+    );
+
+    if (
+      promise_time === null ||
+      promise_place === null ||
+      selectedCity === null ||
+      selectedDistrict === null
+    ) {
+      setMessage({
+        mode: 'error',
+        // isView: true,
+        message: '모든 정보를 입력하세요.',
+      });
+      return;
+    }
+
+    setMessage({
+      mode: '',
+      isView: false,
+      message: '',
+      type: '',
+    });
+
+    handleAddChat(
+      '//취소//' +
         promise_time.toLocaleDateString('ko-Kr', {
           year: 'numeric',
           month: '2-digit',
@@ -236,17 +366,24 @@ const DirectRoom = ({navigation, route}) => {
   };
 
   const parsing = data => {
-    console.log(data);
-    const year = Number(data.split('//')[2].split('.')[0]);
-    const month = Number(data.split('//')[2].split('.')[1]);
-    const day = Number(data.split('//')[2].split('.')[2].split('(')[0]);
+    console.log('채팅 ==> ', data);
+    let year = Number(data.split('//')[2].split('.')[0]);
+    let month = Number(data.split('//')[2].split('.')[1]);
+    let day = Number(data.split('//')[2].split('.')[2].split('(')[0]);
 
-    const hour = Number(data.split('//')[3].split(' ')[1].split(':')[0]);
-    const minute = Number(data.split('//')[3].split(' ')[1].split(':')[1]);
+    let hour = Number(data.split('//')[3].split(' ')[1].split(':')[0]);
+    let minute = Number(data.split('//')[3].split(' ')[1].split(':')[1]);
 
-    const gmtCustomDate = new Date(
-      Date.UTC(year, month - 1, day, hour, minute),
-    );
+    if (data.split('//')[3].includes('오후')) {
+      hour += 12;
+    }
+
+    let gmtCustomDate = new Date();
+    if (data.includes('//등록//')) {
+      gmtCustomDate = new Date(Date.UTC(year, month - 1, day, hour, minute));
+    } else {
+      gmtCustomDate = new Date(year, month - 1, day, hour, minute);
+    }
 
     console.log(gmtCustomDate);
     setPromiseTime(gmtCustomDate);
@@ -316,6 +453,11 @@ const DirectRoom = ({navigation, route}) => {
                   onChange={e => setPromiseTime(e)}
                 />
               </View>
+              <View style={[w_full, align_end]}>
+                <TouchableOpacity onPress={cancelPromise}>
+                  <Typography light>약속 취소하기</Typography>
+                </TouchableOpacity>
+              </View>
             </View>
             <View style={[flex_column, sp_2]}>
               <Typography size="lg" bold>
@@ -365,11 +507,19 @@ const DirectRoom = ({navigation, route}) => {
                 {message.message}
               </Typography>
             )}
-            {!view && (
+            {!view ? (
               <TouchableOpacity style={btn_primary} onPress={addPromise}>
                 <View style={[flex_row, sp_1, align_center, justify_center]}>
                   <Typography bold white size="lg">
                     완료
+                  </Typography>
+                </View>
+              </TouchableOpacity>
+            ) : (
+              <TouchableOpacity style={btn_primary} onPress={updatePromise}>
+                <View style={[flex_row, sp_1, align_center, justify_center]}>
+                  <Typography bold white size="lg">
+                    약속 수정하기
                   </Typography>
                 </View>
               </TouchableOpacity>
@@ -394,7 +544,7 @@ const DirectRoom = ({navigation, route}) => {
               style={styles.Avartar40}
               source={
                 user?.user_profile
-                  ? user?.user_profile
+                  ? {uri: user?.user_profile}
                   : require('../../assets/avartar.png')
               }
             />
@@ -485,10 +635,16 @@ const DirectRoom = ({navigation, route}) => {
                       borderTopRightRadius: 0,
                       maxWidth: 290,
                     }}>
-                    {chat?.chat.includes('//약속//') ? (
+                    {chat?.chat.includes('//등록//') ||
+                    chat?.chat.includes('//수정//') ||
+                    chat?.chat.includes('//취소//') ? (
                       <View style={[flex_column, sp_2]}>
                         <Typography size="lg">
-                          {chat?.chat.split('//')[1]}을 만들었어요.
+                          {chat?.chat.includes('//등록//')
+                            ? '약속을 만들었어요.'
+                            : chat?.chat.includes('//수정//')
+                            ? '약속을 수정했어요.'
+                            : '약속을 취소했어요.'}
                         </Typography>
                         <Typography size="md" light>
                           날짜 : {chat?.chat.split('//')[2]}
@@ -496,32 +652,36 @@ const DirectRoom = ({navigation, route}) => {
                         <Typography size="md" light>
                           시간 : {chat?.chat.split('//')[3]}
                         </Typography>
-                        <TouchableOpacity
-                          style={[
-                            {backgroundColor: blackAlpha700},
-                            center,
-                            flex_row,
-                            p_2,
-                            sp_2,
-                            radius_md,
-                          ]}
-                          onPress={() => {
-                            setView(true);
-                            parsing(chat?.chat);
-                            setOpenModal(true);
-                          }}>
-                          <View
+                        {!chat?.chat.includes('//취소//') && (
+                          <TouchableOpacity
                             style={[
+                              {backgroundColor: blackAlpha700},
+                              center,
                               flex_row,
-                              sp_1,
-                              align_center,
-                              justify_center,
-                            ]}>
-                            <Typography size="md" white bold>
-                              약속보기
-                            </Typography>
-                          </View>
-                        </TouchableOpacity>
+                              p_2,
+                              sp_2,
+                              radius_md,
+                            ]}
+                            onPress={() => {
+                              setView(true);
+                              parsing(
+                                chat?.chat.replace('//등록//', '//보기//'),
+                              );
+                              setOpenModal(true);
+                            }}>
+                            <View
+                              style={[
+                                flex_row,
+                                sp_1,
+                                align_center,
+                                justify_center,
+                              ]}>
+                              <Typography size="md" white bold>
+                                약속보기
+                              </Typography>
+                            </View>
+                          </TouchableOpacity>
+                        )}
                       </View>
                     ) : (
                       <Typography size="sm" style={{whiteSpace: 'pre-wrap'}}>

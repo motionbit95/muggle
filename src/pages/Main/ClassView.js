@@ -134,7 +134,7 @@ function ClassView({navigation, myInfo}) {
             무료 클래스 만들기
           </Typography>
         </TouchableOpacity>
-        <TouchableOpacity
+        {/* <TouchableOpacity
           onPress={() =>
             navigation.navigate('마이', {
               screen: '활동내역',
@@ -145,7 +145,7 @@ function ClassView({navigation, myInfo}) {
             source={require('../../assets/menuIcon.png')}
             style={{width: 40, height: 40}}
           />
-        </TouchableOpacity>
+        </TouchableOpacity> */}
       </View>
     </View>
   );

@@ -181,6 +181,16 @@ const Setting = ({navigation, route}) => {
                   </View>
                   <Image source={require('../../assets/rightarrow.png')} />
                 </TouchableOpacity>
+                <TouchableOpacity
+                  style={[w_full, styles.TouchButtonStyle]}
+                  onPress={() =>
+                    navigation.navigate('마이', {screen: '고객센터'})
+                  }>
+                  <View style={styles.rowBox}>
+                    <Typography>고객센터 및 신고하기</Typography>
+                  </View>
+                  <Image source={require('../../assets/rightarrow.png')} />
+                </TouchableOpacity>
               </View>
               <View style={(flex_column, sp_2, p_2)}>
                 <View style={{marginBottom: 10}}>

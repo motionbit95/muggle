@@ -68,7 +68,7 @@ const Certificate = ({navigation}) => {
   const moveNextStep = async () => {
     // 인증 후 가입 된 회원이 있는지 확인하고, 없으면 회원가입 패이지로, 있으면 홈으로 이동한다.
     let req = await singleQuery('user', 'uid', auth().currentUser.uid);
-    // console.log(req[0]);
+    console.log(auth().currentUser.uid);
 
     if (req?.length > 0) {
       navigation.navigate('모임');

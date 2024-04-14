@@ -45,7 +45,7 @@ const MatchPayment = ({navigation, route}) => {
     buyer_name: '홍길동', // 결제자 이름
     buyer_hp: '01012345678', // 결제자 휴대폰 번호
     buyer_email: 'test@payple.kr', // 결제자 Email
-    buy_goods: '매칭 식사권', // 결제 상품
+    buy_goods: '오프라인 커피 매칭권', // 결제 상품
     buy_total: '1000', // 결제 금액
     buy_istax: 'Y', // 과세여부 (과세: Y | 비과세(면세): N)
     buy_taxtotal: '', // 부가세(복합과세인 경우 필수)

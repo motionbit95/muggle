@@ -10,6 +10,7 @@ import {
   img_sm,
   justify_between,
   justify_end,
+  p_2,
   p_3,
   sp_1,
   sp_2,
@@ -26,7 +27,7 @@ function AlarmSetting(props) {
         <Typography light bold>
           알림 설정
         </Typography>
-        <View style={[sp_3]}>
+        <View style={[sp_3, p_2]}>
           <View style={[flex_row, justify_between, align_center, sp_3, w_full]}>
             <View style={[sp_2, {width: '70%'}]}>
               <Typography size="lg" bold>
@@ -57,7 +58,7 @@ function AlarmSetting(props) {
         <Typography light bold>
           마케팅
         </Typography>
-        <View style={[sp_3]}>
+        <View style={[sp_3, p_2]}>
           <View style={[flex_row, justify_between, align_center, sp_3, w_full]}>
             <View style={[sp_2, {width: '70%'}]}>
               <Typography size="lg" bold>

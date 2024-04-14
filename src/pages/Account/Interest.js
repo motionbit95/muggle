@@ -22,7 +22,7 @@ const Interest = ({navigation, route}) => {
     isView: false,
     message: '',
   });
-  const [interest, setInterest] = useState(null);
+  const [interest, setInterest] = useState([]);
 
   const signupUser = () => {
     if (!data.user_profile) {

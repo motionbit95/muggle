@@ -11,16 +11,22 @@ import {
 import styles, {
   align_center,
   align_end,
+  btn_normal,
+  btn_secondary,
   center,
   f_full,
   flex_row,
   img_md,
   img_sm,
   justify_end,
+  p_1,
+  p_2,
   p_3,
   p_4,
   radius_full,
   radius_lg,
+  radius_md,
+  radius_sm,
   shadow_md,
   sp_2,
   sp_3,
@@ -118,7 +124,7 @@ const User = ({navigation, route}) => {
         });
       } else {
         // console.log('없음!!');
-        navigation.navigate('Account', {screen: '휴대폰 본인인증'});
+        navigation.navigate('User', {screen: 'Account'});
       }
     });
 
@@ -165,15 +171,33 @@ const User = ({navigation, route}) => {
           </View>
           <View style={[styles.UserStackStyle]}>
             <View style={[w_full, flex_row, align_center, sp_3]}>
-              <View style={styles.Avartar70}>
-                <Image
-                  style={[f_full, radius_full]}
-                  source={
-                    myInfo?.user_profile
-                      ? {uri: myInfo?.user_profile}
-                      : require('../../assets/avartar.png')
-                  }
-                />
+              <View style={sp_2}>
+                <View style={styles.Avartar70}>
+                  <Image
+                    style={[f_full, radius_full]}
+                    source={
+                      myInfo?.user_profile
+                        ? {uri: myInfo?.user_profile}
+                        : require('../../assets/avartar.png')
+                    }
+                  />
+                </View>
+                <TouchableOpacity
+                  onPress={() =>
+                    navigation.navigate('프로필 편집', {data: myInfo})
+                  }>
+                  <View
+                    style={[
+                      center,
+                      p_2,
+                      radius_md,
+                      {backgroundColor: '#d9d9d9'},
+                    ]}>
+                    <Typography bold white size="sm">
+                      프로필 수정
+                    </Typography>
+                  </View>
+                </TouchableOpacity>
               </View>
               <View style={[w_full, sp_3]}>
                 <View
@@ -216,26 +240,17 @@ const User = ({navigation, route}) => {
               </View>
             </View>
           </View>
-          <TouchableOpacity
-            onPress={() => navigation.navigate('프로필 편집', {data: myInfo})}>
-            <View
-              style={[center, p_4, radius_lg, {backgroundColor: '#FF5E5B'}]}>
-              <Typography bold white size="lg">
-                프로필 수정
-              </Typography>
-            </View>
-          </TouchableOpacity>
           <View style={[sp_3, shadow_md]}>
             <View style={[styles.rowBox, styles.itembox]}>
               <TouchableOpacity
                 style={styles.one_thirdBoxStyle}
                 onPress={() =>
-                  navigation.navigate('모임', {
+                  navigation.navigate('마이', {
                     screen: '모임리스트',
                     params: {
-                      data: goods,
-                      // userList: userList,
-                      title: '찜모임',
+                      type: 'goods',
+                      title: '찜 목록',
+                      myInfo: myInfo,
                     },
                   })
                 }>
@@ -243,18 +258,19 @@ const User = ({navigation, route}) => {
                   <Typography size="2xl" bold>
                     {myInfo?.goods ? myInfo?.goods.length : 0}
                   </Typography>
-                  <Typography>찜모임</Typography>
+                  <Typography>찜 목록</Typography>
                 </View>
               </TouchableOpacity>
               <TouchableOpacity
                 style={styles.one_thirdBoxStyle}
                 onPress={() =>
-                  navigation.navigate('모임', {
+                  navigation.navigate('마이', {
                     screen: '모임리스트',
                     params: {
-                      data: views,
+                      type: 'views',
                       // userList: userList,
                       title: '최근 본 모임',
+                      myInfo: myInfo,
                     },
                   })
                 }>

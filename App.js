@@ -66,6 +66,7 @@ import MatchingView from './src/pages/Main/MatchingView';
 import MyActivity from './src/pages/MyPage/MyActivity';
 import Setting from './src/pages/MyPage/Setting';
 import AlarmSetting from './src/pages/MyPage/Alarm';
+import Kakao from './src/pages/MyPage/Kakao';
 
 const App = () => {
   // const isDarkMode = useColorScheme() === 'dark';
@@ -113,42 +114,12 @@ const App = () => {
         component={GroupDetail}
         options={({navigation}) => ({
           title: '모임상세',
-          headerLeft: () => (
-            <TouchableOpacity onPress={() => navigation.navigate('Muggle')}>
-              <Image
-                style={img_sm}
-                source={require('./src/assets/icons/left_arrow.png')}
-              />
-            </TouchableOpacity>
-          ),
           headerStyle: {
             backgroundColor: '#fff',
           },
-          headerTintColor: '#black',
+          headerTintColor: 'black',
           headerTitleStyle: {
             // fontWeight: 'bold',
-            fontFamily: font_family_bold,
-          },
-        })}
-      />
-      <HomeStack.Screen
-        name="모임리스트"
-        component={GroupView}
-        options={({navigation}) => ({
-          title: '모임리스트',
-          headerLeft: () => (
-            <TouchableOpacity onPress={() => navigation.navigate('Muggle')}>
-              <Image
-                style={img_sm}
-                source={require('./src/assets/icons/left_arrow.png')}
-              />
-            </TouchableOpacity>
-          ),
-          headerStyle: {
-            backgroundColor: '#fff',
-          },
-          headerTintColor: '#black',
-          headerTitleStyle: {
             fontFamily: font_family_bold,
           },
         })}
@@ -161,7 +132,7 @@ const App = () => {
           headerStyle: {
             backgroundColor: '#fff',
           },
-          headerTintColor: '#black',
+          headerTintColor: 'black',
           headerTitleStyle: {
             fontFamily: font_family_bold,
           },
@@ -175,7 +146,7 @@ const App = () => {
           headerStyle: {
             backgroundColor: '#fff',
           },
-          headerTintColor: '#black',
+          headerTintColor: 'black',
           headerTitleStyle: {
             fontFamily: font_family_bold,
           },
@@ -190,7 +161,7 @@ const App = () => {
           headerStyle: {
             backgroundColor: '#fff',
           },
-          headerTintColor: '#black',
+          headerTintColor: 'black',
           headerTitleStyle: {
             fontFamily: font_family_bold,
           },
@@ -205,7 +176,7 @@ const App = () => {
           headerStyle: {
             backgroundColor: '#fff',
           },
-          headerTintColor: '#black',
+          headerTintColor: 'black',
           headerTitleStyle: {
             fontFamily: font_family_bold,
           },
@@ -220,7 +191,7 @@ const App = () => {
           headerStyle: {
             backgroundColor: '#fff',
           },
-          headerTintColor: '#black',
+          headerTintColor: 'black',
           headerTitleStyle: {
             fontFamily: font_family_bold,
           },
@@ -240,6 +211,7 @@ const App = () => {
         name="프로필 편집"
         component={Profile}
         options={() => ({
+          title: '프로필 수정',
           headerTitleStyle: {
             fontFamily: font_family_bold,
           },
@@ -253,7 +225,15 @@ const App = () => {
       <UserStack.Screen
         name="알림설정"
         component={AlarmSetting}
-        options={() => ({
+        options={({navigation}) => ({
+          headerLeft: () => (
+            <TouchableOpacity onPress={() => navigation.navigate('User')}>
+              <Image
+                style={img_sm}
+                source={require('./src/assets/icons/left_arrow.png')}
+              />
+            </TouchableOpacity>
+          ),
           headerTitleStyle: {
             color: blackAlpha900,
             fontFamily: font_family_bold,
@@ -263,7 +243,32 @@ const App = () => {
       <UserStack.Screen
         name="자주묻는질문"
         component={FAQ}
-        options={() => ({
+        options={({navigation}) => ({
+          headerLeft: () => (
+            <TouchableOpacity onPress={() => navigation.navigate('설정')}>
+              <Image
+                style={img_sm}
+                source={require('./src/assets/icons/left_arrow.png')}
+              />
+            </TouchableOpacity>
+          ),
+          headerTitleStyle: {
+            fontFamily: font_family_bold,
+          },
+        })}
+      />
+      <UserStack.Screen
+        name="고객센터"
+        component={Kakao}
+        options={({navigation}) => ({
+          headerLeft: () => (
+            <TouchableOpacity onPress={() => navigation.navigate('설정')}>
+              <Image
+                style={img_sm}
+                source={require('./src/assets/icons/left_arrow.png')}
+              />
+            </TouchableOpacity>
+          ),
           headerTitleStyle: {
             fontFamily: font_family_bold,
           },
@@ -289,7 +294,39 @@ const App = () => {
       <UserStack.Screen
         name="설정"
         component={Setting}
-        options={() => ({
+        options={({navigation}) => ({
+          headerLeft: () => (
+            <TouchableOpacity onPress={() => navigation.navigate('User')}>
+              <Image
+                style={img_sm}
+                source={require('./src/assets/icons/left_arrow.png')}
+              />
+            </TouchableOpacity>
+          ),
+          headerTitleStyle: {
+            fontFamily: font_family_bold,
+          },
+        })}
+      />
+
+      <HomeStack.Screen
+        name="모임리스트"
+        component={GroupView}
+        options={({navigation}) => ({
+          title: '모임리스트',
+          headerLeft: () => (
+            <TouchableOpacity
+              onPress={() => navigation.navigate('마이', {screen: 'User'})}>
+              <Image
+                style={img_sm}
+                source={require('./src/assets/icons/left_arrow.png')}
+              />
+            </TouchableOpacity>
+          ),
+          headerStyle: {
+            backgroundColor: '#fff',
+          },
+          headerTintColor: 'black',
           headerTitleStyle: {
             fontFamily: font_family_bold,
           },
@@ -313,7 +350,29 @@ const App = () => {
           headerStyle: {
             backgroundColor: '#fff',
           },
-          headerTintColor: '#black',
+          headerTintColor: 'black',
+          headerTitleStyle: {
+            fontFamily: font_family_bold,
+          },
+        })}
+      />
+      <ChatStack.Screen
+        name="매칭룸"
+        component={DirectRoom}
+        options={({navigation}) => ({
+          title: '매칭룸',
+          headerLeft: () => (
+            <TouchableOpacity onPress={() => navigation.navigate('채팅방')}>
+              <Image
+                style={img_sm}
+                source={require('./src/assets/icons/left_arrow.png')}
+              />
+            </TouchableOpacity>
+          ),
+          headerStyle: {
+            backgroundColor: '#fff',
+          },
+          headerTintColor: 'black',
           headerTitleStyle: {
             fontFamily: font_family_bold,
           },
@@ -335,29 +394,7 @@ const App = () => {
           headerStyle: {
             backgroundColor: '#fff',
           },
-          headerTintColor: '#black',
-          headerTitleStyle: {
-            fontFamily: font_family_bold,
-          },
-        })}
-      />
-      <ChatStack.Screen
-        name="매칭룸"
-        component={DirectRoom}
-        options={({navigation}) => ({
-          title: '매칭룸',
-          headerLeft: () => (
-            <TouchableOpacity onPress={() => navigation.goBack()}>
-              <Image
-                style={img_sm}
-                source={require('./src/assets/icons/left_arrow.png')}
-              />
-            </TouchableOpacity>
-          ),
-          headerStyle: {
-            backgroundColor: '#fff',
-          },
-          headerTintColor: '#black',
+          headerTintColor: 'black',
           headerTitleStyle: {
             fontFamily: font_family_bold,
           },
@@ -392,7 +429,7 @@ const App = () => {
           headerStyle: {
             backgroundColor: '#fff',
           },
-          headerTintColor: '#black',
+          headerTintColor: 'black',
           headerTitleStyle: {
             fontFamily: font_family_bold,
           },
@@ -413,7 +450,7 @@ const App = () => {
           headerStyle: {
             backgroundColor: '#fff',
           },
-          headerTintColor: '#black',
+          headerTintColor: 'black',
           headerTitleStyle: {
             fontFamily: font_family_bold,
           },
@@ -426,10 +463,43 @@ const App = () => {
       <SignUpStack.Screen
         name="SignUp"
         component={SignUp}
-        options={{title: '회원가입'}}
+        options={{
+          title: '회원가입',
+          headerStyle: {
+            backgroundColor: '#fff',
+          },
+          headerTintColor: 'black',
+          headerTitleStyle: {
+            fontFamily: font_family_bold,
+          },
+        }}
       />
-      <SignUpStack.Screen name="휴대폰 본인인증" component={Certificate} />
-      <SignUpStack.Screen name="프로필 설정" component={Interest} />
+      <SignUpStack.Screen
+        name="휴대폰 본인인증"
+        component={Certificate}
+        options={{
+          headerStyle: {
+            backgroundColor: '#fff',
+          },
+          headerTintColor: 'black',
+          headerTitleStyle: {
+            fontFamily: font_family_bold,
+          },
+        }}
+      />
+      <SignUpStack.Screen
+        name="프로필 설정"
+        component={Interest}
+        options={{
+          headerStyle: {
+            backgroundColor: '#fff',
+          },
+          headerTintColor: 'black',
+          headerTitleStyle: {
+            fontFamily: font_family_bold,
+          },
+        }}
+      />
       <SignUpStack.Screen name="인트로" component={Introduce} />
     </SignUpStack.Navigator>
   );
@@ -549,10 +619,10 @@ const App = () => {
           }}
         />
         <Tab.Screen
-          name="찜모임"
+          name="찜 목록"
           component={GroupView}
           options={{
-            title: '찜모임',
+            title: '찜 목록',
             tabBarActiveTintColor: '#FF634F',
             unmountOnBlur: true,
             tabBarLabelStyle: {display: 'none'},

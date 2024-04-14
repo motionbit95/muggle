@@ -52,7 +52,7 @@ const ChatRoom = ({navigation, route}) => {
   };
 
   useEffect(() => {
-    console.log('data===>', data);
+    console.log('data===>', data.gid);
     const unsubscribe = firestore()
       .collection('chat-' + data.gid)
       .orderBy('createdAt', 'asc')
@@ -103,7 +103,7 @@ const ChatRoom = ({navigation, route}) => {
         <View
           style={[
             {
-              backgroundColor: '#FFF7E3',
+              backgroundColor: 'white',
               borderRadius: 10,
               padding: 10,
               gap: 5,
@@ -148,7 +148,7 @@ const ChatRoom = ({navigation, route}) => {
         <View
           style={[
             {
-              backgroundColor: '#FFF7E3',
+              backgroundColor: 'white',
               borderRadius: 10,
               padding: 10,
               gap: 5,
@@ -161,10 +161,10 @@ const ChatRoom = ({navigation, route}) => {
               <Typography bold>{data.group_name}</Typography>
 
               <View style={[sp_1]}>
-                <View style={[styles.rowBox, sp_2]}>
+                {/* <View style={[styles.rowBox, sp_2]}>
                   <Image style={{width: 16, height: 16}} source={mapImg} />
                   <Typography size={'sm'}>{data.group_place}</Typography>
-                </View>
+                </View> */}
                 <Typography numberOfLines={2}>{data?.group_target}</Typography>
               </View>
             </View>
