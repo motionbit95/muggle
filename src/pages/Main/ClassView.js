@@ -131,7 +131,7 @@ function ClassView({navigation, myInfo}) {
             navigation.navigate('모임개설', {data: {type: 'class'}})
           }>
           <Typography size="lg" bold white>
-            무료 클래스 만들기
+            무료 단체 모임 만들기
           </Typography>
         </TouchableOpacity>
         {/* <TouchableOpacity

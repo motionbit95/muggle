@@ -1,11 +1,14 @@
 import React from 'react';
-import {Text, TouchableOpacity, View} from 'react-native';
+import {Image, Text, TouchableOpacity, View} from 'react-native';
 import {
+  align_center,
   blackAlpha400,
   center,
   f_full,
+  flex_column,
   flex_row,
   justify_around,
+  justify_center,
   p_6,
   radius_2xl,
   sp_4,
@@ -46,20 +49,29 @@ function MessageBox(props) {
         <Typography bold size="lg">
           {props.message ? props.message : '확인하시겠습니까?'}
         </Typography>
-        <View
-          style={[flex_row, w_full, justify_around, {paddingHorizontal: 20}]}>
-          {props.mode === 'confirm' && (
-            <>
-              <TouchableOpacity onPress={handleCancel}>
-                <Typography size="md">취소</Typography>
-              </TouchableOpacity>
-              <Typography light>|</Typography>
-            </>
-          )}
-          <TouchableOpacity onPress={handleOK}>
-            <Typography size="md">확인</Typography>
-          </TouchableOpacity>
-        </View>
+        {props.type === 'share' ? (
+          <View style={[flex_column, justify_center, align_center, sp_4]}>
+            {props.render}
+            <TouchableOpacity onPress={handleCancel}>
+              <Typography size="md">취소</Typography>
+            </TouchableOpacity>
+          </View>
+        ) : (
+          <View
+            style={[flex_row, w_full, justify_around, {paddingHorizontal: 20}]}>
+            {props.mode === 'confirm' && (
+              <>
+                <TouchableOpacity onPress={handleCancel}>
+                  <Typography size="md">취소</Typography>
+                </TouchableOpacity>
+                <Typography light>|</Typography>
+              </>
+            )}
+            <TouchableOpacity onPress={handleOK}>
+              <Typography size="md">확인</Typography>
+            </TouchableOpacity>
+          </View>
+        )}
       </View>
     </View>
   );

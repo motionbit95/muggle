@@ -279,7 +279,8 @@ const Matching = ({navigation, myInfo, userList, ...props}) => {
       {userList ? (
         userList?.map(
           (item, index) =>
-            myInfo?.user_gender !== item?.user_gender && (
+            myInfo?.user_gender !== item?.user_gender &&
+            item?.user_view_profile && (
               <View style={[f_full, {padding: 10}]}>
                 <Image src={item?.user_profile} style={[f_full, radius_2xl]} />
                 <LinearGradient
@@ -388,7 +389,9 @@ const Matching = ({navigation, myInfo, userList, ...props}) => {
                             {isPoint ? (
                               <View style={[w_full, sp_3]}>
                                 <Typography size="xl" bold>
-                                  오프라인 커피 매칭 신청 하시겠어요?
+                                  {type === 0
+                                    ? '1:1 채팅 신청을 하시겠어요?'
+                                    : '오프라인 커피 매칭 신청 하시겠어요?'}
                                 </Typography>
                                 <Typography light>
                                   {`매칭 확률 100% 실제 유저
@@ -494,15 +497,19 @@ const Matching = ({navigation, myInfo, userList, ...props}) => {
                                 </TouchableOpacity>
                               </View>
                             ) : (
-                              <View style={[w_full, sp_3]}>
+                              <View style={[w_full, sp_6]}>
                                 <Typography size="xl" bold>
                                   {userList[swiperIndex]?.user_name}님께
-                                  오프라인 커피 매칭 신청 하시겠어요?
+                                  {type === 0
+                                    ? '1:1 채팅 신청을 하시겠어요?'
+                                    : '오프라인 커피 매칭 신청 하시겠어요?'}
                                 </Typography>
-                                <Typography light>
-                                  상대방과 1:1 로 오프라인 카페에서 즐거운
-                                  커피시간을 만들어 보세요.
-                                </Typography>
+                                {type !== 0 && (
+                                  <Typography light>
+                                    상대방과 1:1 로 오프라인 카페에서 즐거운
+                                    커피시간을 만들어 보세요.
+                                  </Typography>
+                                )}
                                 <TouchableOpacity
                                   style={btn_primary}
                                   onPress={() => {

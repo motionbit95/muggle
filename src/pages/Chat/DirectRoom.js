@@ -168,7 +168,7 @@ const DirectRoom = ({navigation, route}) => {
     setMessage({
       mode: 'confirm',
       isView: true,
-      message: '매칭 취소 하시겠습니까?',
+      message: '매칭 거절 하시겠습니까?',
       type: 'refund',
     });
   };
@@ -408,12 +408,16 @@ const DirectRoom = ({navigation, route}) => {
           onOK={async () => {
             // 메세지 박스 닫기
             if (message.type === 'success') {
+              handleAddChat(`//완료//매칭 완료 처리하였습니다`);
+
               await updateDocument('matching', data?.mid, {
                 matching_state: 2,
               });
             } else if (message.type === 'refund') {
+              handleAddChat(`//거절//매칭 신청을 거절하였습니다`);
               await updateDocument('matching', data?.mid, {
                 matching_state: 400,
+                matching_refunder: auth().currentUser.uid,
               });
             }
             setMessage({mode: '', isView: false, message: ''});
@@ -683,6 +687,20 @@ const DirectRoom = ({navigation, route}) => {
                           </TouchableOpacity>
                         )}
                       </View>
+                    ) : chat?.chat.includes('//완료//') ? (
+                      <View style={[flex_column, sp_2]}>
+                        <Typography>{`${chat?.chat.replaceAll(
+                          '//완료//',
+                          '',
+                        )}`}</Typography>
+                        {data?.receiver === auth().currentUser?.uid ? (
+                          <Typography>
+                            {
+                              '5영업일 이내 설정하신 매칭원 금액의 70%를 기재해주신 계좌로 입금됩니다.\n\n(마이페이지-프로필수정-계좌입력)'
+                            }
+                          </Typography>
+                        ) : null}
+                      </View>
                     ) : (
                       <Typography size="sm" style={{whiteSpace: 'pre-wrap'}}>
                         {`${chat?.chat}`}
@@ -771,6 +789,36 @@ const DirectRoom = ({navigation, route}) => {
                           </TouchableOpacity>
                         )}
                       </View>
+                    ) : chat?.chat.includes('//완료//') ? (
+                      <View style={[flex_column, sp_2]}>
+                        <Typography>{`${chat?.chat.replaceAll(
+                          '//완료//',
+                          '',
+                        )}`}</Typography>
+                        {data?.receiver === auth().currentUser?.uid ? (
+                          <Typography>
+                            {
+                              '5영업일 이내 설정하신 매칭원 금액의 70%를 기재해주신 계좌로 입금됩니다.\n\n(마이페이지-프로필수정-계좌입력)'
+                            }
+                          </Typography>
+                        ) : null}
+                      </View>
+                    ) : chat?.chat.includes('거절') ? (
+                      <>
+                        <View style={[flex_column, sp_2]}>
+                          <Typography>{`${chat?.chat.replaceAll(
+                            '//거절//',
+                            '',
+                          )}`}</Typography>
+                          {data?.sender === auth().currentUser?.uid ? (
+                            <Typography>
+                              {
+                                '신청자가 결제하신 매칭권 금액은\n2영업일 이내 전액환불(카드취소)됩니다.'
+                              }
+                            </Typography>
+                          ) : null}
+                        </View>
+                      </>
                     ) : (
                       <Typography size="sm" style={{whiteSpace: 'pre-wrap'}}>
                         {`${chat?.chat}`}
@@ -811,7 +859,16 @@ const DirectRoom = ({navigation, route}) => {
               color: 'black',
               width: '100%',
             }}
-            placeholder="메시지를 입력하시오."
+            readOnly={
+              matchingInfo?.matching_state === 400 &&
+              matchingInfo?.matching_refunder !== auth().currentUser?.uid
+            }
+            placeholder={
+              matchingInfo?.matching_state === 400 &&
+              matchingInfo?.matching_refunder !== auth().currentUser?.uid
+                ? '매칭이 거절되어 채팅이 불가합니다.'
+                : '메시지를 입력하세요.'
+            }
             onChange={e => setChat(e.nativeEvent.text)}
             value={chat}
           />

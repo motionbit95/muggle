@@ -25,6 +25,14 @@
 	<string>????</string>
 	<key>CFBundleURLTypes</key>
 	<array>
+	   <dict>
+     <key>CFBundleTypeRole</key>
+     <string>Editor</string>
+     <key>CFBundleURLSchemes</key>
+     <array>
+       <string>kakaoc3c19010b1b15c97523a23dc22fdd184</string>
+     </array>
+  </dict>
 		<dict>
 			<key>CFBundleURLName</key>
 			<string></string>
@@ -34,6 +42,15 @@
 			</array>
 		</dict>
 	</array>
+	 <key>KAKAO_APP_KEY</key>
+ <string>c3c19010b1b15c97523a23dc22fdd184</string>
+ <key>LSApplicationQueriesSchemes</key>
+ <array>
+     <!-- 카카오톡으로 로그인 -->
+     <string>kakaokompassauth</string>
+     <!-- 카카오링크 -->
+    <string>kakaolink</string>
+ </array>
 	<key>CFBundleVersion</key>
 	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>LSApplicationQueriesSchemes</key>

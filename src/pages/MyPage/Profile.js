@@ -11,6 +11,8 @@ import {
 
 import styles, {
   align_center,
+  align_end,
+  align_start,
   blackAlpha400,
   blackAlpha50,
   blackAlpha900,
@@ -19,9 +21,14 @@ import styles, {
   font_family,
   fs_md,
   img_sm_2,
+  justify_between,
   justify_center,
   p_2,
   radius_full,
+  sp_2,
+  sp_3,
+  sp_4,
+  w_full,
 } from '../../style/styles';
 import DropDown from '../../Component/PickerComponent';
 import {
@@ -71,6 +78,10 @@ const Profile = ({navigation, route}) => {
   const [selectbank, setSelectbank] = useState(data?.user_bank.bank_name);
   const [accountNumber, setAccountNumber] = useState(
     data?.user_bank.account_number,
+  );
+
+  const [viewProfile, setViewProfile] = useState(
+    data?.user_view_profile ? data?.user_view_profile : true,
   );
 
   const years = [];
@@ -215,6 +226,7 @@ const Profile = ({navigation, route}) => {
         bank_name: selectbank,
         account_number: accountNumber,
       },
+      user_view_profile: viewProfile,
     });
 
     navigation.navigate('User', {
@@ -231,6 +243,7 @@ const Profile = ({navigation, route}) => {
           bank_name: selectbank,
           account_number: accountNumber,
         },
+        user_view_profile: viewProfile,
       },
     });
     //   {
@@ -561,6 +574,44 @@ const Profile = ({navigation, route}) => {
                   <Typography size={'md'}>{item}</Typography>
                 </TouchableOpacity>
               ))}
+            </View>
+          </View>
+          <View style={styles.hr} />
+          <View style={{flex: 1}}>
+            <View
+              style={[
+                flex_row,
+                justify_between,
+                align_start,
+                sp_3,
+                w_full,
+                p_2,
+              ]}>
+              <View style={[sp_4]}>
+                <View style={[flex_row, justify_between, align_center, sp_3]}>
+                  <Typography size="lg" bold>
+                    커피 프로필 노출 설정
+                  </Typography>
+                  <TouchableOpacity
+                    style={[align_end]}
+                    onPress={() => setViewProfile(!viewProfile)}>
+                    <View
+                      style={{width: 20, height: 20, justifyContent: 'center'}}>
+                      <Image
+                        source={
+                          viewProfile
+                            ? require('../../assets/checked.png')
+                            : require('../../assets/unchecked.png')
+                        }
+                      />
+                    </View>
+                  </TouchableOpacity>
+                </View>
+                <Typography light>
+                  비활성화 시 회원님은 커피 추천에서 제외되며, 다른 유저의 커피
+                  추천을 볼 수 없어요. 일상, 클래스, 채팅목록은 유지됩니다.
+                </Typography>
+              </View>
             </View>
           </View>
         </View>

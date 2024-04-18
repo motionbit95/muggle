@@ -67,6 +67,7 @@ import MyActivity from './src/pages/MyPage/MyActivity';
 import Setting from './src/pages/MyPage/Setting';
 import AlarmSetting from './src/pages/MyPage/Alarm';
 import Kakao from './src/pages/MyPage/Kakao';
+import MatchingUser from './src/pages/Matching/MatchingUser';
 
 const App = () => {
   // const isDarkMode = useColorScheme() === 'dark';
@@ -346,7 +347,8 @@ const App = () => {
           //     <Image style={img_md} source={require('./src/assets/home.png')} />
           //   </TouchableOpacity>
           // ),
-          title: '채팅방',
+          headerLeft: () => <></>,
+          title: '채팅',
           headerStyle: {
             backgroundColor: '#fff',
           },
@@ -360,7 +362,7 @@ const App = () => {
         name="매칭룸"
         component={DirectRoom}
         options={({navigation}) => ({
-          title: '매칭룸',
+          title: '매칭',
           headerLeft: () => (
             <TouchableOpacity onPress={() => navigation.navigate('채팅방')}>
               <Image
@@ -382,7 +384,7 @@ const App = () => {
         name="채팅룸"
         component={ChatRoom}
         options={({navigation}) => ({
-          title: '채팅룸',
+          title: '채팅',
           headerLeft: () => (
             <TouchableOpacity onPress={() => navigation.navigate('채팅방')}>
               <Image
@@ -408,6 +410,36 @@ const App = () => {
       <MatchingStack.Screen
         name="커피친구"
         component={Matching}
+        options={({navigation}) => ({
+          title: '',
+          headerLeft: ({onPress}) => (
+            <Image
+              style={{height: 27, width: 100}}
+              source={require('./src/assets/muggle.png')}
+            />
+          ),
+          headerRight: () => (
+            <TouchableOpacity
+              style={{marginRight: 10}}
+              onPress={() => navigation.navigate('알림')}>
+              <Image
+                style={{width: 24, height: 24}}
+                source={require('./src/assets/Notification.png')}
+              />
+            </TouchableOpacity>
+          ),
+          headerStyle: {
+            backgroundColor: '#fff',
+          },
+          headerTintColor: 'black',
+          headerTitleStyle: {
+            fontFamily: font_family_bold,
+          },
+        })}
+      />
+      <MatchingStack.Screen
+        name="매칭유저"
+        component={MatchingUser}
         options={({navigation}) => ({
           title: '',
           headerLeft: ({onPress}) => (

@@ -7,12 +7,14 @@ import {
   ScrollView,
   StyleSheet,
   Text,
+  TextInput,
   TouchableOpacity,
   View,
 } from 'react-native';
 import styles, {
   align_center,
   align_end,
+  blackAlpha400,
   blackAlpha500,
   blackAlpha900,
   btn_normal,
@@ -22,10 +24,13 @@ import styles, {
   f_full,
   flex_column,
   flex_row,
+  font_family,
   fs_md,
   fw_bold,
   img_md,
   img_sm,
+  justify_around,
+  justify_between,
   justify_center,
   justify_end,
   p_2,
@@ -57,11 +62,14 @@ import {
 import auth from '@react-native-firebase/auth';
 import {
   addChat,
+  addDocument,
   singleQuery,
   updateDocument,
 } from '../../firebase/firebase_func';
 import Typography from '../../Component/Typography';
 import MessageBox from '../../Component/MessageBox';
+
+import KakaoShareLink from 'react-native-kakao-share-link';
 
 const GroupDetail = ({navigation, route}) => {
   const {data, userList} = route.params ? route.params : {data: null};
@@ -75,12 +83,35 @@ const GroupDetail = ({navigation, route}) => {
   const [icon, setIcon] = useState(require('../../assets/icons/heart.png'));
   const [groupUsers, setGroupUsers] = useState([]);
 
+  const [openAlert, setOpenAlert] = useState(false);
+  const [reportText, setReportText] = useState('');
+
   const [message, setMessage] = useState({
     mode: 'error',
     isView: false,
     message: '',
     type: '',
   });
+
+  // 제목을 헤더 타이틀로 설정
+  React.useLayoutEffect(() => {
+    navigation.setOptions({
+      title: data?.group_type === '일상 모임' ? '1:1 일상 모임' : '단체 모임',
+      headerRight: () => (
+        <View style={[flex_row, justify_end, sp_2]}>
+          <TouchableOpacity onPress={clickShare}>
+            <Image source={require('../../assets/AiOutlineShareAlt.png')} />
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => {
+              setOpenAlert(true);
+            }}>
+            <Image source={require('../../assets/AiOutlineAlert.png')} />
+          </TouchableOpacity>
+        </View>
+      ),
+    });
+  }, [data]);
 
   useEffect(() => {
     const getUserInfo = async user => {
@@ -206,6 +237,44 @@ const GroupDetail = ({navigation, route}) => {
     });
   };
 
+  const clickShare = async () => {
+    setMessage({
+      mode: 'confirm',
+      isView: true,
+      message: '친구에게 이성을 소개시켜주세요!',
+      type: 'share',
+    });
+  };
+
+  const shareApp = async () => {
+    try {
+      const response = await KakaoShareLink.sendFeed({
+        content: {
+          title: data?.group_name,
+          imageUrl: data?.group_image,
+          link: {
+            webUrl: 'https://muggle.life/',
+            mobileWebUrl: 'muggle://group/detail ',
+          },
+          description: data?.group_target,
+        },
+      });
+      console.log(response);
+    } catch (e) {
+      console.error(e);
+      console.error(e.message);
+    }
+  };
+
+  const addReort = async () => {
+    addDocument('report', {
+      gid: data?.doc_id,
+      uid: auth().currentUser.uid,
+      createAt: new Date(),
+      description: reportText,
+    });
+  };
+
   return (
     <View style={styles.screenStyle}>
       {message.isView && (
@@ -221,6 +290,15 @@ const GroupDetail = ({navigation, route}) => {
             }
             setMessage({mode: '', isView: false, message: ''});
           }}
+          type={message.type}
+          render={
+            <TouchableOpacity style={sp_2} onPress={shareApp}>
+              <Image source={require('../../assets/kakao.png')} />
+              <Typography light bold>
+                카카오톡초대
+              </Typography>
+            </TouchableOpacity>
+          }
         />
       )}
       <ScrollView style={styles.scrollViewStyle}>
@@ -231,27 +309,28 @@ const GroupDetail = ({navigation, route}) => {
         <View style={styles.contentStyle}>
           <View
             style={{
-              width: '100%',
               flex: 1,
               gap: 20,
             }}>
-            <View style={[{justifyContent: 'space-between'}, styles.rowBox]}>
+            <View style={[w_full, flex_row, justify_between]}>
               <Typography bold size="lg">
                 {data?.group_name}
               </Typography>
-              {data?.group_type !== '일상 모임' && (
-                <View
-                  style={[
-                    radius_sm,
-                    {
-                      backgroundColor: primary_color,
-                      paddingHorizontal: 5,
-                      paddingVertical: 3,
-                    },
-                  ]}>
-                  <Typography white>{displayDday(dday)}</Typography>
-                </View>
-              )}
+              <View style={[flex_row, sp_4]}>
+                {data?.group_type !== '일상 모임' && (
+                  <View
+                    style={[
+                      radius_sm,
+                      {
+                        backgroundColor: primary_color,
+                        paddingHorizontal: 5,
+                        paddingVertical: 3,
+                      },
+                    ]}>
+                    <Typography white>{displayDday(dday)}</Typography>
+                  </View>
+                )}
+              </View>
             </View>
             {data?.group_type !== '일상 모임' && (
               <View style={styles.gap10}>
@@ -320,12 +399,15 @@ const GroupDetail = ({navigation, route}) => {
                 }}>
                 {groupUsers?.map((user, index) => (
                   <TouchableOpacity
-                    // onPress={() =>
-                    //   navigation.navigate('모임', {
-                    //     screen: '유저',
-                    //     params: {data: user, userList: userList},
-                    //   })
-                    // }
+                    disabled={
+                      !data.group_users.includes(auth().currentUser.uid)
+                    }
+                    onPress={() =>
+                      navigation.navigate('모임', {
+                        screen: '유저',
+                        params: {data: user, userList: userList},
+                      })
+                    }
                     style={[styles.rowBox, {width: '50%'}]}>
                     <View key={index} style={[flex_row, center, sp_2]}>
                       <Image
@@ -456,6 +538,83 @@ const GroupDetail = ({navigation, route}) => {
         <TouchableOpacity onPress={() => handleGoods(data.doc_id)}>
           <Image source={icon} style={img_md} />
         </TouchableOpacity>
+        <Modal
+          visible={openAlert}
+          animationType="fade"
+          transparent={true}
+          style={styles.dropdown}>
+          <View
+            style={[
+              w_full,
+              align_end,
+              justify_end,
+              {flex: 1, backgroundColor: 'rgba(0,0,0,0.5)'},
+            ]}>
+            <View
+              style={[
+                w_full,
+                flex_column,
+                justify_end,
+                align_end,
+                p_6,
+                {
+                  backgroundColor: 'white',
+                  borderTopLeftRadius: 20,
+                  borderTopRightRadius: 20,
+                },
+              ]}>
+              <TouchableOpacity onPress={() => setOpenAlert(false)}>
+                <Image
+                  source={require('../../assets/icons/_x.png')}
+                  style={[img_sm, {opacity: 0.5}]}
+                />
+              </TouchableOpacity>
+
+              <View style={[w_full, sp_6]}>
+                <Typography size="xl" bold>
+                  신고내용을 기재해주세요.
+                </Typography>
+                <TextInput
+                  placeholderTextColor={blackAlpha400}
+                  onChange={e => setReportText(e.nativeEvent.text)}
+                  multiline
+                  style={[
+                    {
+                      fontFamily: font_family,
+                      color: 'black',
+                      height: 100,
+                      textAlignVertical: 'top',
+                    },
+                    styles.contentBox,
+                  ]}
+                  placeholder="허위신고시 이용이 제한될 수 있습니다."
+                />
+
+                <View
+                  style={[
+                    flex_row,
+                    w_full,
+                    justify_around,
+                    {paddingHorizontal: 20},
+                  ]}>
+                  <TouchableOpacity onPress={() => openAlert(false)}>
+                    <Typography size="md">취소</Typography>
+                  </TouchableOpacity>
+                  <Typography light>|</Typography>
+
+                  <TouchableOpacity
+                    onPress={() => {
+                      addReort();
+                      setOpenAlert(false);
+                    }}>
+                    <Typography size="md">확인</Typography>
+                  </TouchableOpacity>
+                </View>
+              </View>
+            </View>
+          </View>
+        </Modal>
+
         <Modal visible={openModal} animationType="fade" transparent={true}>
           <View
             style={[

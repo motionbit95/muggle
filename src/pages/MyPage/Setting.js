@@ -121,7 +121,7 @@ const Setting = ({navigation, route}) => {
         });
       } else {
         // console.log('없음!!');
-        navigation.navigate('Account', {screen: '휴대폰 본인인증'});
+        navigation.navigate('계정', {screen: '휴대폰 본인인증'});
       }
     });
 
@@ -134,7 +134,7 @@ const Setting = ({navigation, route}) => {
     auth()
       .signOut()
       .then(() => {
-        navigation.navigate('Account', {screen: '휴대폰 본인인증'});
+        navigation.navigate('계정', {screen: '휴대폰 본인인증'});
       });
   };
 
@@ -142,7 +142,7 @@ const Setting = ({navigation, route}) => {
     auth()
       .currentUser.delete()
       .then(() => {
-        navigation.navigate('Account', {screen: '휴대폰 본인인증'});
+        navigation.navigate('계정', {screen: '휴대폰 본인인증'});
       });
   };
 

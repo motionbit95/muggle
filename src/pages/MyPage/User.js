@@ -133,22 +133,6 @@ const User = ({navigation, route}) => {
     // };
   }, []);
 
-  const onLogout = () => {
-    auth()
-      .signOut()
-      .then(() => {
-        navigation.navigate('Account', {screen: '휴대폰 본인인증'});
-      });
-  };
-
-  const onDeleteUser = () => {
-    auth()
-      .currentUser.delete()
-      .then(() => {
-        navigation.navigate('Account', {screen: '휴대폰 본인인증'});
-      });
-  };
-
   return (
     <View style={styles.screenStyle}>
       <View style={styles.bgStyle}>

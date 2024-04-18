@@ -210,7 +210,9 @@ const MatchBox = ({user, index, userList, navigation, view}) => {
                 {isPoint ? (
                   <View style={[w_full, sp_3]}>
                     <Typography size="xl" bold>
-                      오프라인 커피 매칭 신청 하시겠어요?
+                      {type === 0
+                        ? '1:1 채팅 신청을 하시겠어요?'
+                        : '오프라인 커피 매칭 신청 하시겠어요?'}
                     </Typography>
                     <Typography light>
                       {`매칭 확률 100% 실제 유저
@@ -300,12 +302,17 @@ const MatchBox = ({user, index, userList, navigation, view}) => {
                 ) : (
                   <View style={[w_full, sp_3]}>
                     <Typography size="xl" bold>
-                      {user?.user_name}님께 오프라인 커피 매칭 신청 하시겠어요?
+                      {user?.user_name?.user_name}님께
+                      {type === 0
+                        ? '1:1 채팅 신청을 하시겠어요?'
+                        : '오프라인 커피 매칭 신청 하시겠어요?'}
                     </Typography>
-                    <Typography light>
-                      상대방과 1:1 로 오프라인 카페에서 즐거운 커피시간을 만들어
-                      보세요.
-                    </Typography>
+                    {type !== 0 && (
+                      <Typography light>
+                        상대방과 1:1 로 오프라인 카페에서 즐거운 커피시간을
+                        만들어 보세요.
+                      </Typography>
+                    )}
                     <TouchableOpacity
                       style={btn_primary}
                       onPress={() => {

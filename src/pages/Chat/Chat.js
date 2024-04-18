@@ -352,7 +352,7 @@ const Chat = ({navigation}) => {
   const [routes] = React.useState([
     {key: 'Chore', title: '일상'},
     {key: 'Matching', title: '커피'},
-    {key: 'Class', title: '클래스'},
+    {key: 'Class', title: '모임'},
   ]);
 
   return (

@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">머글</string>
+    <string name="kakao_app_key">c3c19010b1b15c97523a23dc22fdd184</string>
 </resources>

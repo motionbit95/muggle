@@ -243,7 +243,7 @@ const styles = StyleSheet.create({
   },
   outlineTagBox: {
     borderRadius: 20,
-    borderColor: 'red',
+    borderColor: 'black',
     borderWidth: 1,
     paddingHorizontal: 8,
     paddingVertical: 6,
@@ -349,7 +349,7 @@ const styles = StyleSheet.create({
     paddingBottom: 10,
   },
   matchBox: {
-    backgroundColor: 'rgba(255, 245, 244, 1)',
+    // backgroundColor: 'rgba(255, 245, 244, 1)',
     borderRadius: 10,
     padding: 16,
     gap: 5,

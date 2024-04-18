@@ -32,7 +32,7 @@ import MatchingView from './MatchingView';
 import Matching from '../Matching/Matching';
 import ClassView from './ClassView';
 
-export const group_category = ['일상', '커피', '클래스'];
+export const group_category = ['일상', '커피', '모임'];
 const Home = ({navigation}) => {
   const [userList, setUserList] = useState(null);
   const [myInfo, setMyInfo] = useState(null);
@@ -216,7 +216,7 @@ const Home = ({navigation}) => {
               navigation={navigation}
             />
           )}
-          {selectedGroup === '클래스' && (
+          {selectedGroup === '모임' && (
             <ClassView myInfo={myInfo} navigation={navigation} />
           )}
         </View>

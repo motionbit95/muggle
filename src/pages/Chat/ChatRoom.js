@@ -99,97 +99,107 @@ const ChatRoom = ({navigation, route}) => {
   };
   return (
     <View style={styles.screenStyle}>
-      {data?.group_type !== '일상 모임' ? (
-        <View
-          style={[
-            {
-              backgroundColor: 'white',
-              borderRadius: 10,
-              padding: 10,
-              gap: 5,
-              width: '95%',
-              margin: 10,
-            },
-          ]}>
-          <View style={[flex_row, justify_between]}>
-            <View style={{gap: 5}}>
-              <Typography size="md" bold>
-                {data?.group_name}
-              </Typography>
-              <View style={[flex_row, align_center, sp_2]}>
-                <Typography size="sm" light>
-                  {formatDateTime(data?.group_date)}
-                </Typography>
-              </View>
-
+      <TouchableOpacity
+        onPress={() => {
+          navigation.navigate('모임', {
+            screen: '모임상세',
+            params: {data: {...data, gid: data.gid}},
+          });
+        }}>
+        {data?.group_type !== '일상 모임' ? (
+          <View
+            style={[
+              {
+                backgroundColor: 'white',
+                borderRadius: 10,
+                padding: 10,
+                gap: 5,
+                width: '95%',
+                margin: 10,
+              },
+            ]}>
+            <View style={[flex_row, justify_between]}>
               <View style={{gap: 5}}>
-                <View style={[styles.rowBox, {gap: 5}]}>
-                  <Image style={{width: 16, height: 16}} source={mapImg} />
-                  <Typography size="sm">{data?.group_place}</Typography>
+                <Typography size="md" bold>
+                  {data?.group_name}
+                </Typography>
+                <View style={[flex_row, align_center, sp_2]}>
+                  <Typography size="sm" light>
+                    {formatDateTime(data?.group_date)}
+                  </Typography>
                 </View>
-                <View style={[styles.rowBox, {gap: 5}]}>
-                  <Image style={{width: 16, height: 16}} source={moneyImg} />
-                  <Typography size="sm">{data?.group_price}</Typography>
-                  <Image style={{width: 16, height: 16}} source={userImg} />
-                  <Typography red bold>
-                    {data?.group_users.length}
-                  </Typography>
-                  <Typography size="sm">
-                    / {data?.group_personnel} (
-                    {data?.group_personnel - data?.group_users.length}
-                    자리 남음)
-                  </Typography>
+
+                <View style={{gap: 5}}>
+                  <View style={[styles.rowBox, {gap: 5}]}>
+                    <Image style={{width: 16, height: 16}} source={mapImg} />
+                    <Typography size="sm">{data?.group_place}</Typography>
+                  </View>
+                  <View style={[styles.rowBox, {gap: 5}]}>
+                    <Image style={{width: 16, height: 16}} source={moneyImg} />
+                    <Typography size="sm">{data?.group_price}</Typography>
+                    <Image style={{width: 16, height: 16}} source={userImg} />
+                    <Typography red bold>
+                      {data?.group_users.length}
+                    </Typography>
+                    <Typography size="sm">
+                      / {data?.group_personnel} (
+                      {data?.group_personnel - data?.group_users.length}
+                      자리 남음)
+                    </Typography>
+                  </View>
                 </View>
               </View>
             </View>
           </View>
-        </View>
-      ) : (
-        <View
-          style={[
-            {
-              backgroundColor: 'white',
-              borderRadius: 10,
-              padding: 10,
-              gap: 5,
-              width: '95%',
-              margin: 10,
-            },
-          ]}>
-          <View style={[flex_row, justify_between]}>
-            <View style={[sp_1, justify_center, {maxWidth: '70%'}]}>
-              <Typography bold>{data.group_name}</Typography>
+        ) : (
+          <View
+            style={[
+              {
+                backgroundColor: 'white',
+                borderRadius: 10,
+                padding: 10,
+                gap: 5,
+                width: '95%',
+                margin: 10,
+              },
+            ]}>
+            <View style={[flex_row, justify_between]}>
+              <View style={[sp_1, justify_center, {maxWidth: '70%'}]}>
+                <Typography bold>{data.group_name}</Typography>
 
-              <View style={[sp_1]}>
-                {/* <View style={[styles.rowBox, sp_2]}>
+                <View style={[sp_1]}>
+                  {/* <View style={[styles.rowBox, sp_2]}>
                   <Image style={{width: 16, height: 16}} source={mapImg} />
                   <Typography size={'sm'}>{data.group_place}</Typography>
                 </View> */}
-                <Typography numberOfLines={2}>{data?.group_target}</Typography>
+                  <Typography numberOfLines={2}>
+                    {data?.group_target}
+                  </Typography>
+                </View>
               </View>
-            </View>
-            <View
-              style={[
-                img_lg,
-                radius_md,
-                {
-                  maxWidth: '30%',
-                  // backgroundColor: blackAlpha100,
-                  overflow: 'hidden',
-                },
-              ]}>
-              <View>
-                <Image
-                  style={[radius_full, {width: '100%', height: '100%'}]}
-                  source={
-                    data?.group_image ? {uri: data?.group_image} : groupImg
-                  }
-                />
+              <View
+                style={[
+                  img_lg,
+                  radius_md,
+                  {
+                    maxWidth: '30%',
+                    // backgroundColor: blackAlpha100,
+                    overflow: 'hidden',
+                  },
+                ]}>
+                <View>
+                  <Image
+                    style={[radius_full, {width: '100%', height: '100%'}]}
+                    source={
+                      data?.group_image ? {uri: data?.group_image} : groupImg
+                    }
+                  />
+                </View>
               </View>
             </View>
           </View>
-        </View>
-      )}
+        )}
+      </TouchableOpacity>
       <ScrollView style={styles.scrollViewStyle} ref={scrollViewRef}>
         <View
           style={[styles.contentStyle, {gap: 15, justifyContent: 'flex-end'}]}>

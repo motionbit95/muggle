@@ -131,7 +131,7 @@ function MatchingView({navigation, myInfo}) {
             navigation.navigate('일상모임생성', {data: {type: 'personal'}})
           }>
           <Typography size="lg" bold white>
-            무료 일상 모임 만들기
+            무료 1:1 모임 만들기
           </Typography>
         </TouchableOpacity>
         {/* <TouchableOpacity

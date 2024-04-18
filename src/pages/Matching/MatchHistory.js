@@ -100,10 +100,15 @@ const MatchHistory = ({navigation}) => {
       <View style={styles.matchBoxs}>
         <TouchableOpacity
           style={styles.matchBox}
-          onPress={() => alert('매칭 태그')}>
+          onPress={() =>
+            navigation.navigate('매칭', {
+              screen: '매칭유저',
+              params: {data: user},
+            })
+          }>
           <View style={[styles.spaceBetween, styles.rowBox]}>
             <View style={styles.gap10}>
-              <View style={styles.rowBox}>
+              {/* <View style={styles.rowBox}>
                 <View style={[styles.iconBox, styles.icon20]}>
                   <Image
                     style={img_sm}
@@ -127,7 +132,7 @@ const MatchHistory = ({navigation}) => {
                     ? '매칭거절'
                     : ''}
                 </Typography>
-              </View>
+              </View> */}
               <View style={styles.rowBox}>
                 <Image
                   style={[
@@ -160,21 +165,14 @@ const MatchHistory = ({navigation}) => {
                 </View>
               </View>
             </View>
-            {matching.matching_state < 2 && (
-              <View style={styles.outlineTagBox}>
-                <Typography red bold>
-                  정산대기중
-                </Typography>
-              </View>
-            )}
+
             {matching.matching_state == 2 && (
               <View style={styles.outlineTagBox}>
-                <Typography red bold>
-                  정산완료
-                </Typography>
+                <Typography bold>매칭완료</Typography>
               </View>
             )}
-            {matching.matching_state == 400 && (
+
+            {matching.matching_state === 400 && (
               <View
                 style={[
                   styles.outlineTagBox,

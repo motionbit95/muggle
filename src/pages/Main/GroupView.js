@@ -164,7 +164,7 @@ function GroupView({navigation, route}) {
             }}>
             <View style={[center]}>
               <Typography bold red={tab === 2} light={tab !== 2}>
-                {'클래스'}
+                {'모임'}
               </Typography>
             </View>
           </TouchableOpacity>
