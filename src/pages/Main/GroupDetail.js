@@ -254,7 +254,7 @@ const GroupDetail = ({navigation, route}) => {
           imageUrl: data?.group_image,
           link: {
             webUrl: 'https://muggle.life/',
-            mobileWebUrl: 'muggle://group/detail ',
+            mobileWebUrl: 'muggle://group ',
           },
           description: data?.group_target,
         },

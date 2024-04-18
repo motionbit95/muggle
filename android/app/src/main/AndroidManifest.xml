@@ -24,7 +24,7 @@
             <action android:name="android.intent.action.VIEW" />
              <category android:name="android.intent.category.DEFAULT" />
              <category android:name="android.intent.category.BROWSABLE" />
-              <data android:host="kakaolink" android:scheme="kakaoc3c19010b1b15c97523a23dc22fdd184" />
+              <data android:host="kakaolink" android:scheme="kakao9d93cec0b3f3b50fd0360fea6b1db3f6" />
            </intent-filter>
   <intent-filter>
     <action android:name="android.intent.action.VIEW"/>

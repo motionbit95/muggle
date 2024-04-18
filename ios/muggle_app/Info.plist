@@ -30,7 +30,7 @@
      <string>Editor</string>
      <key>CFBundleURLSchemes</key>
      <array>
-       <string>kakaoc3c19010b1b15c97523a23dc22fdd184</string>
+       <string>kakao9d93cec0b3f3b50fd0360fea6b1db3f6</string>
      </array>
   </dict>
 		<dict>
@@ -43,7 +43,7 @@
 		</dict>
 	</array>
 	 <key>KAKAO_APP_KEY</key>
- <string>c3c19010b1b15c97523a23dc22fdd184</string>
+ <string>9d93cec0b3f3b50fd0360fea6b1db3f6</string>
  <key>LSApplicationQueriesSchemes</key>
  <array>
      <!-- 카카오톡으로 로그인 -->
