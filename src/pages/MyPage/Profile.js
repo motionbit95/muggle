@@ -159,11 +159,11 @@ const Profile = ({navigation, route}) => {
       return;
     }
 
-    if (!userInfo) {
+    if (!userInfo || userInfo.length < 20) {
       setMessage({
         mode: 'error',
         isView: true,
-        message: '소개말을 입력하세요.',
+        message: '소개말을 20자 이상 입력하세요.',
       });
       return;
     }
@@ -491,7 +491,7 @@ const Profile = ({navigation, route}) => {
             </View>
             <View style={styles.columnBox}>
               <Typography size="lg" bold>
-                커피ㅣ 매칭 부수입 정산 받으실 계좌(선택)
+                커피 매칭 수익 정산 받으실 계좌(선택)
               </Typography>
               <View
                 style={{
@@ -608,8 +608,8 @@ const Profile = ({navigation, route}) => {
                   </TouchableOpacity>
                 </View>
                 <Typography light>
-                  비활성화 시 회원님은 커피 추천에서 제외되며, 다른 유저의 커피
-                  추천을 볼 수 없어요. 일상, 클래스, 채팅목록은 유지됩니다.
+                  비활성화 시 회원님은 커피 이성 추천에서 제외되며, 다른 커피
+                  이성 추천을 볼 수 없어요. 일상, 모임, 채팅목록은 유지됩니다.
                 </Typography>
               </View>
             </View>

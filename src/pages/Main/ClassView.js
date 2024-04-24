@@ -3,8 +3,10 @@ import {Image, ScrollView, TouchableOpacity, View} from 'react-native';
 import styles, {
   align_center,
   f_full,
+  flex_column,
   flex_row,
   justify_between,
+  justify_end,
   p_3,
   sp_2,
   sp_3,
@@ -102,7 +104,13 @@ function ClassView({navigation, myInfo}) {
   };
   return (
     <View style={[f_full, p_3, sp_2, justify_between]}>
-      <View style={[flex_row, sp_2]}>
+      <View style={[flex_column, sp_2]}>
+        <Typography size="xl" bold>
+          팀 단위 모임
+        </Typography>
+        <Typography light>취미 및 클래스 모임에 참여해보세요.</Typography>
+      </View>
+      <View style={[flex_row, sp_2, justify_end]}>
         <TouchableOpacity onPress={() => setOrder(0)}>
           <Typography light={order !== 0}>최신순</Typography>
         </TouchableOpacity>

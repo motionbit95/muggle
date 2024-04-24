@@ -48,10 +48,11 @@ const BannerPicker = props => {
     try {
       const pickerOptions = {
         cropping: true,
-        // width: 300,
-        // height: 300,
+        width: 300,
+        height: 150,
         // cropperCircleOverlay: true,
         mediaType: 'photo',
+        multiple: false,
       };
 
       if (Platform.OS === 'ios') {

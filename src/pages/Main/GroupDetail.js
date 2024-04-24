@@ -100,7 +100,10 @@ const GroupDetail = ({navigation, route}) => {
       headerRight: () => (
         <View style={[flex_row, justify_end, sp_2]}>
           <TouchableOpacity onPress={clickShare}>
-            <Image source={require('../../assets/AiOutlineShareAlt.png')} />
+            <Image
+              style={{width: 26, height: 26}}
+              source={require('../../assets/style14.png')}
+            />
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() => {
@@ -606,6 +609,12 @@ const GroupDetail = ({navigation, route}) => {
                     onPress={() => {
                       addReort();
                       setOpenAlert(false);
+                      setMessage({
+                        mode: '',
+                        isView: true,
+                        message: '신고가 접수되었습니다.',
+                        type: '',
+                      });
                     }}>
                     <Typography size="md">확인</Typography>
                   </TouchableOpacity>

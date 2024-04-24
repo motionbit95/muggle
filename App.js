@@ -106,6 +106,7 @@ const App = () => {
         name="Muggle"
         component={Home}
         options={({navigation}) => ({
+          headerTitleAlign: 'center',
           title: 'Home',
           headerShown: false,
         })}
@@ -114,6 +115,7 @@ const App = () => {
         name="모임상세"
         component={GroupDetail}
         options={({navigation}) => ({
+          headerTitleAlign: 'center',
           title: '모임상세',
           headerStyle: {
             backgroundColor: '#fff',
@@ -129,6 +131,7 @@ const App = () => {
         name="모임개설"
         component={GroupCreate}
         options={({navigation}) => ({
+          headerTitleAlign: 'center',
           title: '클래스 만들기',
           headerStyle: {
             backgroundColor: '#fff',
@@ -143,6 +146,7 @@ const App = () => {
         name="유저"
         component={UserView}
         options={({navigation}) => ({
+          headerTitleAlign: 'center',
           title: '유저정보',
           headerStyle: {
             backgroundColor: '#fff',
@@ -158,6 +162,7 @@ const App = () => {
         name="일상모임생성"
         component={GroupCreate}
         options={({navigation}) => ({
+          headerTitleAlign: 'center',
           title: '일상 모임 만들기',
           headerStyle: {
             backgroundColor: '#fff',
@@ -173,6 +178,7 @@ const App = () => {
         name="일상 모임"
         component={MatchingView}
         options={({navigation}) => ({
+          headerTitleAlign: 'center',
           title: '일상 모임',
           headerStyle: {
             backgroundColor: '#fff',
@@ -188,6 +194,7 @@ const App = () => {
         name="알림"
         component={Alarm}
         options={({navigation}) => ({
+          headerTitleAlign: 'center',
           title: '알림',
           headerStyle: {
             backgroundColor: '#fff',
@@ -213,6 +220,7 @@ const App = () => {
         component={Profile}
         options={() => ({
           title: '프로필 수정',
+          headerTitleAlign: 'center',
           headerTitleStyle: {
             fontFamily: font_family_bold,
           },
@@ -227,10 +235,13 @@ const App = () => {
         name="알림설정"
         component={AlarmSetting}
         options={({navigation}) => ({
+          headerTitleAlign: 'center',
           headerLeft: () => (
-            <TouchableOpacity onPress={() => navigation.navigate('User')}>
+            <TouchableOpacity
+              style={[p_2]}
+              onPress={() => navigation.navigate('User')}>
               <Image
-                style={img_sm}
+                style={[img_sm]}
                 source={require('./src/assets/icons/left_arrow.png')}
               />
             </TouchableOpacity>
@@ -245,8 +256,11 @@ const App = () => {
         name="자주묻는질문"
         component={FAQ}
         options={({navigation}) => ({
+          headerTitleAlign: 'center',
           headerLeft: () => (
-            <TouchableOpacity onPress={() => navigation.navigate('설정')}>
+            <TouchableOpacity
+              style={[p_2]}
+              onPress={() => navigation.navigate('설정')}>
               <Image
                 style={img_sm}
                 source={require('./src/assets/icons/left_arrow.png')}
@@ -262,8 +276,11 @@ const App = () => {
         name="고객센터"
         component={Kakao}
         options={({navigation}) => ({
+          headerTitleAlign: 'center',
           headerLeft: () => (
-            <TouchableOpacity onPress={() => navigation.navigate('설정')}>
+            <TouchableOpacity
+              style={[p_2]}
+              onPress={() => navigation.navigate('설정')}>
               <Image
                 style={img_sm}
                 source={require('./src/assets/icons/left_arrow.png')}
@@ -279,8 +296,11 @@ const App = () => {
         name="활동내역"
         component={MyActivity}
         options={({navigation}) => ({
+          headerTitleAlign: 'center',
           headerLeft: () => (
-            <TouchableOpacity onPress={() => navigation.navigate('User')}>
+            <TouchableOpacity
+              style={[p_2]}
+              onPress={() => navigation.navigate('User')}>
               <Image
                 style={img_sm}
                 source={require('./src/assets/icons/left_arrow.png')}
@@ -296,8 +316,11 @@ const App = () => {
         name="설정"
         component={Setting}
         options={({navigation}) => ({
+          headerTitleAlign: 'center',
           headerLeft: () => (
-            <TouchableOpacity onPress={() => navigation.navigate('User')}>
+            <TouchableOpacity
+              style={[p_2]}
+              onPress={() => navigation.navigate('User')}>
               <Image
                 style={img_sm}
                 source={require('./src/assets/icons/left_arrow.png')}
@@ -314,9 +337,11 @@ const App = () => {
         name="모임리스트"
         component={GroupView}
         options={({navigation}) => ({
+          headerTitleAlign: 'center',
           title: '모임리스트',
           headerLeft: () => (
             <TouchableOpacity
+              style={[p_2]}
               onPress={() => navigation.navigate('마이', {screen: 'User'})}>
               <Image
                 style={img_sm}
@@ -342,6 +367,7 @@ const App = () => {
         name="채팅방"
         component={Chat}
         options={({navigation}) => ({
+          headerTitleAlign: 'center',
           // headerLeft: () => (
           //   <TouchableOpacity onPress={() => navigation.navigate('Muggle')}>
           //     <Image style={img_md} source={require('./src/assets/home.png')} />
@@ -363,8 +389,11 @@ const App = () => {
         component={DirectRoom}
         options={({navigation}) => ({
           title: '매칭',
+          headerTitleAlign: 'center',
           headerLeft: () => (
-            <TouchableOpacity onPress={() => navigation.navigate('채팅방')}>
+            <TouchableOpacity
+              style={[p_2]}
+              onPress={() => navigation.navigate('채팅방')}>
               <Image
                 style={img_sm}
                 source={require('./src/assets/icons/left_arrow.png')}
@@ -384,9 +413,12 @@ const App = () => {
         name="채팅룸"
         component={ChatRoom}
         options={({navigation}) => ({
+          headerTitleAlign: 'center',
           title: '채팅',
           headerLeft: () => (
-            <TouchableOpacity onPress={() => navigation.navigate('채팅방')}>
+            <TouchableOpacity
+              style={[p_2]}
+              onPress={() => navigation.navigate('채팅방')}>
               <Image
                 style={img_sm}
                 source={require('./src/assets/icons/left_arrow.png')}
@@ -411,6 +443,7 @@ const App = () => {
         name="커피친구"
         component={Matching}
         options={({navigation}) => ({
+          headerTitleAlign: 'center',
           title: '',
           headerLeft: ({onPress}) => (
             <Image
@@ -442,6 +475,7 @@ const App = () => {
         component={MatchingUser}
         options={({navigation}) => ({
           title: '',
+          headerTitleAlign: 'center',
           headerLeft: ({onPress}) => (
             <Image
               style={{height: 27, width: 100}}
@@ -478,6 +512,7 @@ const App = () => {
         component={WebViewPayment}
         options={({navigation}) => ({
           headerShown: true,
+          headerTitleAlign: 'center',
           title: '결제',
           headerStyle: {
             backgroundColor: '#fff',
@@ -496,6 +531,7 @@ const App = () => {
         name="휴대폰 본인인증"
         component={Certificate}
         options={{
+          headerTitleAlign: 'center',
           headerStyle: {
             backgroundColor: '#fff',
           },
@@ -509,6 +545,7 @@ const App = () => {
         name="SignUp"
         component={SignUp}
         options={{
+          headerTitleAlign: 'center',
           title: '회원가입',
           headerStyle: {
             backgroundColor: '#fff',
@@ -524,6 +561,7 @@ const App = () => {
         name="프로필 설정"
         component={Interest}
         options={{
+          headerTitleAlign: 'center',
           headerStyle: {
             backgroundColor: '#fff',
           },
@@ -536,100 +574,6 @@ const App = () => {
       <SignUpStack.Screen name="인트로" component={Introduce} />
     </SignUpStack.Navigator>
   );
-
-  const CustomTabBar = ({state, descriptors, navigation}) => {
-    return (
-      <SafeAreaView>
-        <View style={styles.tabContainer}>
-          {state.routes.map((route, index) => {
-            const {options} = descriptors[route.key];
-            const label =
-              options.tabBarLabel !== undefined
-                ? options.tabBarLabel
-                : options.title !== undefined
-                ? options.title
-                : route.name;
-            const isFocused = state.index === index;
-
-            const onPress = () => {
-              const event = navigation.emit({
-                type: 'tabPress',
-                target: route.key,
-                canPreventDefault: true,
-              });
-
-              if (!isFocused && !event.defaultPrevented) {
-                navigation.navigate(route.name);
-              }
-            };
-
-            const onLongPress = () => {
-              navigation.emit({
-                type: 'tabLongPress',
-                target: route.key,
-              });
-            };
-
-            return (
-              <TouchableOpacity
-                accessibilityRole="button"
-                accessibilityState={isFocused ? {selected: true} : {}}
-                accessibilityLabel={options.tabBarAccessibilityLabel}
-                testID={options.tabBarTestID}
-                onPress={onPress}
-                onLongPress={onLongPress}
-                style={[{flex: 1}, center]}
-                key={index}>
-                <View
-                  style={
-                    index === 2
-                      ? [center, radius_full, circle_40, p_2]
-                      : [styles.tabItem, sp_1]
-                  }>
-                  <Image
-                    style={{width: 24, height: 24}}
-                    source={
-                      isFocused ? tabBarSelectIcon[index] : tabBarIcon[index]
-                    }
-                  />
-                  {/* {label && (
-                    <Typography
-                      size={'sm'}
-                      style={{
-                        color: isFocused ? primary_color : '#8c8c8c',
-                      }}>
-                      {label}
-                    </Typography>
-                  )} */}
-                </View>
-              </TouchableOpacity>
-            );
-          })}
-        </View>
-      </SafeAreaView>
-    );
-  };
-
-  const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      justifyContent: 'center',
-      alignItems: 'center',
-    },
-    tabContainer: {
-      flexDirection: 'row',
-      // height: 60,
-      paddingVertical: 10,
-      borderTopWidth: 1,
-      borderTopColor: '#f1f1f1',
-      backgroundColor: '#fff',
-    },
-    tabItem: {
-      flex: 1,
-      justifyContent: 'center',
-      alignItems: 'center',
-    },
-  });
 
   return (
     <NavigationContainer independent={true}>

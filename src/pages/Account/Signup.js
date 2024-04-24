@@ -407,7 +407,7 @@ const SignUp = ({navigation}) => {
             </View>
             <View style={styles.columnBox}>
               <Typography bold size={'lg'}>
-                커피ㅣ 매칭 부수입 정산 받으실 계좌(선택)
+                커피 매칭 수익 정산 받으실 계좌(선택)
               </Typography>
               <View
                 style={{

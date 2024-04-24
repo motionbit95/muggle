@@ -15,7 +15,9 @@ import styles, {
   f_full,
   flex_row,
   font_family,
+  fs_md,
   justify_between,
+  justify_start,
 } from '../../style/styles';
 import {addChat, addDocument} from '../../firebase/firebase_func';
 import auth from '@react-native-firebase/auth';
@@ -265,23 +267,64 @@ const GroupCreate = ({navigation, route}) => {
                           gap: 10,
                         },
                       ]}>
-                      <TextInput
+                      <DropDown
+                        defaultValue="없음"
+                        items={['없음', '나누기', '직접입력']}
+                        onChangeValue={e => setMatchPrice(e)}
+                      />
+                      <View
+                        style={[
+                          flex_row,
+                          justify_between,
+                          align_center,
+                          styles.contentBox,
+                          {
+                            flex: 1,
+                            height: 50,
+                            display:
+                              matchPrice === '나누기' || matchPrice === '없음'
+                                ? 'none'
+                                : 'flex',
+                          },
+                        ]}>
+                        <TextInput
+                          placeholderTextColor={blackAlpha400}
+                          keyboardType="numeric"
+                          style={[
+                            {
+                              color: blackAlpha900,
+                              fontSize: fs_md,
+                              padding: 0,
+                              fontFamily: font_family,
+                            },
+                          ]}
+                          placeholder="0"
+                          onChange={e => setMatchPrice(e.nativeEvent.text)}
+                          // defaultValue={userPrice}
+                        />
+                        <Typography>원</Typography>
+                      </View>
+                      {/* <TextInput
                         placeholderTextColor={blackAlpha400}
                         onChange={e => setMatchPrice(e.nativeEvent.text)}
                         keyboardType="numeric"
                         style={[
                           {
-                            width: '100%',
+                            flex: 1,
                             height: 50,
                             fontFamily: font_family,
                             fontSize: font_md,
                             color: blackAlpha900,
+                            display:
+                              matchPrice === '나누기' || matchPrice === '없음'
+                                ? 'none'
+                                : 'flex',
                           },
                           styles.contentBox,
                         ]}
-                        placeholder="인당 회비를 작성해주세요."
+                        placeholder="모임 회비"
                         // onChange={null}
-                      />
+                      /> */}
                     </View>
                   </View>
                   <View style={[flex_row, align_center]}>

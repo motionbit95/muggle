@@ -22,6 +22,7 @@ import styles, {
   img_lg,
   justify_between,
   justify_center,
+  p_2,
   radius_full,
   radius_md,
   sp_1,
@@ -39,6 +40,7 @@ const ChatRoom = ({navigation, route}) => {
   const [chat, setChat] = useState(null);
   const [groupInfo, setGroupInfo] = useState(null);
   const [chatList, setChatList] = useState([]);
+  const [dateList, setDateList] = useState([]);
 
   // ScrollView의 ref를 생성합니다.
   const scrollViewRef = useRef();
@@ -62,12 +64,24 @@ const ChatRoom = ({navigation, route}) => {
           if (documentSnapshot.id === 'chat_info') {
             setGroupInfo(documentSnapshot.data().group_info);
           } else {
+            if (
+              !dateList.includes(
+                formatDateTime(documentSnapshot.data().createdAt).split(' ')[0],
+              )
+            ) {
+              setDateList([
+                ...dateList,
+                formatDateTime(documentSnapshot.data().createdAt).split(' ')[0],
+              ]);
+            }
             updatedDocuments.push({
               id: documentSnapshot.id,
               ...documentSnapshot.data(),
             });
           }
         });
+
+        console.log(dateList);
         // console.log(updatedDocuments);
         setChatList(updatedDocuments);
         scrollToBottom();
@@ -100,6 +114,7 @@ const ChatRoom = ({navigation, route}) => {
   return (
     <View style={styles.screenStyle}>
       <TouchableOpacity
+        style={{width: '100%'}}
         onPress={() => {
           navigation.navigate('모임', {
             screen: '모임상세',
@@ -205,93 +220,115 @@ const ChatRoom = ({navigation, route}) => {
           style={[styles.contentStyle, {gap: 15, justifyContent: 'flex-end'}]}>
           {/* 왼쪽 배치 rowBox, 시간은 flex-start
           본인 채팅 시 오른쪽배치 시 row-reverse, 시간은 flex-end 조건, 색상 rgba(255, 218, 122, 1) 추가 */}
-
-          {chatList?.map(chat =>
-            chat?.uid === auth().currentUser.uid ? (
+          {chatList?.map((chat, index) => (
+            <View>
               <View
-                key={chat?.id}
                 style={[
+                  p_2,
                   {
-                    alignItems: 'flex-start',
-                    flexDirection: 'row-reverse',
-                    gap: 10,
+                    alignItems: 'center',
+                    display:
+                      formatDateTime(chatList[index]?.createdAt).split(
+                        ' ',
+                      )[0] ===
+                      formatDateTime(chatList[index - 1]?.createdAt).split(
+                        ' ',
+                      )[0]
+                        ? 'none'
+                        : 'flex',
                   },
                 ]}>
-                <View style={{gap: 10, alignItems: 'center'}}>
-                  <View>
-                    <View style={styles.Avartar40}>
-                      <Image
-                        style={[f_full, radius_full]}
-                        source={
-                          chat?.user_info?.user_profile
-                            ? {uri: chat?.user_info?.user_profile}
-                            : require('../../assets/avartar.png')
-                        }
-                      />
+                <Typography>
+                  {formatDateTime(chatList[index]?.createdAt).split(' ')[0]}
+                  {/* {formatDateTime(chatList[index - 1]?.createdAt).split(' ')[0]} */}
+                </Typography>
+              </View>
+              {chat?.uid === auth().currentUser.uid ? (
+                <View
+                  key={chat?.id}
+                  style={[
+                    {
+                      alignItems: 'flex-start',
+                      flexDirection: 'row-reverse',
+                      gap: 10,
+                    },
+                  ]}>
+                  <View style={{gap: 10, alignItems: 'center'}}>
+                    <View>
+                      <View style={styles.Avartar40}>
+                        <Image
+                          style={[f_full, radius_full]}
+                          source={
+                            chat?.user_info?.user_profile
+                              ? {uri: chat?.user_info?.user_profile}
+                              : require('../../assets/avartar.png')
+                          }
+                        />
+                      </View>
                     </View>
-                  </View>
-                  <Typography size="sm">
-                    {chat?.user_info?.user_name}
-                  </Typography>
-                </View>
-                <View style={{alignItems: 'flex-end', gap: 5}}>
-                  <View
-                    style={{
-                      flex: 1,
-                      padding: 15,
-                      backgroundColor: '#F1F1F1',
-                      borderRadius: 15,
-                      borderTopRightRadius: 0,
-                      maxWidth: 290,
-                    }}>
-                    <Typography size="sm" style={{whiteSpace: 'pre-wrap'}}>
-                      {`${chat?.chat}`}
+                    <Typography size="sm">
+                      {chat?.user_info?.user_name}
                     </Typography>
                   </View>
-                  <Typography light size="xs">
-                    {formatDateTime(chat?.createdAt).split(' ')[1]}
-                  </Typography>
-                </View>
-              </View>
-            ) : (
-              <View style={[styles.rowBox, {gap: 10}]}>
-                <View style={{gap: 10, alignItems: 'center'}}>
-                  <View>
-                    <View style={styles.Avartar40}>
-                      <Image
-                        style={[f_full, radius_full]}
-                        source={
-                          chat?.user_info?.user_profile
-                            ? {uri: chat?.user_info?.user_profile}
-                            : require('../../assets/avartar.png')
-                        }
-                      />
+                  <View style={{alignItems: 'flex-end', gap: 5}}>
+                    <View
+                      style={{
+                        flex: 1,
+                        padding: 15,
+                        backgroundColor: '#F1F1F1',
+                        borderRadius: 15,
+                        borderTopRightRadius: 0,
+                        maxWidth: 290,
+                      }}>
+                      <Typography size="sm" style={{whiteSpace: 'pre-wrap'}}>
+                        {`${chat?.chat}`}
+                      </Typography>
                     </View>
-                  </View>
-                  <Typography size="sm">
-                    {chat?.user_info?.user_name}
-                  </Typography>
-                </View>
-                <View style={{alignItems: 'flex-start', gap: 5}}>
-                  <View
-                    style={{
-                      flex: 1,
-                      padding: 15,
-                      backgroundColor: '#FFDA7A',
-                      borderRadius: 15,
-                      borderTopLeftRadius: 0,
-                    }}>
-                    <Typography size="sm" style={{whiteSpace: 'pre-wrap'}}>
-                      {`${chat?.chat}`}
+                    <Typography light size="xs">
+                      {formatDateTime(chat?.createdAt).split(' ')[1]}
                     </Typography>
                   </View>
-                  <Typography light size="xs">
-                    {formatDateTime(chat?.createdAt).split(' ')[1]}
-                  </Typography>
                 </View>
-              </View>
-            ),
-          )}
+              ) : (
+                <View style={[styles.rowBox, {gap: 10}]}>
+                  <View style={{gap: 10, alignItems: 'center'}}>
+                    <View>
+                      <View style={styles.Avartar40}>
+                        <Image
+                          style={[f_full, radius_full]}
+                          source={
+                            chat?.user_info?.user_profile
+                              ? {uri: chat?.user_info?.user_profile}
+                              : require('../../assets/avartar.png')
+                          }
+                        />
+                      </View>
+                    </View>
+                    <Typography size="sm">
+                      {chat?.user_info?.user_name}
+                    </Typography>
+                  </View>
+                  <View style={{alignItems: 'flex-start', gap: 5}}>
+                    <View
+                      style={{
+                        flex: 1,
+                        padding: 15,
+                        backgroundColor: '#FFDA7A',
+                        borderRadius: 15,
+                        borderTopLeftRadius: 0,
+                      }}>
+                      <Typography size="sm" style={{whiteSpace: 'pre-wrap'}}>
+                        {`${chat?.chat}`}
+                      </Typography>
+                    </View>
+                    <Typography light size="xs">
+                      {formatDateTime(chat?.createdAt).split(' ')[1]}
+                    </Typography>
+                  </View>
+                </View>
+              )}
+            </View>
+          ))}
         </View>
       </ScrollView>
       <View

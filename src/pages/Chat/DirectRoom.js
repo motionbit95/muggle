@@ -534,7 +534,7 @@ const DirectRoom = ({navigation, route}) => {
       <View
         style={[
           {
-            backgroundColor: '#FFF7E3',
+            // backgroundColor: '#FFF7E3',
             borderRadius: 10,
             padding: 10,
             gap: 5,
@@ -554,16 +554,17 @@ const DirectRoom = ({navigation, route}) => {
             />
             <View style={[flex_column, sp_1]}>
               <Typography bold size="lg">
-                {user?.user_name}
+                {user?.user_name} ({user?.user_gender}){' '}
+                {getDisplayAge(user?.user_birth)}
               </Typography>
-              <View style={[flex_row, align_center, sp_1]}>
+              {/* <View style={[flex_row, align_center, sp_1]}>
                 <Typography light>
                   {getDisplayAge(user?.user_birth)}세
                 </Typography>
                 <View style={[p_1, {backgroundColor: whiteAlpha900}]}>
                   <Typography red>{user?.user_gender}자</Typography>
                 </View>
-              </View>
+              </View> */}
               <Typography light>{user?.user_place}</Typography>
             </View>
           </View>

@@ -26,7 +26,7 @@ const DropDown = ({items, ...props}) => {
   }, [props.defaultValue]);
 
   return (
-    <View>
+    <View style={{minWidth: 100}}>
       <TouchableOpacity onPress={() => setOpenDropdown(!openDropdown)}>
         <View style={styles.container}>
           <Typography>{selectedValue}</Typography>

@@ -34,16 +34,16 @@ const Interest = ({navigation, route}) => {
       return;
     }
 
-    if (!data.user_info) {
+    if (!data.user_info || data.user_info.length < 20) {
       setMessage({
         mode: 'error',
         isView: true,
-        message: '소개말을 입력하세요.',
+        message: '소개말을 20자 이상 입력하세요.',
       });
       return;
     }
 
-    if (!interest && interest?.length < 2) {
+    if (!interest || interest?.length < 2) {
       setMessage({
         mode: 'error',
         isView: true,
@@ -128,7 +128,7 @@ const Interest = ({navigation, route}) => {
           <View style={styles.hr} />
           <View style={{flex: 1}}>
             <Typography size={'lg'} bold>
-              관심사
+              관심사 (최대 3개까지 설정 가능합니다.)
             </Typography>
           </View>
           <View style={center}>

@@ -215,7 +215,7 @@ const MatchHistory = ({navigation}) => {
       </ScrollView>
       <View>
         <View>
-          <View>
+          <View style={{marginTop: 20}}>
             <Typography size="lg" bold>
               커피 매칭 친구 추천
             </Typography>

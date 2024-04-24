@@ -42,8 +42,8 @@ const ProfilePicker = props => {
     try {
       const pickerOptions = {
         cropping: true,
-        // width: 300,
-        // height: 300,
+        width: 300,
+        height: 300,
         cropperCircleOverlay: true,
         mediaType: 'photo',
       };

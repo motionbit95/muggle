@@ -453,7 +453,7 @@ export function compareTimestampWithCurrentTime(firestoreTimestamp) {
 }
 
 const itemSkus = Platform.select({
-  ios: {skus: ['heart_100']},
+  ios: {sku: ['heart_100']},
   android: {skus: ['heart_100']},
 });
 
@@ -461,17 +461,6 @@ export function useShoppingState() {
   let purchaseUpdateSubscription;
   let purchaseErrorSubscription;
   const [loading, setLoading] = useState(false);
-
-  const getItems = async () => {
-    try {
-      console.log('getItems : ', itemSkus);
-      const items = await getProducts(itemSkus);
-      // items 저장
-      console.log('getItems : ', items);
-    } catch (error) {
-      console.log('getItemsError : ', error);
-    }
-  };
 
   useEffect(() => {
     const connection = async () => {
@@ -518,13 +507,14 @@ export function useShoppingState() {
             Alert.alert('구매실패', '구매 중 오류가 발생하였습니다.');
           }
         });
+
+        console.log('connection success', initCompleted);
+        getItems();
       } catch (error) {
         console.log('connection error', error);
       }
     };
     connection();
-
-    getItems();
 
     return () => {
       if (purchaseUpdateSubscription) {
@@ -539,4 +529,27 @@ export function useShoppingState() {
       RNIap.endConnection();
     };
   }, []);
+
+  const getItems = async () => {
+    try {
+      console.log('getItems : ', itemSkus);
+      const items = await getProducts(itemSkus);
+      console.log(RNIap.getAvailablePurchases());
+      // items 저장
+      console.log('getItems : ', items);
+    } catch (error) {
+      console.log('getItemsError : ', error);
+    }
+  };
+
+  const requestItemPurchase = async skus => {
+    try {
+      const response = await RNIap.requestPurchase(skus);
+      console.log('requestItemPurchase : ', response);
+    } catch (error) {
+      console.log('requestItemPurchaseError : ', error);
+    }
+  };
+
+  return {requestItemPurchase};
 }
