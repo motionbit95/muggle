@@ -36,7 +36,12 @@ import {
   sp_6,
   w_full,
 } from '../../style/styles';
-import {defaultFemale, defaultMale, getDisplayAge} from '../../firebase/api';
+import {
+  defaultFemale,
+  defaultMale,
+  getDisplayAge,
+  useShoppingState,
+} from '../../firebase/api';
 import {
   addDocument,
   addMessage,
@@ -48,6 +53,7 @@ import Typography from '../../Component/Typography';
 import auth from '@react-native-firebase/auth';
 
 const Matching = ({navigation, myInfo, userList, ...props}) => {
+  const shoppingstate = useShoppingState();
   const [data, setData] = React.useState(null);
 
   const [openModal, setOpenModal] = useState(false);
@@ -58,6 +64,8 @@ const Matching = ({navigation, myInfo, userList, ...props}) => {
 
   const [amount, setAmount] = useState(1000);
   const [pay_method, setPayMethod] = useState('card');
+
+  useEffect(() => {}, []);
 
   function createOid() {
     const now_date = new Date();

@@ -1,4 +1,15 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
+import {Alert, Platform} from 'react-native';
+import {
+  InAppPurchase,
+  PurchaseError,
+  getProducts,
+  finishTransaction,
+  purchaseErrorListener,
+  purchaseUpdatedListener,
+} from 'react-native-iap';
+import * as RNIap from 'react-native-iap';
+
 export const primary_color = '#FF238D';
 // export const primary_color = '#FF5E5B';
 // export const primary_color = '#D96F6F';
@@ -439,4 +450,93 @@ export function compareTimestampWithCurrentTime(firestoreTimestamp) {
     const options = {year: 'numeric', month: 'long', day: 'numeric'};
     return firestoreDate.toLocaleDateString('ko-Kr', options);
   }
+}
+
+const itemSkus = Platform.select({
+  ios: {skus: ['heart_100']},
+  android: {skus: ['heart_100']},
+});
+
+export function useShoppingState() {
+  let purchaseUpdateSubscription;
+  let purchaseErrorSubscription;
+  const [loading, setLoading] = useState(false);
+
+  const getItems = async () => {
+    try {
+      console.log('getItems : ', itemSkus);
+      const items = await getProducts(itemSkus);
+      // items 저장
+      console.log('getItems : ', items);
+    } catch (error) {
+      console.log('getItemsError : ', error);
+    }
+  };
+
+  useEffect(() => {
+    const connection = async () => {
+      try {
+        const init = await RNIap.initConnection();
+        const initCompleted = init === true;
+
+        if (initCompleted) {
+          if (Platform.OS === 'android') {
+            await RNIap.flushFailedPurchasesCachedAsPendingAndroid();
+          } else {
+            await RNIap.clearTransactionIOS();
+          }
+        }
+
+        // success listener
+        purchaseUpdateSubscription = purchaseUpdatedListener(async purchase => {
+          const receipt = purchase.transactionReceipt
+            ? purchase.transactionReceipt
+            : purchase.purchaseToken;
+
+          if (receipt) {
+            try {
+              setLoading(false);
+              const ackResult = await finishTransaction(purchase);
+
+              // 구매이력 저장 및 상태 갱신
+              if (purchase) {
+              }
+            } catch (error) {
+              console.log('ackError : ', error);
+            }
+          }
+        });
+
+        purchaseErrorSubscription = purchaseErrorListener(error => {
+          setLoading(false);
+
+          // 정상적인 에러상황 대응
+          const USER_CANCEL = 'E_USER_CANCELED';
+          if (error && error.code === USER_CANCEL) {
+            Alert.alert('구매취소', '구매를 취소하셨습니다.');
+          } else {
+            Alert.alert('구매실패', '구매 중 오류가 발생하였습니다.');
+          }
+        });
+      } catch (error) {
+        console.log('connection error', error);
+      }
+    };
+    connection();
+
+    getItems();
+
+    return () => {
+      if (purchaseUpdateSubscription) {
+        purchaseUpdateSubscription.remove();
+        purchaseUpdateSubscription = null;
+      }
+      if (purchaseErrorSubscription) {
+        purchaseErrorSubscription.remove();
+        purchaseErrorSubscription = null;
+      }
+
+      RNIap.endConnection();
+    };
+  }, []);
 }

@@ -17,6 +17,7 @@
 		B28A2A9917DE724CDC0EFCED /* Pods_muggle_app_muggle_appTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3BA39644D0DC0937B2742391 /* Pods_muggle_app_muggle_appTests.framework */; };
 		B2DB5C2E2BCC94C200DC9A2D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B2DB5C2D2BCC94C200DC9A2D /* GoogleService-Info.plist */; };
 		B2DB5C312BD0B56F00DC9A2D /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2DB5C302BD0B56F00DC9A2D /* File.swift */; };
+		B2E384B72BD9243400CB7037 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2E384B62BD9243400CB7037 /* StoreKit.framework */; };
 		FE5FC89D2AB2372EA8A08130 /* Pods_muggle_app.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 67C19231366781BA4BEE6D2E /* Pods_muggle_app.framework */; };
 /* End PBXBuildFile section */
 
@@ -44,12 +45,15 @@
 		37F9F2D5181D47FB9BFDFF28 /* S-CoreDream-6Bold.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "S-CoreDream-6Bold.otf"; path = "../src/assets/fonts/S-CoreDream-6Bold.otf"; sourceTree = "<group>"; };
 		3BA39644D0DC0937B2742391 /* Pods_muggle_app_muggle_appTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_muggle_app_muggle_appTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4149CDBF9261EF9473C7E4EE /* Pods-muggle_app.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-muggle_app.release.xcconfig"; path = "Target Support Files/Pods-muggle_app/Pods-muggle_app.release.xcconfig"; sourceTree = "<group>"; };
+		4CD51E250C18755E54EB314D /* Pods-muggle_app-muggle_appTests.staging.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-muggle_app-muggle_appTests.staging.xcconfig"; path = "Target Support Files/Pods-muggle_app-muggle_appTests/Pods-muggle_app-muggle_appTests.staging.xcconfig"; sourceTree = "<group>"; };
 		67C19231366781BA4BEE6D2E /* Pods_muggle_app.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_muggle_app.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6A05EA88CB844F8A4E9F8B84 /* Pods-muggle_app.staging.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-muggle_app.staging.xcconfig"; path = "Target Support Files/Pods-muggle_app/Pods-muggle_app.staging.xcconfig"; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = muggle_app/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		875A4B8A90F7427C9977C8C2 /* S-CoreDream-4Regular.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "S-CoreDream-4Regular.otf"; path = "../src/assets/fonts/S-CoreDream-4Regular.otf"; sourceTree = "<group>"; };
 		B2DB5C2D2BCC94C200DC9A2D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		B2DB5C2F2BD0B56F00DC9A2D /* muggle_app-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "muggle_app-Bridging-Header.h"; sourceTree = "<group>"; };
 		B2DB5C302BD0B56F00DC9A2D /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
+		B2E384B62BD9243400CB7037 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		C0AA1424160F60119D7D8437 /* Pods-muggle_app-muggle_appTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-muggle_app-muggle_appTests.debug.xcconfig"; path = "Target Support Files/Pods-muggle_app-muggle_appTests/Pods-muggle_app-muggle_appTests.debug.xcconfig"; sourceTree = "<group>"; };
 		D16C3B1FADE6B7F0897AED28 /* Pods-muggle_app-muggle_appTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-muggle_app-muggle_appTests.release.xcconfig"; path = "Target Support Files/Pods-muggle_app-muggle_appTests/Pods-muggle_app-muggle_appTests.release.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
@@ -69,6 +73,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FE5FC89D2AB2372EA8A08130 /* Pods_muggle_app.framework in Frameworks */,
+				B2E384B72BD9243400CB7037 /* StoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -109,6 +114,7 @@
 		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				B2E384B62BD9243400CB7037 /* StoreKit.framework */,
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
 				67C19231366781BA4BEE6D2E /* Pods_muggle_app.framework */,
 				3BA39644D0DC0937B2742391 /* Pods_muggle_app_muggle_appTests.framework */,
@@ -157,6 +163,8 @@
 				4149CDBF9261EF9473C7E4EE /* Pods-muggle_app.release.xcconfig */,
 				C0AA1424160F60119D7D8437 /* Pods-muggle_app-muggle_appTests.debug.xcconfig */,
 				D16C3B1FADE6B7F0897AED28 /* Pods-muggle_app-muggle_appTests.release.xcconfig */,
+				6A05EA88CB844F8A4E9F8B84 /* Pods-muggle_app.staging.xcconfig */,
+				4CD51E250C18755E54EB314D /* Pods-muggle_app-muggle_appTests.staging.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -844,7 +852,7 @@
 		};
 		B24FA45C2BD27B7400E4E302 /* Staging */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2A100F40BAAC207C87C02E47 /* Pods-muggle_app.debug.xcconfig */;
+			baseConfigurationReference = 6A05EA88CB844F8A4E9F8B84 /* Pods-muggle_app.staging.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -886,7 +894,7 @@
 		};
 		B24FA45D2BD27B7400E4E302 /* Staging */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C0AA1424160F60119D7D8437 /* Pods-muggle_app-muggle_appTests.debug.xcconfig */;
+			baseConfigurationReference = 4CD51E250C18755E54EB314D /* Pods-muggle_app-muggle_appTests.staging.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
