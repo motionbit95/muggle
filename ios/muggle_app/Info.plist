@@ -5,14 +5,11 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
-	<string>머글</string>
+	<string>muggle</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
 	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
-	<key>LSApplicationCategoryType</key>
-	<string>Build input file cannot be found: &apos;/Users/krystal/Project/Downloads/GoogleService-Info.plist&apos;. Did you forget to declare this file as an output of a script phase or custom build rule which produces it?
-</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
@@ -25,14 +22,14 @@
 	<string>????</string>
 	<key>CFBundleURLTypes</key>
 	<array>
-	   <dict>
-     <key>CFBundleTypeRole</key>
-     <string>Editor</string>
-     <key>CFBundleURLSchemes</key>
-     <array>
-       <string>kakao9d93cec0b3f3b50fd0360fea6b1db3f6</string>
-     </array>
-  </dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>kakao9d93cec0b3f3b50fd0360fea6b1db3f6</string>
+			</array>
+		</dict>
 		<dict>
 			<key>CFBundleURLName</key>
 			<string></string>
@@ -42,17 +39,13 @@
 			</array>
 		</dict>
 	</array>
-	 <key>KAKAO_APP_KEY</key>
- <string>9d93cec0b3f3b50fd0360fea6b1db3f6</string>
- <key>LSApplicationQueriesSchemes</key>
- <array>
-     <!-- 카카오톡으로 로그인 -->
-     <string>kakaokompassauth</string>
-     <!-- 카카오링크 -->
-    <string>kakaolink</string>
- </array>
 	<key>CFBundleVersion</key>
 	<string>$(CURRENT_PROJECT_VERSION)</string>
+	<key>KAKAO_APP_KEY</key>
+	<string>9d93cec0b3f3b50fd0360fea6b1db3f6</string>
+	<key>LSApplicationCategoryType</key>
+	<string>Build input file cannot be found: &apos;/Users/krystal/Project/Downloads/GoogleService-Info.plist&apos;. Did you forget to declare this file as an output of a script phase or custom build rule which produces it?
+</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>kb-acp</string>
@@ -106,6 +99,11 @@
 	<string>$(PRODUCT_NAME) would like to save photos to your photo gallery</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>$(PRODUCT_NAME) would like access to your photo gallery</string>
+	<key>UIAppFonts</key>
+	<array>
+		<string>S-CoreDream-4Regular.otf</string>
+		<string>S-CoreDream-6Bold.otf</string>
+	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIRequiredDeviceCapabilities</key>
@@ -120,10 +118,5 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
-	<key>UIAppFonts</key>
-	<array>
-		<string>S-CoreDream-4Regular.otf</string>
-		<string>S-CoreDream-6Bold.otf</string>
-	</array>
 </dict>
 </plist>
