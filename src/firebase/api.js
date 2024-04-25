@@ -320,6 +320,9 @@ export const banks = [
   '토스',
   'SC제일',
   '한국씨티',
+  '새마을금고',
+  '농협',
+  'IBK기업',
 ];
 
 export function getDisplayAge(birthdate) {
@@ -552,4 +555,31 @@ export function useShoppingState() {
   };
 
   return {requestItemPurchase};
+}
+
+export function checkString(inputString) {
+  // 영어와 한글만을 포함하는 정규표현식
+  const englishPattern = /^[a-zA-Z]{1,10}$/;
+  const koreanPattern = /^[가-힣]{1,5}$/;
+
+  // 영어 패턴과 한글 패턴에 맞는지 확인
+  if (englishPattern.test(inputString)) {
+    console.log('영어 문자열입니다.');
+    if (inputString.length <= 10) {
+      console.log('영어는 10글자 이하입니다.');
+    } else {
+      return false;
+    }
+  } else if (koreanPattern.test(inputString)) {
+    console.log('한글 문자열입니다.');
+    if (inputString.length <= 5) {
+      console.log('한글은 5글자 이하입니다.');
+    } else {
+      return false;
+    }
+  } else {
+    return false;
+  }
+
+  return true;
 }

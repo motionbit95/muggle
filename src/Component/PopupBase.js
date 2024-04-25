@@ -45,10 +45,10 @@ const PopupBase = ({icon, contents, ...props}) => {
               align_end,
               {
                 backgroundColor: 'white',
-                paddingTop: Platform.OS === 'ios' ? 40 : 0,
+                paddingTop: Platform.OS === 'ios' ? 80 : 80,
               },
             ]}>
-            <ScrollView height={'100%'}>{props.children}</ScrollView>
+            {props.children}
             <View style={[center, w_full, p_3, {marginBottom: 4}]}>
               <TouchableOpacity
                 style={[btn_primary, w_full]}

@@ -20,7 +20,7 @@ import {
 import Typography from './Typography';
 import ConnectButtons from './ConnectButtons';
 
-const MatchBox = ({user, index, view}) => {
+const MatchBox = ({user, index, view, navigation}) => {
   return (
     <ImageBackground
       key={index}

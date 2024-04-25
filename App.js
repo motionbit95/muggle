@@ -132,7 +132,7 @@ const App = () => {
         component={GroupCreate}
         options={({navigation}) => ({
           headerTitleAlign: 'center',
-          title: '클래스 만들기',
+          title: '단체 모임 만들기',
           headerStyle: {
             backgroundColor: '#fff',
           },
@@ -163,7 +163,7 @@ const App = () => {
         component={GroupCreate}
         options={({navigation}) => ({
           headerTitleAlign: 'center',
-          title: '일상 모임 만들기',
+          title: '1:1 모임 만들기',
           headerStyle: {
             backgroundColor: '#fff',
           },
@@ -599,7 +599,7 @@ const App = () => {
         <Tab.Screen
           name="찜 목록"
           component={GroupView}
-          options={{
+          options={({navigation}) => ({
             title: '찜 목록',
             tabBarActiveTintColor: '#FF634F',
             unmountOnBlur: true,
@@ -614,12 +614,12 @@ const App = () => {
                 style={{width: 24, height: 24}}
               />
             ),
-          }}
+          })}
         />
         <Tab.Screen
           name="채팅"
           component={ChatStackNavigate}
-          options={{
+          options={({navigation}) => ({
             headerShown: false,
             tabBarActiveTintColor: '#FF634F',
             unmountOnBlur: true,
@@ -630,7 +630,7 @@ const App = () => {
                 style={{width: 24, height: 24}}
               />
             ),
-          }}
+          })}
         />
         <Tab.Screen
           name="마이"

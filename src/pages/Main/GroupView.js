@@ -30,8 +30,8 @@ import {primary_color} from '../../firebase/api';
 import MatchBox from '../../Component/MatchBox';
 import Matching from '../Matching/Matching';
 
-function GroupView({navigation, route}) {
-  const {type, userList, title} = route.params
+function GroupView({route}) {
+  const {type, userList, title, navigation} = route.params
     ? route.params
     : {type: 'goods', userList: null, title: '', myInfo: null};
   const [myInfo, setMyInfo] = useState(null);
@@ -42,9 +42,11 @@ function GroupView({navigation, route}) {
 
   // 제목을 헤더 타이틀로 설정
   React.useLayoutEffect(() => {
-    navigation.setOptions({
-      title: title ? title : '찜 목록',
-    });
+    if (navigation) {
+      navigation.setOptions({
+        title: title ? title : '찜 목록',
+      });
+    }
   }, [navigation, title]);
 
   useEffect(() => {

@@ -215,8 +215,7 @@ function ConnectButtons({navigation, ...props}) {
                       : ' 오프라인 커피 매칭 신청 하시겠어요?'}
                   </Typography>
                   <Typography light>
-                    {`매칭 확률 100% 실제 유저
-상대방 매칭 거절 시 전액 환불`}
+                    {`하트를 구매해 상대방과 채팅을 나눌 수 있어요.`}
                   </Typography>
                   {type === 0 ? (
                     <View style={[w_full, flex_row, sp_2]}>
@@ -443,7 +442,7 @@ function ConnectButtons({navigation, ...props}) {
                             source={require('../assets/icons/heart_fill_black.png')}
                           />
                           <Typography size="sm" light>
-                            40
+                            50
                           </Typography>
                         </View>
                       </View>

@@ -14,6 +14,7 @@ import {
   banks,
   font_lg,
   formatTwoDigits,
+  checkString,
 } from '../../firebase/api';
 import DropDown from '../../Component/PickerComponent';
 import styles, {
@@ -194,6 +195,16 @@ const SignUp = ({navigation}) => {
       });
       return;
     }
+
+    if (!checkString(userName)) {
+      setMessage({
+        mode: 'error',
+        isView: true,
+        message:
+          '닉네임은 영문과 한글만 사용하실 수 있으며, 영문 10자 이내, 한글 5자 이내로 설정해주세요.',
+      });
+      return;
+    }
     singleQuery('user', 'user_name', userName).then(res => {
       if (res.length > 0) {
         setMessage({
@@ -254,7 +265,7 @@ const SignUp = ({navigation}) => {
                     styles.contentBox,
                   ]}
                   value={userName}
-                  placeholder="닉네임을 입력해주세요."
+                  placeholder="가입 후 변경 불가능합니다."
                   onChange={e => serUserName(e.nativeEvent.text)}
                 />
                 <TouchableOpacity
@@ -268,7 +279,7 @@ const SignUp = ({navigation}) => {
             </View>
             <View style={styles.columnBox}>
               <Typography bold size={'lg'}>
-                성별
+                성별(가입 후 변경 불가합니다.)
               </Typography>
               <View style={styles.buttoncontainer}>
                 <TouchableOpacity
@@ -422,6 +433,7 @@ const SignUp = ({navigation}) => {
                     onChangeValue={handleBankChange}
                   />
                 </View>
+
                 <TextInput
                   placeholderTextColor={blackAlpha400}
                   keyboardType="numeric"

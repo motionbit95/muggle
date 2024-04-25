@@ -33,6 +33,7 @@ import styles, {
 import DropDown from '../../Component/PickerComponent';
 import {
   banks,
+  checkString,
   cities,
   districts,
   font_md,
@@ -141,15 +142,6 @@ const Profile = ({navigation, route}) => {
   };
 
   const confirmSave = () => {
-    setMessage({
-      mode: 'confirm',
-      isView: true,
-      message: '프로필을 수정하시겠습니까?',
-      type: 'success',
-    });
-  };
-
-  const handleSaveProfile = () => {
     if (!userName) {
       setMessage({
         mode: 'error',
@@ -159,7 +151,7 @@ const Profile = ({navigation, route}) => {
       return;
     }
 
-    if (!userInfo || userInfo.length < 20) {
+    if (userInfo && userInfo.length < 20) {
       setMessage({
         mode: 'error',
         isView: true,
@@ -176,7 +168,6 @@ const Profile = ({navigation, route}) => {
       });
       return;
     }
-
     if (!selectyear || !selectmonth || !selectday) {
       setMessage({
         mode: 'error',
@@ -213,6 +204,15 @@ const Profile = ({navigation, route}) => {
       return;
     }
 
+    setMessage({
+      mode: 'confirm',
+      isView: true,
+      message: '프로필을 수정하시겠습니까?',
+      type: 'success',
+    });
+  };
+
+  const handleSaveProfile = () => {
     updateDocument('user', data?.doc_id, {
       ...data,
       user_name: userName,
@@ -301,10 +301,11 @@ const Profile = ({navigation, route}) => {
             <View style={styles.rowBox}>
               <View style={{flex: 1}}>
                 <Typography size="lg" bold>
-                  이름
+                  닉네임
                 </Typography>
               </View>
               <TextInput
+                readOnly
                 placeholderTextColor={blackAlpha400}
                 style={[
                   {
@@ -356,22 +357,26 @@ const Profile = ({navigation, route}) => {
                 성별
               </Typography>
               <View style={styles.buttoncontainer}>
-                <TouchableOpacity
-                  style={[
-                    styles.genderButton,
-                    selectedGender === '남' && styles.selectedButton,
-                  ]}
-                  onPress={() => selectGender('남')}>
-                  <Typography red={selectedGender === '남'}>남성</Typography>
-                </TouchableOpacity>
-                <TouchableOpacity
-                  style={[
-                    styles.genderButton,
-                    selectedGender === '여' && styles.selectedButton,
-                  ]}
-                  onPress={() => selectGender('여')}>
-                  <Typography red={selectedGender === '여'}>여성</Typography>
-                </TouchableOpacity>
+                {selectedGender === '남' && (
+                  <TouchableOpacity
+                    style={[
+                      styles.genderButton,
+                      selectedGender === '남' && styles.selectedButton,
+                    ]}
+                    onPress={() => selectGender('남')}>
+                    <Typography red={selectedGender === '남'}>남성</Typography>
+                  </TouchableOpacity>
+                )}
+                {selectedGender === '여' && (
+                  <TouchableOpacity
+                    style={[
+                      styles.genderButton,
+                      selectedGender === '여' && styles.selectedButton,
+                    ]}
+                    onPress={() => selectGender('여')}>
+                    <Typography red={selectedGender === '여'}>여성</Typography>
+                  </TouchableOpacity>
+                )}
               </View>
             </View>
             <View style={styles.columnBox}>

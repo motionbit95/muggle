@@ -103,7 +103,7 @@ const MatchHistory = ({navigation}) => {
           onPress={() =>
             navigation.navigate('매칭', {
               screen: '매칭유저',
-              params: {data: user},
+              params: {data: user, navigation: navigation},
             })
           }>
           <View style={[styles.spaceBetween, styles.rowBox]}>

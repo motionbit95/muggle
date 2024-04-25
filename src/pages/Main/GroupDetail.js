@@ -102,7 +102,7 @@ const GroupDetail = ({navigation, route}) => {
           <TouchableOpacity onPress={clickShare}>
             <Image
               style={{width: 26, height: 26}}
-              source={require('../../assets/style14.png')}
+              source={require('../../assets/kakao.png')}
             />
           </TouchableOpacity>
           <TouchableOpacity
@@ -811,7 +811,7 @@ const GroupDetail = ({navigation, route}) => {
                           source={require('../../assets/icons/heart_fill_black.png')}
                         />
                         <Typography size="sm" light>
-                          40
+                          50
                         </Typography>
                       </View>
                     </View>

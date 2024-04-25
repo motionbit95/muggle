@@ -14,7 +14,7 @@ import {defaultFemale, defaultMale, getDisplayAge} from '../../firebase/api';
 import Typography from '../../Component/Typography';
 import ConnectButtons from '../../Component/ConnectButtons';
 
-const MatchingUser = ({route}) => {
+const MatchingUser = ({route, navigation}) => {
   const {data} = route.params ? route.params : {data: null};
 
   return (

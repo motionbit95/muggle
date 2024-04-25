@@ -12,13 +12,17 @@ import {
 import styles, {
   align_center,
   align_end,
+  align_start,
   center,
   f_full,
   flex_column,
   flex_row,
   img_md,
   img_sm,
+  justify_center,
   justify_end,
+  justify_start,
+  m_16,
   p_2,
   p_3,
   p_4,
@@ -187,7 +191,7 @@ const Setting = ({navigation, route}) => {
                     navigation.navigate('마이', {screen: '고객센터'})
                   }>
                   <View style={styles.rowBox}>
-                    <Typography>고객센터 및 신고하기</Typography>
+                    <Typography>고객센터 및 개선 의견 보내기</Typography>
                   </View>
                   <Image source={require('../../assets/rightarrow.png')} />
                 </TouchableOpacity>
@@ -223,15 +227,19 @@ const Setting = ({navigation, route}) => {
                       <Image source={require('../../assets/rightarrow.png')} />
                     </View>
                   }>
-                  <WebView
-                    source={{
-                      uri: 'https://muggle.life/terms',
-                    }} // 표시할 웹 페이지의 URL
-                    style={{
-                      width: Dimensions.get('window').width,
-                      height: Dimensions.get('window').height,
-                    }}
-                  />
+                  <SafeAreaView>
+                    <View style={[f_full]}>
+                      <WebView
+                        source={{
+                          uri: 'https://muggle.life/terms',
+                        }} // 표시할 웹 페이지의 URL
+                        style={{
+                          width: Dimensions.get('window').width,
+                          height: 'auto',
+                        }}
+                      />
+                    </View>
+                  </SafeAreaView>
                 </PopupBase>
                 <PopupBase
                   button={
@@ -242,15 +250,19 @@ const Setting = ({navigation, route}) => {
                       <Image source={require('../../assets/rightarrow.png')} />
                     </View>
                   }>
-                  <WebView
-                    source={{
-                      uri: 'https://muggle.life/privacy',
-                    }} // 표시할 웹 페이지의 URL
-                    style={{
-                      width: Dimensions.get('window').width,
-                      height: Dimensions.get('window').height,
-                    }}
-                  />
+                  <SafeAreaView>
+                    <View style={[f_full]}>
+                      <WebView
+                        source={{
+                          uri: 'https://muggle.life/privacy',
+                        }} // 표시할 웹 페이지의 URL
+                        style={{
+                          width: Dimensions.get('window').width,
+                          height: 'auto',
+                        }}
+                      />
+                    </View>
+                  </SafeAreaView>
                 </PopupBase>
               </View>
             </View>

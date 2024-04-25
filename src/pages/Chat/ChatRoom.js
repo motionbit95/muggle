@@ -343,6 +343,7 @@ const ChatRoom = ({navigation, route}) => {
             {flexDirection: 'row', alignItems: 'center', gap: -40},
           ]}>
           <TextInput
+            multiline
             placeholderTextColor={blackAlpha400}
             style={{
               fontFamily: font_family,

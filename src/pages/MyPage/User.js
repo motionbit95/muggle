@@ -193,10 +193,10 @@ const User = ({navigation, route}) => {
                   <Typography size="xl" bold>
                     {myInfo?.user_name}님
                   </Typography>
-                  <Image source={require('../../assets/star.png')} />
+                  {/* <Image source={require('../../assets/star.png')} />
                   <Typography size="xl" bold>
                     {(0).toFixed(1)}
-                  </Typography>
+                  </Typography> */}
                 </View>
                 <View
                   style={{flexDirection: 'row', gap: 5, alignItems: 'center'}}>
@@ -232,6 +232,7 @@ const User = ({navigation, route}) => {
                   navigation.navigate('마이', {
                     screen: '모임리스트',
                     params: {
+                      navigation: navigation,
                       type: 'goods',
                       title: '찜 목록',
                       myInfo: myInfo,
@@ -251,8 +252,9 @@ const User = ({navigation, route}) => {
                   navigation.navigate('마이', {
                     screen: '모임리스트',
                     params: {
+                      navigation: navigation,
                       type: 'views',
-                      // userList: userList,
+                      userList: userList,
                       title: '최근 본 모임',
                       myInfo: myInfo,
                     },
@@ -311,6 +313,17 @@ const User = ({navigation, route}) => {
                 <View style={styles.rowBox}>
                   <Image source={require('../../assets/icons/Bell.png')} />
                   <Typography>알림설정</Typography>
+                </View>
+                <Image source={require('../../assets/rightarrow.png')} />
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={styles.TouchButtonStyle}
+                onPress={() =>
+                  navigation.navigate('마이', {screen: '고객센터'})
+                }>
+                <View style={styles.rowBox}>
+                  <Image source={require('../../assets/MdPayment.png')} />
+                  <Typography>정산신청</Typography>
                 </View>
                 <Image source={require('../../assets/rightarrow.png')} />
               </TouchableOpacity>
