@@ -389,7 +389,7 @@ const Profile = ({navigation, route}) => {
                   flexDirection: 'row',
                   gap: 10,
                 }}>
-                <View style={{flex: 2}}>
+                <View style={{flex: 1}}>
                   <DropDown
                     items={years}
                     defaultValue={selectyear ? selectyear : '년도'}

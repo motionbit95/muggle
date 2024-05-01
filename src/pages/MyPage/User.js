@@ -145,18 +145,9 @@ const User = ({navigation, route}) => {
       </View>
       <SafeAreaView>
         <View style={styles.contentStyle}>
-          <View style={[w_full, flex_row, align_end, justify_end, sp_3]}>
-            <TouchableOpacity
-              onPress={() => navigation.navigate('마이', {screen: '설정'})}>
-              <Image
-                style={img_md}
-                source={require('../../assets/icons/AiOutlineSetting.png')}
-              />
-            </TouchableOpacity>
-          </View>
           <View style={[styles.UserStackStyle]}>
             <View style={[w_full, flex_row, align_center, sp_3]}>
-              <View style={sp_2}>
+              <View style={[sp_2]}>
                 <View style={styles.Avartar70}>
                   <Image
                     style={[f_full, radius_full]}
@@ -169,13 +160,17 @@ const User = ({navigation, route}) => {
                 </View>
                 <TouchableOpacity
                   onPress={() =>
-                    navigation.navigate('프로필 편집', {data: myInfo})
+                    navigation.navigate('마이', {
+                      screen: '프로필 편집',
+                      params: {data: myInfo},
+                    })
                   }>
                   <View
                     style={[
                       center,
                       p_2,
                       radius_md,
+
                       {backgroundColor: '#d9d9d9'},
                     ]}>
                     <Typography bold white size="sm">
@@ -184,16 +179,27 @@ const User = ({navigation, route}) => {
                   </View>
                 </TouchableOpacity>
               </View>
-              <View style={[w_full, sp_3]}>
+
+              <View style={[sp_3, {flex: 1}]}>
                 <View
                   style={{
                     flexDirection: 'row',
                     gap: 5,
                     alignItems: 'center',
+                    justifyContent: 'space-between',
                   }}>
                   <Typography size="xl" bold>
                     {myInfo?.user_name}님
                   </Typography>
+                  <TouchableOpacity
+                    onPress={() =>
+                      navigation.navigate('마이', {screen: '설정'})
+                    }>
+                    <Image
+                      style={img_md}
+                      source={require('../../assets/icons/AiOutlineSetting.png')}
+                    />
+                  </TouchableOpacity>
                   {/* <Image source={require('../../assets/star.png')} />
                   <Typography size="xl" bold>
                     {(0).toFixed(1)}

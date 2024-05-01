@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {ScrollView, TouchableOpacity, View} from 'react-native';
+import {SafeAreaView, ScrollView, TouchableOpacity, View} from 'react-native';
 import Typography from '../../Component/Typography';
 import {
   align_start,
@@ -105,7 +105,7 @@ function MyActivity({navigation, route}) {
         <ScrollView style={[w_full, p_3]}>
           {groupList?.map(
             (item, index) =>
-              item?.group_users.includes(myInfo?.uid) &&
+              item?.group_admin.includes(myInfo?.uid) &&
               item?.group_type === '일상 모임' && (
                 <GroupBox
                   key={index}

@@ -53,6 +53,7 @@ import {
   img_md,
   img_sm,
   p_2,
+  p_4,
   radius_full,
   sp_1,
 } from './src/style/styles';
@@ -119,7 +120,7 @@ const App = () => {
         options={({navigation}) => ({
           headerLeft: () => (
             <TouchableOpacity
-              style={[p_2]}
+              style={[p_4]}
               onPress={() => navigation.navigate('Muggle')}>
               <Image
                 style={[img_sm]}
@@ -245,7 +246,17 @@ const App = () => {
       <UserStack.Screen
         name="프로필 편집"
         component={Profile}
-        options={() => ({
+        options={({navigation}) => ({
+          headerLeft: () => (
+            <TouchableOpacity
+              style={[p_4]}
+              onPress={() => navigation.navigate('마이', {screen: 'User'})}>
+              <Image
+                style={img_sm}
+                source={require('./src/assets/icons/left_arrow.png')}
+              />
+            </TouchableOpacity>
+          ),
           title: '프로필 수정',
           headerTitleAlign: 'center',
           headerTitleStyle: {
@@ -265,7 +276,7 @@ const App = () => {
           headerTitleAlign: 'center',
           headerLeft: () => (
             <TouchableOpacity
-              style={[p_2]}
+              style={[p_4]}
               onPress={() => navigation.navigate('User')}>
               <Image
                 style={[img_sm]}
@@ -286,7 +297,7 @@ const App = () => {
           headerTitleAlign: 'center',
           headerLeft: () => (
             <TouchableOpacity
-              style={[p_2]}
+              style={[p_4]}
               onPress={() => navigation.navigate('설정')}>
               <Image
                 style={img_sm}
@@ -306,7 +317,7 @@ const App = () => {
           headerTitleAlign: 'center',
           headerLeft: () => (
             <TouchableOpacity
-              style={[p_2]}
+              style={[p_4]}
               onPress={() => navigation.navigate('설정')}>
               <Image
                 style={img_sm}
@@ -326,7 +337,7 @@ const App = () => {
           headerTitleAlign: 'center',
           headerLeft: () => (
             <TouchableOpacity
-              style={[p_2]}
+              style={[p_4]}
               onPress={() => navigation.navigate('User')}>
               <Image
                 style={img_sm}
@@ -346,7 +357,7 @@ const App = () => {
           headerTitleAlign: 'center',
           headerLeft: () => (
             <TouchableOpacity
-              style={[p_2]}
+              style={[p_4]}
               onPress={() => navigation.navigate('User')}>
               <Image
                 style={img_sm}
@@ -367,7 +378,7 @@ const App = () => {
           headerTitleAlign: 'center',
           headerLeft: () => (
             <TouchableOpacity
-              style={[p_2]}
+              style={[p_4]}
               onPress={() => navigation.navigate('User')}>
               <Image
                 style={img_sm}
@@ -389,7 +400,7 @@ const App = () => {
           title: '찜 목록',
           headerLeft: () => (
             <TouchableOpacity
-              style={[p_2]}
+              style={[p_4]}
               onPress={() => navigation.navigate('마이', {screen: 'User'})}>
               <Image
                 style={img_sm}
@@ -441,7 +452,7 @@ const App = () => {
           headerTitleAlign: 'center',
           headerLeft: () => (
             <TouchableOpacity
-              style={[p_2]}
+              style={[p_4]}
               onPress={() => navigation.navigate('채팅홈')}>
               <Image
                 style={img_sm}
@@ -466,7 +477,7 @@ const App = () => {
           title: '채팅',
           headerLeft: () => (
             <TouchableOpacity
-              style={[p_2]}
+              style={[p_4]}
               onPress={() => navigation.navigate('채팅홈')}>
               <Image
                 style={img_sm}

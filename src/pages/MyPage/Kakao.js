@@ -8,6 +8,16 @@ import WebView from 'react-native-webview';
 function Kakao(props) {
   return (
     <SafeAreaView style={f_full}>
+      <View
+        style={[
+          f_full,
+          center,
+          {
+            position: 'absolute',
+          },
+        ]}>
+        <Typography>카카오톡 채널 연결중...</Typography>
+      </View>
       <View style={[f_full, center]}>
         <WebView
           source={{
