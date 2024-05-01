@@ -51,9 +51,9 @@ function Heart(props) {
               sp_8,
               {height: 250, backgroundColor: 'white'},
             ]}>
-            <Image
+            {/* <Image
               style={{width: Dimensions.get('window').width, height: 60}}
-              source={require('../../assets/testImage.png')}></Image>
+              source={require('../../assets/testImage.png')}></Image> */}
             <Typography center bold size="2xl">
               {'다양한 모임에 참석하여\n매력적인 상대를 만나보세요.'}
             </Typography>

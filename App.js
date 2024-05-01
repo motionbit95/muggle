@@ -69,6 +69,7 @@ import AlarmSetting from './src/pages/MyPage/Alarm';
 import Kakao from './src/pages/MyPage/Kakao';
 import MatchingUser from './src/pages/Matching/MatchingUser';
 import Heart from './src/pages/MyPage/Heart';
+import GroupModify from './src/pages/Main/GroupModify';
 
 const App = () => {
   // const isDarkMode = useColorScheme() === 'dark';
@@ -116,6 +117,16 @@ const App = () => {
         name="모임상세"
         component={GroupDetail}
         options={({navigation}) => ({
+          headerLeft: () => (
+            <TouchableOpacity
+              style={[p_2]}
+              onPress={() => navigation.navigate('Muggle')}>
+              <Image
+                style={[img_sm]}
+                source={require('./src/assets/icons/left_arrow.png')}
+              />
+            </TouchableOpacity>
+          ),
           headerTitleAlign: 'center',
           title: '모임상세',
           headerStyle: {
@@ -134,6 +145,21 @@ const App = () => {
         options={({navigation}) => ({
           headerTitleAlign: 'center',
           title: '단체 모임 만들기',
+          headerStyle: {
+            backgroundColor: '#fff',
+          },
+          headerTintColor: 'black',
+          headerTitleStyle: {
+            fontFamily: font_family_bold,
+          },
+        })}
+      />
+      <HomeStack.Screen
+        name="모임수정"
+        component={GroupModify}
+        options={({navigation}) => ({
+          headerTitleAlign: 'center',
+          title: '모임 수정하기',
           headerStyle: {
             backgroundColor: '#fff',
           },

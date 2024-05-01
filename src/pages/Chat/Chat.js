@@ -41,7 +41,7 @@ const DmBox = ({navigation, data}) => {
     getUser(
       data?.receiver === auth().currentUser.uid ? data?.sender : data?.receiver,
     ).then(data => {
-      console.log(data);
+      // console.log(data);
       setUser(data);
     });
   }, []);

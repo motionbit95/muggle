@@ -121,7 +121,7 @@ const DirectRoom = ({navigation, route}) => {
   }, []);
 
   useEffect(() => {
-    console.log('data===>', data);
+    // console.log('data===>', data);
     const unsubscribe = firestore()
       .collection('message-' + data.mid)
       .orderBy('createdAt', 'asc')
@@ -377,7 +377,7 @@ const DirectRoom = ({navigation, route}) => {
   };
 
   const parsing = data => {
-    console.log('채팅 ==> ', data);
+    // console.log('채팅 ==> ', data);
     let year = Number(data.split('//')[2].split('.')[0]);
     let month = Number(data.split('//')[2].split('.')[1]);
     let day = Number(data.split('//')[2].split('.')[2].split('(')[0]);
@@ -396,14 +396,14 @@ const DirectRoom = ({navigation, route}) => {
       gmtCustomDate = new Date(year, month - 1, day, hour, minute);
     }
 
-    console.log(gmtCustomDate);
+    // console.log(gmtCustomDate);
     setPromiseTime(gmtCustomDate);
 
     setSelectedCity(data.split('//')[4]);
     setSelectedDistrict(data.split('//')[5]);
     setPlace(data.split('//')[6]);
 
-    console.log(data.split('//')[4], data.split('//')[5], data.split('//')[6]);
+    // console.log(data.split('//')[4], data.split('//')[5], data.split('//')[6]);
 
     // setPlace(data.split('//')[3]);
   };
@@ -579,16 +579,13 @@ const DirectRoom = ({navigation, route}) => {
               <Typography light>{user?.user_place}</Typography>
               <View style={[flex_row, sp_1]}>
                 <TouchableOpacity
-                  style={[btn_yellow, flex_row, p_1, sp_2]}
-                  onPress={() => {
-                    setView(false);
-                    setOpenModal(true);
-                  }}>
+                  onPress={matchingFail}
+                  style={[btn_yellow, flex_row, p_1, sp_2]}>
                   <Image
                     style={img_sm}
-                    source={require('../../assets/Calendar.png')}
+                    source={require('../../assets/x.png')}
                   />
-                  <Typography bold>약속잡기</Typography>
+                  <Typography bold>매칭거절</Typography>
                 </TouchableOpacity>
                 <TouchableOpacity
                   onPress={matchingSuccess}
@@ -600,13 +597,16 @@ const DirectRoom = ({navigation, route}) => {
                   <Typography bold>매칭완료</Typography>
                 </TouchableOpacity>
                 <TouchableOpacity
-                  onPress={matchingFail}
-                  style={[btn_yellow, flex_row, p_1, sp_2]}>
+                  style={[btn_yellow, flex_row, p_1, sp_2]}
+                  onPress={() => {
+                    setView(false);
+                    setOpenModal(true);
+                  }}>
                   <Image
                     style={img_sm}
-                    source={require('../../assets/x.png')}
+                    source={require('../../assets/Calendar.png')}
                   />
-                  <Typography bold>매칭거절</Typography>
+                  <Typography bold>약속잡기</Typography>
                 </TouchableOpacity>
               </View>
             </View>
@@ -651,7 +651,11 @@ const DirectRoom = ({navigation, route}) => {
                     {chat?.user_info?.user_name}
                   </Typography>
                 </View>
-                <View style={{alignItems: 'flex-end', gap: 5}}>
+                <View
+                  style={{
+                    alignItems: 'flex-end',
+                    gap: 5,
+                  }}>
                   <View
                     style={{
                       flex: 1,
@@ -735,7 +739,7 @@ const DirectRoom = ({navigation, route}) => {
                 </View>
               </View>
             ) : (
-              <View style={[styles.rowBox, {gap: 10}]}>
+              <View style={[styles.rowBox, align_end, {gap: 10}]}>
                 <View style={{gap: 10, alignItems: 'center'}}>
                   <View>
                     <View style={styles.Avartar40}>
@@ -753,7 +757,12 @@ const DirectRoom = ({navigation, route}) => {
                     {chat?.user_info?.user_name}
                   </Typography>
                 </View>
-                <View style={{alignItems: 'flex-start', gap: 5}}>
+                <View
+                  style={{
+                    alignItems: 'flex-start',
+                    justifyContent: 'flex-end',
+                    gap: 5,
+                  }}>
                   <View
                     style={{
                       flex: 1,
@@ -889,7 +898,7 @@ const DirectRoom = ({navigation, route}) => {
               matchingInfo?.matching_state === 400 &&
               matchingInfo?.matching_refunder !== auth().currentUser?.uid
                 ? '매칭이 거절되어 채팅이 불가합니다.'
-                : '메시지를 입력하세요.'
+                : '메세지를 입력하세요.'
             }
             onChange={e => setChat(e.nativeEvent.text)}
             value={chat}
@@ -899,7 +908,7 @@ const DirectRoom = ({navigation, route}) => {
               width: 30,
               height: 30,
               borderRadius: 50,
-              backgroundColor: 'rgba(255, 206, 79, 1)',
+              backgroundColor: '#FF238D',
               alignItems: 'center',
               justifyContent: 'center',
             }}

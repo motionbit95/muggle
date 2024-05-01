@@ -30,6 +30,7 @@ import {
   justify_between,
   p_4,
   sp_4,
+  w_full,
 } from '../../style/styles';
 import WebView from 'react-native-webview';
 
@@ -72,7 +73,7 @@ const Certificate = ({navigation}) => {
   const moveNextStep = async () => {
     // 인증 후 가입 된 회원이 있는지 확인하고, 없으면 회원가입 패이지로, 있으면 홈으로 이동한다.
     let req = await singleQuery('user', 'uid', auth().currentUser.uid);
-    console.log(auth().currentUser.uid);
+    // console.log(auth().currentUser.uid);
 
     if (req?.length > 0) {
       navigation.navigate('모임');
@@ -224,21 +225,30 @@ const Certificate = ({navigation}) => {
                 alignItems: 'center',
                 justifyContent: 'space-between',
               }}>
-              <Typography bold>서비스 이용약관 동의</Typography>
               <PopupBase
                 button={
-                  <Image source={require('../../assets/rightarrow.png')} />
+                  <View style={[w_full, justify_between]}>
+                    <Typography bold size="lg">
+                      서비스 이용약관 동의
+                    </Typography>
+                  </View>
                 }>
-                <WebView
-                  source={{
-                    uri: 'https://muggle.life/terms',
-                  }} // 표시할 웹 페이지의 URL
-                  style={{
-                    width: Dimensions.get('window').width,
-                    height: Dimensions.get('window').height,
-                  }}
-                />
+                <SafeAreaView>
+                  <View style={[f_full]}>
+                    <WebView
+                      source={{
+                        uri: 'https://muggle.life/terms',
+                      }} // 표시할 웹 페이지의 URL
+                      style={{
+                        width: Dimensions.get('window').width,
+                        height: 'auto',
+                      }}
+                    />
+                  </View>
+                </SafeAreaView>
               </PopupBase>
+
+              <Image source={require('../../assets/rightarrow.png')} />
             </View>
           </View>
         </View>

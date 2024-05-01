@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
   banner: {
     width: '100%',
     height: undefined,
-    aspectRatio: 16 / 9,
+    aspectRatio: 4 / 3,
   },
 
   // Font
@@ -755,7 +755,7 @@ export const btn_yellow = [
   align_center,
   p_3,
   {
-    backgroundColor: '#FFCE4F',
+    backgroundColor: '#FF238D',
   },
 ];
 

@@ -14,11 +14,11 @@ export const getDocList = async collectionId => {
 };
 
 export const addDocument = async (collection_name, data) => {
-  console.log('add data ===> ', data);
+  // console.log('add data ===> ', data);
   try {
     // Firestore 컬렉션에 문서 추가
     const docRef = await firestore().collection(collection_name).add(data);
-    console.log('문서가 성공적으로 추가되었습니다.', docRef.id);
+    // console.log('문서가 성공적으로 추가되었습니다.', docRef.id);
     return docRef.id;
   } catch (error) {
     console.error('문서 추가 중 오류:', error);
@@ -42,9 +42,9 @@ export const singleQuery = async (collection_name, key, value) => {
 export const updateDocument = async (collection_name, doc_id, data) => {
   try {
     await firestore().collection(collection_name).doc(doc_id).update(data);
-    console.log('문서 업데이트 완료', collection_name, data);
+    // console.log('문서 업데이트 완료', collection_name, data);
   } catch (error) {
-    console.error('문서 수정 중 오류:', error);
+    // console.error('문서 수정 중 오류:', error, data);
   }
 };
 
@@ -62,7 +62,7 @@ export const addChat = async data => {
     .doc('chat_info')
     .set(data)
     .then(() => {
-      console.log('채팅이 성공적으로 등록되었습니다.');
+      // console.log('채팅이 성공적으로 등록되었습니다.');
     })
     .catch(error => {
       console.error('채팅 등록 중 오류 발생:', error);
@@ -75,7 +75,7 @@ export const addMessage = async data => {
     .doc('chat_info')
     .set(data)
     .then(() => {
-      console.log('채팅이 성공적으로 등록되었습니다.');
+      // console.log('채팅이 성공적으로 등록되었습니다.');
     })
     .catch(error => {
       console.error('채팅 등록 중 오류 발생:', error);

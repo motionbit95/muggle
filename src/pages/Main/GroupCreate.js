@@ -71,7 +71,7 @@ const GroupCreate = ({navigation, route}) => {
     Geolocation.getCurrentPosition(
       async pos => {
         const matchInfo = {
-          createAt: new Date(),
+          updatedAt: new Date(),
           group_place:
             selectedCity + ' ' + selectedDistrict + ' ' + matchPlace
               ? selectedCity + ' ' + selectedDistrict + ' ' + matchPlace
@@ -116,7 +116,7 @@ const GroupCreate = ({navigation, route}) => {
             });
           })
           .catch(err => {
-            console.log(err);
+            // console.log(err);
           });
       },
       error => {
@@ -162,7 +162,7 @@ const GroupCreate = ({navigation, route}) => {
       }
     }
 
-    console.log('createGroup ==>', message);
+    // console.log('createGroup ==>', message);
 
     if (message) {
       setMessage({
@@ -176,7 +176,7 @@ const GroupCreate = ({navigation, route}) => {
       setMessage({
         mode: 'confirm',
         isView: true,
-        message: '모임를 생성하시겠습니까?',
+        message: '모임을 생성하시겠습니까?',
         type: 'success',
       });
     }

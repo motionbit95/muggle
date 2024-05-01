@@ -33,7 +33,7 @@ const DateTimeInput = props => {
 
   useEffect(() => {
     console.log('props.defaultValue ==>', props.defaultValue);
-    setDateTime(props.defaultValue ? props.defaultValue : new Date());
+    setDateTime(props.defaultValue ? props.defaultValue.toDate() : new Date());
   }, [props.defaultValue]);
 
   const onChange = (event, selectedDate) => {

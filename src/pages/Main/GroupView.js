@@ -50,7 +50,7 @@ function GroupView({route}) {
   }, [navigation, title]);
 
   useEffect(() => {
-    console.log(route.params);
+    // console.log(route.params);
     singleQuery('user', 'uid', auth().currentUser?.uid).then(res => {
       setMyInfo(res[0]);
     });
@@ -85,9 +85,9 @@ function GroupView({route}) {
         res.forEach(user => {
           myInfo?.favorite?.forEach(async uid => {
             if (uid === user.doc_id) {
-              console.log(uid, user.doc_id);
+              // console.log(uid, user.doc_id);
               userList.push(user);
-              console.log(userList);
+              // console.log(userList);
               setFavorite(userList);
             }
           });

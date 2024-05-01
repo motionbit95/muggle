@@ -73,7 +73,7 @@ const Setting = ({navigation, route}) => {
           myInfo?.goods?.forEach(async gid => {
             if (gid === group.doc_id) {
               goodList.push(group);
-              console.log(new Date(), '찜했습니다.', goodList);
+              // console.log(new Date(), '찜했습니다.', goodList);
               setGoods(goodList);
             }
           });
@@ -88,7 +88,7 @@ const Setting = ({navigation, route}) => {
           myInfo?.views?.forEach(async gid => {
             if (gid === group.doc_id) {
               viewList.push(group);
-              console.log(new Date(), '봤습니다.', viewList);
+              // console.log(new Date(), '봤습니다.', viewList);
               setViews(viewList);
             }
           });
@@ -101,7 +101,7 @@ const Setting = ({navigation, route}) => {
   }, [myInfo]);
 
   useEffect(() => {
-    console.log('data ===> ', data);
+    // console.log('data ===> ', data);
     const unsubscribe = auth().onAuthStateChanged(async user => {
       if (user) {
         await singleQuery('user', 'uid', user.uid).then(res => {

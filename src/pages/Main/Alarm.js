@@ -23,7 +23,7 @@ function Alarm(props) {
     const getAlarms = async () => {
       singleQuery('alarm', 'user_id', auth().currentUser.uid).then(res => {
         setAlarmList(res);
-        console.log(res);
+        // console.log(res);
       });
     };
     getAlarms();

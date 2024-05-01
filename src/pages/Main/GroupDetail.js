@@ -63,6 +63,7 @@ import auth from '@react-native-firebase/auth';
 import {
   addChat,
   addDocument,
+  deleteDocument,
   singleQuery,
   updateDocument,
 } from '../../firebase/firebase_func';
@@ -72,6 +73,7 @@ import MessageBox from '../../Component/MessageBox';
 import KakaoShareLink from 'react-native-kakao-share-link';
 
 const GroupDetail = ({navigation, route}) => {
+  const [toolbar, setToolbar] = useState(false);
   const {data, userList} = route.params ? route.params : {data: null};
   const [openModal, setOpenModal] = useState(false);
   const [isPoint, setIsPoint] = useState(false);
@@ -98,20 +100,23 @@ const GroupDetail = ({navigation, route}) => {
     navigation.setOptions({
       title: data?.group_type === '일상 모임' ? '1:1 일상 모임' : '단체 모임',
       headerRight: () => (
-        <View style={[flex_row, justify_end, sp_2]}>
-          <TouchableOpacity onPress={clickShare}>
-            <Image
-              style={{width: 26, height: 26}}
-              source={require('../../assets/kakao.png')}
-            />
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() => {
-              setOpenAlert(true);
-            }}>
-            <Image source={require('../../assets/AiOutlineAlert.png')} />
-          </TouchableOpacity>
-        </View>
+        <TouchableOpacity onPress={() => setToolbar(true)}>
+          <Image source={require('../../assets/icons/MdMoreVert.png')} />
+        </TouchableOpacity>
+        // <View style={[flex_row, justify_end, sp_2]}>
+        //   <TouchableOpacity onPress={clickShare}>
+        //     <Image
+        //       style={{width: 26, height: 26}}
+        //       source={require('../../assets/kakao.png')}
+        //     />
+        //   </TouchableOpacity>
+        //   <TouchableOpacity
+        //     onPress={() => {
+        //       setOpenAlert(true);
+        //     }}>
+        //     <Image source={require('../../assets/AiOutlineAlert.png')} />
+        //   </TouchableOpacity>
+        // </View>
       ),
     });
   }, [data]);
@@ -241,7 +246,7 @@ const GroupDetail = ({navigation, route}) => {
   };
 
   const clickShare = async () => {
-    console.log(data?.group_type);
+    // console.log(data?.group_type);
     setMessage({
       mode: 'confirm',
       isView: true,
@@ -265,7 +270,7 @@ const GroupDetail = ({navigation, route}) => {
           description: data?.group_target,
         },
       });
-      console.log(response);
+      // console.log(response);
     } catch (e) {
       console.error(e);
       console.error(e.message);
@@ -281,8 +286,72 @@ const GroupDetail = ({navigation, route}) => {
     });
   };
 
+  const handleDeleteGroup = async () => {
+    await deleteDocument('group', data?.doc_id).then(() => {
+      navigation.navigate('모임', {screen: 'Muggle'});
+    });
+  };
+
   return (
     <View style={styles.screenStyle}>
+      <View
+        style={{
+          display: toolbar ? 'flex' : 'none',
+          position: 'absolute',
+          top: 0,
+          right: 0,
+          backgroundColor: 'white',
+          width: '50%',
+          zIndex: 1,
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}>
+        {data?.group_admin === auth().currentUser.uid && (
+          <>
+            <TouchableOpacity
+              onPress={() => {
+                setToolbar(false);
+                navigation.navigate('모임수정', {data: data});
+              }}
+              style={[p_4, flex_row, align_center, justify_between, w_full]}>
+              <Typography size="lg">모임 수정하기</Typography>
+              <Image source={require('../../assets/rightarrow.png')} />
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => {
+                setMessage({
+                  mode: 'confirm',
+                  isView: true,
+                  message: '모임을 삭제하시겠습니까?',
+                  type: 'delete',
+                });
+                setToolbar(false);
+              }}
+              style={[p_4, flex_row, align_center, justify_between, w_full]}>
+              <Typography size="lg">모임 삭제하기</Typography>
+              <Image source={require('../../assets/rightarrow.png')} />
+            </TouchableOpacity>
+          </>
+        )}
+        <TouchableOpacity
+          onPress={() => {
+            setToolbar(false);
+            clickShare();
+          }}
+          style={[p_4, flex_row, align_center, justify_between, w_full]}>
+          <Typography size="lg">모임 URL 공유하기</Typography>
+          <Image source={require('../../assets/rightarrow.png')} />
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => {
+            setToolbar(false);
+            setOpenAlert(true);
+          }}
+          style={[p_4, flex_row, align_center, justify_between, w_full]}>
+          <Typography size="lg">모임 신고 하기</Typography>
+          <Image source={require('../../assets/rightarrow.png')} />
+        </TouchableOpacity>
+      </View>
       {message.isView && (
         <MessageBox
           visible={message.isView}
@@ -293,6 +362,9 @@ const GroupDetail = ({navigation, route}) => {
             // 메세지 박스 닫기
             if (message.type === 'success') {
               handleEnterGroup();
+            }
+            if (message.type === 'delete') {
+              handleDeleteGroup();
             }
             setMessage({mode: '', isView: false, message: ''});
           }}
@@ -310,7 +382,7 @@ const GroupDetail = ({navigation, route}) => {
       <ScrollView style={styles.scrollViewStyle}>
         <Image
           source={{uri: data?.group_image}}
-          style={[radius_xl, styles.banner, {backgroundColor: '#d9d9d9'}]}
+          style={[styles.banner, {backgroundColor: '#d9d9d9'}]}
         />
         <View style={styles.contentStyle}>
           <View
@@ -462,7 +534,7 @@ const GroupDetail = ({navigation, route}) => {
                 {groupUsers?.map(
                   (user, index) =>
                     user?.uid === data?.group_admin && (
-                      <TouchableOpacity
+                      <View
                         key={index}
                         // onPress={() =>
                         //   navigation.navigate('모임', {
@@ -499,7 +571,7 @@ const GroupDetail = ({navigation, route}) => {
                               : '탈퇴한 회원입니다.'}
                           </Typography>
                         </View>
-                      </TouchableOpacity>
+                      </View>
                     ),
                 )}
               </View>
@@ -542,7 +614,7 @@ const GroupDetail = ({navigation, route}) => {
           </TouchableOpacity>
         )}
         <TouchableOpacity onPress={() => handleGoods(data.doc_id)}>
-          <Image source={icon} style={img_md} />
+          <Image source={icon} style={{width: 24, height: 20}} />
         </TouchableOpacity>
         <Modal
           visible={openAlert}
@@ -603,7 +675,7 @@ const GroupDetail = ({navigation, route}) => {
                     justify_around,
                     {paddingHorizontal: 20},
                   ]}>
-                  <TouchableOpacity onPress={() => openAlert(false)}>
+                  <TouchableOpacity onPress={() => setOpenAlert(false)}>
                     <Typography size="md">취소</Typography>
                   </TouchableOpacity>
                   <Typography light>|</Typography>

@@ -9,6 +9,7 @@ import {
   justify_end,
   radius_2xl,
   sp_3,
+  sp_4,
 } from '../../style/styles';
 import {getDisplayAge} from '../../firebase/api';
 import {updateDocument} from '../../firebase/firebase_func';
@@ -64,18 +65,6 @@ const Matching = ({navigation, myInfo, userList, ...props}) => {
                     {position: 'absolute', top: 0, left: 0, margin: 10},
                   ]}
                   colors={['rgba(0,0,0,0)', 'rgba(0,0,0,1)']}>
-                  <TouchableOpacity
-                    onPress={() => handleFavorite(item?.doc_id)}
-                    style={[{position: 'absolute', top: 10, right: 10}]}>
-                    <Image
-                      style={{width: 48, height: 48}}
-                      source={
-                        myInfo?.favorite?.includes(item.doc_id)
-                          ? require('../../assets/icons/heart_fill.png')
-                          : require('../../assets/icons/heart.png')
-                      }
-                    />
-                  </TouchableOpacity>
                   <View
                     style={[
                       f_full,
@@ -99,11 +88,26 @@ const Matching = ({navigation, myInfo, userList, ...props}) => {
                           </View>
                         </View>
                       </View>
-                      <ConnectButtons
-                        size={50}
-                        user={item}
-                        navigation={navigation}
-                      />
+                      <View style={[flex_row, sp_4]}>
+                        <TouchableOpacity
+                          onPress={() => handleFavorite(item?.doc_id)}
+                          // style={[{position: 'absolute', top: 10, right: 10}]}
+                        >
+                          <Image
+                            style={{width: 48, height: 48}}
+                            source={
+                              myInfo?.favorite?.includes(item.doc_id)
+                                ? require('../../assets/icons/heart_fill_2.png')
+                                : require('../../assets/icons/heart_2.png')
+                            }
+                          />
+                        </TouchableOpacity>
+                        <ConnectButtons
+                          size={50}
+                          user={item}
+                          navigation={navigation}
+                        />
+                      </View>
                     </View>
                   </View>
                 </LinearGradient>

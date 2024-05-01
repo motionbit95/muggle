@@ -176,7 +176,7 @@ function ConnectButtons({navigation, ...props}) {
         });
       })
       .catch(err => {
-        console.log(err);
+        // console.log(err);
       });
   };
   return (
@@ -215,7 +215,7 @@ function ConnectButtons({navigation, ...props}) {
                       : ' 오프라인 커피 매칭 신청 하시겠어요?'}
                   </Typography>
                   <Typography light>
-                    {`매칭 확률 100% 실제 유저 
+                    {`매칭 확률 100% 실제 유저
 상대방 매칭 거절 시 전액 환불`}
                   </Typography>
                   {type === 0 ? (
@@ -461,7 +461,7 @@ function ConnectButtons({navigation, ...props}) {
           </View>
         </Modal>
       )}
-      <TouchableOpacity
+      {/* <TouchableOpacity
         onPress={e => {
           e.preventDefault();
           setIsPoint(false);
@@ -477,7 +477,7 @@ function ConnectButtons({navigation, ...props}) {
           }}
           source={require('../assets/icons/chatting_button.png')}
         />
-      </TouchableOpacity>
+      </TouchableOpacity> */}
       <TouchableOpacity
         onPress={e => {
           e.preventDefault();

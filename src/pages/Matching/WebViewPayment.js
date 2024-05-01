@@ -39,7 +39,7 @@ function WebViewPayment({navigation, route}) {
 
     setQueryParams(queryParams.toString());
 
-    console.log(queryParams.toString());
+    // console.log(queryParams.toString());
 
     const unsubscribe = firestore()
       .collection('payment')
@@ -49,7 +49,7 @@ function WebViewPayment({navigation, route}) {
         if (documentSnapshot.exists) {
           // 문서가 존재하는 경우
           // setDocData(documentSnapshot.data());
-          console.log('결제가 완료되었습니다. ===> ', documentSnapshot.data());
+          // console.log('결제가 완료되었습니다. ===> ', documentSnapshot.data());
 
           await addDocument('matching', {
             matching_state: 0,
@@ -89,7 +89,7 @@ function WebViewPayment({navigation, route}) {
               });
             })
             .catch(err => {
-              console.log(err);
+              // console.log(err);
             });
         } else {
           // 문서가 존재하지 않는 경우

@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 import styles, {
   align_center,
+  align_end,
   blackAlpha400,
   blackAlpha500,
   blackAlpha900,
@@ -65,7 +66,7 @@ const ChatRoom = ({navigation, route}) => {
   }, [navigation]);
 
   useEffect(() => {
-    console.log('data===>', data.gid);
+    // console.log('data===>', data.gid);
     const unsubscribe = firestore()
       .collection('chat-' + data.gid)
       .orderBy('createdAt', 'asc')
@@ -92,7 +93,7 @@ const ChatRoom = ({navigation, route}) => {
           }
         });
 
-        console.log(dateList);
+        // console.log(dateList);
         // console.log(updatedDocuments);
         setChatList(updatedDocuments);
         scrollToBottom();
@@ -215,7 +216,7 @@ const ChatRoom = ({navigation, route}) => {
                 ]}>
                 <View>
                   <Image
-                    style={[radius_full, {width: '100%', height: '100%'}]}
+                    style={[radius_md, {width: '100%', height: '100%'}]}
                     source={
                       data?.group_image ? {uri: data?.group_image} : groupImg
                     }
@@ -301,7 +302,7 @@ const ChatRoom = ({navigation, route}) => {
                   </View>
                 </View>
               ) : (
-                <View style={[styles.rowBox, {gap: 10}]}>
+                <View style={[styles.rowBox, align_end, {gap: 10}]}>
                   <View style={{gap: 10, alignItems: 'center'}}>
                     <TouchableOpacity
                       onPress={() =>
@@ -330,7 +331,7 @@ const ChatRoom = ({navigation, route}) => {
                       style={{
                         flex: 1,
                         padding: 15,
-                        backgroundColor: '#FFDA7A',
+                        backgroundColor: '#D2D2D2',
                         borderRadius: 15,
                         borderTopLeftRadius: 0,
                       }}>
@@ -374,7 +375,7 @@ const ChatRoom = ({navigation, route}) => {
               color: 'black',
               width: '100%',
             }}
-            placeholder="메시지를 입력하시오."
+            placeholder="메세지를 입력하세요."
             onChange={e => setChat(e.nativeEvent.text)}
             value={chat}
           />
@@ -383,7 +384,7 @@ const ChatRoom = ({navigation, route}) => {
               width: 30,
               height: 30,
               borderRadius: 50,
-              backgroundColor: 'rgba(255, 206, 79, 1)',
+              backgroundColor: '#FF238D',
               alignItems: 'center',
               justifyContent: 'center',
             }}

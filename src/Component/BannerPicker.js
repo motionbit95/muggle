@@ -35,9 +35,9 @@ const BannerPicker = props => {
           },
         );
         if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-          console.log('You can use the photo library');
+          // console.log('You can use the photo library');
         } else {
-          console.log('Camera permission denied');
+          // console.log('Camera permission denied');
         }
       } catch (err) {
         // console.warn(err);
@@ -49,7 +49,7 @@ const BannerPicker = props => {
       const pickerOptions = {
         cropping: true,
         width: 300,
-        height: 150,
+        height: 300,
         // cropperCircleOverlay: true,
         mediaType: 'photo',
         multiple: false,
@@ -63,7 +63,7 @@ const BannerPicker = props => {
       setImageUri(pickedImage.path);
       uploadImage(pickedImage.path);
     } catch (error) {
-      console.log('Error picking image: ', error);
+      // console.log('Error picking image: ', error);
     }
 
     // if (Platform.OS === 'android') {
@@ -117,14 +117,14 @@ const BannerPicker = props => {
     const filename = uri.substring(uri.lastIndexOf('/') + 1);
     const uploadUri = Platform.OS === 'ios' ? uri.replace('file://', '') : uri;
 
-    console.log('uploadUri ===> ', uploadUri);
+    // console.log('uploadUri ===> ', uploadUri);
     const task = storage().ref(filename).putFile(uploadUri);
 
     try {
       await task;
-      console.log('Image uploaded successfully');
+      // console.log('Image uploaded successfully');
       const url = await storage().ref(filename).getDownloadURL();
-      console.log('Image URL:', url);
+      // console.log('Image URL:', url);
       // 여기서 URL을 사용하거나 상태로 저장할 수 있습니다.
       props.onChangeValue(url);
     } catch (error) {
@@ -141,19 +141,19 @@ const BannerPicker = props => {
             style={[
               // radius_full,
               radius_lg,
-              f_full,
-              {height: 150, backgroundColor: '#d9d9d9'},
+              // f_full,
+              {aspectRatio: 1, backgroundColor: '#d9d9d9'},
             ]}
             source={imageUri ? {uri: imageUri} : null}
           />
         ) : (
           <View
             style={[
-              f_full,
+              // f_full,
               center,
               sp_2,
               {
-                height: 150,
+                aspectRatio: 1,
                 borderRadius: 10,
                 borderWidth: 2,
                 borderStyle: 'dashed',

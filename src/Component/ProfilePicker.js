@@ -29,9 +29,9 @@ const ProfilePicker = props => {
           },
         );
         if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-          console.log('You can use the photo library');
+          // console.log('You can use the photo library');
         } else {
-          console.log('Camera permission denied');
+          // console.log('Camera permission denied');
         }
       } catch (err) {
         // console.warn(err);
@@ -56,7 +56,7 @@ const ProfilePicker = props => {
       setImageUri(pickedImage.path);
       uploadImage(pickedImage.path);
     } catch (error) {
-      console.log('Error picking image: ', error);
+      // console.log('Error picking image: ', error);
     }
 
     // if (Platform.OS === 'android') {
@@ -110,14 +110,14 @@ const ProfilePicker = props => {
     const filename = uri.substring(uri.lastIndexOf('/') + 1);
     const uploadUri = Platform.OS === 'ios' ? uri.replace('file://', '') : uri;
 
-    console.log('uploadUri ===> ', uploadUri);
+    // console.log('uploadUri ===> ', uploadUri);
     const task = storage().ref(filename).putFile(uploadUri);
 
     try {
       await task;
-      console.log('Image uploaded successfully');
+      // console.log('Image uploaded successfully');
       const url = await storage().ref(filename).getDownloadURL();
-      console.log('Image URL:', url);
+      // console.log('Image URL:', url);
       // 여기서 URL을 사용하거나 상태로 저장할 수 있습니다.
       props.onChangeValue(url);
     } catch (error) {

@@ -35,7 +35,7 @@ function MatchingView({navigation, myInfo}) {
         const newArray = [...groupList]; // groupList를 해당 배열로 대체해야 함
         Geolocation.getCurrentPosition(
           pos => {
-            console.log('pos ==>', pos.coords.latitude, pos.coords.longitude);
+            // console.log('pos ==>', pos.coords.latitude, pos.coords.longitude);
             // newArray.forEach(group => {
             //   console.log('group ==>', group.group_position);
             // });
@@ -70,7 +70,7 @@ function MatchingView({navigation, myInfo}) {
   };
 
   useEffect(() => {
-    console.log('order ==>', order);
+    // console.log('order ==>', order);
     getGroups();
   }, [order]);
 
@@ -84,7 +84,7 @@ function MatchingView({navigation, myInfo}) {
   }, []);
 
   const calculateDistance = (position1, position2) => {
-    console.log('position1 ==>', position1, 'position2 ==>', position2);
+    // console.log('position1 ==>', position1, 'position2 ==>', position2);
     // 두 지점 간의 거리를 계산하는 함수 (예: Haversine 공식 사용)
     const {latitude: lat1, longitude: lon1} = position1;
     const {latitude: lat2, longitude: lon2} = position2;
@@ -99,7 +99,7 @@ function MatchingView({navigation, myInfo}) {
         Math.sin(dLon / 2);
     const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
     const distance = earthRadius * c;
-    console.log('distance ==>', distance);
+    // console.log('distance ==>', distance);
     return distance;
   };
   return (
@@ -132,7 +132,7 @@ function MatchingView({navigation, myInfo}) {
           />
         ))}
       </ScrollView>
-      <View style={[flex_row, align_center, sp_3]}>
+      <View style={[flex_row, align_center, sp_3, {marginBottom: 10}]}>
         <TouchableOpacity
           style={[styles.button, {flex: 1}]}
           onPress={() =>

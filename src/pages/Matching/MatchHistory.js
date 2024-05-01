@@ -82,7 +82,7 @@ const MatchHistory = ({navigation}) => {
       }
       return 0;
     });
-    console.log('matchings ===> ', matchings);
+    // console.log('matchings ===> ', matchings);
     setMatchings(matchings);
   };
 

@@ -45,8 +45,8 @@ const Home = ({navigation}) => {
   useEffect(() => {
     if (!userList) updateUser();
 
-    if (!muggleGroupList || !muggleClassList || !muggleBusinessList)
-      updateGroup();
+    // if (!muggleGroupList || !muggleClassList || !muggleBusinessList)
+    updateGroup();
   }, []);
 
   const [screenWidth, setScreenWidth] = useState(
@@ -74,7 +74,7 @@ const Home = ({navigation}) => {
         updateUser();
         updateGroup();
       } else {
-        console.log('없음!!');
+        // console.log('없음!!');
         navigation.navigate('계정');
       }
     });
@@ -137,19 +137,19 @@ const Home = ({navigation}) => {
       .collection('group')
       .onSnapshot(() => {
         updateGroup();
-        console.log('그룹이 업데이트 되었습니다!!!');
+        // console.log('그룹이 업데이트 되었습니다!!!');
       });
 
     firestore()
       .collection('user')
       .onSnapshot(() => {
         updateUser();
-        console.log('유저가 업데이트 되었습니다!!!');
+        // console.log('유저가 업데이트 되었습니다!!!');
       });
 
     auth().onAuthStateChanged(async user => {
       if (!user) {
-        console.log('없음!!');
+        // console.log('없음!!');
         navigation.navigate('계정');
       }
     });
@@ -176,7 +176,7 @@ const Home = ({navigation}) => {
                   <TouchableOpacity
                     key={index}
                     onPress={() => {
-                      console.log('category ===> ', category, index);
+                      // console.log('category ===> ', category, index);
                       setSelectedGroup(category);
                     }}>
                     <View style={[under_button(selectedGroup === category)]}>

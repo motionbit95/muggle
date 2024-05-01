@@ -29,12 +29,12 @@ function UserView({navigation, route}) {
           group.group_users?.forEach(async uid => {
             // console.log(uid, data?.uid);
             if (uid === data?.uid) {
-              console.log('gid ==>', group.doc_id);
+              // console.log('gid ==>', group.doc_id);
               groupList.push(group);
             }
           });
         });
-        console.log('groupList ==>', groupList);
+        // console.log('groupList ==>', groupList);
         setGroupList(groupList);
       });
     };

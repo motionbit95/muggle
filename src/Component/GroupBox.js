@@ -13,8 +13,10 @@ import styles, {
   img_lg,
   img_md,
   img_sm,
+  img_xs,
   justify_between,
   justify_center,
+  m_2,
   p_1,
   p_2,
   p_3,
@@ -55,7 +57,7 @@ const GroupBox = ({item, index, myInfo, navigation}) => {
         groupUsers.push(user[0]);
       }
       setGroupUsers(groupUsers);
-      console.log(groupUsers);
+      // console.log(groupUsers);
     };
     getGroupUsers();
   }, []);
@@ -74,7 +76,7 @@ const GroupBox = ({item, index, myInfo, navigation}) => {
       // setIcon(require('../assets/icons/heart_fill.png'));
     }
 
-    console.log(myInfo.goods);
+    // console.log(myInfo.goods);
 
     await updateDocument('user', myInfo.doc_id, myInfo);
   };
@@ -97,8 +99,27 @@ const GroupBox = ({item, index, myInfo, navigation}) => {
               {data: {...item, gid: item.doc_id}},
             );
           }}>
-          <View style={[flex_row, justify_between]}>
-            <View style={[sp_1, justify_center, {maxWidth: '70%'}]}>
+          <View style={[flex_row]}>
+            <View
+              style={[
+                img_lg,
+                radius_md,
+                {
+                  backgroundColor: blackAlpha100,
+                  overflow: 'hidden',
+                },
+              ]}>
+              <View>
+                <Image
+                  style={{width: '100%', height: '100%'}}
+                  source={
+                    item?.group_image ? {uri: item?.group_image} : groupImg
+                  }
+                />
+              </View>
+            </View>
+            <View
+              style={[sp_1, justify_center, {marginLeft: 10, maxWidth: '60%'}]}>
               <Typography bold numberOfLines={1} size={'md'}>
                 {item.group_name}
               </Typography>
@@ -115,7 +136,7 @@ const GroupBox = ({item, index, myInfo, navigation}) => {
                       paddingVertical: 3,
                     },
                   ]}>
-                  <Typography bold size={'sm'} white>
+                  <Typography bold size={'xs'} white>
                     {displayDday(calculateDday(formatDate(item.group_time)))}
                   </Typography>
                 </View>
@@ -136,59 +157,44 @@ const GroupBox = ({item, index, myInfo, navigation}) => {
                 </View>
               </View>
             </View>
-            <View
+            <TouchableOpacity
+              onPress={() => {
+                handleGoods(item.doc_id);
+              }}
               style={[
-                img_lg,
-                radius_md,
+                img_sm,
                 {
-                  backgroundColor: blackAlpha100,
-                  overflow: 'hidden',
+                  position: 'absolute',
+                  top: 0,
+                  right: 0,
+                  width: 30,
+                  height: 30,
+                  alignItems: 'center',
+                  justifyContent: 'center',
                 },
               ]}>
-              <View>
-                <Image
-                  style={{width: '100%', height: '100%'}}
-                  source={
-                    item?.group_image ? {uri: item?.group_image} : groupImg
-                  }
-                />
-                <TouchableOpacity
-                  onPress={() => {
-                    handleGoods(item.doc_id);
-                  }}
-                  style={[
-                    img_sm,
-                    {
-                      position: 'absolute',
-                      top: 4,
-                      right: 4,
-                      width: 30,
-                      height: 30,
-                    },
-                  ]}>
-                  <Image
-                    // style={[
-                    //   img_sm,
-                    //   {
-                    //     position: 'absolute',
-                    //     top: 4,
-                    //     right: 4,
-                    //     width: 30,
-                    //     height: 30,
-                    //   },
-                    // ]}
-                    source={
-                      myInfo?.goods?.includes(item.doc_id)
-                        ? require('../assets/icons/heart_fill.png')
-                        : require('../assets/icons/heart.png')
-                    }
-                  />
-                </TouchableOpacity>
-              </View>
-            </View>
+              <Image
+                // style={[
+                //   img_sm,
+                //   {
+                //     position: 'absolute',
+                //     top: 4,
+                //     right: 4,
+                //     width: 30,
+                //     height: 30,
+                //   },
+                // ]}
+                style={{width: 21, height: 18}}
+                source={
+                  myInfo?.goods?.includes(item.doc_id)
+                    ? require('../assets/icons/heart_fill.png')
+                    : require('../assets/icons/heart.png')
+                }
+              />
+            </TouchableOpacity>
           </View>
           {/* 유저 이미지 */}
-          <View style={[flex_row, sp_3]}>
+          {/* <View style={[flex_row, sp_3]}>
             <View
               style={[
                 flex_row,
@@ -237,7 +243,7 @@ const GroupBox = ({item, index, myInfo, navigation}) => {
                 </View>
               )}
             </View>
-          </View>
+          </View> */}
         </TouchableOpacity>
       ) : (
         <View>
@@ -246,7 +252,7 @@ const GroupBox = ({item, index, myInfo, navigation}) => {
               key={index + '_' + item.doc_id}
               style={[
                 radius_md,
-                p_4,
+                p_2,
                 flex_row,
                 {backgroundColor: '#FFF5F4', marginBottom: 10, flex: 1},
               ]}
@@ -258,8 +264,14 @@ const GroupBox = ({item, index, myInfo, navigation}) => {
                   {data: {...item, gid: item.doc_id}},
                 );
               }}>
-              <View style={[flex_row, justify_between, align_start, {flex: 3}]}>
-                <View style={[sp_1, justify_center, {maxWidth: '70%'}]}>
+              <View style={[flex_row, align_start, {flex: 3}]}>
+                <Image
+                  style={[radius_md, img_lg]}
+                  source={
+                    item?.group_image ? {uri: item?.group_image} : groupImg
+                  }
+                />
+                <View style={[sp_1, justify_center, p_4, {maxWidth: '70%'}]}>
                   <Typography bold numberOfLines={1} size={'md'}>
                     {item.group_name}
                   </Typography>
@@ -275,27 +287,18 @@ const GroupBox = ({item, index, myInfo, navigation}) => {
                   </View>
                 </View>
               </View>
-              <View style={[flex_row, justify_between, align_start]}>
+              <TouchableOpacity
+                style={p_1}
+                onPress={() => handleGoods(item.doc_id)}>
                 <Image
-                  style={[radius_full, styles.Avartar70]}
+                  style={{width: 22, height: 18}}
                   source={
-                    groupUsers[0]?.user_profile
-                      ? {uri: groupUsers[0]?.user_profile}
-                      : groupImg
+                    myInfo?.goods?.includes(item.doc_id)
+                      ? require('../assets/icons/heart_fill.png')
+                      : require('../assets/icons/heart.png')
                   }
                 />
-                <TouchableOpacity
-                  style={[img_sm]}
-                  onPress={() => handleGoods(item.doc_id)}>
-                  <Image
-                    source={
-                      myInfo?.goods?.includes(item.doc_id)
-                        ? require('../assets/icons/heart_fill.png')
-                        : require('../assets/icons/heart.png')
-                    }
-                  />
-                </TouchableOpacity>
-              </View>
+              </TouchableOpacity>
             </TouchableOpacity>
           )}
         </View>
