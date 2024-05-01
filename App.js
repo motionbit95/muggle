@@ -68,6 +68,7 @@ import Setting from './src/pages/MyPage/Setting';
 import AlarmSetting from './src/pages/MyPage/Alarm';
 import Kakao from './src/pages/MyPage/Kakao';
 import MatchingUser from './src/pages/Matching/MatchingUser';
+import Heart from './src/pages/MyPage/Heart';
 
 const App = () => {
   // const isDarkMode = useColorScheme() === 'dark';
@@ -333,12 +334,33 @@ const App = () => {
         })}
       />
 
+      <UserStack.Screen
+        name="하트구매"
+        component={Heart}
+        options={({navigation}) => ({
+          headerTitleAlign: 'center',
+          headerLeft: () => (
+            <TouchableOpacity
+              style={[p_2]}
+              onPress={() => navigation.navigate('User')}>
+              <Image
+                style={img_sm}
+                source={require('./src/assets/icons/left_arrow.png')}
+              />
+            </TouchableOpacity>
+          ),
+          headerTitleStyle: {
+            fontFamily: font_family_bold,
+          },
+        })}
+      />
+
       <HomeStack.Screen
         name="모임리스트"
         component={GroupView}
         options={({navigation}) => ({
           headerTitleAlign: 'center',
-          title: '모임리스트',
+          title: '찜 목록',
           headerLeft: () => (
             <TouchableOpacity
               style={[p_2]}
@@ -373,6 +395,7 @@ const App = () => {
           //     <Image style={img_md} source={require('./src/assets/home.png')} />
           //   </TouchableOpacity>
           // ),
+          tabBarVisible: false,
           headerLeft: () => <></>,
           title: '채팅',
           headerStyle: {
@@ -393,7 +416,7 @@ const App = () => {
           headerLeft: () => (
             <TouchableOpacity
               style={[p_2]}
-              onPress={() => navigation.navigate('채팅방')}>
+              onPress={() => navigation.navigate('채팅홈')}>
               <Image
                 style={img_sm}
                 source={require('./src/assets/icons/left_arrow.png')}
@@ -418,7 +441,7 @@ const App = () => {
           headerLeft: () => (
             <TouchableOpacity
               style={[p_2]}
-              onPress={() => navigation.navigate('채팅방')}>
+              onPress={() => navigation.navigate('채팅홈')}>
               <Image
                 style={img_sm}
                 source={require('./src/assets/icons/left_arrow.png')}
@@ -602,6 +625,7 @@ const App = () => {
           options={({navigation}) => ({
             title: '찜 목록',
             tabBarActiveTintColor: '#FF634F',
+            headerTitleAlign: 'center',
             unmountOnBlur: true,
             tabBarLabelStyle: {display: 'none'},
             headerTitleStyle: {
@@ -617,9 +641,33 @@ const App = () => {
           })}
         />
         <Tab.Screen
+          name="채팅홈"
+          component={Chat}
+          options={({navigation}) => ({
+            // headerShown: false,
+            headerTitle: '채팅',
+            tabBarLabelStyle: {display: 'none'},
+            headerTitleAlign: 'center',
+            headerStyle: {
+              backgroundColor: '#fff',
+            },
+            headerTintColor: 'black',
+            headerTitleStyle: {
+              fontFamily: font_family_bold,
+            },
+            tabBarIcon: ({focused}) => (
+              <Image
+                source={focused ? tabBarSelectIcon[3] : tabBarIcon[3]}
+                style={{width: 24, height: 24}}
+              />
+            ),
+          })}
+        />
+        <Tab.Screen
           name="채팅"
           component={ChatStackNavigate}
           options={({navigation}) => ({
+            tabBarButton: () => null,
             headerShown: false,
             tabBarActiveTintColor: '#FF634F',
             unmountOnBlur: true,
@@ -633,8 +681,8 @@ const App = () => {
           })}
         />
         <Tab.Screen
-          name="마이"
-          component={UserStackNavigate}
+          name="유저"
+          component={User}
           options={{
             headerShown: false,
             tabBarActiveTintColor: '#FF634F',
@@ -648,6 +696,24 @@ const App = () => {
             ),
           }}
         />
+        <Tab.Screen
+          name="마이"
+          component={UserStackNavigate}
+          options={{
+            tabBarButton: () => null,
+            headerShown: false,
+            tabBarActiveTintColor: '#FF634F',
+            unmountOnBlur: true,
+            tabBarLabelStyle: {display: 'none'},
+            tabBarIcon: ({focused}) => (
+              <Image
+                source={focused ? tabBarSelectIcon[4] : tabBarIcon[4]}
+                style={{width: 24, height: 24}}
+              />
+            ),
+          }}
+        />
+
         <Tab.Screen
           name="매칭"
           component={MatchingStackNavigate}

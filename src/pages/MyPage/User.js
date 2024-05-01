@@ -18,6 +18,7 @@ import styles, {
   flex_row,
   img_md,
   img_sm,
+  justify_around,
   justify_end,
   p_1,
   p_2,
@@ -225,7 +226,7 @@ const User = ({navigation, route}) => {
             </View>
           </View>
           <View style={[sp_3, shadow_md]}>
-            <View style={[styles.rowBox, styles.itembox]}>
+            <View style={[justify_around, styles.rowBox]}>
               <TouchableOpacity
                 style={styles.one_thirdBoxStyle}
                 onPress={() =>
@@ -254,7 +255,7 @@ const User = ({navigation, route}) => {
                     params: {
                       navigation: navigation,
                       type: 'views',
-                      userList: userList,
+                      // userList: userList,
                       title: '최근 본 모임',
                       myInfo: myInfo,
                     },
@@ -267,14 +268,14 @@ const User = ({navigation, route}) => {
                   <Typography>최근 본 모임</Typography>
                 </View>
               </TouchableOpacity>
-              <TouchableOpacity style={styles.one_thirdBoxStyle}>
+              {/* <TouchableOpacity style={styles.one_thirdBoxStyle}>
                 <View style={center}>
                   <Typography size="2xl" bold>
                     0
                   </Typography>
                   <Typography>초대받은 모임</Typography>
                 </View>
-              </TouchableOpacity>
+              </TouchableOpacity> */}
             </View>
             <View
               style={{backgroundColor: 'white', borderRadius: 10, padding: 10}}>
@@ -324,6 +325,19 @@ const User = ({navigation, route}) => {
                 <View style={styles.rowBox}>
                   <Image source={require('../../assets/MdPayment.png')} />
                   <Typography>정산신청</Typography>
+                </View>
+                <Image source={require('../../assets/rightarrow.png')} />
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={styles.TouchButtonStyle}
+                onPress={() =>
+                  navigation.navigate('마이', {screen: '하트구매'})
+                }>
+                <View style={styles.rowBox}>
+                  <Image
+                    source={require('../../assets/icons/heart_black.png')}
+                  />
+                  <Typography>하트구매</Typography>
                 </View>
                 <Image source={require('../../assets/rightarrow.png')} />
               </TouchableOpacity>

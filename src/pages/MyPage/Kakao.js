@@ -7,7 +7,7 @@ import WebView from 'react-native-webview';
 
 function Kakao(props) {
   return (
-    <SafeAreaView>
+    <SafeAreaView style={f_full}>
       <View style={[f_full, center]}>
         <WebView
           source={{

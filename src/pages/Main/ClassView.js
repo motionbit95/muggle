@@ -106,7 +106,7 @@ function ClassView({navigation, myInfo}) {
     <View style={[f_full, p_3, sp_2, justify_between]}>
       <View style={[flex_column, sp_2]}>
         <Typography size="xl" bold>
-          팀 단위 모임
+          단체 모임
         </Typography>
         <Typography light>취미 및 클래스 모임에 참여해보세요.</Typography>
       </View>

@@ -61,7 +61,7 @@ const SignUp = ({navigation}) => {
   const [checkedNickname, setCheckNickname] = useState(false);
 
   const years = [];
-  for (let year = 2005; year >= 1900; year--) {
+  for (let year = 2005; year >= 1950; year--) {
     years.push(year);
   }
 
@@ -156,6 +156,15 @@ const SignUp = ({navigation}) => {
         mode: 'error',
         isView: true,
         message: '매칭권 금액을 2만원 이상으로 설정하세요.',
+      });
+      return;
+    }
+
+    if (userPrice > 100) {
+      setMessage({
+        mode: 'error',
+        isView: true,
+        message: '매칭권 금액을 100만원 이하로 설정하세요.',
       });
       return;
     }
@@ -409,6 +418,7 @@ const SignUp = ({navigation}) => {
                       padding: 0,
                     },
                   ]}
+                  maxLength={3}
                   placeholder="0"
                   onChange={e => setUserPrice(e.nativeEvent.text)}
                   // defaultValue={userPrice}
@@ -441,6 +451,7 @@ const SignUp = ({navigation}) => {
                     {fontFamily: font_family, flex: 1.5, color: 'black'},
                     styles.contentBox,
                   ]}
+                  maxLength={15}
                   placeholder="번호를 입력해주세요."
                   onChange={e => setAccountNumber(e.nativeEvent.text)}
                 />

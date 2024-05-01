@@ -55,6 +55,11 @@ const Setting = ({navigation, route}) => {
   const [myInfo, setMyInfo] = useState(data ? data : null);
   const [goods, setGoods] = useState(null);
   const [views, setViews] = useState(null);
+  const [message, setMessage] = useState({
+    mode: '',
+    isView: false,
+    message: '',
+  });
 
   useEffect(() => {
     setMyInfo(data);
@@ -143,6 +148,7 @@ const Setting = ({navigation, route}) => {
   };
 
   const onDeleteUser = () => {
+    setMessage({mode: '', isView: false, message: ''});
     auth()
       .currentUser.delete()
       .then(() => {
@@ -152,6 +158,21 @@ const Setting = ({navigation, route}) => {
 
   return (
     <View style={styles.screenStyle}>
+      {message.isView && (
+        <MessageBox
+          visible={message.isView}
+          message={message.message}
+          mode={message.mode}
+          onOK={() => {
+            if (message.type === 'delete') {
+              onDeleteUser();
+            } else if (message.type === 'logout') {
+              onLogout();
+            }
+          }}
+          onCancel={() => setMessage({mode: '', isView: false, message: ''})}
+        />
+      )}
       <View style={styles.bgStyle}>
         {/* <LinearGradient
           style={styles.bgStyle}
@@ -204,7 +225,14 @@ const Setting = ({navigation, route}) => {
                 </View>
                 <TouchableOpacity
                   style={styles.TouchButtonStyle}
-                  onPress={onLogout}>
+                  onPress={() =>
+                    setMessage({
+                      type: 'logout',
+                      mode: 'confirm',
+                      isView: true,
+                      message: '로그아웃하시겠어요?',
+                    })
+                  }>
                   <View style={styles.rowBox}>
                     <Typography>로그아웃</Typography>
                   </View>
@@ -212,7 +240,15 @@ const Setting = ({navigation, route}) => {
                 </TouchableOpacity>
                 <TouchableOpacity
                   style={styles.TouchButtonStyle}
-                  onPress={onDeleteUser}>
+                  onPress={() =>
+                    setMessage({
+                      type: 'delete',
+                      mode: 'confirm',
+                      isView: true,
+                      message:
+                        '머글 서비스의 건전성 확보를 위해, 탈퇴한 후에는 7일동안 재가입이 불가능합니다. 신중한 결정 부탁드립니다. 감사합니다.',
+                    })
+                  }>
                   <View style={styles.rowBox}>
                     <Typography>탈퇴하기</Typography>
                   </View>

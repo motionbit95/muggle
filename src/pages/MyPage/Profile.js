@@ -86,7 +86,7 @@ const Profile = ({navigation, route}) => {
   );
 
   const years = [];
-  for (let year = 2005; year >= 1900; year--) {
+  for (let year = 2005; year >= 1950; year--) {
     years.push(year);
   }
 

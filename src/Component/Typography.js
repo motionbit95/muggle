@@ -21,6 +21,7 @@ export function Typography(props) {
     <Text
       {...props}
       style={{
+        textAlign: props.center ? 'center' : 'left',
         fontFamily:
           Platform.OS === 'ios'
             ? font_family

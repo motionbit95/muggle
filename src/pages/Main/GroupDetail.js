@@ -241,10 +241,13 @@ const GroupDetail = ({navigation, route}) => {
   };
 
   const clickShare = async () => {
+    console.log(data?.group_type);
     setMessage({
       mode: 'confirm',
       isView: true,
-      message: '친구에게 이성을 소개시켜주세요!',
+      message: `친구에게 ${
+        data?.group_type === '일상 모임' ? '이성' : '모임'
+      }을 소개시켜주세요!`,
       type: 'share',
     });
   };

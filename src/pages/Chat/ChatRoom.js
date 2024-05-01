@@ -53,6 +53,17 @@ const ChatRoom = ({navigation, route}) => {
     }
   };
 
+  // 제목을 헤더 타이틀로 설정
+  React.useLayoutEffect(() => {
+    if (navigation) {
+      navigation.getParent()?.setOptions({
+        tabBarStyle: {
+          display: 'none',
+        },
+      });
+    }
+  }, [navigation]);
+
   useEffect(() => {
     console.log('data===>', data.gid);
     const unsubscribe = firestore()
@@ -292,7 +303,13 @@ const ChatRoom = ({navigation, route}) => {
               ) : (
                 <View style={[styles.rowBox, {gap: 10}]}>
                   <View style={{gap: 10, alignItems: 'center'}}>
-                    <View>
+                    <TouchableOpacity
+                      onPress={() =>
+                        navigation.navigate('모임', {
+                          screen: '유저',
+                          params: {data: chat?.user_info, userList: userList},
+                        })
+                      }>
                       <View style={styles.Avartar40}>
                         <Image
                           style={[f_full, radius_full]}
@@ -303,7 +320,7 @@ const ChatRoom = ({navigation, route}) => {
                           }
                         />
                       </View>
-                    </View>
+                    </TouchableOpacity>
                     <Typography size="sm">
                       {chat?.user_info?.user_name}
                     </Typography>

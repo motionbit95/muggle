@@ -98,6 +98,17 @@ const DirectRoom = ({navigation, route}) => {
     scrollViewRef.current.scrollToEnd({animated: true});
   };
 
+  // 제목을 헤더 타이틀로 설정
+  React.useLayoutEffect(() => {
+    if (navigation) {
+      navigation.getParent()?.setOptions({
+        tabBarStyle: {
+          display: 'none',
+        },
+      });
+    }
+  }, [navigation]);
+
   const [user, setUser] = React.useState({});
   React.useEffect(() => {
     getUser(
@@ -566,35 +577,45 @@ const DirectRoom = ({navigation, route}) => {
                 </View>
               </View> */}
               <Typography light>{user?.user_place}</Typography>
+              <View style={[flex_row, sp_1]}>
+                <TouchableOpacity
+                  style={[btn_yellow, flex_row, p_1, sp_2]}
+                  onPress={() => {
+                    setView(false);
+                    setOpenModal(true);
+                  }}>
+                  <Image
+                    style={img_sm}
+                    source={require('../../assets/Calendar.png')}
+                  />
+                  <Typography bold>약속잡기</Typography>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  onPress={matchingSuccess}
+                  style={[btn_yellow, flex_row, p_1, sp_2]}>
+                  <Image
+                    style={img_sm}
+                    source={require('../../assets/o.png')}
+                  />
+                  <Typography bold>매칭완료</Typography>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  onPress={matchingFail}
+                  style={[btn_yellow, flex_row, p_1, sp_2]}>
+                  <Image
+                    style={img_sm}
+                    source={require('../../assets/x.png')}
+                  />
+                  <Typography bold>매칭거절</Typography>
+                </TouchableOpacity>
+              </View>
             </View>
           </View>
-          <View style={[flex_column, sp_1]}>
-            <TouchableOpacity
-              style={[btn_yellow, flex_row, p_1, sp_2]}
-              onPress={() => {
-                setView(false);
-                setOpenModal(true);
-              }}>
-              <Image
-                style={img_sm}
-                source={require('../../assets/Calendar.png')}
-              />
-              <Typography bold>약속잡기</Typography>
-            </TouchableOpacity>
-            <TouchableOpacity
-              onPress={matchingSuccess}
-              style={[btn_yellow, flex_row, p_1, sp_2]}>
-              <Image style={img_sm} source={require('../../assets/o.png')} />
-              <Typography bold>매칭완료</Typography>
-            </TouchableOpacity>
-            <TouchableOpacity
-              onPress={matchingFail}
-              style={[btn_yellow, flex_row, p_1, sp_2]}>
-              <Image style={img_sm} source={require('../../assets/x.png')} />
-              <Typography bold>매칭거절</Typography>
-            </TouchableOpacity>
-          </View>
         </View>
+
+        <Typography size="xs" center>
+          커피 매칭 장소는 근처 스타벅스 또는 대형 브랜드 카페를 권장드립니다.{' '}
+        </Typography>
       </View>
       <ScrollView style={styles.scrollViewStyle} ref={scrollViewRef}>
         <View

@@ -215,7 +215,8 @@ function ConnectButtons({navigation, ...props}) {
                       : ' 오프라인 커피 매칭 신청 하시겠어요?'}
                   </Typography>
                   <Typography light>
-                    {`하트를 구매해 상대방과 채팅을 나눌 수 있어요.`}
+                    {`매칭 확률 100% 실제 유저 
+상대방 매칭 거절 시 전액 환불`}
                   </Typography>
                   {type === 0 ? (
                     <View style={[w_full, flex_row, sp_2]}>
