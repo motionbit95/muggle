@@ -34,6 +34,7 @@ import Typography from '../../Component/Typography';
 import MessageBox from '../../Component/MessageBox';
 import Tooltip from 'react-native-walkthrough-tooltip';
 import {singleQuery} from '../../firebase/firebase_func';
+import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 
 const SignUp = ({navigation}) => {
   const [tooltipVisible, setTooltipVisible] = useState(false);
@@ -249,7 +250,7 @@ const SignUp = ({navigation}) => {
         />
       )}
       <SafeAreaView style={{width: '100%'}}>
-        <ScrollView style={styles.scrollViewStyle}>
+        <KeyboardAwareScrollView style={styles.scrollViewStyle}>
           <View style={{width: '100%', gap: 15, padding: 20}}>
             <View style={{width: '100%'}}>
               <Typography bold size={'xl'}>
@@ -467,7 +468,7 @@ const SignUp = ({navigation}) => {
               </Typography>
             </TouchableOpacity>
           </View>
-        </ScrollView>
+        </KeyboardAwareScrollView>
       </SafeAreaView>
     </View>
   );

@@ -44,6 +44,7 @@ import {updateDocument} from '../../firebase/firebase_func';
 import Typography from '../../Component/Typography';
 import MessageBox from '../../Component/MessageBox';
 import Tooltip from 'react-native-walkthrough-tooltip';
+import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 
 const Profile = ({navigation, route}) => {
   const {data} = route.params ? route.params : {data: null};
@@ -287,7 +288,7 @@ const Profile = ({navigation, route}) => {
           }}
         />
       )}
-      <ScrollView style={styles.scrollViewStyle}>
+      <KeyboardAwareScrollView style={styles.scrollViewStyle}>
         <View style={[styles.contentStyle, {gap: 20}]}>
           <View
             style={{
@@ -308,6 +309,7 @@ const Profile = ({navigation, route}) => {
                 readOnly
                 placeholderTextColor={blackAlpha400}
                 style={[
+                  styles.contentBox,
                   {
                     width: '100%',
                     height: 50,
@@ -316,8 +318,8 @@ const Profile = ({navigation, route}) => {
                     color: blackAlpha900,
                     flex: 4,
                     height: 50,
+                    backgroundColor: '#f1f1f1',
                   },
-                  styles.contentBox,
                 ]}
                 placeholder="변경할 이름을 입력해주세요"
                 defaultValue={userName}
@@ -629,7 +631,7 @@ const Profile = ({navigation, route}) => {
             </Typography>
           </TouchableOpacity>
         </View>
-      </ScrollView>
+      </KeyboardAwareScrollView>
     </View>
   );
 };

@@ -14,6 +14,7 @@ import ProfilePicker from '../../Component/ProfilePicker';
 import Typography from '../../Component/Typography';
 import {primary_color} from '../../firebase/api';
 import MessageBox from '../../Component/MessageBox';
+import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 
 const Interest = ({navigation, route}) => {
   const {data} = route.params ? route.params : {data: null};
@@ -89,7 +90,7 @@ const Interest = ({navigation, route}) => {
           }}
         />
       )}
-      <ScrollView style={styles.scrollViewStyle}>
+      <KeyboardAwareScrollView style={styles.scrollViewStyle}>
         <View style={[styles.contentStyle, {gap: 20}]}>
           <View
             style={{
@@ -176,7 +177,7 @@ const Interest = ({navigation, route}) => {
             </View>
           </View>
         </View>
-      </ScrollView>
+      </KeyboardAwareScrollView>
       <View style={styles.buttonBox}>
         <TouchableOpacity style={styles.button} onPress={signupUser}>
           <Typography size={'lg'} bold white>

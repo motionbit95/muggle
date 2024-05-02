@@ -61,6 +61,7 @@ import Typography from '../../Component/Typography';
 import MessageBox from '../../Component/MessageBox';
 import DateTimeInput from '../../Component/DateTimeInput';
 import DropDown from '../../Component/PickerComponent';
+import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 
 const DirectRoom = ({navigation, route}) => {
   const {data} = route.params ? route.params : {data: null};
@@ -617,7 +618,9 @@ const DirectRoom = ({navigation, route}) => {
           커피 매칭 장소는 근처 스타벅스 또는 대형 브랜드 카페를 권장드립니다.{' '}
         </Typography>
       </View>
-      <ScrollView style={styles.scrollViewStyle} ref={scrollViewRef}>
+      <KeyboardAwareScrollView
+        style={styles.scrollViewStyle}
+        ref={scrollViewRef}>
         <View
           style={[styles.contentStyle, {gap: 15, justifyContent: 'flex-end'}]}>
           {/* 왼쪽 배치 rowBox, 시간은 flex-start
@@ -864,7 +867,7 @@ const DirectRoom = ({navigation, route}) => {
             ),
           )}
         </View>
-      </ScrollView>
+      </KeyboardAwareScrollView>
       <View
         style={{
           width: '100%',

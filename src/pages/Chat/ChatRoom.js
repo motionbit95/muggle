@@ -35,6 +35,7 @@ import firestore from '@react-native-firebase/firestore';
 import {addDocument, getUser} from '../../firebase/firebase_func';
 import auth from '@react-native-firebase/auth';
 import Typography from '../../Component/Typography';
+import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 
 const ChatRoom = ({navigation, route}) => {
   const {data, userList} = route.params ? route.params : {data: null};
@@ -227,7 +228,9 @@ const ChatRoom = ({navigation, route}) => {
           </View>
         )}
       </TouchableOpacity>
-      <ScrollView style={styles.scrollViewStyle} ref={scrollViewRef}>
+      <KeyboardAwareScrollView
+        style={styles.scrollViewStyle}
+        ref={scrollViewRef}>
         <View
           style={[styles.contentStyle, {gap: 15, justifyContent: 'flex-end'}]}>
           {/* 왼쪽 배치 rowBox, 시간은 flex-start
@@ -348,7 +351,7 @@ const ChatRoom = ({navigation, route}) => {
             </View>
           ))}
         </View>
-      </ScrollView>
+      </KeyboardAwareScrollView>
       <View
         style={{
           width: '100%',

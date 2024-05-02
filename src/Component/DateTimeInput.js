@@ -32,7 +32,7 @@ const DateTimeInput = props => {
   const [mode, setMode] = useState('date');
 
   useEffect(() => {
-    console.log('props.defaultValue ==>', props.defaultValue);
+    // console.log('props.defaultValue ==>', props.defaultValue);
     setDateTime(props.defaultValue ? props.defaultValue.toDate() : new Date());
   }, [props.defaultValue]);
 

@@ -32,6 +32,7 @@ import BannerPicker from '../../Component/BannerPicker';
 import Typography from '../../Component/Typography';
 import MessageBox from '../../Component/MessageBox';
 import Geolocation from '@react-native-community/geolocation'; // 라이브러리 import
+import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 
 const GroupModify = ({navigation, route}) => {
   const {data} = route.params ? route.params : {data: null};
@@ -197,7 +198,7 @@ const GroupModify = ({navigation, route}) => {
           }}
         />
       )}
-      <ScrollView style={[styles.scrollViewStyle]}>
+      <KeyboardAwareScrollView style={[styles.scrollViewStyle]}>
         <View style={[f_full, justify_between]}>
           <View>
             <View style={[{width: '100%', gap: 15, padding: 20}]}>
@@ -406,7 +407,7 @@ const GroupModify = ({navigation, route}) => {
             </View>
           </View>
         </View>
-      </ScrollView>
+      </KeyboardAwareScrollView>
       <View style={[styles.buttonBox]}>
         <TouchableOpacity style={styles.button} onPress={confirmCreate}>
           <Typography size="lg" bold white>

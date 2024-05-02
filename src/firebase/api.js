@@ -580,16 +580,16 @@ export function checkString(inputString) {
 
   // 영어 패턴과 한글 패턴에 맞는지 확인
   if (englishPattern.test(inputString)) {
-    console.log('영어 문자열입니다.');
+    // console.log('영어 문자열입니다.');
     if (inputString.length <= 10) {
-      console.log('영어는 10글자 이하입니다.');
+      // console.log('영어는 10글자 이하입니다.');
     } else {
       return false;
     }
   } else if (koreanPattern.test(inputString)) {
-    console.log('한글 문자열입니다.');
+    // console.log('한글 문자열입니다.');
     if (inputString.length <= 5) {
-      console.log('한글은 5글자 이하입니다.');
+      // console.log('한글은 5글자 이하입니다.');
     } else {
       return false;
     }

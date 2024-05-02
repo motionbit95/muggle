@@ -8,6 +8,8 @@ import {
   StyleSheet,
   Text,
   TextInput,
+  Touchable,
+  TouchableHighlight,
   TouchableOpacity,
   View,
 } from 'react-native';
@@ -71,6 +73,7 @@ import Typography from '../../Component/Typography';
 import MessageBox from '../../Component/MessageBox';
 
 import KakaoShareLink from 'react-native-kakao-share-link';
+import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 
 const GroupDetail = ({navigation, route}) => {
   const [toolbar, setToolbar] = useState(false);
@@ -100,23 +103,20 @@ const GroupDetail = ({navigation, route}) => {
     navigation.setOptions({
       title: data?.group_type === '일상 모임' ? '1:1 일상 모임' : '단체 모임',
       headerRight: () => (
-        <TouchableOpacity onPress={() => setToolbar(true)}>
-          <Image source={require('../../assets/icons/MdMoreVert.png')} />
-        </TouchableOpacity>
-        // <View style={[flex_row, justify_end, sp_2]}>
-        //   <TouchableOpacity onPress={clickShare}>
-        //     <Image
-        //       style={{width: 26, height: 26}}
-        //       source={require('../../assets/kakao.png')}
-        //     />
-        //   </TouchableOpacity>
-        //   <TouchableOpacity
-        //     onPress={() => {
-        //       setOpenAlert(true);
-        //     }}>
-        //     <Image source={require('../../assets/AiOutlineAlert.png')} />
-        //   </TouchableOpacity>
-        // </View>
+        <View style={[flex_row, justify_end, sp_2]}>
+          <TouchableOpacity onPress={clickShare}>
+            <Image
+              style={{width: 26, height: 26}}
+              source={require('../../assets/kakao.png')}
+            />
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => {
+              setToolbar(true);
+            }}>
+            <Image source={require('../../assets/icons/MdMoreVert.png')} />
+          </TouchableOpacity>
+        </View>
       ),
     });
   }, [data]);
@@ -293,7 +293,11 @@ const GroupDetail = ({navigation, route}) => {
   };
 
   return (
-    <View style={styles.screenStyle}>
+    <TouchableOpacity
+      activeOpacity={1}
+      onPress={() => setToolbar(false)}
+      // style={styles.screenStyle}
+      style={f_full}>
       <View
         style={{
           display: toolbar ? 'flex' : 'none',
@@ -333,7 +337,7 @@ const GroupDetail = ({navigation, route}) => {
             </TouchableOpacity>
           </>
         )}
-        <TouchableOpacity
+        {/* <TouchableOpacity
           onPress={() => {
             setToolbar(false);
             clickShare();
@@ -341,7 +345,7 @@ const GroupDetail = ({navigation, route}) => {
           style={[p_4, flex_row, align_center, justify_between, w_full]}>
           <Typography size="lg">모임 URL 공유하기</Typography>
           <Image source={require('../../assets/rightarrow.png')} />
-        </TouchableOpacity>
+        </TouchableOpacity> */}
         <TouchableOpacity
           onPress={() => {
             setToolbar(false);
@@ -379,7 +383,7 @@ const GroupDetail = ({navigation, route}) => {
           }
         />
       )}
-      <ScrollView style={styles.scrollViewStyle}>
+      <KeyboardAwareScrollView style={styles.scrollViewStyle}>
         <Image
           source={{uri: data?.group_image}}
           style={[styles.banner, {backgroundColor: '#d9d9d9'}]}
@@ -578,7 +582,7 @@ const GroupDetail = ({navigation, route}) => {
             </View>
           )}
         </View>
-      </ScrollView>
+      </KeyboardAwareScrollView>
       <View style={[styles.buttonBox, styles.rowBox]}>
         {data?.group_admin === auth().currentUser.uid ? (
           <TouchableOpacity disabled style={[btn_normal, {flex: 1}]}>
@@ -897,7 +901,7 @@ const GroupDetail = ({navigation, route}) => {
           </View>
         </Modal>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 

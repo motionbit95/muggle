@@ -196,7 +196,7 @@ const Setting = ({navigation, route}) => {
                     안내
                   </Typography>
                 </View>
-                <TouchableOpacity
+                {/* <TouchableOpacity
                   style={[w_full, styles.TouchButtonStyle]}
                   onPress={() =>
                     navigation.navigate('마이', {screen: '자주묻는질문'})
@@ -205,7 +205,7 @@ const Setting = ({navigation, route}) => {
                     <Typography>자주묻는질문</Typography>
                   </View>
                   <Image source={require('../../assets/rightarrow.png')} />
-                </TouchableOpacity>
+                </TouchableOpacity> */}
                 <TouchableOpacity
                   style={[w_full, styles.TouchButtonStyle]}
                   onPress={() =>

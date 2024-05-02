@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import {
   Dimensions,
   Image,
+  KeyboardAvoidingView,
   SafeAreaView,
   StyleSheet,
   Text,
@@ -20,6 +21,7 @@ import auth from '@react-native-firebase/auth';
 import {singleQuery} from '../../firebase/firebase_func';
 import PopupBase from '../../Component/PopupBase';
 import Typography from '../../Component/Typography';
+import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import {
   blackAlpha400,
   blackAlpha500,
@@ -29,6 +31,7 @@ import {
   font_family,
   justify_between,
   p_4,
+  sp_2,
   sp_4,
   w_full,
 } from '../../style/styles';
@@ -42,6 +45,17 @@ const Certificate = ({navigation}) => {
   const [confirmation, setConfirmation] = useState(null); // 인증 정보
   const [sendCode, setSendCode] = useState(false); // 인증 요청 했는지 여부
   const [isActive, setIsActive] = useState(false); //
+
+  // 제목을 헤더 타이틀로 설정
+  React.useLayoutEffect(() => {
+    if (navigation) {
+      navigation.getParent()?.setOptions({
+        tabBarStyle: {
+          display: 'none',
+        },
+      });
+    }
+  }, [navigation]);
 
   // 전화번호 요청 함수
   const signInWithPhoneNumber = async () => {
@@ -85,9 +99,9 @@ const Certificate = ({navigation}) => {
   return (
     <View
       style={[f_full, sp_4, p_4, justify_between, {backgroundColor: 'white'}]}>
-      <SafeAreaView style={{flex: 1}}>
+      <KeyboardAwareScrollView style={[{flex: 1}]}>
         <View style={{gap: 20}}>
-          <View style={{width: '100%', gap: 15, paddingTop: 10}}>
+          <View style={{width: '100%', gap: 15, paddingVertical: 10}}>
             <Typography size={'xl'} bold>
               휴대폰 본인인증
             </Typography>
@@ -252,7 +266,7 @@ const Certificate = ({navigation}) => {
             </View>
           </View>
         </View>
-      </SafeAreaView>
+      </KeyboardAwareScrollView>
       <View
         style={{
           borderTopWidth: 1,
@@ -261,6 +275,7 @@ const Certificate = ({navigation}) => {
         <TouchableOpacity
           disabled={!tempAgree || !isActive}
           style={{
+            marginBottom: 10,
             backgroundColor:
               !tempAgree || !isActive ? '#d9d9d9' : primary_color,
             borderRadius: component_radius,
