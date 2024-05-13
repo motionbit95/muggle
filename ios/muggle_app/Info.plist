@@ -94,15 +94,15 @@
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription </key>
 	<string>항상 위치에 접근합니다.</string>
 	<key>NSCameraUsageDescription</key>
-	<string>$(PRODUCT_NAME) would like to use your camera</string>
+	<string>게시글이나 프로필을 업로드하기 위해 사용자의 카메라에 접근합니다.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>We need your location to provide better service</string>
-	<key>NSMicrophoneUsageDescription</key>
-	<string>$(PRODUCT_NAME) would like to use your microphone (for videos)</string>
+	<string>가까운 사용자를 검색하거나 동네 인증을 위해 현재 위치를 확인합니다.</string>
+	<!-- <key>NSMicrophoneUsageDescription</key>
+	<string>$(PRODUCT_NAME) would like to use your microphone (for videos)</string> -->
 	<key>NSPhotoLibraryAddUsageDescription</key>
-	<string>$(PRODUCT_NAME) would like to save photos to your photo gallery</string>
+	<string>모임 배너나 사용자 프로필 사진을 업로드할 때 사용됩니다.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>$(PRODUCT_NAME) would like access to your photo gallery</string>
+	<string>모임 배너나 사용자 프로필 사진을 업로드할 때 사용됩니다.</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>S-CoreDream-4Regular.otf</string>

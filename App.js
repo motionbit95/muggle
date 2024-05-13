@@ -5,34 +5,16 @@
  * @format
  */
 
-import React, {useEffect, useState} from 'react';
-import {
-  Alert,
-  Button,
-  Image,
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  useColorScheme,
-  View,
-} from 'react-native';
+import React from 'react';
+import {Image, StatusBar, TouchableOpacity} from 'react-native';
 
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
-import Home from './src/pages/Main/Home';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {NavigationContainer} from '@react-navigation/native';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+
+import Home from './src/pages/Main/Home';
 import User from './src/pages/MyPage/User';
 import Chat from './src/pages/Chat/Chat';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import Matching from './src/pages/Matching/Matching';
 import SignUp from './src/pages/Account/Signup';
 import Certificate from './src/pages/Account/Certificate';
@@ -40,23 +22,10 @@ import Interest from './src/pages/Account/Interest';
 import Introduce from './src/pages/Account/Introduce';
 import Profile from './src/pages/MyPage/Profile';
 import ChatRoom from './src/pages/Chat/ChatRoom';
-
 import GroupDetail from './src/pages/Main/GroupDetail';
 import GroupCreate from './src/pages/Main/GroupCreate';
 import MatchHistory from './src/pages/Matching/MatchHistory';
 import MatchPayment from './src/pages/Matching/MatchPayment';
-import {
-  blackAlpha900,
-  center,
-  circle_40,
-  font_family_bold,
-  img_md,
-  img_sm,
-  p_2,
-  p_4,
-  radius_full,
-  sp_1,
-} from './src/style/styles';
 import WebViewPayment from './src/pages/Matching/WebViewPayment';
 import DirectRoom from './src/pages/Chat/DirectRoom';
 import GroupView from './src/pages/Main/GroupView';
@@ -72,13 +41,9 @@ import MatchingUser from './src/pages/Matching/MatchingUser';
 import Heart from './src/pages/MyPage/Heart';
 import GroupModify from './src/pages/Main/GroupModify';
 
+import {blackAlpha900, font_family_bold, img_sm, p_4} from './src/style/styles';
+
 const App = () => {
-  // const isDarkMode = useColorScheme() === 'dark';
-
-  // const backgroundStyle = {
-  //   backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  // };
-
   const tabBarSelectIcon = [
     require('./src/assets/Home_s.png'),
     require('./src/assets/Favorite_s.png'),
@@ -585,6 +550,7 @@ const App = () => {
       />
     </MatchingStack.Navigator>
   );
+
   const SignUpStackNavigate = () => (
     <SignUpStack.Navigator>
       <SignUpStack.Screen
