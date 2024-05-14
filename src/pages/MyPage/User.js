@@ -334,7 +334,7 @@ const User = ({navigation, route}) => {
                 </View>
                 <Image source={require('../../assets/rightarrow.png')} />
               </TouchableOpacity>
-              <TouchableOpacity
+              {/* <TouchableOpacity
                 style={styles.TouchButtonStyle}
                 onPress={() =>
                   navigation.navigate('마이', {screen: '하트구매'})
@@ -346,7 +346,7 @@ const User = ({navigation, route}) => {
                   <Typography>하트구매</Typography>
                 </View>
                 <Image source={require('../../assets/rightarrow.png')} />
-              </TouchableOpacity>
+              </TouchableOpacity> */}
             </View>
           </View>
         </View>

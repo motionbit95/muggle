@@ -21,7 +21,7 @@ function Kakao(props) {
       <View style={[f_full, center]}>
         <WebView
           source={{
-            uri: 'http://pf.kakao.com/_AWeWG',
+            uri: 'https://pf.kakao.com/_AWeWG',
           }} // 표시할 웹 페이지의 URL
           style={{width: Dimensions.get('window').width, height: 'auto'}}
         />

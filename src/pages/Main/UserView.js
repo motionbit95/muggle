@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {
   Image,
+  KeyboardAvoidingView,
   Modal,
   ScrollView,
   TextInput,
@@ -99,82 +100,86 @@ function UserView({navigation, route}) {
               animationType="fade"
               transparent={true}
               style={styles.dropdown}>
-              <View
-                style={[
-                  w_full,
-                  align_end,
-                  justify_end,
-                  {flex: 1, backgroundColor: 'rgba(0,0,0,0.5)'},
-                ]}>
+              <KeyboardAvoidingView
+                style={{flex: 1}}
+                behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
                 <View
                   style={[
                     w_full,
-                    flex_column,
-                    justify_end,
                     align_end,
-                    p_6,
-                    {
-                      backgroundColor: 'white',
-                      borderTopLeftRadius: 20,
-                      borderTopRightRadius: 20,
-                    },
+                    justify_end,
+                    {flex: 1, backgroundColor: 'rgba(0,0,0,0.5)'},
                   ]}>
-                  <TouchableOpacity onPress={() => setOpenAlert(false)}>
-                    <Image
-                      source={require('../../assets/icons/_x.png')}
-                      style={[img_sm, {opacity: 0.5}]}
-                    />
-                  </TouchableOpacity>
+                  <View
+                    style={[
+                      w_full,
+                      flex_column,
+                      justify_end,
+                      align_end,
+                      p_6,
+                      {
+                        backgroundColor: 'white',
+                        borderTopLeftRadius: 20,
+                        borderTopRightRadius: 20,
+                      },
+                    ]}>
+                    <TouchableOpacity onPress={() => setOpenAlert(false)}>
+                      <Image
+                        source={require('../../assets/icons/_x.png')}
+                        style={[img_sm, {opacity: 0.5}]}
+                      />
+                    </TouchableOpacity>
 
-                  <View style={[w_full, sp_6]}>
-                    <Typography size="xl" bold>
-                      신고내용을 기재해주세요.
-                    </Typography>
-                    <TextInput
-                      placeholderTextColor={blackAlpha400}
-                      onChange={e => setReportText(e.nativeEvent.text)}
-                      multiline
-                      style={[
-                        {
-                          fontFamily: font_family,
-                          color: 'black',
-                          height: 100,
-                          textAlignVertical: 'top',
-                        },
-                        styles.contentBox,
-                      ]}
-                      placeholder="허위신고시 이용이 제한될 수 있습니다."
-                    />
+                    <View style={[w_full, sp_6]}>
+                      <Typography size="xl" bold>
+                        신고내용을 기재해주세요.
+                      </Typography>
+                      <TextInput
+                        placeholderTextColor={blackAlpha400}
+                        onChange={e => setReportText(e.nativeEvent.text)}
+                        multiline
+                        style={[
+                          {
+                            fontFamily: font_family,
+                            color: 'black',
+                            height: 100,
+                            textAlignVertical: 'top',
+                          },
+                          styles.contentBox,
+                        ]}
+                        placeholder="허위신고시 이용이 제한될 수 있습니다."
+                      />
 
-                    <View
-                      style={[
-                        flex_row,
-                        w_full,
-                        justify_around,
-                        {paddingHorizontal: 20},
-                      ]}>
-                      <TouchableOpacity onPress={() => setOpenAlert(false)}>
-                        <Typography size="md">취소</Typography>
-                      </TouchableOpacity>
-                      <Typography light>|</Typography>
+                      <View
+                        style={[
+                          flex_row,
+                          w_full,
+                          justify_around,
+                          {paddingHorizontal: 20},
+                        ]}>
+                        <TouchableOpacity onPress={() => setOpenAlert(false)}>
+                          <Typography size="md">취소</Typography>
+                        </TouchableOpacity>
+                        <Typography light>|</Typography>
 
-                      <TouchableOpacity
-                        onPress={() => {
-                          addReort();
-                          setOpenAlert(false);
-                          // setMessage({
-                          //   mode: '',
-                          //   isView: true,
-                          //   message: '신고가 접수되었습니다.',
-                          //   type: '',
-                          // });
-                        }}>
-                        <Typography size="md">확인</Typography>
-                      </TouchableOpacity>
+                        <TouchableOpacity
+                          onPress={() => {
+                            addReort();
+                            setOpenAlert(false);
+                            // setMessage({
+                            //   mode: '',
+                            //   isView: true,
+                            //   message: '신고가 접수되었습니다.',
+                            //   type: '',
+                            // });
+                          }}>
+                          <Typography size="md">확인</Typography>
+                        </TouchableOpacity>
+                      </View>
                     </View>
                   </View>
                 </View>
-              </View>
+              </KeyboardAvoidingView>
             </Modal>
             <Typography light>
               {data?.user_place} • {data?.user_birth.substring(0, 4)}.

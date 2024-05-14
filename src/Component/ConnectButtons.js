@@ -112,17 +112,19 @@ function ConnectButtons({navigation, ...props}) {
     }
 
     // 유저정보
-    const user = await getUser(auth().currentUser?.uid);
+    const currentUser = await getUser(auth().currentUser?.uid);
     // console.log(user.uid, '->', data.uid);
 
     // 구매정보 수정
 
     content.current.pay_type = pay_method;
-    content.current.buyer_name = user?.user_name;
-    content.current.buyer_hp = user?.user_phone;
-    content.current.buyer_email = user?.user_email;
+    content.current.buyer_name = currentUser?.user_name;
+    content.current.buyer_hp = currentUser?.user_phone;
+    content.current.buyer_email = currentUser?.user_email;
     content.current.buy_total = parseInt(user?.user_price) * 10000;
     content.current.order_num = createOid();
+
+    console.log('content.current', content.current, user);
 
     navigation.navigate('매칭', {
       screen: '결제',
@@ -351,7 +353,7 @@ function ConnectButtons({navigation, ...props}) {
                               p_6,
                             ]}>
                             <Typography bold size="xl">
-                              커피 매칭권 금액 {user.user_price}만원
+                              커피 매칭권 금액 {user?.user_price}만원
                             </Typography>
                           </View>
                         </View>

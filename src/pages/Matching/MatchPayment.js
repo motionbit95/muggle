@@ -75,8 +75,10 @@ const MatchPayment = ({navigation, route}) => {
     content.current.buyer_name = user?.user_name;
     content.current.buyer_hp = user?.user_phone;
     content.current.buyer_email = user?.user_email;
-    content.current.buy_total = amount;
+    content.current.buy_total = user?.user_price;
     content.current.order_num = createOid();
+
+    setAmount(user?.user_price * 1000);
 
     navigation.navigate('매칭', {
       screen: '결제',
@@ -135,7 +137,7 @@ const MatchPayment = ({navigation, route}) => {
                     ]}>
                     <Image source={require('../../assets/check.png')} />
                     <Typography bold red>
-                      매칭권 금액 5만원
+                      매칭권 금액 {amount}만원
                     </Typography>
                   </View>
                   <View

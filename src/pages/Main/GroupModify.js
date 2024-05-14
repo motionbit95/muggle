@@ -53,7 +53,7 @@ const GroupModify = ({navigation, route}) => {
   const [matchImage, setMatchImage] = useState(data?.group_image);
 
   useEffect(() => {
-    // console.log('data : ', data);
+    console.log('data : ', data);
   }, []);
 
   const [message, setMessage] = useState({
@@ -243,7 +243,7 @@ const GroupModify = ({navigation, route}) => {
               </View>
               {data?.type !== 'personal' && (
                 <>
-                  <View style={[flex_row, align_center]}>
+                  {/* <View style={[flex_row, align_center]}>
                     <View style={{width: '20%'}}>
                       <Typography size="md" bold>
                         모임 일정
@@ -252,10 +252,10 @@ const GroupModify = ({navigation, route}) => {
                     <View style={{width: '80%'}}>
                       <DateTimeInput
                         onChange={e => setMatchDateTime(e)}
-                        defaultValue={data?.group_time}
+                        defaultValue={data?.group_time.toDate()}
                       />
                     </View>
-                  </View>
+                  </View> */}
                   <View style={[flex_row, align_center]}>
                     <View style={{width: '20%'}}>
                       <Typography size="md" bold>
