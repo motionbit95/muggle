@@ -30,7 +30,12 @@ import styles, {
   sp_6,
   w_full,
 } from '../../style/styles';
-import {addDocument, getDocList} from '../../firebase/firebase_func';
+import {
+  addDocument,
+  getDocList,
+  getDocument,
+  updateDocument,
+} from '../../firebase/firebase_func';
 import GroupBox from '../../Component/GroupBox';
 import Typography from '../../Component/Typography';
 
@@ -68,6 +73,10 @@ function UserView({navigation, route}) {
       uid: auth().currentUser.uid,
       createAt: new Date(),
       description: reportText,
+    });
+
+    getDocument('user', auth().currentUser.uid).then(res => {
+      console.log(res);
     });
   };
 

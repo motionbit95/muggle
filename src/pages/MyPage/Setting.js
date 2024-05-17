@@ -267,7 +267,7 @@ const Setting = ({navigation, route}) => {
                     <View style={[f_full]}>
                       <WebView
                         source={{
-                          uri: 'https://muggle.life/terms',
+                          uri: 'https://muggle.life/term',
                         }} // 표시할 웹 페이지의 URL
                         style={{
                           width: Dimensions.get('window').width,
@@ -290,7 +290,7 @@ const Setting = ({navigation, route}) => {
                     <View style={[f_full]}>
                       <WebView
                         source={{
-                          uri: 'https://muggle.life/privacy',
+                          uri: 'https://muggle.life/privacys',
                         }} // 표시할 웹 페이지의 URL
                         style={{
                           width: Dimensions.get('window').width,
